@@ -1,2 +1,6 @@
+<<<<<<< HEAD
 Opus ten hejt!
 #Hubert
+=======
+LOL testuju #hubert
+>>>>>>> origin/master
