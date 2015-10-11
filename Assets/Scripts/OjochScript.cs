@@ -22,25 +22,30 @@ public class OjochScript : MonoBehaviour {
         // Pohyb 
         movement = new Vector2(speed.x * inputX, speed.y * inputY);
 
-        //Strelba
-        bool shoot = Input.GetKeyDown(KeyCode.Space);
-        shoot |= Input.GetButtonDown("Fire2");
-        
+        ///<summary>
+        /// Strelba
+        ///</summary>
 
+        bool shoot = Input.GetKeyDown(KeyCode.Space);       //Stisknutí mezerníku
+        shoot |= Input.GetButtonDown("Fire2");              //Alternativní střelba - defaultní v Unity
+        
+        //Pokud chce hrac vystrelit, pouzije se skript weapon, který zavolá svou fci Attack
         if (shoot) {
             WeaponScript weapon = GetComponent<WeaponScript>();
             if (weapon != null) {
-                weapon.Attack(false);
+                weapon.Attack(false);               //atribut false -> jedna se o nepritele, kdo strili?
             }
 
         }
     }
 
-
     void FixedUpdate() {
        GetComponent<Rigidbody2D>().velocity = movement; //Aplikace pohybu na objekt
     }
 
-    
+    void OnCollisionEnter2D(Collision2D collision) {
+        bool damagePlayer = false;
 
+        EnemyScript enemy = 
+    }
 }

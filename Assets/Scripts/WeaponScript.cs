@@ -12,9 +12,10 @@ public class WeaponScript : MonoBehaviour {
     private float shootCooldown;            //cooldown
 
     void Start() {
-        shootCooldown = 0f;
+        shootCooldown = 0f;                 //inicialni cooldown strelby
     }
 
+    //pokud je cooldown > 0, nelze strilet a odpocita se cas
     void Update() {
         if (shootCooldown > 0) {
             shootCooldown -= Time.deltaTime;
@@ -23,23 +24,21 @@ public class WeaponScript : MonoBehaviour {
 
     //Utok
     public void Attack(bool isEnemy) {
-        if (CanAttack)
+        if (CanAttack)      // viz fce nize
         {
             shootCooldown = shootingRate;                               //nastaveni cooldownu
             var shotTransform = Instantiate(shotPrefab) as Transform;   //vytvoreni nove strely
-            shotTransform.position = transform.position;              //prirazeni pozice strely
+            shotTransform.position = transform.position;                //prirazeni pozice strely
 
-            // The is enemy property
-            ShotScript shot = shotTransform.gameObject.GetComponent<ShotScript>();
+            ShotScript shot = shotTransform.gameObject.GetComponent<ShotScript>();      //Bereme ShotScript
             if (shot != null){
-                shot.isEnemyShot = isEnemy;
+                shot.isEnemyShot = isEnemy;                 //aplikace vstupniho parametru a jeho prirazeni ke strele - kdo vystrelil? hrac/enemy
             }
 
-            // Make the weapon shot always towards it
-            MovingScript move = shotTransform.gameObject.GetComponent<MovingScript>();
+            MovingScript move = shotTransform.gameObject.GetComponent<MovingScript>();  //Bereme MovingScript strely
             if (move != null)
             {
-                move.direction = this.transform.right; // towards in 2D space is the right of the sprite
+                move.direction = this.transform.right;      //Strela se vystreli smerem vpravo
             }
         }
 

@@ -20,8 +20,18 @@ public class HealthScript : MonoBehaviour {
             {
                 Destroy(gameObject);
             }
-        }
+        }       
     }
 
-	
+    void OnTriggerEnter2D(Collider2D otherCollider)
+    {
+        ShotScript shot = otherCollider.gameObject.GetComponent<ShotScript>();      
+
+        if (shot != null) {
+            if (shot.isEnemyShot != isEnemy) {      //Jedna se o mou strelu?
+                Damage(shot.damage);                //ddani zraneni
+                Destroy(shot.gameObject);           //zniceni strely
+            }
+        }
+    }
 }
