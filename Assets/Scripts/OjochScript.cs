@@ -43,9 +43,5 @@ public class OjochScript : MonoBehaviour {
        GetComponent<Rigidbody2D>().velocity = movement; //Aplikace pohybu na objekt
     }
 
-    void OnCollisionEnter2D(Collision2D collision) {
-        bool damagePlayer = false;
-
-        EnemyScript enemy = 
-    }
+    
 }

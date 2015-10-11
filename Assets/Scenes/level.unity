@@ -154,8 +154,8 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 23185257}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -.129999995, y: -4.67000008, z: 0}
-  m_LocalScale: {x: 21.5098438, y: 1.53924513, z: 1}
+  m_LocalPosition: {x: .709996283, y: -4.46849489, z: 0}
+  m_LocalScale: {x: 15.9933205, y: 1.41826868, z: 1}
   m_Children: []
   m_Father: {fileID: 1709462994}
   m_RootOrder: 2
@@ -306,14 +306,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-<<<<<<< HEAD
-  m_RootOrder: 0
---- !u!1 &1257828255 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 155050, guid: c5b9daee301a00b47837aa70727f8cd2, type: 2}
-  m_PrefabInternal: {fileID: 33963815}
---- !u!114 &1257828261
-=======
   m_RootOrder: 2
 --- !u!1 &1002659455
 GameObject:
@@ -348,25 +340,16 @@ Transform:
   m_Father: {fileID: 1709462994}
   m_RootOrder: 4
 --- !u!114 &1002659457
->>>>>>> origin/ojochMaster
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-<<<<<<< HEAD
-  m_GameObject: {fileID: 1257828255}
-=======
   m_GameObject: {fileID: 1002659455}
->>>>>>> origin/ojochMaster
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 10389e101edba2545af6392a06bce56b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-<<<<<<< HEAD
-  hp: 30
-  isEnemy: 0
-=======
   hp: 1
   isEnemy: 1
 --- !u!114 &1002659458
@@ -425,7 +408,6 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1002659455}
   m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
->>>>>>> origin/ojochMaster
 --- !u!1 &1362325786
 GameObject:
   m_ObjectHideFlags: 0
@@ -658,7 +640,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10389e101edba2545af6392a06bce56b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hp: 3
+  hp: 1
   isEnemy: 1
 --- !u!1 &1709462993
 GameObject:
