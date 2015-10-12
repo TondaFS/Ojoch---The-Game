@@ -1,7 +1,13 @@
 fileFormatVersion: 2
+<<<<<<< HEAD
 guid: 1b515723a53fbc248918ad0f26b35b3b
 folderAsset: yes
 timeCreated: 1444657612
+=======
+guid: 0f6f29911ba4b014aac569de57788ff2
+folderAsset: yes
+timeCreated: 1444656402
+>>>>>>> origin/ojochMaster
 licenseType: Free
 DefaultImporter:
   userData: 

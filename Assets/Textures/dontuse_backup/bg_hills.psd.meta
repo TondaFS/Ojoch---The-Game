@@ -1,6 +1,11 @@
 fileFormatVersion: 2
+<<<<<<< HEAD
 guid: b261cc73726d2b54f950bdbd73c060e6
 timeCreated: 1444657647
+=======
+guid: 3a2173a53e0941f4b9add80807abc79d
+timeCreated: 1444656411
+>>>>>>> origin/ojochMaster
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName: {}

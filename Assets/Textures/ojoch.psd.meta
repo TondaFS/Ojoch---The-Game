@@ -1,6 +1,11 @@
 fileFormatVersion: 2
+<<<<<<< HEAD
 guid: 6d8afb7a2dfcc994d9ac02e35a0f2920
 timeCreated: 1444657639
+=======
+guid: 42ce8f935f536bb4f852b780807bbd80
+timeCreated: 1444656411
+>>>>>>> origin/ojochMaster
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName: {}
@@ -30,7 +35,11 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     filterMode: -1
+<<<<<<< HEAD
     aniso: -1
+=======
+    aniso: 16
+>>>>>>> origin/ojochMaster
     mipBias: -1
     wrapMode: 1
   nPOTScale: 0
@@ -41,7 +50,11 @@ TextureImporter:
   spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
+<<<<<<< HEAD
   alignment: 0
+=======
+  alignment: 4
+>>>>>>> origin/ojochMaster
   spritePivot: {x: .5, y: .5}
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spritePixelsToUnits: 100
