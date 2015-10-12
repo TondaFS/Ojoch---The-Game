@@ -22,6 +22,16 @@ public class OjochScript : MonoBehaviour {
         // Pohyb 
         movement = new Vector2(speed.x * inputX, speed.y * inputY);
 
+        bool rotateLeft = Input.GetKey(KeyCode.E);
+        bool rotateRight = Input.GetKey(KeyCode.Q);
+        if (rotateLeft) {
+            transform.Rotate(0, 0, -1);
+        }
+
+        if (rotateRight) {
+            transform.Rotate(0, 0, 1);
+        }
+
         ///<summary>
         /// Strelba
         ///</summary>
@@ -43,5 +53,15 @@ public class OjochScript : MonoBehaviour {
        GetComponent<Rigidbody2D>().velocity = movement; //Aplikace pohybu na objekt
     }
 
+    void OnCollisionEnter2D(Collision2D collision) {
+        if (collision.gameObject.tag == "Enemy") {
+            Destroy(collision.gameObject);
+            HealthScript playerHealth = this.GetComponent<HealthScript>();
+            if (playerHealth != null) {
+                playerHealth.Damage(5);
+            }
+
+        }
+    }
     
 }
