@@ -9,10 +9,11 @@ GameObject:
   m_Component:
   - 4: {fileID: 453708}
   - 212: {fileID: 21265184}
-  - 61: {fileID: 6170538}
   - 50: {fileID: 5060958}
   - 114: {fileID: 11430968}
   - 114: {fileID: 11436702}
+  - 114: {fileID: 11419636}
+  - 61: {fileID: 6165844}
   m_Layer: 0
   m_Name: Ojoch
   m_TagString: Player
@@ -28,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 155050}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -1.58000374, y: -.938494861, z: 0}
-  m_LocalScale: {x: .500428498, y: .500428438, z: 1}
+  m_LocalScale: {x: .300000012, y: .300000012, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -48,7 +49,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!61 &6170538
+--- !u!61 &6165844
 BoxCollider2D:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -58,9 +59,22 @@ BoxCollider2D:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_UsedByEffector: 0
-  m_Offset: {x: 0, y: -1.1920929e-07}
+  m_Offset: {x: 2.28965998, y: .29062131}
   serializedVersion: 2
-  m_Size: {x: 2.05999994, y: 2.05999994}
+  m_Size: {x: 2.50817537, y: 3.9844203}
+--- !u!114 &11419636
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 155050}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10389e101edba2545af6392a06bce56b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hp: 15
+  isEnemy: 0
 --- !u!114 &11430968
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -73,6 +87,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: {x: 2, y: 2}
+  ojoch: {fileID: 0}
 --- !u!114 &11436702
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -110,7 +125,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 517db3747b37ff944bc59deba11110cd, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 42ce8f935f536bb4f852b780807bbd80, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1001 &100100000
 Prefab:
@@ -131,6 +146,11 @@ Prefab:
       propertyPath: speed.y
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 42ce8f935f536bb4f852b780807bbd80,
+        type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 155050}

@@ -9,6 +9,8 @@ GameObject:
   m_Component:
   - 4: {fileID: 470462}
   - 212: {fileID: 21211246}
+  - 68: {fileID: 6814036}
+  - 114: {fileID: 11421362}
   m_Layer: 0
   m_Name: house3
   m_TagString: Untagged
@@ -23,11 +25,47 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 114054}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.36572003, y: 2.23475409, z: -5.875}
+  m_LocalPosition: {x: 3.61999989, y: 4.25, z: -5.875}
   m_LocalScale: {x: .5, y: .5, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
+--- !u!68 &6814036
+EdgeCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 114054}
+  m_Enabled: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_Offset: {x: 0, y: 0}
+  m_Points:
+  - {x: 1.44797802, y: 1.41958618}
+  - {x: 8.33896446, y: 1.81645584}
+  - {x: 8.57398033, y: 4.37581444}
+  - {x: 14.0802822, y: 4.88652229}
+  - {x: 18.361351, y: 4.84493446}
+  - {x: 18.1107979, y: -5.38717079}
+  - {x: 18.2535572, y: -6.66499615}
+  - {x: 7.92840624, y: -6.49938297}
+  - {x: 8.1162262, y: -1.74570465}
+  - {x: 1.16499186, y: -1.97566223}
+  - {x: 1.42839384, y: 1.37707329}
+--- !u!114 &11421362
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 114054}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10389e101edba2545af6392a06bce56b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hp: 1000
+  isEnemy: 1
 --- !u!212 &21211246
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -52,7 +90,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 679456c0b83cdbd44b882f8fafa65199, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 4fb1db403a34f184bb0d2c096208c038, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1001 &100100000
 Prefab:
@@ -60,7 +98,16 @@ Prefab:
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
-    m_Modifications: []
+    m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 4fb1db403a34f184bb0d2c096208c038,
+        type: 3}
+    - target: {fileID: 0}
+      propertyPath: hp
+      value: 1000
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 114054}

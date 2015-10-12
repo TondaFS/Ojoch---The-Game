@@ -13,6 +13,11 @@ public class OjochScript : MonoBehaviour {
     
     public Vector2 speed = new Vector2(10,10);   // Rychlost Ojocha
     private Vector2 movement;                   // Ulozeni pohybu
+    public Rigidbody2D ojoch;
+
+    void Start() {
+        ojoch = GetComponent<Rigidbody2D>();
+    }
 
     void Update () {
         //Axis information
@@ -32,11 +37,13 @@ public class OjochScript : MonoBehaviour {
             transform.Rotate(0, 0, 1);
         }
 
+        
+
         ///<summary>
         /// Strelba
         ///</summary>
 
-        bool shoot = Input.GetKeyDown(KeyCode.Space);       //Stisknutí mezerníku
+        bool shoot = Input.GetKey(KeyCode.Space);           //Stisknutí mezerníku
         shoot |= Input.GetButtonDown("Fire2");              //Alternativní střelba - defaultní v Unity
         
         //Pokud chce hrac vystrelit, pouzije se skript weapon, který zavolá svou fci Attack
@@ -51,6 +58,7 @@ public class OjochScript : MonoBehaviour {
 
     void FixedUpdate() {
        GetComponent<Rigidbody2D>().velocity = movement; //Aplikace pohybu na objekt
+        ojoch.AddForce(ojoch.velocity * -1);
     }
 
     void OnCollisionEnter2D(Collision2D collision) {
