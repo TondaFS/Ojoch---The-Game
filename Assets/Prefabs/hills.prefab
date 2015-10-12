@@ -97,7 +97,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8d5cb4d956322b4e9ec3670c56ff41c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: {x: 2, y: 1}
+  speed: {x: .5, y: 1}
   direction: {x: -1, y: 0}
 --- !u!114 &11448718
 MonoBehaviour:
@@ -147,7 +147,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 0}
       propertyPath: speed.x
-      value: 2
+      value: .5
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_SortingOrder

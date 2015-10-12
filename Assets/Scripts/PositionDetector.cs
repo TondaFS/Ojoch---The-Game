@@ -11,7 +11,7 @@ public class PositionDetector : MonoBehaviour {
     void Update () {
         //Debug.Log("X = " + transform.position.x);
         Vector3 position = camera.WorldToViewportPoint(transform.position);
-        Debug.Log("X screen =" + position.x);
+        //Debug.Log("X screen =" + position.x);
 
         if (position.x < 1.2f && spawnedNew == false)
         {
