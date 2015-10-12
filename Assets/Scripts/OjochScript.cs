@@ -12,12 +12,7 @@ public class OjochScript : MonoBehaviour {
     /// </summary>
     
     public Vector2 speed = new Vector2(10,10);   // Rychlost Ojocha
-    private Vector2 movement;                   // Ulozeni pohybu    
-    public Rigidbody2D ojoch;
-
-    void Start() {
-        ojoch = GetComponent<Rigidbody2D>();
-    }
+    private Vector2 movement;                   // Ulozeni pohybu
 
     void Update () {
         //Axis information
@@ -27,18 +22,15 @@ public class OjochScript : MonoBehaviour {
         // Pohyb 
         movement = new Vector2(speed.x * inputX, speed.y * inputY);
 
-        
         bool rotateLeft = Input.GetKey(KeyCode.E);
         bool rotateRight = Input.GetKey(KeyCode.Q);
         if (rotateLeft) {
-           ojoch.MoveRotation(ojoch.rotation - 1);
+            transform.Rotate(0, 0, -1);
         }
 
         if (rotateRight) {
-            ojoch.MoveRotation(ojoch.rotation + 1);
+            transform.Rotate(0, 0, 1);
         }
-        
-
 
         ///<summary>
         /// Strelba
@@ -58,8 +50,7 @@ public class OjochScript : MonoBehaviour {
     }
 
     void FixedUpdate() {
-        GetComponent<Rigidbody2D>().velocity = movement; //Aplikace pohybu na objekt
-        
+       GetComponent<Rigidbody2D>().velocity = movement; //Aplikace pohybu na objekt
     }
 
     void OnCollisionEnter2D(Collision2D collision) {
