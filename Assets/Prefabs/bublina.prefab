@@ -86,10 +86,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b57764b3ee1c514409ba4f439452d1c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: {x: 1.5, y: 1.5}
+  speed: {x: 3, y: 1.5}
   direction: {x: 1, y: 0}
   modifier: .0500000007
-  countdown: 3
+  countdown: 1.5
 --- !u!212 &21240724
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -114,7 +114,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 3c30807fc7a82954bb4011af8721ec8a, type: 3}
+  m_Sprite: {fileID: 21300000, guid: bf645d94efe33f346864eea041e85f5a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1001 &100100000
 Prefab:
@@ -125,7 +125,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 0}
       propertyPath: lifeTime
-      value: 6
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_IsTrigger
@@ -133,7 +133,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: speed.x
-      value: 1.5
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: speed.y
@@ -142,7 +142,7 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 3c30807fc7a82954bb4011af8721ec8a,
+      objectReference: {fileID: 21300000, guid: bf645d94efe33f346864eea041e85f5a,
         type: 3}
     - target: {fileID: 0}
       propertyPath: m_LocalScale.x
@@ -151,6 +151,10 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_LocalScale.y
       value: .200000003
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: countdown
+      value: 1.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

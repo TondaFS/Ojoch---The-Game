@@ -28,7 +28,7 @@ public class WeaponScript : MonoBehaviour {
         {
             shootCooldown = shootingRate;                               //nastaveni cooldownu
             var shotTransform = Instantiate(shotPrefab) as Transform;   //vytvoreni nove strely
-            shotTransform.position = transform.position + new Vector3(0.9f, 0, 0) ;                //prirazeni pozice strely
+            shotTransform.position = transform.position + new Vector3(0.3f, 0, 0) ;                //prirazeni pozice strely
 
             ShotScript shot = shotTransform.gameObject.GetComponent<ShotScript>();      //Bereme ShotScript
             if (shot != null){

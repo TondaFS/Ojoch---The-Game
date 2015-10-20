@@ -14,7 +14,7 @@ GameObject:
   - 68: {fileID: 6841554}
   m_Layer: 0
   m_Name: house4
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -103,7 +103,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: cb8a48cc1b80e1f4da937960b7f0c7b4, type: 3}
+  m_Sprite: {fileID: 21300000, guid: fa1cdb6ad8094714795d54692d119359, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1001 &100100000
 Prefab:
@@ -115,7 +115,7 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: cb8a48cc1b80e1f4da937960b7f0c7b4,
+      objectReference: {fileID: 21300000, guid: fa1cdb6ad8094714795d54692d119359,
         type: 3}
     - target: {fileID: 0}
       propertyPath: hp
@@ -136,6 +136,10 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_LocalPosition.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_TagString
+      value: Obstacle
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

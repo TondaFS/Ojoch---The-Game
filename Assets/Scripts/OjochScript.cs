@@ -14,6 +14,7 @@ public class OjochScript : MonoBehaviour {
     public Vector2 speed = new Vector2(10,10);   // Rychlost Ojocha
     private Vector2 movement;                   // Ulozeni pohybu
     public Rigidbody2D ojoch;
+    public Collider2D obstacle;
 
     void Start() {
         ojoch = GetComponent<Rigidbody2D>();
@@ -23,6 +24,8 @@ public class OjochScript : MonoBehaviour {
         //Axis information
         float inputX = Input.GetAxis("Horizontal");
         float inputY = Input.GetAxis("Vertical");
+
+        god -= Time.deltaTime;
 
         // Pohyb 
         movement = new Vector2(speed.x * inputX, speed.y * inputY);
@@ -36,7 +39,6 @@ public class OjochScript : MonoBehaviour {
         if (rotateRight) {
             transform.Rotate(0, 0, 1);
         }
-
         
 
         ///<summary>
@@ -61,7 +63,9 @@ public class OjochScript : MonoBehaviour {
         ojoch.AddForce(ojoch.velocity * -1);
     }
 
+    //Kolize 
     void OnCollisionEnter2D(Collision2D collision) {
+        //S nepritelem -> ubere 5 zivotu a nepritele znici
         if (collision.gameObject.tag == "Enemy") {
             Destroy(collision.gameObject);
             HealthScript playerHealth = this.GetComponent<HealthScript>();
@@ -70,6 +74,22 @@ public class OjochScript : MonoBehaviour {
             }
 
         }
+
+        //S prekazkou -> ubere 10 zivotu a ucini na 5 vterin Ojocha nesmrtelnym
+        if (collision.gameObject.tag == "Obstacle")
+        {
+            HealthScript playerHealth = this.GetComponent<HealthScript>();
+            if (playerHealth != null)
+            {
+                playerHealth.Damage(10);
+            }
+
+            Physics2D.IgnoreCollision(collision.gameObject.GetComponent<Collider2D>(), GetComponent<Collider2D>());
+                        
+
+                       
+        }
     }
-    
+
+      
 }

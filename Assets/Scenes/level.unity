@@ -199,26 +199,11 @@ Prefab:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6165844, guid: c5b9daee301a00b47837aa70727f8cd2, type: 2}
-      propertyPath: m_Offset.x
-      value: -.0287795067
+      propertyPath: m_UsedByEffector
+      value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6165844, guid: c5b9daee301a00b47837aa70727f8cd2, type: 2}
-      propertyPath: m_Offset.y
-      value: .309374511
-      objectReference: {fileID: 0}
-    - target: {fileID: 6165844, guid: c5b9daee301a00b47837aa70727f8cd2, type: 2}
-      propertyPath: m_Size.x
-      value: 1.95610499
-      objectReference: {fileID: 0}
-    - target: {fileID: 6165844, guid: c5b9daee301a00b47837aa70727f8cd2, type: 2}
-      propertyPath: m_Size.y
-      value: 3.51729631
-      objectReference: {fileID: 0}
-    - target: {fileID: 11419636, guid: c5b9daee301a00b47837aa70727f8cd2, type: 2}
-      propertyPath: hp
-      value: 15
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 11436702, guid: c5b9daee301a00b47837aa70727f8cd2, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: c5b9daee301a00b47837aa70727f8cd2, type: 2}
   m_IsPrefabParent: 0
 --- !u!1 &41744729
@@ -565,7 +550,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 446406, guid: 5f17ae7e3fc56d34f8b9d26a19aacf52, type: 2}
       propertyPath: m_RootOrder
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5f17ae7e3fc56d34f8b9d26a19aacf52, type: 2}
@@ -1106,3 +1091,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 11
+--- !u!1 &2042823271 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 155050, guid: c5b9daee301a00b47837aa70727f8cd2, type: 2}
+  m_PrefabInternal: {fileID: 33963815}
+--- !u!114 &2042823274
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2042823271}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 23e764de7df3e014a9aa775f4969b7fe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shotPrefab: {fileID: 487496, guid: ebd85ed6047648548bc450c3f0697160, type: 2}
+  shootingRate: .25
