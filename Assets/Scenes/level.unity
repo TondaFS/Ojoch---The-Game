@@ -202,6 +202,14 @@ Prefab:
       propertyPath: m_UsedByEffector
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6165844, guid: c5b9daee301a00b47837aa70727f8cd2, type: 2}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 11430968, guid: c5b9daee301a00b47837aa70727f8cd2, type: 2}
+      propertyPath: rotace
+      value: 15
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 11436702, guid: c5b9daee301a00b47837aa70727f8cd2, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: c5b9daee301a00b47837aa70727f8cd2, type: 2}
