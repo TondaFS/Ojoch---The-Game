@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 /// <summary>
@@ -18,9 +19,15 @@ public class OjochScript : MonoBehaviour {
     public float godMode = 0;                   //nesmrtelnost
     public float rotace = 10;                   //rychlost nezavisle rotace
     public float modifikator = 1;               //Modfifikator
+    public PowerUpScript powerCombo;
+    public Slider healthSlider;                 //Ukazatel zdravi   
+    public HealthScript playerHealth;           
+
 
     void Start() {
         ojoch = GetComponent<Rigidbody2D>();
+        powerCombo = GetComponent<PowerUpScript>();
+        playerHealth = GetComponent<HealthScript>();
     }
 
     void Update () {
@@ -42,7 +49,7 @@ public class OjochScript : MonoBehaviour {
             transform.Rotate(0, 0, 1);
         }
 
-        //Ocekuje, jestli je natoceni  na 0, pokud ne, yacne aplikovat rotaci v danem smeru
+        //Ocekuje, jestli je natoceni  na 0, pokud ne, zacne aplikovat rotaci v danem smeru
         if (transform.rotation.z <= 0)
         {
             transform.Rotate(0, 0, -10 * Time.deltaTime);
@@ -56,7 +63,7 @@ public class OjochScript : MonoBehaviour {
             godMode -= Time.deltaTime ;
             if (godMode == 0 || godMode < 0) {
                 godMode = 0;
-                CollisionDisable(false);
+                CollisionDisable(true);
             } 
         }
 
@@ -64,14 +71,16 @@ public class OjochScript : MonoBehaviour {
         /// Strelba
         ///</summary>
 
-        bool shoot = Input.GetKey(KeyCode.Space);           //Stisknutí mezerníku
+        bool shoot = Input.GetKeyDown(KeyCode.Space);           //Stisknutí mezerníku
         shoot |= Input.GetButtonDown("Fire2");              //Alternativní střelba - defaultní v Unity
         
-        //Pokud chce hrac vystrelit, pouzije se skript weapon, který zavolá svou fci Attack
+        //Pokud chce hrac vystrelit, pouzije se skript weapon, který zavolá svou fci Attack a ubere mu to 1 život
         if (shoot) {
             WeaponScript weapon = GetComponent<WeaponScript>();
             if (weapon != null) {
-                weapon.Attack(false);               //atribut false -> jedna se o nepritele, kdo strili?
+                weapon.Attack(false);                       //atribut false -> jedna se o nepritele, kdo strili? 
+                playerHealth.Damage(1);
+                healthSlider.value = playerHealth.hp;
             }
 
         }
@@ -79,19 +88,20 @@ public class OjochScript : MonoBehaviour {
 
     void FixedUpdate() {
        GetComponent<Rigidbody2D>().velocity = movement; //Aplikace pohybu na objekt
-        ojoch.AddForce(ojoch.velocity * -1);
     }
 
     //Kolize 
     void OnCollisionEnter2D(Collision2D collision) {
+
         //S nepritelem -> ubere 5 zivotu a nepritele znici
         if (collision.gameObject.tag == "Enemy") {
             Destroy(collision.gameObject);
-            HealthScript playerHealth = this.GetComponent<HealthScript>();
-            if (playerHealth != null) {
+            if (playerHealth != null || playerHealth.hp < 100) {
                 playerHealth.Damage(5);
+                healthSlider.value = playerHealth.hp;
             }
 
+            //orotuje ojocha
             if (transform.rotation.z < 0)
                 transform.Rotate(0, 0, Random.Range(-25, -15));
             else
@@ -102,24 +112,42 @@ public class OjochScript : MonoBehaviour {
         //S prekazkou -> ubere 10 zivotu a ucini na 5 vterin Ojocha nesmrtelnym
         if (collision.gameObject.tag == "Obstacle")
         {
-            HealthScript playerHealth = this.GetComponent<HealthScript>();
             if (playerHealth != null)
             {
                 playerHealth.Damage(10);
+                healthSlider.value = playerHealth.hp;
             }
 
+            //orotuje ojocha
             if (transform.rotation.z < 0)
                 transform.Rotate(0, 0, Random.Range(-40, -30));
             else
                 transform.Rotate(0, 0, Random.Range(30, 40));
             
-            CollisionDisable(true);
+            //nesmrtelnost
+            CollisionDisable(false);
             godMode = 5;                                  
+        }
+
+        //S powerUpem -> Zvysi pocet powerupu, provede efekt powerUpu, a pokud je sbran jiz druhy power up
+        //provede se kombo
+        if (collision.gameObject.tag == "PowerUp") {
+            powerCombo.powerUps += 1;               //zvyseni powerUpu
+            powerCombo.powerUpCombo += collision.gameObject.GetComponent<PowerUpID>().powerUpID;    //pridani ID
+            powerCombo.PowerEffect(collision.gameObject.GetComponent<PowerUpID>().powerUpID);       //efekt powerUpu
+
+            //pokud je sebran jiz druhy powerUp -> provede se kombo
+            if (powerCombo.powerUps == 2) {
+                powerCombo.PowerCombo(powerCombo.powerUpCombo);
+                powerCombo.powerUps = 0;
+                powerCombo.powerUpCombo = 0;
+            }
+            Destroy(collision.gameObject);
         }
     }
 
-    //Metoda pro zapnuti/vynuti BoxCollideru
+    //Metoda pro zapnuti/vynuti BoxCollideru - nesmrtelnost
     void CollisionDisable(bool enableGod) {
-        this.GetComponent<BoxCollider2D>().isTrigger = enableGod;
+        this.GetComponent<BoxCollider2D>().enabled = enableGod;
     }      
 }

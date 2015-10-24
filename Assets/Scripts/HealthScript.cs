@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 /// <summary>
@@ -9,11 +10,16 @@ public class HealthScript : MonoBehaviour {
 
     //Promenne
     public int hp = 1;              //pocet zivotu
-    public bool isEnemy = true;     //jedna se o hrace/nepritele?
+    public bool isEnemy = true;     //jedna se o hrace/nepritele?\
     
+
     // Započítání zranení a kontrola, jestli nemá být objekt zničen
     public void Damage(int damageCount) {
         hp -= damageCount;
+
+        if (gameObject.tag == "Player" && hp > 100) {
+            hp = 100;
+        }
 
         if (hp <= 0) {
             if (gameObject.tag != "Player")
