@@ -18,23 +18,32 @@ public class OjochScript : MonoBehaviour {
     public Collider2D obstacle;
     public float godMode = 0;                   //nesmrtelnost
     public float rotace = 10;                   //rychlost nezavisle rotace
-    public float modifikator = 1;               //Modfifikator
     public PowerUpScript powerCombo;
+
+    //promenne na zivoty/palivo Ojocha
     public Slider healthSlider;                 //Ukazatel zdravi   
-    public HealthScript playerHealth;           
+    public HealthScript playerHealth;
+
+    //promenne na score
+    public Text scoreText;
+    public int modifikatorScore = 1;                //Modfifikator
+    public int tmpscore;                            //hracovo skore      
 
 
     void Start() {
         ojoch = GetComponent<Rigidbody2D>();
         powerCombo = GetComponent<PowerUpScript>();
         playerHealth = GetComponent<HealthScript>();
+        tmpscore = 0;
     }
 
     void Update () {
         //Axis information
         float inputX = Input.GetAxis("Horizontal");
         float inputY = Input.GetAxis("Vertical");
-        
+
+        //Skore
+        this.scoreText.text = "Skore: " + tmpscore;        
 
         // Pohyb 
         movement = new Vector2(speed.x * inputX, speed.y * inputY);
@@ -71,7 +80,7 @@ public class OjochScript : MonoBehaviour {
         /// Strelba
         ///</summary>
 
-        bool shoot = Input.GetKeyDown(KeyCode.Space);           //Stisknutí mezerníku
+        bool shoot = Input.GetKeyDown(KeyCode.Space);       //Stisknutí mezerníku
         shoot |= Input.GetButtonDown("Fire2");              //Alternativní střelba - defaultní v Unity
         
         //Pokud chce hrac vystrelit, pouzije se skript weapon, který zavolá svou fci Attack a ubere mu to 1 život
@@ -96,7 +105,7 @@ public class OjochScript : MonoBehaviour {
         //S nepritelem -> ubere 5 zivotu a nepritele znici
         if (collision.gameObject.tag == "Enemy") {
             Destroy(collision.gameObject);
-            if (playerHealth != null || playerHealth.hp < 100) {
+            if (playerHealth != null) {
                 playerHealth.Damage(5);
                 healthSlider.value = playerHealth.hp;
             }
@@ -132,15 +141,16 @@ public class OjochScript : MonoBehaviour {
         //S powerUpem -> Zvysi pocet powerupu, provede efekt powerUpu, a pokud je sbran jiz druhy power up
         //provede se kombo
         if (collision.gameObject.tag == "PowerUp") {
-            powerCombo.powerUps += 1;               //zvyseni powerUpu
+            tmpscore += 5 * modifikatorScore;                                                       //Zapocitani skore 
+            powerCombo.powerUps += 1;                                                               //zvyseni powerUpu
             powerCombo.powerUpCombo += collision.gameObject.GetComponent<PowerUpID>().powerUpID;    //pridani ID
             powerCombo.PowerEffect(collision.gameObject.GetComponent<PowerUpID>().powerUpID);       //efekt powerUpu
 
             //pokud je sebran jiz druhy powerUp -> provede se kombo
             if (powerCombo.powerUps == 2) {
-                powerCombo.PowerCombo(powerCombo.powerUpCombo);
-                powerCombo.powerUps = 0;
-                powerCombo.powerUpCombo = 0;
+                powerCombo.PowerCombo(powerCombo.powerUpCombo);                                     //provedeni komba
+                powerCombo.powerUps = 0;                                                            //nastaveni poctu powerupu na nula
+                powerCombo.powerUpCombo = 0;                                                        //vymazani komba a priprava na dalsi
             }
             Destroy(collision.gameObject);
         }

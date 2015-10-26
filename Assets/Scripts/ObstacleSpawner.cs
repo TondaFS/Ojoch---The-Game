@@ -11,7 +11,7 @@ public class ObstacleSpawner : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         spawnCountdown += Time.deltaTime;
-        Debug.Log("T = " + spawnCountdown);
+        //Debug.Log("T = " + spawnCountdown);
 
         if (spawnCountdown > coolDown)
         {

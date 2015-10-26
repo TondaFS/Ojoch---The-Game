@@ -10,22 +10,32 @@ public class HealthScript : MonoBehaviour {
 
     //Promenne
     public int hp = 1;              //pocet zivotu
-    public bool isEnemy = true;     //jedna se o hrace/nepritele?\
-    
+    public bool isEnemy = true;     //jedna se o hrace/nepritele?
+    GameObject ojoch;
+
+    void Start() {
+        ojoch = GameObject.FindWithTag("Player");
+    }
+
+    void Update() {
+        
+        if (gameObject.tag == "Player") {
+            if (hp > 100) {
+                hp = 100;
+            }
+            if (hp < 0) {
+                hp = 0;
+            }
+        }
+    }
 
     // Započítání zranení a kontrola, jestli nemá být objekt zničen
     public void Damage(int damageCount) {
         hp -= damageCount;
 
-        if (gameObject.tag == "Player" && hp > 100) {
-            hp = 100;
-        }
-
-        if (hp <= 0) {
-            if (gameObject.tag != "Player")
-            {
-                Destroy(gameObject);
-            }
+        if (hp <= 0 && gameObject.tag != "Player") {        //pouze pro nepratele
+            Destroy(gameObject);
+            ojoch.GetComponent<OjochScript>().tmpscore += 10 * ojoch.GetComponent<OjochScript>().modifikatorScore;      //zapocitani skore
         }       
     }
 

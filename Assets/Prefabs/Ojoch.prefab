@@ -10,9 +10,10 @@ GameObject:
   - 4: {fileID: 453708}
   - 50: {fileID: 5060958}
   - 114: {fileID: 11430968}
-  - 114: {fileID: 11436702}
   - 114: {fileID: 11419636}
   - 61: {fileID: 6165844}
+  - 114: {fileID: 11429774}
+  - 114: {fileID: 11444528}
   m_Layer: 0
   m_Name: Ojoch
   m_TagString: Player
@@ -103,6 +104,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hp: 15
   isEnemy: 0
+  ojoch: {fileID: 0}
+--- !u!114 &11429774
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 155050}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 23e764de7df3e014a9aa775f4969b7fe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shotPrefab: {fileID: 487496, guid: ebd85ed6047648548bc450c3f0697160, type: 2}
+  shootingRate: .25
 --- !u!114 &11430968
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -118,9 +133,15 @@ MonoBehaviour:
   ojoch: {fileID: 0}
   obstacle: {fileID: 0}
   godMode: 0
-  rotace: 10
-  modifikator: 1
---- !u!114 &11436702
+  rotace: 15
+  powerCombo: {fileID: 0}
+  healthSlider: {fileID: 0}
+  playerHealth: {fileID: 0}
+  score: 0
+  scoreText: {fileID: 0}
+  modifikatorScore: 1
+  tmpscore: 0
+--- !u!114 &11444528
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -128,11 +149,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 155050}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 23e764de7df3e014a9aa775f4969b7fe, type: 3}
+  m_Script: {fileID: 11500000, guid: 7d4a2bba03a3a9a4382937dd201113fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shotPrefab: {fileID: 487496, guid: ebd85ed6047648548bc450c3f0697160, type: 2}
-  shootingRate: .25
+  powerUps: 0
+  powerUpCombo: 0
 --- !u!212 &21204244
 SpriteRenderer:
   m_ObjectHideFlags: 1
