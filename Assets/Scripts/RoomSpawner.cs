@@ -3,21 +3,21 @@ using System.Collections;
 
 public class RoomSpawner : MonoBehaviour {
 
-    public GameObject[] rooms;
-    public float spawnHeight;
-    public float spawnDistance;
+    public GameObject[] rooms; //seznam mistnosti
+    public float spawnHeight; //vyska (osa y) ve ktere se budou spawnovat
+    public float spawnDistance; //vzdalenost (ose x) ve ktere se budou spawnovat 
     
-    private GameObject room;
-    private GameObject currentRoom;
+    private GameObject currentRoom; //posledni spawnuta mistnost
 
     void Start()
     {
-        SpawnRoom();
+        SpawnRoom(); //po spusteni hry spawni okamzite jednu mistnost
     }
     
     void Update()
     {
-        if(spawnDistance > currentRoom.transform.GetChild(0).position.x)
+        //pokud je konec predchozi mistnosti ve spawnDistance, spawne se nova mistnost
+        if(currentRoom.transform.GetChild(0).position.x < spawnDistance)
         {
             SpawnRoom();
         }
@@ -25,10 +25,14 @@ public class RoomSpawner : MonoBehaviour {
 
     void SpawnRoom()
     {
-        room = rooms[Random.Range(0, rooms.Length)];
-        Vector3 spawnPos = new Vector3(spawnDistance , spawnHeight, 0);
-        currentRoom = Instantiate(room, spawnPos, Quaternion.identity) as GameObject;
-        Debug.Log("ROOM SPAWNED");
-    }
+        //vyber nahodnou mistnost ze seznamu
+        GameObject room = rooms[Random.Range(0, rooms.Length)];
 
+        //nastav pozici kde se bude spawnovat
+        Vector3 spawnPos = new Vector3(spawnDistance , spawnHeight, 0);
+
+        //instancuj mistnost
+        currentRoom = Instantiate(room, spawnPos, Quaternion.identity) as GameObject;
+        //currentRoom = transform.GetChild(0).gameObject.AddComponent<>();
+    }
 }
