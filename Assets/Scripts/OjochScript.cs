@@ -19,6 +19,12 @@ public class OjochScript : MonoBehaviour {
     public float godMode = 0;                   //nesmrtelnost
     public float rotace = 10;                   //rychlost nezavisle rotace
     public PowerUpScript powerCombo;
+    public float vterina = 0;                   //vterina
+    public float timeSlow = 0;                  //jak dlouho bude zpomaleny cas
+
+    //Inverze
+    public bool isInverted = false;             //Inverzni ovladani?
+    public float invertTime = 0;
 
     //promenne na zivoty/palivo Ojocha
     public Slider healthSlider;                 //Ukazatel zdravi   
@@ -27,8 +33,13 @@ public class OjochScript : MonoBehaviour {
     //promenne na score
     public Text scoreText;
     public int modifikatorScore = 1;                //Modfifikator
-    public int tmpscore;                            //hracovo skore      
+    public int tmpscore;                            //hracovo skore 
 
+    
+    //promenne na panelText
+    public float odpocet = 0;                       //jak dlouho tam bude text
+    public Text panelText;                          //text
+    
 
     void Start() {
         ojoch = GetComponent<Rigidbody2D>();
@@ -39,33 +50,87 @@ public class OjochScript : MonoBehaviour {
 
     void Update () {
         //Axis information
-        float inputX = Input.GetAxis("Horizontal");
-        float inputY = Input.GetAxis("Vertical");
+        float inputX = Input.GetAxis("Horizontal") * (isInverted ? -1 : 1) ;
+        float inputY = Input.GetAxis("Vertical") * (isInverted ? -1 : 1) ;
 
         //Skore
-        this.scoreText.text = "Skore: " + tmpscore;        
+        this.scoreText.text = "Skore: " + tmpscore;
 
         // Pohyb 
+        
         movement = new Vector2(speed.x * inputX, speed.y * inputY);
+        
+        
+
+        transform.Translate(speed.x * inputX, speed.y * inputY, 0);
 
         //Balancovani
-        bool rotateLeft = Input.GetKey(KeyCode.E);
-        bool rotateRight = Input.GetKey(KeyCode.Q);
-        if (rotateLeft) {
-            transform.Rotate(0, 0, -1);
+        float rotation = Input.GetAxis("Rotation") * (isInverted ? -1 : 1);
+        if (rotation < 0 && transform.rotation.z >= -0.8) {
+            transform.Rotate(0, 0, rotation * 1.5f);
         }
-        if (rotateRight) {
-            transform.Rotate(0, 0, 1);
+        if (rotation >= 0 && transform.rotation.z <= 0.8) {
+            transform.Rotate(0, 0, rotation * 1.5f);
         }
 
-        //Ocekuje, jestli je natoceni  na 0, pokud ne, zacne aplikovat rotaci v danem smeru
-        if (transform.rotation.z <= 0)
+        //Kontrola zpomaleni casu
+        if(timeSlow > 0)
         {
-            transform.Rotate(0, 0, -10 * Time.deltaTime);
+            timeSlow -= Time.deltaTime;
+            if(timeSlow <= 0)
+            {
+                SlowTime(false);
+            }
         }
-        else if (transform.rotation.z > 0) {
-            transform.Rotate(0, 0, 10 * Time.deltaTime);
+        
+        //Odpocet zobrazeni textu
+        if (odpocet != 0)
+        {
+            odpocet -= Time.deltaTime;
+            if (odpocet == 0 || odpocet < 0)
+            {
+                this.panelText.text = "";
+                odpocet = 0;
+            }
         }
+
+        //Kontrola inverzniho ovladani
+        if (invertTime != 0)
+        {
+            invertTime -= Time.deltaTime;
+            if(invertTime == 0 || invertTime < 0)
+            {
+                this.InversionControlling();
+                invertTime = 0;
+            }
+        }
+
+
+        //Ocekuje, jestli je natoceni  na 0, pokud ne, zacne aplikovat rotaci v danem smeru
+        if (transform.rotation.z <= 0 && transform.rotation.z >= -0.8)
+        {
+            transform.Rotate(0, 0, -rotace * Time.deltaTime + transform.rotation.z*0.8f);
+        }
+        else if (transform.rotation.z > 0 && transform.rotation.z <= 0.8) {
+            transform.Rotate(0, 0, rotace * Time.deltaTime + transform.rotation.z*0.8f);
+        }
+
+        //Ocekuje jaka je rotace a pripadne odebere palivo
+        if (transform.rotation.z <= -0.5 || transform.rotation.z >= 0.5)
+        {
+            if (vterina > 0)
+            {
+                vterina -= Time.deltaTime;
+            }
+            else
+            {
+                playerHealth.Damage(2);
+                healthSlider.value = playerHealth.hp;
+                vterina = 1;
+            }
+        }
+
+        
 
         //Kontrola, zda neni Ojoch zrovna nesmrtelny, pokud je, odecte cas z godMode a pokud dojde na nulu, okamzite mu opet zapne BoxCollider
         if (godMode != 0) {
@@ -80,18 +145,16 @@ public class OjochScript : MonoBehaviour {
         /// Strelba
         ///</summary>
 
-        bool shoot = Input.GetKeyDown(KeyCode.Space);       //Stisknutí mezerníku
-        shoot |= Input.GetButtonDown("Fire2");              //Alternativní střelba - defaultní v Unity
+        bool shoot = Input.GetButton("Fire1");          //Stisknutí mezerníku
         
         //Pokud chce hrac vystrelit, pouzije se skript weapon, který zavolá svou fci Attack a ubere mu to 1 život
         if (shoot) {
             WeaponScript weapon = GetComponent<WeaponScript>();
-            if (weapon != null) {
+            if (weapon != null && weapon.CanAttack) {
                 weapon.Attack(false);                       //atribut false -> jedna se o nepritele, kdo strili? 
                 playerHealth.Damage(1);
                 healthSlider.value = playerHealth.hp;
             }
-
         }
     }
 
@@ -159,5 +222,26 @@ public class OjochScript : MonoBehaviour {
     //Metoda pro zapnuti/vynuti BoxCollideru - nesmrtelnost
     void CollisionDisable(bool enableGod) {
         this.GetComponent<BoxCollider2D>().enabled = enableGod;
-    }      
+    }
+
+    //Inverze ovladani
+    public void InversionControlling() {
+        this.isInverted = !(isInverted);
+    }    
+
+    //Zpomali/vrati cas
+    public void SlowTime(bool slow)
+    {
+        if (slow)
+        {
+            Time.timeScale = 0.5f;
+            Time.fixedDeltaTime = 0.5f;
+            timeSlow = 6;
+        }
+        else
+        {
+            Time.timeScale = 1;
+            Time.fixedDeltaTime = 1;
+        }
+    }
 }

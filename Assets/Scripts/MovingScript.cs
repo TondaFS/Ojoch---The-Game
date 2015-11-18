@@ -29,5 +29,7 @@ public class MovingScript : MonoBehaviour {
         GetComponent<Rigidbody2D>().velocity = movement; //Aplikace pohybu na objekt
     }
 
+
+
 	
 }

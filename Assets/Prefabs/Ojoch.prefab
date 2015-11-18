@@ -104,7 +104,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hp: 15
   isEnemy: 0
-  ojoch: {fileID: 0}
 --- !u!114 &11429774
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -137,10 +136,10 @@ MonoBehaviour:
   powerCombo: {fileID: 0}
   healthSlider: {fileID: 0}
   playerHealth: {fileID: 0}
-  score: 0
   scoreText: {fileID: 0}
   modifikatorScore: 1
   tmpscore: 0
+  panelText: {fileID: 0}
 --- !u!114 &11444528
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -207,6 +206,10 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_IsTrigger
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: shootingRate
+      value: .25
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

@@ -7,6 +7,7 @@ public class PowerUpScript : MonoBehaviour {
     private HealthScript health;
     private OjochScript ojoch;
 
+
     void Start() {
         health = this.GetComponent<HealthScript>();
         ojoch = this.GetComponent<OjochScript>();
@@ -48,81 +49,105 @@ public class PowerUpScript : MonoBehaviour {
             case 2:                
                 health.Damage(-20);
                 ojoch.healthSlider.value = health.hp;
+                ojoch.panelText.text = "Bublinace!";
+                ojoch.odpocet = 3;
                 break;
 
             //bublinky + LP
             case 4:
-                Debug.Log("Bublinky + LP");
+                ojoch.panelText.text = "Bublinové LP!";
+                ojoch.odpocet = 3;
                 break;
 
             //bublinky + ponozky
             case 9:
-                Debug.Log("Ciste ponozky");
+                ojoch.panelText.text = "Čisté ponožky!";
+                ojoch.odpocet = 3;
                 break;
 
             //bublinky + smetak
             case 12:
-                Debug.Log("Bublinky + smetak");
+                ojoch.panelText.text = "Bulbinky a smeták!";
+                ojoch.odpocet = 3;
                 break;
 
             //bublinky + koreni
             case 21:
-                Debug.Log("Bublinky + koreni");
+                ojoch.panelText.text = "Bublinove koreni!";
+                ojoch.odpocet = 3;
                 break;
 
             //lp + lp
             case 6:
-                Debug.Log("Lp + Lp");
+                ojoch.panelText.text = "SLOWTIME!";
+                ojoch.odpocet = 3;
+                ojoch.SlowTime(true);
                 break;
 
             //lp + ponozky
             case 11:
-                Debug.Log("Lp + ponozky");
+                ojoch.panelText.text = "LP s ponozkama!";
+                ojoch.odpocet = 3;
                 break;
 
             //lp + smetak
             case 14:
-                Debug.Log("Lp + smetak");
+                ojoch.panelText.text = "Lp a smetak!";
+                ojoch.odpocet = 3;
                 break;
 
             //lp + koreni
             case 23:
-                Debug.Log("Lp + koreni");
+                ojoch.panelText.text = "Lp a koreni!";
+                ojoch.odpocet = 3;
+
+                
                 break;
 
             //ponozky + ponozky
             case 16:
-                Debug.Log("Ponozky + ponozky");
+                ojoch.panelText.text = "Double ponozky!";
+                ojoch.odpocet = 3;
                 break;
 
             //ponozky + smetak
             case 19:
-                Debug.Log("ponozky + smetak");
+                ojoch.panelText.text = "Smetakove ponozky!";
+                ojoch.odpocet = 3;
                 break;
 
             //ponozky + koreni
             case 28:
-                Debug.Log("ponozky + koreni");
+                ojoch.panelText.text = "Inverze!";
+                ojoch.odpocet = 3;
+
+                //Inverzni ovladani
+                ojoch.InversionControlling();
+                ojoch.invertTime = 10;
                 break;
 
             //smetak + smetak
             case 22:
-                Debug.Log("smetak + smetak");
+                ojoch.panelText.text = "Smetaky";
+                ojoch.odpocet = 3;
                 break;
 
             //smetak + koreni
             case 31:
-                Debug.Log("smetak + koreni");
+                ojoch.panelText.text = "Koreneny smetak!";
+                ojoch.odpocet = 3;
                 break;
 
             //koreni + koreni
             case 40:
-                Debug.Log("koreni + koreni");
+                ojoch.panelText.text = "Hodne koreni!";
+                ojoch.odpocet = 3;
                 break;
                 
 
         }
-            
+       
+
     }
 
 }

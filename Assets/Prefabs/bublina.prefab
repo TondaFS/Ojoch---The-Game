@@ -86,7 +86,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b57764b3ee1c514409ba4f439452d1c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: {x: 3, y: 1.5}
+  speed: {x: 7, y: 7}
   direction: {x: 1, y: 0}
   modifier: .0500000007
   countdown: 1.5
@@ -133,11 +133,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: speed.x
-      value: 3
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: speed.y
-      value: 1.5
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_Sprite
