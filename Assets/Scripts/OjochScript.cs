@@ -19,8 +19,13 @@ public class OjochScript : MonoBehaviour {
     public float godMode = 0;                   //nesmrtelnost
     public float rotace = 10;                   //rychlost nezavisle rotace
     public PowerUpScript powerCombo;
+    private WeaponScript[] weapons;
     public float vterina = 0;                   //vterina
     public float timeSlow = 0;                  //jak dlouho bude zpomaleny cas
+
+    public bool contraBubles = false;           //Rozptyl bublinek
+    public int contraNumber = 10;              //Pocet Kontra Strel
+    public bool cleanSock = false;              //je powerUp Ciste ponozky aktivni?
 
     //Inverze
     public bool isInverted = false;             //Inverzni ovladani?
@@ -46,6 +51,7 @@ public class OjochScript : MonoBehaviour {
         powerCombo = GetComponent<PowerUpScript>();
         playerHealth = GetComponent<HealthScript>();
         tmpscore = 0;
+        weapons = GetComponentsInChildren<WeaponScript>();
     }
 
     void Update () {
@@ -58,14 +64,11 @@ public class OjochScript : MonoBehaviour {
 
         // Pohyb 
         
-        movement = new Vector2(speed.x * inputX, speed.y * inputY);
-        
-        
-
-        transform.Translate(speed.x * inputX, speed.y * inputY, 0);
+        movement = new Vector2(speed.x * inputX * Time.deltaTime, speed.y * inputY * Time.deltaTime);
+        transform.Translate(movement, 0);
 
         //Balancovani
-        float rotation = Input.GetAxis("Rotation") * (isInverted ? -1 : 1);
+        float rotation = Input.GetAxis("Rotation");                 //* (isInverted ? -1 : 1)
         if (rotation < 0 && transform.rotation.z >= -0.8) {
             transform.Rotate(0, 0, rotation * 1.5f);
         }
@@ -148,25 +151,33 @@ public class OjochScript : MonoBehaviour {
         bool shoot = Input.GetButton("Fire1");          //Stisknutí mezerníku
         
         //Pokud chce hrac vystrelit, pouzije se skript weapon, který zavolá svou fci Attack a ubere mu to 1 život
-        if (shoot) {
-            WeaponScript weapon = GetComponent<WeaponScript>();
-            if (weapon != null && weapon.CanAttack) {
-                weapon.Attack(false);                       //atribut false -> jedna se o nepritele, kdo strili? 
+        if (shoot) {            
+            if (weapons != null && weapons[0].CanAttack) {
+                weapons[0].Attack(false);                       //atribut false -> jedna se o nepritele, kdo strili? 
                 playerHealth.Damage(1);
                 healthSlider.value = playerHealth.hp;
+                
+                if (contraBubles)
+                {
+                    weapons[1].Attack(false);
+                    weapons[2].Attack(false);
+
+                    contraNumber -= 1;
+                    if (contraNumber == 0)
+                    {
+                        contraBubles = false;
+                    }
+                    
+                }
             }
         }
     }
-
-    void FixedUpdate() {
-       GetComponent<Rigidbody2D>().velocity = movement; //Aplikace pohybu na objekt
-    }
-
+    
     //Kolize 
     void OnCollisionEnter2D(Collision2D collision) {
 
         //S nepritelem -> ubere 5 zivotu a nepritele znici
-        if (collision.gameObject.tag == "Enemy") {
+        if (collision.gameObject.tag == "Enemy" && !cleanSock) {
             Destroy(collision.gameObject);
             if (playerHealth != null) {
                 playerHealth.Damage(5);
@@ -179,6 +190,11 @@ public class OjochScript : MonoBehaviour {
             else
                 transform.Rotate(0, 0, Random.Range(15, 25));
 
+        }
+        else
+        {
+            Destroy(collision.gameObject);
+            cleanSock = false;
         }
 
         //S prekazkou -> ubere 10 zivotu a ucini na 5 vterin Ojocha nesmrtelnym
@@ -198,8 +214,9 @@ public class OjochScript : MonoBehaviour {
             
             //nesmrtelnost
             CollisionDisable(false);
-            godMode = 5;                                  
+            godMode = 5;
         }
+        
 
         //S powerUpem -> Zvysi pocet powerupu, provede efekt powerUpu, a pokud je sbran jiz druhy power up
         //provede se kombo
@@ -207,7 +224,7 @@ public class OjochScript : MonoBehaviour {
             tmpscore += 5 * modifikatorScore;                                                       //Zapocitani skore 
             powerCombo.powerUps += 1;                                                               //zvyseni powerUpu
             powerCombo.powerUpCombo += collision.gameObject.GetComponent<PowerUpID>().powerUpID;    //pridani ID
-            powerCombo.PowerEffect(collision.gameObject.GetComponent<PowerUpID>().powerUpID);       //efekt powerUpu
+            //powerCombo.PowerEffect(collision.gameObject.GetComponent<PowerUpID>().powerUpID);       //efekt powerUpu
 
             //pokud je sebran jiz druhy powerUp -> provede se kombo
             if (powerCombo.powerUps == 2) {
@@ -235,13 +252,28 @@ public class OjochScript : MonoBehaviour {
         if (slow)
         {
             Time.timeScale = 0.5f;
-            Time.fixedDeltaTime = 0.5f;
-            timeSlow = 6;
+            //Time.fixedDeltaTime = 0.5f;
+            timeSlow = 3;
         }
         else
         {
             Time.timeScale = 1;
-            Time.fixedDeltaTime = 1;
+            //Time.fixedDeltaTime = 1;
         }
     }
 }
+
+
+
+
+
+/***
+***     Pozustatkove kody!
+
+   
+    void FixedUpdate() {
+       GetComponent<Rigidbody2D>().velocity = movement; //Aplikace pohybu na objekt
+    }
+
+*/
+
