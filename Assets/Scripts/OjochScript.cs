@@ -44,7 +44,15 @@ public class OjochScript : MonoBehaviour {
     //promenne na panelText
     public float odpocet = 0;                       //jak dlouho tam bude text
     public Text panelText;                          //text
-    
+
+    /***
+        ZVUKY
+    **/
+    public AudioClip shootSound;
+    public AudioClip damage1;
+    public AudioClip damage2;
+    public AudioClip grab;
+
 
     void Start() {
         ojoch = GetComponent<Rigidbody2D>();
@@ -141,6 +149,7 @@ public class OjochScript : MonoBehaviour {
             if (godMode == 0 || godMode < 0) {
                 godMode = 0;
                 CollisionDisable(true);
+                Destroy(this.transform.Find("smetacek(Clone)").gameObject);
             } 
         }
 
@@ -153,14 +162,15 @@ public class OjochScript : MonoBehaviour {
         //Pokud chce hrac vystrelit, pouzije se skript weapon, který zavolá svou fci Attack a ubere mu to 1 život
         if (shoot) {            
             if (weapons != null && weapons[0].CanAttack) {
-                weapons[0].Attack(false);                       //atribut false -> jedna se o nepritele, kdo strili? 
+                weapons[0].Attack(false, new Vector2 (1, 0));                       //atribut false -> jedna se o nepritele, kdo strili? 
                 playerHealth.Damage(1);
                 healthSlider.value = playerHealth.hp;
+                SoundScript.instance.PlaySingle(shootSound);                        //Zvuk vystrelu
                 
                 if (contraBubles)
                 {
-                    weapons[1].Attack(false);
-                    weapons[2].Attack(false);
+                    weapons[1].Attack(false, new Vector2(1, 0.7f));
+                    weapons[2].Attack(false, new Vector2(1, -0.7f));
 
                     contraNumber -= 1;
                     if (contraNumber == 0)
@@ -178,6 +188,7 @@ public class OjochScript : MonoBehaviour {
 
         //S nepritelem -> ubere 5 zivotu a nepritele znici
         if (collision.gameObject.tag == "Enemy" && !cleanSock) {
+            SoundScript.instance.RandomSFX(damage1, damage2);
             Destroy(collision.gameObject);
             if (playerHealth != null) {
                 playerHealth.Damage(5);
@@ -191,9 +202,10 @@ public class OjochScript : MonoBehaviour {
                 transform.Rotate(0, 0, Random.Range(15, 25));
 
         }
-        else
+        else if (collision.gameObject.tag == "Enemy" && cleanSock) 
         {
             Destroy(collision.gameObject);
+            Destroy(this.transform.Find("sockClean(Clone)").gameObject);
             cleanSock = false;
         }
 
@@ -203,6 +215,7 @@ public class OjochScript : MonoBehaviour {
             if (playerHealth != null)
             {
                 playerHealth.Damage(10);
+                SoundScript.instance.RandomSFX(damage1, damage2);
                 healthSlider.value = playerHealth.hp;
             }
 
@@ -221,10 +234,10 @@ public class OjochScript : MonoBehaviour {
         //S powerUpem -> Zvysi pocet powerupu, provede efekt powerUpu, a pokud je sbran jiz druhy power up
         //provede se kombo
         if (collision.gameObject.tag == "PowerUp") {
+            SoundScript.instance.PlaySingle(grab);
             tmpscore += 5 * modifikatorScore;                                                       //Zapocitani skore 
             powerCombo.powerUps += 1;                                                               //zvyseni powerUpu
-            powerCombo.powerUpCombo += collision.gameObject.GetComponent<PowerUpID>().powerUpID;    //pridani ID
-            //powerCombo.PowerEffect(collision.gameObject.GetComponent<PowerUpID>().powerUpID);       //efekt powerUpu
+            powerCombo.powerUpCombo += collision.gameObject.GetComponent<PowerUpID>().powerUpID;    //pridani ID            
 
             //pokud je sebran jiz druhy powerUp -> provede se kombo
             if (powerCombo.powerUps == 2) {
@@ -237,7 +250,7 @@ public class OjochScript : MonoBehaviour {
     }
 
     //Metoda pro zapnuti/vynuti BoxCollideru - nesmrtelnost
-    void CollisionDisable(bool enableGod) {
+    public void CollisionDisable(bool enableGod) {
         this.GetComponent<BoxCollider2D>().enabled = enableGod;
     }
 
@@ -275,5 +288,5 @@ public class OjochScript : MonoBehaviour {
        GetComponent<Rigidbody2D>().velocity = movement; //Aplikace pohybu na objekt
     }
 
+    //powerCombo.PowerEffect(collision.gameObject.GetComponent<PowerUpID>().powerUpID);     //efekt powerUpu
 */
-

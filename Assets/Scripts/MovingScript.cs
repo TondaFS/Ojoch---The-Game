@@ -8,29 +8,29 @@ using System.Collections;
 public class MovingScript : MonoBehaviour {
     
     //Proměnné
-    public Vector2 speed = new Vector2(10, 10);     //rychlost
-    public Vector2 direction = new Vector2(-1, 0);  //smer
+    public Vector2 direction = new Vector2(0, 1);     //smer    
+    private Vector2 movement;                         //pohyb
+    public int speed = 1;
+
+    void Update() {                 
+        movement = new Vector2(speed * direction.x * Time.deltaTime, speed * direction.y * Time.deltaTime);   //samotny pohyb
+        transform.Translate(movement, 0);       
+    }  
+}
+
+/*
+Pozustatkove kody
+******************************
     //public float modifier = 0f;                     //modifikator gravitace
     //public float countdown = 5f;                    //odpocet
-    private Vector2 movement;                       //pohyb
+    //countdown -= Time.deltaTime;    
 
-    void Update() {
-        //countdown -= Time.deltaTime;             
-        movement = new Vector2(speed.x * direction.x * Time.deltaTime, speed.y * direction.y * Time.deltaTime);   //samotny pohyb
-        transform.Translate(movement, 0);
-        /*
-        //pokud uplyne doba countdown, zacne se na objekt aplikovat gravitace s modifikatorem
-        if (countdown <= 0.0f) {
-            gameObject.GetComponent<Rigidbody2D>().gravityScale -= (float)modifier * 2;
-        }  */          
-        
-    }
-
-    void FixedUpdate() {
+ void FixedUpdate() {
         //GetComponent<Rigidbody2D>().velocity = movement; //Aplikace pohybu na objekt
     }
-
-
-
-	
-}
+    
+    //pokud uplyne doba countdown, zacne se na objekt aplikovat gravitace s modifikatorem
+        if (countdown <= 0.0f) {
+            gameObject.GetComponent<Rigidbody2D>().gravityScale -= (float)modifier * 2;
+        }  	
+*/

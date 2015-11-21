@@ -10,6 +10,7 @@ public class WeaponScript : MonoBehaviour {
     public Transform shotPrefab;            //prefab pro strelbu
     public float shootingRate = 0.25f;      //doba mezi vystrely
     private float shootCooldown;            //cooldown
+    
 
     void Start() {
         shootCooldown = 0f;                 //inicialni cooldown strelby
@@ -23,7 +24,7 @@ public class WeaponScript : MonoBehaviour {
     }
 
     //Utok
-    public void Attack(bool isEnemy) {
+    public void Attack(bool isEnemy, Vector2 directionP) {
         if (CanAttack)      // viz fce nize
         {
             shootCooldown = shootingRate;                                                          //nastaveni cooldownu
@@ -34,11 +35,11 @@ public class WeaponScript : MonoBehaviour {
             if (shot != null){
                 shot.isEnemyShot = isEnemy;                                                        //aplikace vstupniho parametru a jeho prirazeni ke strele - kdo vystrelil? hrac/enemy
             }
-
+            
             MovingScript move = shotTransform.gameObject.GetComponent<MovingScript>();             //Bereme MovingScript strely
             if (move != null)
             {
-                move.direction = this.transform.right;                                             //Strela se vystreli smerem vpravo
+                move.direction = directionP;                                          //Strela se vystreli smerem vpravo
             }
         }
     }

@@ -6,6 +6,11 @@ public class PowerUpScript : MonoBehaviour {
     public int powerUpCombo = 0;    //jake combo bude
     private HealthScript health;
     private OjochScript ojoch;
+    public Transform sockClean;
+    public Transform smetacek;
+
+    public AudioClip good;
+    public AudioClip bad;
 
 
     void Start() {
@@ -19,7 +24,8 @@ public class PowerUpScript : MonoBehaviour {
         {
             // Bublinky + Bublinky 
             // Prida Ojochovi palivo
-            case 2:                
+            case 2:
+                SoundScript.instance.PlaySingle(good);
                 health.Damage(-20);
                 ojoch.healthSlider.value = health.hp;
                 ojoch.panelText.text = "Bublinace!";
@@ -38,17 +44,21 @@ public class PowerUpScript : MonoBehaviour {
             // *** Cista ponozka ***
             //Rotujici ponozka kolem ojocha neguje 1 zraneni
             case 9:
-                ojoch.panelText.text = "Čistá ponožka!";
+                SoundScript.instance.PlaySingle(good);
+                ojoch.panelText.text = "Smradoštít";
                 ojoch.odpocet = 3;
-
                 ojoch.cleanSock = true;
+                var sock = Instantiate(sockClean) as Transform;                
+                sock.position = transform.position + new Vector3(0.1f, -0.2f, 0);
+                sock.parent = ojoch.transform;                
                 break;
             
 
             //Bublinky + smetak  
             //Ojoch strili 3 bublinky naraz! Ve trech smerech - 10 vystrelu                    
             case 12:
-                ojoch.panelText.text = "CONTRA BUBBLES!";                
+                SoundScript.instance.PlaySingle(good);
+                ojoch.panelText.text = "Prďák";                
                 ojoch.odpocet = 3;
                 ojoch.contraBubles = true;
                 break;
@@ -64,6 +74,7 @@ public class PowerUpScript : MonoBehaviour {
             //lp + lp 
             // *** Zpomaleni casu ***
             case 6:
+                SoundScript.instance.PlaySingle(good);
                 ojoch.panelText.text = "SLOWTIME!";
                 ojoch.odpocet = 1;
                 ojoch.SlowTime(true);
@@ -108,19 +119,27 @@ public class PowerUpScript : MonoBehaviour {
             //ponozky + koreni 
             //Inverzni ovladani
             case 28:
-                ojoch.panelText.text = "Inverze!";
+                SoundScript.instance.PlaySingle(bad);
+                ojoch.panelText.text = "Zmatek";
                 ojoch.odpocet = 3;
-
                 //Inverze
                 ojoch.InversionControlling();
                 ojoch.invertTime = 10;
                 break;
 
 
-            //smetak + smetak
+            //smetak + smetak 
+            //Nesmrtelnost po určitou dobu - kolem ojocha budou rotovat 2 smetáky
             case 22:
-                ojoch.panelText.text = "Smetaky";
+                SoundScript.instance.PlaySingle(good);
+                ojoch.panelText.text = "Koštění";
                 ojoch.odpocet = 3;
+                ojoch.CollisionDisable(false);
+                ojoch.godMode = 5;
+
+                var smet = Instantiate(smetacek) as Transform;
+                smet.position = transform.position + new Vector3(0.2f, 0.2f, 0);
+                smet.parent = ojoch.transform;
                 break;
 
 
