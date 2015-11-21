@@ -8,6 +8,7 @@ TagManager:
   - Enemy
   - Obstacle
   - PowerUp
+  - Fader
   layers:
   - Default
   - TransparentFX
@@ -45,9 +46,15 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Background
+    uniqueID: 3766687319
+    locked: 0
   - name: Obstacles
     uniqueID: 3721530637
     locked: 0
-  - name: 1
-    uniqueID: 1465496439
+  - name: Items and Enemies
+    uniqueID: 1582291417
+    locked: 0
+  - name: Ojoch
+    uniqueID: 965113949
     locked: 0

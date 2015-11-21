@@ -4,18 +4,26 @@ using System;
 
 public class BackgroundSpawner : MonoBehaviour {
 
+    
     public GameObject hills;
     public GameObject clouds;
+    
+    public Vector2 hillSpeed = new Vector2(1, 1); 
+    public Vector2 cloudSpeed = new Vector2(1, 1); 
+    public Vector2 direction = new Vector2(-1, 0); 
 
-    public Vector2 hillSpeed = new Vector2(1, 1); // scrolling speed
-    public Vector2 cloudSpeed = new Vector2(1, 1); // scrolling speed
-    public Vector2 direction = new Vector2(-1, 0); // moving direction
+    public float hillHeight = 0;
+    public float cloudHeight = 0;
+
+    private float[] objLenght;
+    private float[] objWarpPos;
 
     private float hillSize;
     private float hillWarpPos;
 
     private float cloudSize;
     private float cloudWarpPos;
+
 
     private GameObject hill1;
     private GameObject hill2;
@@ -28,14 +36,14 @@ public class BackgroundSpawner : MonoBehaviour {
         hillSize = hills.GetComponent<SpriteRenderer>().bounds.size.x;
         hillWarpPos = -10 - hillSize;
 
-        hill1 = Instantiate(hills, new Vector3(-9, 0, 0), Quaternion.identity) as GameObject;
-        hill2 = Instantiate(hills, new Vector3(-9 + hillSize, 0, 0), Quaternion.identity) as GameObject;
+        hill1 = Instantiate(hills, new Vector3(-9, hillHeight, 0), Quaternion.identity) as GameObject;
+        hill2 = Instantiate(hills, new Vector3(-9 + hillSize, hillHeight, 0), Quaternion.identity) as GameObject;
 
         cloudSize = clouds.GetComponent<SpriteRenderer>().bounds.size.x;
         cloudWarpPos = -10 - cloudSize;
 
-        cloud1 = Instantiate(clouds, new Vector3(-9, 0, 0), Quaternion.identity) as GameObject;
-        cloud2 = Instantiate(clouds, new Vector3(-9 + cloudSize, 0, 0), Quaternion.identity) as GameObject;
+        cloud1 = Instantiate(clouds, new Vector3(-9, cloudHeight, 0), Quaternion.identity) as GameObject;
+        cloud2 = Instantiate(clouds, new Vector3(-9 + cloudSize, cloudHeight, 0), Quaternion.identity) as GameObject;
     }
 
     void Update()

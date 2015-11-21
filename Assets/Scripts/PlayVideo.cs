@@ -7,6 +7,7 @@ using System.Collections;
 public class PlayVideo : MonoBehaviour {
 
     public MovieTexture intro;
+    public ScreenFader fader;
 
     private AudioSource introAudio;
 
@@ -30,7 +31,7 @@ public class PlayVideo : MonoBehaviour {
         }
         else if (Input.anyKeyDown)
         {
-            Application.LoadLevel(1);
+            fader.FadeOutLoadNewScene(1);
         }
 	}
 }
