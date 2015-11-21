@@ -10,9 +10,9 @@ GameObject:
   - 4: {fileID: 487496}
   - 212: {fileID: 21240724}
   - 50: {fileID: 5045204}
-  - 114: {fileID: 11474516}
   - 114: {fileID: 11454268}
   - 58: {fileID: 5818968}
+  - 114: {fileID: 11411464}
   m_Layer: 0
   m_Name: bublina
   m_TagString: Untagged
@@ -61,6 +61,18 @@ CircleCollider2D:
   m_Offset: {x: 1.46000004, y: 0}
   serializedVersion: 2
   m_Radius: .699999988
+--- !u!114 &11411464
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 124546}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67e97188d0f525b41b7eaa3f0ec718c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: -7
 --- !u!114 &11454268
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -75,21 +87,6 @@ MonoBehaviour:
   damage: 1
   isEnemyShot: 0
   lifeTime: 5
---- !u!114 &11474516
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 124546}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b57764b3ee1c514409ba4f439452d1c9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: {x: 7, y: 7}
-  direction: {x: 1, y: 0}
-  modifier: .0500000007
-  countdown: 1.5
 --- !u!212 &21240724
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -133,11 +130,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: speed.x
-      value: 7
+      value: 350
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: speed.y
-      value: 7
+      value: 350
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_Sprite
@@ -155,6 +152,14 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: countdown
       value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: direction.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: speed
+      value: -7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
