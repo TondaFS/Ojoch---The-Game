@@ -13,9 +13,10 @@ GameObject:
   - 82: {fileID: 8224466}
   - 114: {fileID: 11441974}
   - 114: {fileID: 11433182}
+  - 114: {fileID: 11444468}
   m_Layer: 0
   m_Name: Main Menu Controller
-  m_TagString: Untagged
+  m_TagString: GameController
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -27,7 +28,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 167406}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 471, y: 294, z: 90}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -38,12 +39,12 @@ AudioSource:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 167406}
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: d9877c2c0aa92eb4aa90888e5c2f2563, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: .400000006
+  m_Volume: .200000003
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -114,7 +115,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fadeImg: {fileID: 0}
-  fadeSpeed: 10
+  fadeSpeed: 2
   isSceneStarting: 1
   isSceneEnding: 0
 --- !u!114 &11408570
@@ -156,11 +157,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hills: {fileID: 111346, guid: b93e5819a02b6f7419f06c61c70c8026, type: 2}
   clouds: {fileID: 158762, guid: 7d3b99429317f6448bd4af4ff134e9b6, type: 2}
-  hillSpeed: {x: 3, y: 1}
-  cloudSpeed: {x: 1, y: 1}
+  sessionController: {fileID: 0}
+  hillSpeed: {x: 1, y: 1}
+  cloudSpeed: {x: .5, y: 1}
   direction: {x: -1, y: 0}
   hillHeight: -2
   cloudHeight: 0
+--- !u!114 &11444468
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 167406}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 618da468d3ab0af4f861af7e63671bf1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameManager: {fileID: 147462, guid: 7011819d57f1bb248ad121654bc3fb81, type: 2}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

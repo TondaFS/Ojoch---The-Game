@@ -30,6 +30,7 @@ public class BackgroundSpawner : MonoBehaviour {
 
     private GameObject cloud1;
     private GameObject cloud2;
+    private Vector3 movement;
 
     void Start()
     {
@@ -55,11 +56,20 @@ public class BackgroundSpawner : MonoBehaviour {
 
     private void MoveClouds()
     {
-
-        Vector3 movement = new Vector3(
-          (hillSpeed.x + sessionController.gameSpeed) * direction.x,
-          hillSpeed.y * direction.y,
-          0);
+        if (sessionController == null)
+        {
+            movement = new Vector3(
+            (hillSpeed.x) * direction.x,
+            hillSpeed.y * direction.y,
+            0);
+        }
+        else
+        {
+            movement = new Vector3(
+            (hillSpeed.x + sessionController.gameSpeed) * direction.x,
+            hillSpeed.y * direction.y,
+            0);
+        }
 
         movement *= Time.deltaTime;
 
@@ -79,10 +89,20 @@ public class BackgroundSpawner : MonoBehaviour {
 
     private void MoveHills()
     {
-        Vector3 movement = new Vector3(
-          (cloudSpeed.x + sessionController.gameSpeed) * direction.x,
-          cloudSpeed.y * direction.y,
+        if (sessionController == null)
+        {
+            movement = new Vector3(
+            (cloudSpeed.x) * direction.x,
+            cloudSpeed.y * direction.y,
           0);
+        }
+        else
+        {
+            movement = new Vector3(
+                     (cloudSpeed.x + sessionController.gameSpeed) * direction.x,
+                     cloudSpeed.y * direction.y,
+                     0);
+        }
 
         movement *= Time.deltaTime;
 
