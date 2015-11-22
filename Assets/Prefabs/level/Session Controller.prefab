@@ -20,6 +20,25 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &191220
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 483664}
+  - 20: {fileID: 2064880}
+  - 92: {fileID: 9249386}
+  - 124: {fileID: 12488986}
+  - 81: {fileID: 8106932}
+  m_Layer: 0
+  m_Name: Main Camera
+  m_TagString: MainCamera
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!4 &452354
 Transform:
   m_ObjectHideFlags: 1
@@ -29,9 +48,63 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 483664}
   m_Father: {fileID: 0}
   m_RootOrder: 0
+--- !u!4 &483664
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 191220}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1, z: -10}
+  m_LocalScale: {x: 1, y: 1.49999917, z: 1}
+  m_Children: []
+  m_Father: {fileID: 452354}
+  m_RootOrder: 0
+--- !u!20 &2064880
+Camera:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 191220}
+  m_Enabled: 1
+  serializedVersion: 2
+  m_ClearFlags: 2
+  m_BackGroundColor: {r: .278431386, g: .278431386, b: .278431386, a: 1}
+  m_NormalizedViewPortRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 1
+    height: 1
+  near clip plane: .300000012
+  far clip plane: 1000
+  field of view: 60
+  orthographic: 1
+  orthographic size: 4.79520416
+  m_Depth: -1
+  m_CullingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_RenderingPath: -1
+  m_TargetTexture: {fileID: 0}
+  m_TargetDisplay: 0
+  m_TargetEye: 3
+  m_HDR: 0
+  m_OcclusionCulling: 1
+  m_StereoConvergence: 10
+  m_StereoSeparation: .0219999999
+  m_StereoMirrorMode: 0
+--- !u!81 &8106932
+AudioListener:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 191220}
+  m_Enabled: 1
 --- !u!82 &8234072
 AudioSource:
   m_ObjectHideFlags: 1
@@ -102,6 +175,13 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
+--- !u!92 &9249386
+Behaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 191220}
+  m_Enabled: 1
 --- !u!114 &11421958
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -128,8 +208,8 @@ MonoBehaviour:
   hills: {fileID: 111346, guid: b93e5819a02b6f7419f06c61c70c8026, type: 2}
   clouds: {fileID: 158762, guid: 7d3b99429317f6448bd4af4ff134e9b6, type: 2}
   sessionController: {fileID: 11466436}
-  hillSpeed: {x: 4, y: 1}
-  cloudSpeed: {x: 2, y: 1}
+  hillSpeed: {x: .5, y: 1}
+  cloudSpeed: {x: .200000003, y: 1}
   direction: {x: -1, y: 0}
   hillHeight: 0
   cloudHeight: 0
@@ -155,16 +235,33 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 165032}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ebf9305b24d18e7429cc153fbe5423f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   rooms:
-  - {fileID: 100850, guid: 75a5b61c559ec5d44b649132f4ece092, type: 2}
-  - {fileID: 181232, guid: 1c9c8f3955c15864ebe474c1684ef807, type: 2}
-  spawnHeight: -5
-  spawnDistance: 8
+  - {fileID: 107938, guid: 19e676a6e8065b842ac04fb95e7559b9, type: 2}
+  - {fileID: 197784, guid: 880106d5020b1dc46be7f0d7bfd204a9, type: 2}
+  - {fileID: 118274, guid: 6fc48d4f3e4201846bfe47223cc514fe, type: 2}
+  - {fileID: 157660, guid: 644885e21ff352047917010b2f245a88, type: 2}
+  - {fileID: 136314, guid: 17a4bbc8349565f4b891606e6dd9ee20, type: 2}
+  - {fileID: 109898, guid: 1d0e06cb81d0d0e418932956c4e9b81d, type: 2}
+  - {fileID: 150802, guid: f41731a9da6a6364d8eeaf89f3bc29fe, type: 2}
+  - {fileID: 116256, guid: cc43f9c027783c341a42fb705d96b5b6, type: 2}
+  - {fileID: 171084, guid: 0b6b4ea20863e5748a4298ec5b4ef392, type: 2}
+  - {fileID: 163814, guid: 03fed8037f729864f9a71f22caa6dcda, type: 2}
+  - {fileID: 123094, guid: 05e2c9f5ea836344ab8409c88d00b4c2, type: 2}
+  - {fileID: 163108, guid: 9eab32de3be8eff42b132bc5109e5faf, type: 2}
+  spawnHeight: -4
+  spawnDistance: 20
+--- !u!124 &12488986
+Behaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 191220}
+  m_Enabled: 1
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
