@@ -9,7 +9,7 @@ public class ScreenFader : MonoBehaviour
     public bool isSceneStarting = true;
     public bool isSceneEnding = false;
 
-    private int newScene;
+    private string newScene;
 
     void Update()
     {
@@ -52,7 +52,7 @@ public class ScreenFader : MonoBehaviour
         }
     }
 
-    public void FadeOutLoadNewScene(int newScene)
+    public void FadeOutLoadNewScene(string newScene)
     {
         fadeImg.enabled = true;
         isSceneEnding = true;

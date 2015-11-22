@@ -3,9 +3,9 @@ using System.Collections;
 
 public class MainMenuController : MonoBehaviour
 {
-    public void ChangeToScene(int sceneToChangeTo)
+    public void ChangeToScene(string sceneName)
     {
-        Application.LoadLevel(sceneToChangeTo);
+        Application.LoadLevel(sceneName);
     }
 
     public void ExitGame()

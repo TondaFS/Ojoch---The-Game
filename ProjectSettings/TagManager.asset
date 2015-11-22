@@ -4,15 +4,7 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Boundary
-  - Enemy
-  - Obstacle
-  - PowerUp
-<<<<<<< HEAD
-  - clean
-=======
-  - Fader
->>>>>>> origin/ojochMaster
+  - Socha
   layers:
   - Default
   - TransparentFX
@@ -51,14 +43,14 @@ TagManager:
     uniqueID: 0
     locked: 0
   - name: Background
-    uniqueID: 3766687319
+    uniqueID: 1026942733
     locked: 0
   - name: Obstacles
-    uniqueID: 3721530637
-    locked: 0
-  - name: Items and Enemies
-    uniqueID: 1582291417
+    uniqueID: 2446702053
     locked: 0
   - name: Ojoch
-    uniqueID: 965113949
+    uniqueID: 1199424103
+    locked: 0
+  - name: Power-ups and enemies
+    uniqueID: 92924783
     locked: 0

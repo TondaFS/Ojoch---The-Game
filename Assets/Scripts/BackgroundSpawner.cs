@@ -4,10 +4,10 @@ using System;
 
 public class BackgroundSpawner : MonoBehaviour {
 
-    
     public GameObject hills;
     public GameObject clouds;
-    
+
+    public SessionController sessionController;
     public Vector2 hillSpeed = new Vector2(1, 1); 
     public Vector2 cloudSpeed = new Vector2(1, 1); 
     public Vector2 direction = new Vector2(-1, 0); 
@@ -55,8 +55,9 @@ public class BackgroundSpawner : MonoBehaviour {
 
     private void MoveClouds()
     {
+
         Vector3 movement = new Vector3(
-          hillSpeed.x * direction.x,
+          (hillSpeed.x + sessionController.gameSpeed) * direction.x,
           hillSpeed.y * direction.y,
           0);
 
@@ -79,7 +80,7 @@ public class BackgroundSpawner : MonoBehaviour {
     private void MoveHills()
     {
         Vector3 movement = new Vector3(
-          cloudSpeed.x * direction.x,
+          (cloudSpeed.x + sessionController.gameSpeed) * direction.x,
           cloudSpeed.y * direction.y,
           0);
 

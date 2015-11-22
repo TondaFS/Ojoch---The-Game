@@ -31,7 +31,7 @@ public class PlayVideo : MonoBehaviour {
         }
         else if (Input.anyKeyDown)
         {
-            fader.FadeOutLoadNewScene(1);
+            fader.FadeOutLoadNewScene("menu");
         }
 	}
 }
