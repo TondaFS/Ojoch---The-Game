@@ -23,6 +23,6 @@ public class BackgroundScrolling : MonoBehaviour
         movement *= Time.deltaTime;
         transform.Translate(movement);
 
-        Debug.Log("bg scroll speed: " + movement.x);
+        //Debug.Log("bg scroll speed: " + movement.x);
     }
 }
