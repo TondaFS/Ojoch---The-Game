@@ -5,6 +5,11 @@ TagManager:
   serializedVersion: 2
   tags:
   - Socha
+  - PowerUp
+  - Enemy
+  - clean
+  - Obstacle
+  - Particle
   layers:
   - Default
   - TransparentFX

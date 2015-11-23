@@ -249,7 +249,7 @@ public class OjochScript : MonoBehaviour {
             else
                 transform.Rotate(0, 0, Random.Range(30, 40));
 
-            //collision.gameObject.GetComponent<ObstacleDestruction>().Destruction();
+            collision.gameObject.GetComponent<ObstacleDestruction>().Destruction();
             //nesmrtelnost
             CollisionDisable(false);
             godMode = 5;
