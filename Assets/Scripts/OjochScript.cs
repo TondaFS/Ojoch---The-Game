@@ -209,6 +209,7 @@ public class OjochScript : MonoBehaviour {
     
     //Kolize 
     void OnCollisionEnter2D(Collision2D collision) {
+        Debug.Log("collision with: " + collision.gameObject.tag);
 
         //S nepritelem -> ubere 5 zivotu a nepritele znici
         if (collision.gameObject.tag == "Enemy" && !cleanSock) {
