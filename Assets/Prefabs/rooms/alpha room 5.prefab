@@ -1,5 +1,21 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &106198
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 496524}
+  - 114: {fileID: 11414824}
+  m_Layer: 0
+  m_Name: Power-up spawn point (2)
+  m_TagString: Untagged
+  m_Icon: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &116256
 GameObject:
   m_ObjectHideFlags: 0
@@ -34,6 +50,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &123044
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 404722}
+  - 114: {fileID: 11420742}
+  m_Layer: 0
+  m_Name: Power-up spawn point (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &126182
 GameObject:
   m_ObjectHideFlags: 0
@@ -49,6 +81,38 @@ GameObject:
   m_Name: obstacle_house3 (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &136326
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 470922}
+  - 114: {fileID: 11492462}
+  m_Layer: 0
+  m_Name: Enemy Spawn Point
+  m_TagString: Untagged
+  m_Icon: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &148816
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 417322}
+  - 114: {fileID: 11493542}
+  m_Layer: 0
+  m_Name: Power-up spawn point
+  m_TagString: Untagged
+  m_Icon: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -116,6 +180,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 496770}
   m_RootOrder: 3
+--- !u!4 &404722
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 123044}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 11.1965246, y: 13.0110893, z: .189453125}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 496770}
+  m_RootOrder: 7
 --- !u!4 &412546
 Transform:
   m_ObjectHideFlags: 1
@@ -140,6 +216,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 496770}
   m_RootOrder: 1
+--- !u!4 &417322
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 148816}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 7.62591171, y: 10.1149254, z: .189453125}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 496770}
+  m_RootOrder: 6
 --- !u!4 &451908
 Transform:
   m_ObjectHideFlags: 1
@@ -164,6 +252,30 @@ Transform:
   m_Children: []
   m_Father: {fileID: 496770}
   m_RootOrder: 2
+--- !u!4 &470922
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 136326}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 11.3084764, y: 7.13259649, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 496770}
+  m_RootOrder: 5
+--- !u!4 &496524
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 106198}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 14.6877928, y: 10.1942711, z: .189453125}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 496770}
+  m_RootOrder: 8
 --- !u!4 &496770
 Transform:
   m_ObjectHideFlags: 1
@@ -179,6 +291,10 @@ Transform:
   - {fileID: 466042}
   - {fileID: 400746}
   - {fileID: 412546}
+  - {fileID: 470922}
+  - {fileID: 417322}
+  - {fileID: 404722}
+  - {fileID: 496524}
   m_Father: {fileID: 0}
   m_RootOrder: 0
 --- !u!61 &6115686
@@ -285,6 +401,44 @@ BoxCollider2D:
   m_Offset: {x: 2.11182785, y: -.840415955}
   serializedVersion: 2
   m_Size: {x: 2.34343338, y: 9.11916161}
+--- !u!114 &11414824
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 106198}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ab1b26257c3b2043a3751103fa095f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  powerup:
+  - {fileID: 180846, guid: e48ecef242c6ccc499bc973193da7df3, type: 2}
+  - {fileID: 193472, guid: 23425adb063050548b3eeffdc3259461, type: 2}
+  - {fileID: 153190, guid: 95ccb58cf192ec64bab8dca692e72a7f, type: 2}
+  - {fileID: 150540, guid: 0e91683fa87698c41a33e113dd3d1e90, type: 2}
+  - {fileID: 172254, guid: bf5d35dfa1ccfa341aa94546286bac83, type: 2}
+  - {fileID: 0}
+  - {fileID: 0}
+--- !u!114 &11420742
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 123044}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ab1b26257c3b2043a3751103fa095f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  powerup:
+  - {fileID: 180846, guid: e48ecef242c6ccc499bc973193da7df3, type: 2}
+  - {fileID: 193472, guid: 23425adb063050548b3eeffdc3259461, type: 2}
+  - {fileID: 153190, guid: 95ccb58cf192ec64bab8dca692e72a7f, type: 2}
+  - {fileID: 150540, guid: 0e91683fa87698c41a33e113dd3d1e90, type: 2}
+  - {fileID: 172254, guid: bf5d35dfa1ccfa341aa94546286bac83, type: 2}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!114 &11423860
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -310,6 +464,38 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: {x: 1, y: 1}
   direction: {x: -1, y: 0}
+--- !u!114 &11492462
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 136326}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b7f315985d873114bba305e7199e8ca9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemy: {fileID: 190532, guid: 25e4570693707ad4f94639e44e393b55, type: 2}
+  delay: 0
+--- !u!114 &11493542
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 148816}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ab1b26257c3b2043a3751103fa095f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  powerup:
+  - {fileID: 180846, guid: e48ecef242c6ccc499bc973193da7df3, type: 2}
+  - {fileID: 193472, guid: 23425adb063050548b3eeffdc3259461, type: 2}
+  - {fileID: 153190, guid: 95ccb58cf192ec64bab8dca692e72a7f, type: 2}
+  - {fileID: 150540, guid: 0e91683fa87698c41a33e113dd3d1e90, type: 2}
+  - {fileID: 172254, guid: bf5d35dfa1ccfa341aa94546286bac83, type: 2}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!212 &21223334
 SpriteRenderer:
   m_ObjectHideFlags: 1

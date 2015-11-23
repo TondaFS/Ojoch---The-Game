@@ -9,10 +9,14 @@ public class SpawnRandomPowerup : MonoBehaviour
     void Start()
     {
         GameObject randomPowerup = powerup[Random.Range(0, powerup.Length)];
+        //Debug.Log(randomPowerup);
         Vector3 spawnPos = (gameObject.transform.position);
 
-        Instantiate(randomPowerup, spawnPos, Quaternion.identity);
-        Destroy(gameObject);
+        if (randomPowerup != null)
+        {
+            (Instantiate(randomPowerup, spawnPos, Quaternion.identity) as GameObject).transform.parent = transform; ;
+        }
+        //Destroy(gameObject);
     }
 
 }

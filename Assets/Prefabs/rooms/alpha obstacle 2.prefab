@@ -19,6 +19,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &132502
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 446568}
+  - 114: {fileID: 11458372}
+  m_Layer: 0
+  m_Name: Enemy Spawn Point
+  m_TagString: Untagged
+  m_Icon: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &136314
 GameObject:
   m_ObjectHideFlags: 0
@@ -32,6 +48,22 @@ GameObject:
   m_Name: alpha obstacle 2
   m_TagString: Untagged
   m_Icon: {fileID: 7250588514170254948, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &156374
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 441190}
+  - 114: {fileID: 11492496}
+  m_Layer: 0
+  m_Name: Power-up spawn point
+  m_TagString: Untagged
+  m_Icon: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -58,11 +90,35 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 123500}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.41000009, y: 3.9000001, z: 0}
+  m_LocalPosition: {x: 3.71000004, y: 3.9000001, z: 0}
   m_LocalScale: {x: .434777975, y: .434777975, z: 1.08694494}
   m_Children: []
   m_Father: {fileID: 491880}
   m_RootOrder: 1
+--- !u!4 &441190
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 156374}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 3.19000006, y: 3.9000001, z: .189453125}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 491880}
+  m_RootOrder: 2
+--- !u!4 &446568
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 132502}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.87, y: 3.89870095, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 491880}
+  m_RootOrder: 3
 --- !u!4 &475914
 Transform:
   m_ObjectHideFlags: 1
@@ -87,6 +143,8 @@ Transform:
   m_Children:
   - {fileID: 475914}
   - {fileID: 414304}
+  - {fileID: 441190}
+  - {fileID: 446568}
   m_Father: {fileID: 0}
   m_RootOrder: 0
 --- !u!61 &6132962
@@ -140,6 +198,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   destroyDistance: -10
+--- !u!114 &11458372
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 132502}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b7f315985d873114bba305e7199e8ca9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemy: {fileID: 125674, guid: 3410d796530ed1f4e915baa376572fc1, type: 2}
+  delay: 0
 --- !u!114 &11474488
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -153,6 +224,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: {x: 1, y: 1}
   direction: {x: -1, y: 0}
+--- !u!114 &11492496
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 156374}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ab1b26257c3b2043a3751103fa095f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  powerup:
+  - {fileID: 180846, guid: e48ecef242c6ccc499bc973193da7df3, type: 2}
+  - {fileID: 193472, guid: 23425adb063050548b3eeffdc3259461, type: 2}
+  - {fileID: 153190, guid: 95ccb58cf192ec64bab8dca692e72a7f, type: 2}
+  - {fileID: 150540, guid: 0e91683fa87698c41a33e113dd3d1e90, type: 2}
+  - {fileID: 172254, guid: bf5d35dfa1ccfa341aa94546286bac83, type: 2}
 --- !u!212 &21257268
 SpriteRenderer:
   m_ObjectHideFlags: 1

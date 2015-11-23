@@ -18,6 +18,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &142622
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 415508}
+  - 114: {fileID: 11432462}
+  m_Layer: 0
+  m_Name: Power-up spawn point
+  m_TagString: Untagged
+  m_Icon: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &157660
 GameObject:
   m_ObjectHideFlags: 0
@@ -50,6 +66,18 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!4 &415508
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 142622}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 6.63999987, y: 3.92000008, z: .189453125}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 473268}
+  m_RootOrder: 0
 --- !u!4 &418488
 Transform:
   m_ObjectHideFlags: 1
@@ -57,11 +85,11 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 177568}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 8.72999954, y: 0, z: 0}
+  m_LocalPosition: {x: 12.2299995, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 473268}
-  m_RootOrder: 0
+  m_RootOrder: 1
 --- !u!4 &473268
 Transform:
   m_ObjectHideFlags: 1
@@ -72,6 +100,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 415508}
   - {fileID: 418488}
   - {fileID: 485836}
   m_Father: {fileID: 0}
@@ -83,11 +112,11 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 105002}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.55000019, y: 4.03999996, z: 0}
+  m_LocalPosition: {x: 8.05000019, y: 4.03999996, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 473268}
-  m_RootOrder: 1
+  m_RootOrder: 2
 --- !u!61 &6183358
 BoxCollider2D:
   m_ObjectHideFlags: 1
@@ -126,6 +155,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   destroyDistance: -10
+--- !u!114 &11432462
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 142622}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ab1b26257c3b2043a3751103fa095f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  powerup:
+  - {fileID: 180846, guid: e48ecef242c6ccc499bc973193da7df3, type: 2}
+  - {fileID: 193472, guid: 23425adb063050548b3eeffdc3259461, type: 2}
+  - {fileID: 153190, guid: 95ccb58cf192ec64bab8dca692e72a7f, type: 2}
+  - {fileID: 150540, guid: 0e91683fa87698c41a33e113dd3d1e90, type: 2}
+  - {fileID: 172254, guid: bf5d35dfa1ccfa341aa94546286bac83, type: 2}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!114 &11466816
 MonoBehaviour:
   m_ObjectHideFlags: 1
