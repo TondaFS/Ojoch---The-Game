@@ -144,9 +144,13 @@ public class PowerUpScript : MonoBehaviour {
 
 
             //smetak + koreni
+            //AK - na nejakou dobu - vyssi ucinnost zbrane
             case 31:
-                ojoch.panelText.text = "Koreneny smetak!";
+                ojoch.panelText.text = "AK-47";
                 ojoch.odpocet = 3;
+
+                ojoch.isAkacko = true;
+                ojoch.akacko = 10;
                 break;
 
 

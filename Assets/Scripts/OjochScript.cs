@@ -21,11 +21,19 @@ public class OjochScript : MonoBehaviour {
     public PowerUpScript powerCombo;
     private WeaponScript[] weapons;
     public float vterina = 0;                   //vterina
-    public float timeSlow = 0;                  //jak dlouho bude zpomaleny cas
 
+    //Slowtime
+    public float timeSlow = 0;                  //jak dlouho bude zpomaleny cas
+        
+
+    //Kontra strelba
     public bool contraBubles = false;           //Rozptyl bublinek
-    public int contraNumber = 10;              //Pocet Kontra Strel
+    public int contraNumber = 10;               //Pocet Kontra Strel
     public bool cleanSock = false;              //je powerUp Ciste ponozky aktivni?
+    
+    //AK-47
+    public int akacko = 0;                      //Pocet strel Akacka
+    public bool isAkacko = false;               //ke Ak-47 aktivni?
 
     //Inverze
     public bool isInverted = false;             //Inverzni ovladani?
@@ -39,8 +47,7 @@ public class OjochScript : MonoBehaviour {
     public Text scoreText;
     public int modifikatorScore = 1;                //Modfifikator
     public int tmpscore;                            //hracovo skore 
-
-    
+        
     //promenne na panelText
     public float odpocet = 0;                       //jak dlouho tam bude text
     public Text panelText;                          //text
@@ -52,6 +59,7 @@ public class OjochScript : MonoBehaviour {
     public AudioClip damage1;
     public AudioClip damage2;
     public AudioClip grab;
+    public AudioClip ak47;
 
 
     void Start() {
@@ -103,6 +111,11 @@ public class OjochScript : MonoBehaviour {
                 this.panelText.text = "";
                 odpocet = 0;
             }
+        }
+
+        if (akacko == 0)
+        {
+            isAkacko = false;
         }
 
         //Kontrola inverzniho ovladani
@@ -162,22 +175,33 @@ public class OjochScript : MonoBehaviour {
         //Pokud chce hrac vystrelit, pouzije se skript weapon, který zavolá svou fci Attack a ubere mu to 1 život
         if (shoot) {            
             if (weapons != null && weapons[0].CanAttack) {
-                weapons[0].Attack(false, new Vector2 (1, 0));                       //atribut false -> jedna se o nepritele, kdo strili? 
-                playerHealth.Damage(1);
-                healthSlider.value = playerHealth.hp;
-                SoundScript.instance.PlaySingle(shootSound);                        //Zvuk vystrelu
-                
-                if (contraBubles)
-                {
-                    weapons[1].Attack(false, new Vector2(1, 0.7f));
-                    weapons[2].Attack(false, new Vector2(1, -0.7f));
 
-                    contraNumber -= 1;
-                    if (contraNumber == 0)
+                if (!isAkacko)
+                {
+                    weapons[0].Attack(false, new Vector2(1, 0));                       //atribut false -> jedna se o nepritele, kdo strili? 
+                    playerHealth.Damage(1);
+                    healthSlider.value = playerHealth.hp;
+                    SoundScript.instance.PlaySingle(shootSound);                        //Zvuk vystrelu
+
+                    if (contraBubles)
                     {
-                        contraBubles = false;
+                        weapons[1].Attack(false, new Vector2(1, 0.7f));
+                        weapons[2].Attack(false, new Vector2(1, -0.7f));
+
+                        contraNumber -= 1;
+                        if (contraNumber == 0)
+                        {
+                            contraBubles = false;
+                        }
+
                     }
-                    
+                }
+                else
+                {
+                    weapons[0].Ak47Attack(false, new Vector2(1, 0));
+                    SoundScript.instance.PlaySingle(ak47);
+                    akacko -= 1;
+
                 }
             }
         }

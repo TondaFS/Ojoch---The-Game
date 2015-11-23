@@ -168,28 +168,20 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 453708, guid: c5b9daee301a00b47837aa70727f8cd2, type: 2}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
-    - target: {fileID: 11430968, guid: c5b9daee301a00b47837aa70727f8cd2, type: 2}
-      propertyPath: scoreText
-      value: 
-      objectReference: {fileID: 1359381147}
     - target: {fileID: 11430968, guid: c5b9daee301a00b47837aa70727f8cd2, type: 2}
       propertyPath: healthSlider
       value: 
       objectReference: {fileID: 422518536}
     - target: {fileID: 11430968, guid: c5b9daee301a00b47837aa70727f8cd2, type: 2}
+      propertyPath: scoreText
+      value: 
+      objectReference: {fileID: 1359381147}
+    - target: {fileID: 11430968, guid: c5b9daee301a00b47837aa70727f8cd2, type: 2}
       propertyPath: panelText
       value: 
       objectReference: {fileID: 2013351833}
-    - target: {fileID: 11430968, guid: c5b9daee301a00b47837aa70727f8cd2, type: 2}
-      propertyPath: speed.x
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 11430968, guid: c5b9daee301a00b47837aa70727f8cd2, type: 2}
-      propertyPath: speed.y
-      value: 7
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c5b9daee301a00b47837aa70727f8cd2, type: 2}
   m_IsPrefabParent: 0

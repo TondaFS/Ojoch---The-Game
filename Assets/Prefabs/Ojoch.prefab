@@ -62,6 +62,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 423778}
   - 212: {fileID: 21204244}
+  - 95: {fileID: 9507832}
   m_Layer: 0
   m_Name: sprite
   m_TagString: Untagged
@@ -88,7 +89,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 155050}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5.46289635, y: .766532421, z: 0}
+  m_LocalPosition: {x: -1.58000374, y: -.938494861, z: 0}
   m_LocalScale: {x: .300000012, y: .300000012, z: 1}
   m_Children:
   - {fileID: 462246}
@@ -149,6 +150,23 @@ BoxCollider2D:
   m_Offset: {x: -.0287795067, y: .309374511}
   serializedVersion: 2
   m_Size: {x: 1.95610499, y: 3.51729631}
+--- !u!95 &9507832
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 194820}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: da2a8eabe842d7b4c83c59e8618b4d98, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!114 &11412632
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -161,6 +179,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shotPrefab: {fileID: 487496, guid: ebd85ed6047648548bc450c3f0697160, type: 2}
+  akPrefab: {fileID: 444382, guid: 4f0b95cceed952449ba277b970cd5784, type: 2}
   shootingRate: .25
 --- !u!114 &11418698
 MonoBehaviour:
@@ -174,6 +193,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shotPrefab: {fileID: 487496, guid: ebd85ed6047648548bc450c3f0697160, type: 2}
+  akPrefab: {fileID: 0}
   shootingRate: .25
 --- !u!114 &11419636
 MonoBehaviour:
@@ -210,10 +230,12 @@ MonoBehaviour:
   contraBubles: 0
   contraNumber: 10
   cleanSock: 0
+  akacko: 0
+  isAkacko: 0
   isInverted: 0
   invertTime: 0
   healthSlider: {fileID: 0}
-  playerHealth: {fileID: 11419636}
+  playerHealth: {fileID: 0}
   scoreText: {fileID: 0}
   modifikatorScore: 1
   tmpscore: 0
@@ -223,6 +245,7 @@ MonoBehaviour:
   damage1: {fileID: 8300000, guid: 98099ecb857272843a12db6d235dfa6c, type: 3}
   damage2: {fileID: 8300000, guid: abef98b16f6c5514e8d103e5e1808da3, type: 3}
   grab: {fileID: 8300000, guid: d9b428646196a9041826fda15e82aacf, type: 3}
+  ak47: {fileID: 0}
 --- !u!114 &11444528
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -252,6 +275,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shotPrefab: {fileID: 487496, guid: ebd85ed6047648548bc450c3f0697160, type: 2}
+  akPrefab: {fileID: 0}
   shootingRate: .25
 --- !u!212 &21204244
 SpriteRenderer:
@@ -301,7 +325,7 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 42ce8f935f536bb4f852b780807bbd80,
+      objectReference: {fileID: 21300000, guid: 9fad411d5335bd349812dbcf7b7f9365,
         type: 3}
     - target: {fileID: 0}
       propertyPath: m_IsTrigger
@@ -339,6 +363,18 @@ Prefab:
       propertyPath: shotPrefab
       value: 
       objectReference: {fileID: 487496, guid: ebd85ed6047648548bc450c3f0697160, type: 2}
+    - target: {fileID: 0}
+      propertyPath: m_SortingOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 7fd073f6e3488cc4188ce6570dd1ffc3, type: 2}
+    - target: {fileID: 0}
+      propertyPath: akPrefab
+      value: 
+      objectReference: {fileID: 444382, guid: 4f0b95cceed952449ba277b970cd5784, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 155050}
