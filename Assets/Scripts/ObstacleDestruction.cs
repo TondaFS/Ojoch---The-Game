@@ -20,6 +20,7 @@ public class ObstacleDestruction : MonoBehaviour {
         }
         if (countdown <= 0)
         {
+            
             this.gameObject.GetComponent<SpriteRenderer>().enabled = false;
         }
         else if (countdown <= countdown - 2)
@@ -33,6 +34,10 @@ public class ObstacleDestruction : MonoBehaviour {
         foreach (Transform child in this.gameObject.transform) if (child.CompareTag("Particle"))
         {
             child.GetComponent<ParticleSystem>().Play();
+        }
+        foreach (BoxCollider2D collider in this.gameObject.GetComponents<BoxCollider2D>())
+        {
+            collider.enabled = false;
         }
         startCountdown = true;
         destroy = false;

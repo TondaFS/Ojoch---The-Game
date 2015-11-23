@@ -10,6 +10,7 @@ GameObject:
   - 4: {fileID: 488090}
   - 61: {fileID: 6137796}
   - 114: {fileID: 11412058}
+  - 114: {fileID: 11458604}
   m_Layer: 0
   m_Name: statue
   m_TagString: Socha
@@ -100,6 +101,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc7fffbb000d1bf4b822911380515089, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &11458604
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 139308}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d733188c051d9904da9cbfa16686172a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  heartAttack: 0
 --- !u!212 &21275072
 SpriteRenderer:
   m_ObjectHideFlags: 1

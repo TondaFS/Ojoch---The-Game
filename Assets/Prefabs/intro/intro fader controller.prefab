@@ -41,7 +41,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fadeImg: {fileID: 0}
   fadeSpeed: 2
-  isSceneStarting: 0
+  isSceneStarting: 1
   isSceneEnding: 0
 --- !u!1001 &100100000
 Prefab:

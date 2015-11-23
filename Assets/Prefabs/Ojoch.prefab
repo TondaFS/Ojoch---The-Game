@@ -89,7 +89,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 155050}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.58000374, y: -.938494861, z: 0}
+  m_LocalPosition: {x: 2.85541725, y: 1.09998465, z: 0}
   m_LocalScale: {x: .300000012, y: .300000012, z: 1}
   m_Children:
   - {fileID: 462246}
@@ -159,7 +159,7 @@ Animator:
   m_GameObject: {fileID: 194820}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: da2a8eabe842d7b4c83c59e8618b4d98, type: 2}
+  m_Controller: {fileID: 9100000, guid: ad3b2ffaa9144cc429f9c3a1b3688629, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -180,6 +180,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shotPrefab: {fileID: 487496, guid: ebd85ed6047648548bc450c3f0697160, type: 2}
   akPrefab: {fileID: 444382, guid: 4f0b95cceed952449ba277b970cd5784, type: 2}
+  heartPrefab: {fileID: 0}
   shootingRate: .25
 --- !u!114 &11418698
 MonoBehaviour:
@@ -194,6 +195,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shotPrefab: {fileID: 487496, guid: ebd85ed6047648548bc450c3f0697160, type: 2}
   akPrefab: {fileID: 0}
+  heartPrefab: {fileID: 0}
   shootingRate: .25
 --- !u!114 &11419636
 MonoBehaviour:
@@ -206,7 +208,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10389e101edba2545af6392a06bce56b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hp: 15
+  hp: 100
   isEnemy: 0
 --- !u!114 &11430968
 MonoBehaviour:
@@ -226,6 +228,7 @@ MonoBehaviour:
   rotace: 15
   powerCombo: {fileID: 0}
   vterina: 0
+  animator: {fileID: 0}
   timeSlow: 0
   contraBubles: 0
   contraNumber: 10
@@ -245,7 +248,7 @@ MonoBehaviour:
   damage1: {fileID: 8300000, guid: 98099ecb857272843a12db6d235dfa6c, type: 3}
   damage2: {fileID: 8300000, guid: abef98b16f6c5514e8d103e5e1808da3, type: 3}
   grab: {fileID: 8300000, guid: d9b428646196a9041826fda15e82aacf, type: 3}
-  ak47: {fileID: 0}
+  ak47: {fileID: 8300000, guid: 0c0360de2bc9ecf428e441927215b7f8, type: 3}
 --- !u!114 &11444528
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -261,6 +264,7 @@ MonoBehaviour:
   powerUpCombo: 0
   sockClean: {fileID: 473580, guid: 0ba171618224faf4c955ff42fe3f1f84, type: 2}
   smetacek: {fileID: 419822, guid: 07256aa70510c3b43b9caac63dd211cd, type: 2}
+  socha: {fileID: 0}
   good: {fileID: 8300000, guid: 3b4c9585f408daf459e73447a8876bfb, type: 3}
   bad: {fileID: 8300000, guid: f6eacaa1e112e764ca2c6ade0b3e3964, type: 3}
 --- !u!114 &11480654
@@ -276,6 +280,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shotPrefab: {fileID: 487496, guid: ebd85ed6047648548bc450c3f0697160, type: 2}
   akPrefab: {fileID: 0}
+  heartPrefab: {fileID: 0}
   shootingRate: .25
 --- !u!212 &21204244
 SpriteRenderer:
@@ -375,6 +380,10 @@ Prefab:
       propertyPath: akPrefab
       value: 
       objectReference: {fileID: 444382, guid: 4f0b95cceed952449ba277b970cd5784, type: 2}
+    - target: {fileID: 0}
+      propertyPath: hp
+      value: 100
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 155050}

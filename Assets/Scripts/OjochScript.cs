@@ -21,6 +21,8 @@ public class OjochScript : MonoBehaviour {
     public PowerUpScript powerCombo;
     private WeaponScript[] weapons;
     public float vterina = 0;                   //vterina
+    public float vterina2 = 0;                  //cas pro skore
+    public Animator animator;
 
     //Slowtime
     public float timeSlow = 0;                  //jak dlouho bude zpomaleny cas
@@ -45,8 +47,8 @@ public class OjochScript : MonoBehaviour {
 
     //promenne na score
     public Text scoreText;
-    public int modifikatorScore = 1;                //Modfifikator
-    public int tmpscore;                            //hracovo skore 
+    public float modifikatorScore = 1;                //Modfifikator
+    public float tmpscore;                            //hracovo skore 
         
     //promenne na panelText
     public float odpocet = 0;                       //jak dlouho tam bude text
@@ -67,22 +69,31 @@ public class OjochScript : MonoBehaviour {
         powerCombo = GetComponent<PowerUpScript>();
         playerHealth = GetComponent<HealthScript>();
         tmpscore = 0;
+        animator = transform.Find("sprite").gameObject.GetComponent<Animator>();
         weapons = GetComponentsInChildren<WeaponScript>();
+        vterina2 = 1;
     }
 
     void Update () {
         //Axis information
         float inputX = Input.GetAxis("Horizontal") * (isInverted ? -1 : 1) ;
         float inputY = Input.GetAxis("Vertical") * (isInverted ? -1 : 1) ;
-
+        
         //Skore
         this.scoreText.text = "Skore: " + tmpscore;
+        if (vterina2 <= 0) {
+            tmpscore += 1;
+            vterina2 = 1;
+        }
+
+        vterina2 -= Time.deltaTime;
+
 
         // Pohyb 
         
         movement = new Vector2(speed.x * inputX * Time.deltaTime, speed.y * inputY * Time.deltaTime);
         transform.Translate(movement, 0);
-
+        /*
         //Balancovani
         float rotation = Input.GetAxis("Rotation");                 //* (isInverted ? -1 : 1)
         if (rotation < 0 && transform.rotation.z >= -0.8) {
@@ -90,7 +101,7 @@ public class OjochScript : MonoBehaviour {
         }
         if (rotation >= 0 && transform.rotation.z <= 0.8) {
             transform.Rotate(0, 0, rotation * 1.5f);
-        }
+        }*/
 
         //Kontrola zpomaleni casu
         if(timeSlow > 0)
@@ -116,6 +127,7 @@ public class OjochScript : MonoBehaviour {
         if (akacko == 0)
         {
             isAkacko = false;
+            animator.SetBool("isAk47", false);
         }
 
         //Kontrola inverzniho ovladani
@@ -129,7 +141,7 @@ public class OjochScript : MonoBehaviour {
             }
         }
 
-
+        /*
         //Ocekuje, jestli je natoceni  na 0, pokud ne, zacne aplikovat rotaci v danem smeru
         if (transform.rotation.z <= 0 && transform.rotation.z >= -0.8)
         {
@@ -152,7 +164,7 @@ public class OjochScript : MonoBehaviour {
                 healthSlider.value = playerHealth.hp;
                 vterina = 1;
             }
-        }
+        }*/
 
         
 
@@ -161,8 +173,8 @@ public class OjochScript : MonoBehaviour {
             godMode -= Time.deltaTime ;
             if (godMode == 0 || godMode < 0) {
                 godMode = 0;
-                CollisionDisable(true);
-                Destroy(this.transform.Find("smetacek(Clone)").gameObject);
+                //CollisionDisable(true);
+                Destroy(transform.Find("smetacek(Clone)").gameObject);
             } 
         }
 
@@ -179,6 +191,7 @@ public class OjochScript : MonoBehaviour {
                 if (!isAkacko)
                 {
                     weapons[0].Attack(false, new Vector2(1, 0));                       //atribut false -> jedna se o nepritele, kdo strili? 
+                    animator.SetTrigger("fire");
                     playerHealth.Damage(1);
                     healthSlider.value = playerHealth.hp;
                     SoundScript.instance.PlaySingle(shootSound);                        //Zvuk vystrelu
@@ -209,25 +222,25 @@ public class OjochScript : MonoBehaviour {
     
     //Kolize 
     void OnCollisionEnter2D(Collision2D collision) {
-        Debug.Log("collision with: " + collision.gameObject.tag);
 
         //S nepritelem -> ubere 5 zivotu a nepritele znici
         if (collision.gameObject.tag == "Enemy" && !cleanSock) {
             SoundScript.instance.RandomSFX(damage1, damage2);
+            animator.SetTrigger("hit");
             Destroy(collision.gameObject);
             if (playerHealth != null) {
-                playerHealth.Damage(5);
+                playerHealth.Damage(2);
                 healthSlider.value = playerHealth.hp;
             }
-
+            /*
             //orotuje ojocha
             if (transform.rotation.z < 0)
                 transform.Rotate(0, 0, Random.Range(-25, -15));
             else
-                transform.Rotate(0, 0, Random.Range(15, 25));
+                transform.Rotate(0, 0, Random.Range(15, 25));*/
 
         }
-        else if (collision.gameObject.tag == "Enemy" && cleanSock) 
+        else if (collision.gameObject.tag == "Enemy" && (cleanSock || godMode != 0)) 
         {
             Destroy(collision.gameObject);
             Destroy(this.transform.Find("sockClean(Clone)").gameObject);
@@ -237,23 +250,23 @@ public class OjochScript : MonoBehaviour {
         //S prekazkou -> ubere 10 zivotu a ucini na 5 vterin Ojocha nesmrtelnym
         if (collision.gameObject.tag == "Obstacle")
         {
-            if (playerHealth != null)
+            if (playerHealth != null || godMode == 0)
             {
-                playerHealth.Damage(10);
+                playerHealth.Damage(5);
                 SoundScript.instance.RandomSFX(damage1, damage2);
                 healthSlider.value = playerHealth.hp;
             }
-
+            /*
             //orotuje ojocha
             if (transform.rotation.z < 0)
                 transform.Rotate(0, 0, Random.Range(-40, -30));
             else
-                transform.Rotate(0, 0, Random.Range(30, 40));
+                transform.Rotate(0, 0, Random.Range(30, 40));*/
 
             collision.gameObject.GetComponent<ObstacleDestruction>().Destruction();
             //nesmrtelnost
-            CollisionDisable(false);
-            godMode = 5;
+            //CollisionDisable(false);
+            godMode = 3;
         }
         
 

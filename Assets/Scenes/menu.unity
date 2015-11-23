@@ -422,6 +422,10 @@ Prefab:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 11492828, guid: 64204c89be7e2fb479434ac5f9460072, type: 2}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 64204c89be7e2fb479434ac5f9460072, type: 2}
   m_IsPrefabParent: 0
@@ -548,6 +552,7 @@ Prefab:
       propertyPath: fadeImg
       value: 
       objectReference: {fileID: 1935060111}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 11444468, guid: b4beaa4255801834e8a7880716c06a6f, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: b4beaa4255801834e8a7880716c06a6f, type: 2}
   m_IsPrefabParent: 0

@@ -9,6 +9,7 @@ public class WeaponScript : MonoBehaviour {
     //Promenne
     public Transform shotPrefab;            //prefab pro strelbu
     public Transform akPrefab;              //prefab pro AK47
+    public Transform heartPrefab;
     public float shootingRate = 0.25f;      //doba mezi vystrely
     private float shootCooldown;            //cooldown
 
@@ -79,4 +80,22 @@ public class WeaponScript : MonoBehaviour {
             }
         }
     }
+
+    public void StatueAttack(bool isEnemy, Vector2 direction) {
+        var shotTransform = Instantiate(heartPrefab) as Transform;                             //vytvoreni nove strely
+        shotTransform.position = transform.position + new Vector3(1.5f, 4, 0);                //prirazeni pozice strely
+
+        ShotScript shot = shotTransform.gameObject.GetComponent<ShotScript>();                 //Bereme ShotScript
+        if (shot != null)
+        {
+            shot.isEnemyShot = isEnemy;                                                        //aplikace vstupniho parametru a jeho prirazeni ke strele - kdo vystrelil? hrac/enemy
+        }
+
+        MovingScript move = shotTransform.gameObject.GetComponent<MovingScript>();             //Bereme MovingScript strely
+        if (move != null)
+        {
+            move.direction = direction;                                                        //Strela se vystreli smerem vpravo
+        }
+    }
+
 }

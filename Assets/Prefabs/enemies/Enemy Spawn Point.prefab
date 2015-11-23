@@ -39,7 +39,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7f315985d873114bba305e7199e8ca9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemy: {fileID: 182028, guid: d2b44d9cfa7441949a7b28841b41b820, type: 2}
+  enemy: {fileID: 125674, guid: 3410d796530ed1f4e915baa376572fc1, type: 2}
   delay: 0
 --- !u!1001 &100100000
 Prefab:
@@ -56,6 +56,10 @@ Prefab:
       propertyPath: delay
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: enemy
+      value: 
+      objectReference: {fileID: 125674, guid: 3410d796530ed1f4e915baa376572fc1, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 174284}

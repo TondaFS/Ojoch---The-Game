@@ -14,15 +14,18 @@ public class BackgroundScrolling : MonoBehaviour
     }
 
     void Update()
-    {        
-        Vector3 movement = new Vector3(
+    {
+        
+          Vector3 movement = new Vector3(
           (speed.x + sessionController.gameSpeed) * direction.x,
           speed.y * direction.y,
           0);
+        
+        
 
         movement *= Time.deltaTime;
         transform.Translate(movement);
 
-        //Debug.Log("bg scroll speed: " + movement.x);
+        Debug.Log("bg scroll speed: " + movement.x);
     }
 }

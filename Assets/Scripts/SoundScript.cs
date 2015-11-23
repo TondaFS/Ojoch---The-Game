@@ -12,7 +12,7 @@ public class SoundScript : MonoBehaviour {
             instance = this;
         else if (instance != this)
             Destroy(gameObject);
-        DontDestroyOnLoad(gameObject);
+       // DontDestroyOnLoad(gameObject);
     }
     public void PlaySingle(AudioClip clip)
     {

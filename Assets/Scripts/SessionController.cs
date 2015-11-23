@@ -13,7 +13,7 @@ public class SessionController : MonoBehaviour
 	void FixedUpdate () {
         //Debug.Log("Game runtime: " + Time.time);
 
-        gameSpeed += Time.deltaTime / speedUpTime;
+        //gameSpeed += Time.deltaTime / speedUpTime;
 
         if (gameSpeed < 1)
         {

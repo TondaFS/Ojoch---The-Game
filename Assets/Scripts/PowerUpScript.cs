@@ -8,6 +8,7 @@ public class PowerUpScript : MonoBehaviour {
     private OjochScript ojoch;
     public Transform sockClean;
     public Transform smetacek;
+    public GameObject socha;
 
     public AudioClip good;
     public AudioClip bad;
@@ -16,6 +17,8 @@ public class PowerUpScript : MonoBehaviour {
     void Start() {
         health = this.GetComponent<HealthScript>();
         ojoch = this.GetComponent<OjochScript>();
+        socha = GameObject.Find("statue");
+
     }
 
     //provedení komba po sebrání 2 powerupů
@@ -30,12 +33,13 @@ public class PowerUpScript : MonoBehaviour {
                 ojoch.healthSlider.value = health.hp;
                 ojoch.panelText.text = "Bublinace!";
                 ojoch.odpocet = 3;
+                ojoch.animator.SetTrigger("good");
                 break;
 
 
             //bublinky + LP
             case 4:
-                ojoch.panelText.text = "Bublinové LP!";
+                ojoch.panelText.text = "Velký bratr tě vidí!";
                 ojoch.odpocet = 3;
                 break;
 
@@ -50,7 +54,8 @@ public class PowerUpScript : MonoBehaviour {
                 ojoch.cleanSock = true;
                 var sock = Instantiate(sockClean) as Transform;                
                 sock.position = transform.position + new Vector3(0.1f, -0.2f, 0);
-                sock.parent = ojoch.transform;                
+                sock.parent = ojoch.transform;
+                ojoch.animator.SetTrigger("good");
                 break;
             
 
@@ -61,12 +66,13 @@ public class PowerUpScript : MonoBehaviour {
                 ojoch.panelText.text = "Prďák";                
                 ojoch.odpocet = 3;
                 ojoch.contraBubles = true;
+                ojoch.animator.SetTrigger("good");
                 break;
 
 
             //bublinky + koreni
             case 21:
-                ojoch.panelText.text = "Bublinove koreni!";
+                ojoch.panelText.text = "Sbírej jako dobrý kapitalista";
                 ojoch.odpocet = 3;
                 break;
 
@@ -78,40 +84,45 @@ public class PowerUpScript : MonoBehaviour {
                 ojoch.panelText.text = "SLOWTIME!";
                 ojoch.odpocet = 1;
                 ojoch.SlowTime(true);
+                ojoch.animator.SetTrigger("good");
                 break;
 
 
             //lp + ponozky
             case 11:
-                ojoch.panelText.text = "LP s ponozkama!";
+                ojoch.panelText.text = "BREAKDANCE!";
                 ojoch.odpocet = 3;
                 break;
 
 
             //lp + smetak
             case 14:
-                ojoch.panelText.text = "Lp a smetak!";
+                ojoch.panelText.text = "'MC Smeták' - Mc Citát";
                 ojoch.odpocet = 3;
                 break;
 
 
             //lp + koreni
+            //Napoj lasky
+            //Socha vysterli na Ojocha srdicka
             case 23:
-                ojoch.panelText.text = "Lp a koreni!";
+                socha.GetComponent<StatueAttackScript>().heartAttack = true;
+                SoundScript.instance.PlaySingle(bad);
+                ojoch.panelText.text = "Nápoj lásky";
                 ojoch.odpocet = 3;                
                 break;
 
 
             //ponozky + ponozky
             case 16:
-                ojoch.panelText.text = "Double ponozky!";
+                ojoch.panelText.text = "To je smrad!";
                 ojoch.odpocet = 3;
                 break;
 
 
             //ponozky + smetak
             case 19:
-                ojoch.panelText.text = "Smetakove ponozky!";
+                ojoch.panelText.text = "Nothing here!";
                 ojoch.odpocet = 3;
                 break;
 
@@ -122,6 +133,7 @@ public class PowerUpScript : MonoBehaviour {
                 SoundScript.instance.PlaySingle(bad);
                 ojoch.panelText.text = "Zmatek";
                 ojoch.odpocet = 3;
+                ojoch.animator.SetTrigger("bad");
                 //Inverze
                 ojoch.InversionControlling();
                 ojoch.invertTime = 10;
@@ -134,8 +146,9 @@ public class PowerUpScript : MonoBehaviour {
                 SoundScript.instance.PlaySingle(good);
                 ojoch.panelText.text = "Koštění";
                 ojoch.odpocet = 3;
-                ojoch.CollisionDisable(false);
+                //ojoch.CollisionDisable(false);
                 ojoch.godMode = 5;
+                ojoch.animator.SetTrigger("good");
 
                 var smet = Instantiate(smetacek) as Transform;
                 smet.position = transform.position + new Vector3(0.2f, 0.2f, 0);
@@ -151,12 +164,14 @@ public class PowerUpScript : MonoBehaviour {
 
                 ojoch.isAkacko = true;
                 ojoch.akacko = 10;
+                ojoch.animator.SetTrigger("good");
+                ojoch.animator.SetBool("isAk47", true);
                 break;
 
 
             //koreni + koreni
             case 40:
-                ojoch.panelText.text = "Hodne koreni!";
+                ojoch.panelText.text = "Cake is Lie!";
                 ojoch.odpocet = 3;
                 break;               
 

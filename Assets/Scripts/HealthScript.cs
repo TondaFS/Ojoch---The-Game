@@ -23,8 +23,11 @@ public class HealthScript : MonoBehaviour {
             if (hp > 100) {
                 hp = 100;
             }
-            if (hp < 0) {
-                hp = 0;
+            if (hp <= 0) {
+                ojoch.GetComponent<OjochScript>().panelText.text = "GameOver!";
+                Time.timeScale = 0.1f;                
+                Destroy(gameObject);
+
             }
         }
     }
@@ -48,6 +51,8 @@ public class HealthScript : MonoBehaviour {
                 Damage(shot.damage);                //ddani zraneni
                 Destroy(shot.gameObject);           //zniceni strely
             }
+
+            
         }
     }
 }
