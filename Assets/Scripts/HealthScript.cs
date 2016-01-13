@@ -10,6 +10,7 @@ public class HealthScript : MonoBehaviour {
 
     //Promenne
     public int hp = 1;              //pocet zivotu
+    public int sanity = 30;        //Pocet pricetnosti          
     public bool isEnemy = true;     //jedna se o hrace/nepritele?
     GameObject ojoch;
 
@@ -24,7 +25,7 @@ public class HealthScript : MonoBehaviour {
                 hp = 100;
             }
             if (hp <= 0) {
-                ojoch.GetComponent<OjochScript>().panelText.text = "GameOver!";
+                ojoch.GetComponent<OjochScript>().panelText.text = "GameOver!";                
                 Time.timeScale = 0.1f;                
                 Destroy(gameObject);
 
@@ -37,9 +38,11 @@ public class HealthScript : MonoBehaviour {
         hp -= damageCount;
 
         if (hp <= 0 && gameObject.tag != "Player") {        //pouze pro nepratele
-            Destroy(gameObject);
+            ojoch.GetComponent<OjochScript>().killedEnemies += 1;
+            Destroy(gameObject);            
             ojoch.GetComponent<OjochScript>().tmpscore += 10 * ojoch.GetComponent<OjochScript>().modifikatorScore;      //zapocitani skore
-        }       
+            
+        }         
     }
 
     void OnTriggerEnter2D(Collider2D otherCollider)

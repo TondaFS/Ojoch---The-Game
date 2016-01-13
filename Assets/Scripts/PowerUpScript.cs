@@ -1,10 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class PowerUpScript : MonoBehaviour {
     public int powerUps = 0;        //sebrano powerUpu
     public int powerUpCombo = 0;    //jake combo bude
-    private HealthScript health;
     private OjochScript ojoch;
     public Transform sockClean;
     public Transform smetacek;
@@ -13,12 +13,56 @@ public class PowerUpScript : MonoBehaviour {
     public AudioClip good;
     public AudioClip bad;
 
+    //promenne na panelText
+    public float odpocet = 0;                       //jak dlouho tam bude text
+    public Text panelText;                          //text
+
+    //Slowtime
+    public float timeSlow = 0;                      //jak dlouho bude zpomaleny cas
+
+    //Ultrakejch
+    public float kejchTime; 
+
 
     void Start() {
-        health = this.GetComponent<HealthScript>();
         ojoch = this.GetComponent<OjochScript>();
         socha = GameObject.Find("statue");
+        kejchTime = 0;
 
+    }
+
+    void Update() {
+
+        //Odpocet zobrazeni textu
+        if (odpocet != 0)
+        {
+            odpocet -= Time.deltaTime;
+            if (odpocet == 0 || odpocet < 0)
+            {
+                this.panelText.text = "";
+                odpocet = 0;
+            }
+        }
+
+        //Kontrola zpomaleni casu
+        if (timeSlow > 0)
+        {
+            timeSlow -= Time.deltaTime;
+            if (timeSlow <= 0)
+            {
+                SlowTime(false);
+            }
+        }
+
+        if (kejchTime > 0)
+        {
+            kejchTime -= Time.deltaTime;
+            if(kejchTime <= 0)
+            {
+                ojoch.kejch = false;
+                ojoch.ultraKejch = new Vector2(0, 0);
+            }
+        }
     }
 
     //provedení komba po sebrání 2 powerupů
@@ -29,18 +73,21 @@ public class PowerUpScript : MonoBehaviour {
             // Prida Ojochovi palivo
             case 2:
                 SoundScript.instance.PlaySingle(good);
-                health.Damage(-20);
-                ojoch.healthSlider.value = health.hp;
-                ojoch.panelText.text = "Bublinace!";
-                ojoch.odpocet = 3;
+                ojoch.playerHealth.Damage(-20);
+                ojoch.healthSlider.value = ojoch.playerHealth.hp;
+                panelText.text = "Bublinace!";
+                odpocet = 3;
                 ojoch.animator.SetTrigger("good");
                 break;
 
 
             //bublinky + LP
+            //Nulak
+            //Vynuluje modifikator skore
             case 4:
-                ojoch.panelText.text = "Velký bratr tě vidí!";
-                ojoch.odpocet = 3;
+                panelText.text = "Nulák!";
+                ojoch.modifikatorScore = 1;
+                odpocet = 3;
                 break;
 
 
@@ -49,8 +96,8 @@ public class PowerUpScript : MonoBehaviour {
             //Rotujici ponozka kolem ojocha neguje 1 zraneni
             case 9:
                 SoundScript.instance.PlaySingle(good);
-                ojoch.panelText.text = "Smradoštít";
-                ojoch.odpocet = 3;
+                panelText.text = "Smradoštít";
+                odpocet = 3;
                 ojoch.cleanSock = true;
                 var sock = Instantiate(sockClean) as Transform;                
                 sock.position = transform.position + new Vector3(0.1f, -0.2f, 0);
@@ -63,17 +110,21 @@ public class PowerUpScript : MonoBehaviour {
             //Ojoch strili 3 bublinky naraz! Ve trech smerech - 10 vystrelu                    
             case 12:
                 SoundScript.instance.PlaySingle(good);
-                ojoch.panelText.text = "Prďák";                
-                ojoch.odpocet = 3;
+                panelText.text = "Prďák";                
+                odpocet = 3;
                 ojoch.contraBubles = true;
                 ojoch.animator.SetTrigger("good");
                 break;
 
 
             //bublinky + koreni
+            // NITRO
+            //Zpomali pohyb vseho a zaroven zpomali celkovou uroven zrychleni
             case 21:
-                ojoch.panelText.text = "Sbírej jako dobrý kapitalista";
-                ojoch.odpocet = 3;
+                panelText.text = "NITRO";
+                GameObject.Find("Session Controller").gameObject.GetComponent<SessionController>().speedUpTime += 4;
+                GameObject.Find("Session Controller").gameObject.GetComponent<SessionController>().gameSpeed -= 1f;
+                odpocet = 3;
                 break;
 
 
@@ -81,24 +132,29 @@ public class PowerUpScript : MonoBehaviour {
             // *** Zpomaleni casu ***
             case 6:
                 SoundScript.instance.PlaySingle(good);
-                ojoch.panelText.text = "SLOWTIME!";
-                ojoch.odpocet = 1;
-                ojoch.SlowTime(true);
+                panelText.text = "SLOWTIME!";
+                odpocet = 1;
+                SlowTime(true);
                 ojoch.animator.SetTrigger("good");
                 break;
 
 
             //lp + ponozky
+            //Kovadleni
             case 11:
-                ojoch.panelText.text = "BREAKDANCE!";
-                ojoch.odpocet = 3;
+                panelText.text = "Kovadleni";
+                odpocet = 3;
                 break;
 
 
             //lp + smetak
+            //DENItRO
+            //Zrychli pohyb vseho a zaroven o neco zrychli celkovy posun zrychleni
             case 14:
-                ojoch.panelText.text = "'MC Smeták' - Mc Citát";
-                ojoch.odpocet = 3;
+                panelText.text = "DENItRO";
+                GameObject.Find("Session Controller").gameObject.GetComponent<SessionController>().speedUpTime -= 5;
+                GameObject.Find("Session Controller").gameObject.GetComponent<SessionController>().gameSpeed += 0.5f;
+                odpocet = 3;
                 break;
 
 
@@ -108,22 +164,26 @@ public class PowerUpScript : MonoBehaviour {
             case 23:
                 socha.GetComponent<StatueAttackScript>().heartAttack = true;
                 SoundScript.instance.PlaySingle(bad);
-                ojoch.panelText.text = "Nápoj lásky";
-                ojoch.odpocet = 3;                
+                panelText.text = "Nápoj lásky";
+                odpocet = 3;                
                 break;
 
 
             //ponozky + ponozky
+            //Dušení
+            //Duch Prepere Smradinoha
             case 16:
-                ojoch.panelText.text = "To je smrad!";
-                ojoch.odpocet = 3;
+                panelText.text = "Dušení!";
+                odpocet = 3;
                 break;
 
 
             //ponozky + smetak
+            // Soufl
+            // Zakali Ojochovi na nejakou dobu pohled
             case 19:
-                ojoch.panelText.text = "Nothing here!";
-                ojoch.odpocet = 3;
+                panelText.text = "Šoufl!";
+                odpocet = 3;
                 break;
 
 
@@ -131,8 +191,8 @@ public class PowerUpScript : MonoBehaviour {
             //Inverzni ovladani
             case 28:
                 SoundScript.instance.PlaySingle(bad);
-                ojoch.panelText.text = "Zmatek";
-                ojoch.odpocet = 3;
+                panelText.text = "Zmatek";
+                odpocet = 3;
                 ojoch.animator.SetTrigger("bad");
                 //Inverze
                 ojoch.InversionControlling();
@@ -144,9 +204,8 @@ public class PowerUpScript : MonoBehaviour {
             //Nesmrtelnost po určitou dobu - kolem ojocha budou rotovat 2 smetáky
             case 22:
                 SoundScript.instance.PlaySingle(good);
-                ojoch.panelText.text = "Koštění";
-                ojoch.odpocet = 3;
-                //ojoch.CollisionDisable(false);
+                panelText.text = "Koštění";
+                odpocet = 3;
                 ojoch.godMode = 5;
                 ojoch.animator.SetTrigger("good");
 
@@ -159,8 +218,8 @@ public class PowerUpScript : MonoBehaviour {
             //smetak + koreni
             //AK - na nejakou dobu - vyssi ucinnost zbrane
             case 31:
-                ojoch.panelText.text = "AK-47";
-                ojoch.odpocet = 3;
+                panelText.text = "AK-47";
+                odpocet = 3;
 
                 ojoch.isAkacko = true;
                 ojoch.akacko = 10;
@@ -170,48 +229,29 @@ public class PowerUpScript : MonoBehaviour {
 
 
             //koreni + koreni
+            //ULTRAKEJCH
+            //S ojochem to na nekolik vterin hazi
             case 40:
-                ojoch.panelText.text = "Cake is Lie!";
-                ojoch.odpocet = 3;
+                panelText.text = "Ultrakejch!";
+                ojoch.kejch = true;
+                kejchTime = 5;
+                odpocet = 3;
                 break;               
 
-        }      
-
+        }
     }
 
-}
-///<summary>
-/// Věci, které se nevyužijí, ale jen por případ je tu nechávám
-/// Opusť ten hejt!
-///</summary>
-/*
-//Privedení efektu po sebrání 1 powerupu
-public void PowerEffect(int id)
-{
-    switch (id)
+    //Zpomali/vrati cas
+    public void SlowTime(bool slow)
     {
-        //Bublinky
-        case 1:
-            health.Damage(-5);
-            ojoch.healthSlider.value = health.hp;
-            break;
-
-        //LP
-        case 3:
-            break;
-
-        //ponozky
-        case 8:
-            break;
-
-        //smetak
-        case 11:
-            break;
-
-        //koreni
-        case 20:
-            break;
+        if (slow)
+        {
+            Time.timeScale = 0.5f;
+            timeSlow = 3;
+        }
+        else
+        {
+            Time.timeScale = 1;
+        }
     }
-
 }
-*/

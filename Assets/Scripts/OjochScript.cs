@@ -2,37 +2,34 @@
 using UnityEngine.UI;
 using System.Collections;
 
-/// <summary>
-/// Ovládání a chování Ojocha = Hráče
-/// </summary>
-
 public class OjochScript : MonoBehaviour {
 
     /// <summary>
     /// Proměnné
     /// </summary>
     
-    public Vector2 speed = new Vector2(10,10);  // Rychlost Ojocha
-    private Vector2 movement;                   // Ulozeni pohybu
+    public Vector2 speed = new Vector2(10,10);      // Rychlost Ojocha
+    private Vector2 movement;                       // Ulozeni pohybu
     public Rigidbody2D ojoch;
     public Collider2D obstacle;
-    public float godMode = 0;                   //nesmrtelnost
-    public float rotace = 10;                   //rychlost nezavisle rotace
     public PowerUpScript powerCombo;
     private WeaponScript[] weapons;
-    public float vterina = 0;                   //vterina
-    public float vterina2 = 0;                  //cas pro skore
     public Animator animator;
+    public Text panelText;                         //text
 
-    //Slowtime
-    public float timeSlow = 0;                  //jak dlouho bude zpomaleny cas
-        
+    //Pro ultrakejch 
+    public bool kejch;
+    public Vector2 ultraKejch = new Vector2(0,0);
+
+    //promenne na zivoty/palivo Ojocha
+    public Slider healthSlider;                 //Ukazatel zdravi   
+    public HealthScript playerHealth;
 
     //Kontra strelba
     public bool contraBubles = false;           //Rozptyl bublinek
     public int contraNumber = 10;               //Pocet Kontra Strel
     public bool cleanSock = false;              //je powerUp Ciste ponozky aktivni?
-    
+
     //AK-47
     public int akacko = 0;                      //Pocet strel Akacka
     public bool isAkacko = false;               //ke Ak-47 aktivni?
@@ -41,152 +38,111 @@ public class OjochScript : MonoBehaviour {
     public bool isInverted = false;             //Inverzni ovladani?
     public float invertTime = 0;
 
-    //promenne na zivoty/palivo Ojocha
-    public Slider healthSlider;                 //Ukazatel zdravi   
-    public HealthScript playerHealth;
+    //nesmrtelnost
+    public float godMode = 0;                   //nesmrtelnost 
 
-    //promenne na score
-    public Text scoreText;
-    public float modifikatorScore = 1;                //Modfifikator
-    public float tmpscore;                            //hracovo skore 
-        
-    //promenne na panelText
-    public float odpocet = 0;                       //jak dlouho tam bude text
-    public Text panelText;                          //text
+    //Push od sochy
+    public float push = 0;
 
     /***
         ZVUKY
-    **/
+    ***/
     public AudioClip shootSound;
     public AudioClip damage1;
     public AudioClip damage2;
     public AudioClip grab;
     public AudioClip ak47;
 
+    /// <summary>
+    /// Co by mohlo z Ojocha pryc do jinych skriptu
+    /// </summary> 
+
+    //promenne na score
+    public Text scoreText;
+    public Text modi;                   
+    public float modifikatorScore = 1;              //Modfifikator
+    public float tmpscore;                          //hracovo skore
+    public float scorePerSecond = 0;                //pro zvyseni skore za kazdou vterinu  
+    public int killedEnemies;
+            
 
     void Start() {
         ojoch = GetComponent<Rigidbody2D>();
         powerCombo = GetComponent<PowerUpScript>();
-        playerHealth = GetComponent<HealthScript>();
-        tmpscore = 0;
+        playerHealth = GetComponent<HealthScript>();        
         animator = transform.Find("sprite").gameObject.GetComponent<Animator>();
         weapons = GetComponentsInChildren<WeaponScript>();
-        vterina2 = 1;
+        kejch = false;
+
+
+        //Co muze pryc
+        scorePerSecond = 1;
+        tmpscore = 0;
+        killedEnemies = 0;
     }
 
     void Update () {
+
+        if (push > 0)
+        {
+            transform.Translate(0.25f, 0, 0);
+            push -= Time.deltaTime;
+        }
+
+        //Ultrakejch
+        if (kejch)
+        {
+            ultraKejch = new Vector2(Random.Range(-0.07f, 0.07f), Random.Range(-0.07f, 0.07f));
+        }        
+
         //Axis information
         float inputX = Input.GetAxis("Horizontal") * (isInverted ? -1 : 1) ;
         float inputY = Input.GetAxis("Vertical") * (isInverted ? -1 : 1) ;
-        
-        //Skore
-        this.scoreText.text = "Skore: " + tmpscore;
-        if (vterina2 <= 0) {
-            tmpscore += 1;
-            vterina2 = 1;
-        }
-
-        vterina2 -= Time.deltaTime;
-
 
         // Pohyb 
-        
-        movement = new Vector2(speed.x * inputX * Time.deltaTime, speed.y * inputY * Time.deltaTime);
+        movement = new Vector2(speed.x * inputX * Time.deltaTime + ultraKejch.x, speed.y * inputY * Time.deltaTime + ultraKejch.y);
         transform.Translate(movement, 0);
-        /*
-        //Balancovani
-        float rotation = Input.GetAxis("Rotation");                 //* (isInverted ? -1 : 1)
-        if (rotation < 0 && transform.rotation.z >= -0.8) {
-            transform.Rotate(0, 0, rotation * 1.5f);
-        }
-        if (rotation >= 0 && transform.rotation.z <= 0.8) {
-            transform.Rotate(0, 0, rotation * 1.5f);
-        }*/
 
-        //Kontrola zpomaleni casu
-        if(timeSlow > 0)
+        //Kontrola inverzniho ovladani
+        if (invertTime != 0)
         {
-            timeSlow -= Time.deltaTime;
-            if(timeSlow <= 0)
+            invertTime -= Time.deltaTime;
+            if (invertTime == 0 || invertTime < 0)
             {
-                SlowTime(false);
+                this.InversionControlling();
+                invertTime = 0;
             }
-        }
-        
-        //Odpocet zobrazeni textu
-        if (odpocet != 0)
-        {
-            odpocet -= Time.deltaTime;
-            if (odpocet == 0 || odpocet < 0)
-            {
-                this.panelText.text = "";
-                odpocet = 0;
-            }
-        }
+        }          
+              
 
+        //Kontrola Animace s Akackem
         if (akacko == 0)
         {
             isAkacko = false;
             animator.SetBool("isAk47", false);
         }
 
-        //Kontrola inverzniho ovladani
-        if (invertTime != 0)
+        //Kontrola, zda neni Ojoch zrovna nesmrtelny, pokud je, odecte cas z godMode a pokud dojde na nulu, okamzite mu opet zapne BoxCollider
+        if (godMode != 0)
         {
-            invertTime -= Time.deltaTime;
-            if(invertTime == 0 || invertTime < 0)
+            godMode -= Time.deltaTime;
+            if (godMode <= 0)
             {
-                this.InversionControlling();
-                invertTime = 0;
+                godMode = 0;
+                Destroy(transform.Find("smetacek(Clone)").gameObject);
             }
         }
-
-        /*
-        //Ocekuje, jestli je natoceni  na 0, pokud ne, zacne aplikovat rotaci v danem smeru
-        if (transform.rotation.z <= 0 && transform.rotation.z >= -0.8)
-        {
-            transform.Rotate(0, 0, -rotace * Time.deltaTime + transform.rotation.z*0.8f);
-        }
-        else if (transform.rotation.z > 0 && transform.rotation.z <= 0.8) {
-            transform.Rotate(0, 0, rotace * Time.deltaTime + transform.rotation.z*0.8f);
-        }
-
-        //Ocekuje jaka je rotace a pripadne odebere palivo
-        if (transform.rotation.z <= -0.5 || transform.rotation.z >= 0.5)
-        {
-            if (vterina > 0)
-            {
-                vterina -= Time.deltaTime;
-            }
-            else
-            {
-                playerHealth.Damage(2);
-                healthSlider.value = playerHealth.hp;
-                vterina = 1;
-            }
-        }*/
 
         
-
-        //Kontrola, zda neni Ojoch zrovna nesmrtelny, pokud je, odecte cas z godMode a pokud dojde na nulu, okamzite mu opet zapne BoxCollider
-        if (godMode != 0) {
-            godMode -= Time.deltaTime ;
-            if (godMode == 0 || godMode < 0) {
-                godMode = 0;
-                //CollisionDisable(true);
-                Destroy(transform.Find("smetacek(Clone)").gameObject);
-            } 
-        }
-
-        ///<summary>
-        /// Strelba
-        ///</summary>
+        // Strelba    
 
         bool shoot = Input.GetButton("Fire1");          //Stisknutí mezerníku
-        
+
         //Pokud chce hrac vystrelit, pouzije se skript weapon, který zavolá svou fci Attack a ubere mu to 1 život
-        if (shoot) {            
-            if (weapons != null && weapons[0].CanAttack) {
+        if (shoot)
+        {
+            if (weapons != null && weapons[0].CanAttack)
+            {
 
                 if (!isAkacko)
                 {
@@ -218,13 +174,58 @@ public class OjochScript : MonoBehaviour {
                 }
             }
         }
+
+        /// <summary>
+        /// Co by mohlo z Ojocha pryc
+        /// </summary> 
+
+        //Skore
+        this.scoreText.text = "Skore: " + tmpscore;
+        if (scorePerSecond <= 0) {
+            tmpscore += 1 * modifikatorScore;
+            scorePerSecond = 1;
+        }
+        scorePerSecond -= Time.deltaTime;  
+
+        if(modifikatorScore < 1)
+        {
+            modifikatorScore = 1;
+        }
+        this.modi.text = "Modifikátor: " + modifikatorScore;
+
+        if (killedEnemies == 3)
+        {
+            modifikatorScore += 1;
+            killedEnemies = 0;
+        }
+
+        if (modifikatorScore > 9)
+        {
+            modifikatorScore = 9;
+        }
+
+
+        //Abz ojoch nevyletel pryc
+        var dist = (transform.position - Camera.main.transform.position).z;
+
+        var leftBorder = Camera.main.ViewportToWorldPoint(new Vector3(0, 0, dist)).x;
+        var rightBorder = Camera.main.ViewportToWorldPoint(new Vector3(1, 0, dist)).x;
+        var topBorder = Camera.main.ViewportToWorldPoint(new Vector3(0, 0, dist)).y;
+        var bottomBorder = Camera.main.ViewportToWorldPoint(new Vector3(0, 1, dist)).y;
+
+        transform.position = new Vector3(
+            Mathf.Clamp(transform.position.x, leftBorder, rightBorder),
+            Mathf.Clamp(transform.position.y, topBorder, bottomBorder),
+            transform.position.z);
     }
     
+
     //Kolize 
     void OnCollisionEnter2D(Collision2D collision) {
 
         //S nepritelem -> ubere 5 zivotu a nepritele znici
         if (collision.gameObject.tag == "Enemy" && !cleanSock) {
+            modifikatorScore -= 1;
             SoundScript.instance.RandomSFX(damage1, damage2);
             animator.SetTrigger("hit");
             Destroy(collision.gameObject);
@@ -232,14 +233,8 @@ public class OjochScript : MonoBehaviour {
                 playerHealth.Damage(2);
                 healthSlider.value = playerHealth.hp;
             }
-            /*
-            //orotuje ojocha
-            if (transform.rotation.z < 0)
-                transform.Rotate(0, 0, Random.Range(-25, -15));
-            else
-                transform.Rotate(0, 0, Random.Range(15, 25));*/
-
         }
+
         else if (collision.gameObject.tag == "Enemy" && (cleanSock || godMode != 0)) 
         {
             Destroy(collision.gameObject);
@@ -247,85 +242,56 @@ public class OjochScript : MonoBehaviour {
             cleanSock = false;
         }
 
-        //S prekazkou -> ubere 10 zivotu a ucini na 5 vterin Ojocha nesmrtelnym
+        //S prekazkou -> ubere 10 zivotu a ucini na 3 vterin Ojocha nesmrtelnym
         if (collision.gameObject.tag == "Obstacle")
         {
+            modifikatorScore -= 2;
             if (playerHealth != null || godMode == 0)
             {
                 playerHealth.Damage(5);
                 SoundScript.instance.RandomSFX(damage1, damage2);
                 healthSlider.value = playerHealth.hp;
             }
-            /*
-            //orotuje ojocha
-            if (transform.rotation.z < 0)
-                transform.Rotate(0, 0, Random.Range(-40, -30));
-            else
-                transform.Rotate(0, 0, Random.Range(30, 40));*/
-
             collision.gameObject.GetComponent<ObstacleDestruction>().Destruction();
-            //nesmrtelnost
-            //CollisionDisable(false);
             godMode = 3;
         }
-        
+
+        //Se sochou
+        if (collision.gameObject.tag == "Socha")
+        {
+            modifikatorScore -= 3;
+            if (playerHealth != null)
+            {
+                playerHealth.Damage(30);
+                SoundScript.instance.RandomSFX(damage1, damage2);
+                healthSlider.value = playerHealth.hp;
+            }
+            godMode = 3;
+            push = 0.25f;
+        }
+
 
         //S powerUpem -> Zvysi pocet powerupu, provede efekt powerUpu, a pokud je sbran jiz druhy power up
         //provede se kombo
         if (collision.gameObject.tag == "PowerUp") {
             SoundScript.instance.PlaySingle(grab);
-            tmpscore += 5 * modifikatorScore;                                                       //Zapocitani skore 
+            tmpscore += 5 * modifikatorScore;                                                                          //Zapocitani skore 
             powerCombo.powerUps += 1;                                                               //zvyseni powerUpu
             powerCombo.powerUpCombo += collision.gameObject.GetComponent<PowerUpID>().powerUpID;    //pridani ID            
 
             //pokud je sebran jiz druhy powerUp -> provede se kombo
             if (powerCombo.powerUps == 2) {
+                modifikatorScore += 1;
                 powerCombo.PowerCombo(powerCombo.powerUpCombo);                                     //provedeni komba
                 powerCombo.powerUps = 0;                                                            //nastaveni poctu powerupu na nula
                 powerCombo.powerUpCombo = 0;                                                        //vymazani komba a priprava na dalsi
             }
             Destroy(collision.gameObject);
         }
-    }
-
-    //Metoda pro zapnuti/vynuti BoxCollideru - nesmrtelnost
-    public void CollisionDisable(bool enableGod) {
-        this.GetComponent<BoxCollider2D>().enabled = enableGod;
-    }
-
+    }    
+    
     //Inverze ovladani
     public void InversionControlling() {
         this.isInverted = !(isInverted);
-    }    
-
-    //Zpomali/vrati cas
-    public void SlowTime(bool slow)
-    {
-        if (slow)
-        {
-            Time.timeScale = 0.5f;
-            //Time.fixedDeltaTime = 0.5f;
-            timeSlow = 3;
-        }
-        else
-        {
-            Time.timeScale = 1;
-            //Time.fixedDeltaTime = 1;
-        }
-    }
+    }     
 }
-
-
-
-
-
-/***
-***     Pozustatkove kody!
-
-   
-    void FixedUpdate() {
-       GetComponent<Rigidbody2D>().velocity = movement; //Aplikace pohybu na objekt
-    }
-
-    //powerCombo.PowerEffect(collision.gameObject.GetComponent<PowerUpID>().powerUpID);     //efekt powerUpu
-*/

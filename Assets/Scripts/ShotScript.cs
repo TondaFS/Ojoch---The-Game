@@ -26,6 +26,11 @@ public class ShotScript : MonoBehaviour {
             SoundScript.instance.PlaySingle(blop);
             Destroy(this.gameObject);           //zniceni strely
 
+        }  
+        
+        if (otherCollider.tag == "Player" && isEnemyShot)
+        {
+            GameObject.Find("Ojoch").gameObject.GetComponent<OjochScript>().modifikatorScore -= 1;
         }
     }
 
