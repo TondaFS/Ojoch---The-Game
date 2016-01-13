@@ -21,7 +21,13 @@ public class PowerUpScript : MonoBehaviour {
     public float timeSlow = 0;                      //jak dlouho bude zpomaleny cas
 
     //Ultrakejch
-    public float kejchTime; 
+    public float kejchTime;
+
+    //Akacko
+    public float akTime = 0;
+
+    //Contra Bubbles
+    public float contraTime = 0;
 
 
     void Start() {
@@ -37,7 +43,7 @@ public class PowerUpScript : MonoBehaviour {
         if (odpocet != 0)
         {
             odpocet -= Time.deltaTime;
-            if (odpocet == 0 || odpocet < 0)
+            if (odpocet <= 0)
             {
                 this.panelText.text = "";
                 odpocet = 0;
@@ -54,6 +60,7 @@ public class PowerUpScript : MonoBehaviour {
             }
         }
 
+        //Kontrola Ultrakejchu
         if (kejchTime > 0)
         {
             kejchTime -= Time.deltaTime;
@@ -61,6 +68,27 @@ public class PowerUpScript : MonoBehaviour {
             {
                 ojoch.kejch = false;
                 ojoch.ultraKejch = new Vector2(0, 0);
+            }
+        }
+
+        //Kontrola Akacka
+        if (akTime > 0)
+        {
+            akTime -= Time.deltaTime;
+            if (akTime <= 0)
+            {
+                ojoch.isAkacko = false;
+                ojoch.animator.SetBool("isAk47", false);
+            }
+        }
+
+        //Kontrola contra strelby
+        if (contraTime > 0)
+        {
+            contraTime -= Time.deltaTime;
+            if (contraTime <= 0)
+            {
+                ojoch.contraBubles = false;
             }
         }
     }
@@ -73,7 +101,7 @@ public class PowerUpScript : MonoBehaviour {
             // Prida Ojochovi palivo
             case 2:
                 SoundScript.instance.PlaySingle(good);
-                ojoch.playerHealth.Damage(-20);
+                ojoch.playerHealth.Damage(-30);
                 ojoch.healthSlider.value = ojoch.playerHealth.hp;
                 panelText.text = "Bublinace!";
                 odpocet = 3;
@@ -107,12 +135,13 @@ public class PowerUpScript : MonoBehaviour {
             
 
             //Bublinky + smetak  
-            //Ojoch strili 3 bublinky naraz! Ve trech smerech - 10 vystrelu                    
+            //Ojoch strili 3 bublinky naraz! Ve trech smerech                     
             case 12:
                 SoundScript.instance.PlaySingle(good);
                 panelText.text = "Prďák";                
                 odpocet = 3;
                 ojoch.contraBubles = true;
+                contraTime = 10;
                 ojoch.animator.SetTrigger("good");
                 break;
 
@@ -222,7 +251,7 @@ public class PowerUpScript : MonoBehaviour {
                 odpocet = 3;
 
                 ojoch.isAkacko = true;
-                ojoch.akacko = 10;
+                akTime = 10;
                 ojoch.animator.SetTrigger("good");
                 ojoch.animator.SetBool("isAk47", true);
                 break;

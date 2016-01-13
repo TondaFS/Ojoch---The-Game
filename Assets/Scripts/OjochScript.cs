@@ -15,7 +15,9 @@ public class OjochScript : MonoBehaviour {
     public PowerUpScript powerCombo;
     private WeaponScript[] weapons;
     public Animator animator;
-    public Text panelText;                         //text
+    public Text panelText;                          //text
+    public bool cleanSock = false;                  //je powerUp Ciste ponozky aktivni?
+    public CollectingScript collect;
 
     //Pro ultrakejch 
     public bool kejch;
@@ -26,12 +28,9 @@ public class OjochScript : MonoBehaviour {
     public HealthScript playerHealth;
 
     //Kontra strelba
-    public bool contraBubles = false;           //Rozptyl bublinek
-    public int contraNumber = 10;               //Pocet Kontra Strel
-    public bool cleanSock = false;              //je powerUp Ciste ponozky aktivni?
+    public bool contraBubles = false;           //Rozptyl bublinek   
 
     //AK-47
-    public int akacko = 0;                      //Pocet strel Akacka
     public bool isAkacko = false;               //ke Ak-47 aktivni?
 
     //Inverze
@@ -72,6 +71,7 @@ public class OjochScript : MonoBehaviour {
         playerHealth = GetComponent<HealthScript>();        
         animator = transform.Find("sprite").gameObject.GetComponent<Animator>();
         weapons = GetComponentsInChildren<WeaponScript>();
+        collect = GetComponent<CollectingScript>();
         kejch = false;
 
 
@@ -112,15 +112,7 @@ public class OjochScript : MonoBehaviour {
                 this.InversionControlling();
                 invertTime = 0;
             }
-        }          
-              
-
-        //Kontrola Animace s Akackem
-        if (akacko == 0)
-        {
-            isAkacko = false;
-            animator.SetBool("isAk47", false);
-        }
+        }   
 
         //Kontrola, zda neni Ojoch zrovna nesmrtelny, pokud je, odecte cas z godMode a pokud dojde na nulu, okamzite mu opet zapne BoxCollider
         if (godMode != 0)
@@ -155,13 +147,7 @@ public class OjochScript : MonoBehaviour {
                     if (contraBubles)
                     {
                         weapons[1].Attack(false, new Vector2(1, 0.7f));
-                        weapons[2].Attack(false, new Vector2(1, -0.7f));
-
-                        contraNumber -= 1;
-                        if (contraNumber == 0)
-                        {
-                            contraBubles = false;
-                        }
+                        weapons[2].Attack(false, new Vector2(1, -0.7f));                       
 
                     }
                 }
@@ -169,11 +155,15 @@ public class OjochScript : MonoBehaviour {
                 {
                     weapons[0].Ak47Attack(false, new Vector2(1, 0));
                     SoundScript.instance.PlaySingle(ak47);
-                    akacko -= 1;
+                    if (contraBubles)
+                    {
+                        weapons[1].Ak47Attack(false, new Vector2(1, 0.7f));
+                        weapons[2].Ak47Attack(false, new Vector2(1, -0.7f));
+                    }
 
                 }
             }
-        }
+        }        
 
         /// <summary>
         /// Co by mohlo z Ojocha pryc
@@ -191,7 +181,7 @@ public class OjochScript : MonoBehaviour {
         {
             modifikatorScore = 1;
         }
-        this.modi.text = "Modifikátor: " + modifikatorScore;
+        this.modi.text = "Modifikátor: " + modifikatorScore + "x";
 
         if (killedEnemies == 3)
         {
@@ -202,28 +192,14 @@ public class OjochScript : MonoBehaviour {
         if (modifikatorScore > 9)
         {
             modifikatorScore = 9;
-        }
-
-
-        //Abz ojoch nevyletel pryc
-        var dist = (transform.position - Camera.main.transform.position).z;
-
-        var leftBorder = Camera.main.ViewportToWorldPoint(new Vector3(0, 0, dist)).x;
-        var rightBorder = Camera.main.ViewportToWorldPoint(new Vector3(1, 0, dist)).x;
-        var topBorder = Camera.main.ViewportToWorldPoint(new Vector3(0, 0, dist)).y;
-        var bottomBorder = Camera.main.ViewportToWorldPoint(new Vector3(0, 1, dist)).y;
-
-        transform.position = new Vector3(
-            Mathf.Clamp(transform.position.x, leftBorder, rightBorder),
-            Mathf.Clamp(transform.position.y, topBorder, bottomBorder),
-            transform.position.z);
+        }        
     }
     
 
     //Kolize 
     void OnCollisionEnter2D(Collision2D collision) {
 
-        //S nepritelem -> ubere 5 zivotu a nepritele znici
+        //S nepritelem -> ubere 2 zivotu a nepritele znici
         if (collision.gameObject.tag == "Enemy" && !cleanSock) {
             modifikatorScore -= 1;
             SoundScript.instance.RandomSFX(damage1, damage2);
@@ -242,7 +218,7 @@ public class OjochScript : MonoBehaviour {
             cleanSock = false;
         }
 
-        //S prekazkou -> ubere 10 zivotu a ucini na 3 vterin Ojocha nesmrtelnym
+        //S prekazkou -> ubere 5 zivotu a ucini na 3 vterin Ojocha nesmrtelnym
         if (collision.gameObject.tag == "Obstacle")
         {
             modifikatorScore -= 2;
@@ -259,6 +235,7 @@ public class OjochScript : MonoBehaviour {
         //Se sochou
         if (collision.gameObject.tag == "Socha")
         {
+            animator.SetTrigger("isBack");
             modifikatorScore -= 3;
             if (playerHealth != null)
             {
@@ -275,16 +252,17 @@ public class OjochScript : MonoBehaviour {
         //provede se kombo
         if (collision.gameObject.tag == "PowerUp") {
             SoundScript.instance.PlaySingle(grab);
-            tmpscore += 5 * modifikatorScore;                                                                          //Zapocitani skore 
+            tmpscore += 5 * modifikatorScore;                                                       //Zapocitani skore 
             powerCombo.powerUps += 1;                                                               //zvyseni powerUpu
-            powerCombo.powerUpCombo += collision.gameObject.GetComponent<PowerUpID>().powerUpID;    //pridani ID            
+            powerCombo.powerUpCombo += collision.gameObject.GetComponent<PowerUpID>().powerUpID;    //pridani ID   
+            collect.showObject(collision.gameObject.GetComponent<PowerUpID>().powerUpID, powerCombo.powerUps);
 
             //pokud je sebran jiz druhy powerUp -> provede se kombo
             if (powerCombo.powerUps == 2) {
                 modifikatorScore += 1;
                 powerCombo.PowerCombo(powerCombo.powerUpCombo);                                     //provedeni komba
                 powerCombo.powerUps = 0;                                                            //nastaveni poctu powerupu na nula
-                powerCombo.powerUpCombo = 0;                                                        //vymazani komba a priprava na dalsi
+                powerCombo.powerUpCombo = 0;                                                        //vymazani komba a priprava na dalsi                
             }
             Destroy(collision.gameObject);
         }

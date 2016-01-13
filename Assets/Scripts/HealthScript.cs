@@ -10,7 +10,7 @@ public class HealthScript : MonoBehaviour {
 
     //Promenne
     public int hp = 1;              //pocet zivotu
-    public int sanity = 30;        //Pocet pricetnosti          
+    public int sanity = 30;         //Pocet pricetnosti          
     public bool isEnemy = true;     //jedna se o hrace/nepritele?
     GameObject ojoch;
 
@@ -25,7 +25,25 @@ public class HealthScript : MonoBehaviour {
                 hp = 100;
             }
             if (hp <= 0) {
-                ojoch.GetComponent<OjochScript>().panelText.text = "GameOver!";                
+                ojoch.GetComponent<OjochScript>().panelText.text = "GameOver!";   
+                if(sanity > 25)
+                {
+                    float finalScore = ojoch.GetComponent<OjochScript>().tmpscore;
+                    finalScore *= 3;
+                    ojoch.GetComponent<OjochScript>().scoreText.text = "Skore: " + finalScore;
+                }
+                else if(sanity > 15)
+                {
+                    float finalScore = ojoch.GetComponent<OjochScript>().tmpscore;
+                    finalScore *= 1.5f;
+                    ojoch.GetComponent<OjochScript>().scoreText.text = "Skore: " + finalScore;
+                }  
+                else if (sanity < 5)
+                {
+                    float finalScore = ojoch.GetComponent<OjochScript>().tmpscore;
+                    finalScore /= 2;
+                    ojoch.GetComponent<OjochScript>().scoreText.text = "Skore: " + finalScore;
+                }           
                 Time.timeScale = 0.1f;                
                 Destroy(gameObject);
 
