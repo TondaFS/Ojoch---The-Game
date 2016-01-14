@@ -9,6 +9,8 @@ public class PowerUpScript : MonoBehaviour {
     public Transform sockClean;
     public Transform smetacek;
     public GameObject socha;
+    public GameObject sessionController;
+    public ShowingEffects effects;
 
     public AudioClip good;
     public AudioClip bad;
@@ -33,6 +35,9 @@ public class PowerUpScript : MonoBehaviour {
     void Start() {
         ojoch = this.GetComponent<OjochScript>();
         socha = GameObject.Find("statue");
+        sessionController = GameObject.Find("Session Controller");
+        effects = sessionController.GetComponent<ShowingEffects>();
+
         kejchTime = 0;
 
     }
@@ -52,11 +57,13 @@ public class PowerUpScript : MonoBehaviour {
 
         //Kontrola zpomaleni casu
         if (timeSlow > 0)
-        {
+        {            
             timeSlow -= Time.deltaTime;
+            effects.slowtimeText.text = "SLOWTIME: " + (int)timeSlow;
             if (timeSlow <= 0)
             {
                 SlowTime(false);
+                effects.slowtime.SetActive(false);
             }
         }
 
@@ -64,10 +71,12 @@ public class PowerUpScript : MonoBehaviour {
         if (kejchTime > 0)
         {
             kejchTime -= Time.deltaTime;
+            effects.ultrakejchText.text = "Ultrakejch: " + (int)kejchTime;
             if(kejchTime <= 0)
             {
                 ojoch.kejch = false;
                 ojoch.ultraKejch = new Vector2(0, 0);
+                effects.ultrakejch.SetActive(false);
             }
         }
 
@@ -75,20 +84,24 @@ public class PowerUpScript : MonoBehaviour {
         if (akTime > 0)
         {
             akTime -= Time.deltaTime;
+            effects.ak47Text.text = "AK-47: " + (int)akTime;
             if (akTime <= 0)
             {
                 ojoch.isAkacko = false;
                 ojoch.animator.SetBool("isAk47", false);
+                effects.ak47.SetActive(false);
             }
         }
 
-        //Kontrola contra strelby
+        //Kontrola contra strelby / prdak
         if (contraTime > 0)
         {
             contraTime -= Time.deltaTime;
+            effects.prdakText.text = "Prďák: " + (int)contraTime;
             if (contraTime <= 0)
             {
                 ojoch.contraBubles = false;
+                effects.prdak.SetActive(false);
             }
         }
     }
@@ -143,6 +156,7 @@ public class PowerUpScript : MonoBehaviour {
                 ojoch.contraBubles = true;
                 contraTime = 10;
                 ojoch.animator.SetTrigger("good");
+                effects.prdak.SetActive(true);
                 break;
 
 
@@ -151,8 +165,10 @@ public class PowerUpScript : MonoBehaviour {
             //Zpomali pohyb vseho a zaroven zpomali celkovou uroven zrychleni
             case 21:
                 panelText.text = "NITRO";
-                GameObject.Find("Session Controller").gameObject.GetComponent<SessionController>().speedUpTime += 4;
-                GameObject.Find("Session Controller").gameObject.GetComponent<SessionController>().gameSpeed -= 1f;
+                sessionController.GetComponent<SessionController>().speedUpTime += 4;
+                sessionController.GetComponent<SessionController>().gameSpeed -= 1f;
+                socha.GetComponent<StatueControler>().howMuchForward = 0;
+                socha.GetComponent<StatueControler>().howMuchBack = 2f;
                 odpocet = 3;
                 break;
 
@@ -165,6 +181,7 @@ public class PowerUpScript : MonoBehaviour {
                 odpocet = 1;
                 SlowTime(true);
                 ojoch.animator.SetTrigger("good");
+                effects.slowtime.SetActive(true);                
                 break;
 
 
@@ -181,8 +198,11 @@ public class PowerUpScript : MonoBehaviour {
             //Zrychli pohyb vseho a zaroven o neco zrychli celkovy posun zrychleni
             case 14:
                 panelText.text = "DENItRO";
-                GameObject.Find("Session Controller").gameObject.GetComponent<SessionController>().speedUpTime -= 5;
-                GameObject.Find("Session Controller").gameObject.GetComponent<SessionController>().gameSpeed += 0.5f;
+                //GameObject.Find("Session Controller").gameObject.GetComponent<SessionController>().speedUpTime -= 5;
+                sessionController.GetComponent<SessionController>().speedUpTime -= 5;
+                sessionController.GetComponent<SessionController>().gameSpeed += 0.5f;
+                socha.GetComponent<StatueControler>().howMuchForward += 1.5f;
+                socha.GetComponent<StatueControler>().howMuchBack = 0;
                 odpocet = 3;
                 break;
 
@@ -226,6 +246,7 @@ public class PowerUpScript : MonoBehaviour {
                 //Inverze
                 ojoch.InversionControlling();
                 ojoch.invertTime = 10;
+                effects.zmatek.SetActive(true);
                 break;
 
 
@@ -241,6 +262,7 @@ public class PowerUpScript : MonoBehaviour {
                 var smet = Instantiate(smetacek) as Transform;
                 smet.position = transform.position + new Vector3(0.2f, 0.2f, 0);
                 smet.parent = ojoch.transform;
+                effects.kosteni.SetActive(true);
                 break;
 
 
@@ -254,6 +276,7 @@ public class PowerUpScript : MonoBehaviour {
                 akTime = 10;
                 ojoch.animator.SetTrigger("good");
                 ojoch.animator.SetBool("isAk47", true);
+                effects.ak47.SetActive(true);
                 break;
 
 
@@ -265,6 +288,7 @@ public class PowerUpScript : MonoBehaviour {
                 ojoch.kejch = true;
                 kejchTime = 5;
                 odpocet = 3;
+                effects.ultrakejch.SetActive(true);
                 break;               
 
         }

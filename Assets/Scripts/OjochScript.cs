@@ -18,6 +18,7 @@ public class OjochScript : MonoBehaviour {
     public Text panelText;                          //text
     public bool cleanSock = false;                  //je powerUp Ciste ponozky aktivni?
     public CollectingScript collect;
+    public GameObject socha;
 
     //Pro ultrakejch 
     public bool kejch;
@@ -55,6 +56,8 @@ public class OjochScript : MonoBehaviour {
     /// <summary>
     /// Co by mohlo z Ojocha pryc do jinych skriptu
     /// </summary> 
+    /// 
+    
 
     //promenne na score
     public Text scoreText;
@@ -62,7 +65,10 @@ public class OjochScript : MonoBehaviour {
     public float modifikatorScore = 1;              //Modfifikator
     public float tmpscore;                          //hracovo skore
     public float scorePerSecond = 0;                //pro zvyseni skore za kazdou vterinu  
-    public int killedEnemies;
+    public int killedEnemies;                       //pocet zabitych nepratel
+    public float tenSecondsTimer = 0;               //Timer na vynulovani modifikatoru skore
+    public Slider tenSecondsSlider;
+    public GameObject tenSecondsObject;
             
 
     void Start() {
@@ -73,13 +79,16 @@ public class OjochScript : MonoBehaviour {
         weapons = GetComponentsInChildren<WeaponScript>();
         collect = GetComponent<CollectingScript>();
         kejch = false;
+        socha = GameObject.Find("statue");
+        
 
 
         //Co muze pryc
         scorePerSecond = 1;
         tmpscore = 0;
         killedEnemies = 0;
-    }
+        tenSecondsObject.SetActive(false);
+}
 
     void Update () {
 
@@ -89,10 +98,12 @@ public class OjochScript : MonoBehaviour {
             push -= Time.deltaTime;
         }
 
+        
+
         //Ultrakejch
         if (kejch)
         {
-            ultraKejch = new Vector2(Random.Range(-0.07f, 0.07f), Random.Range(-0.07f, 0.07f));
+            ultraKejch = new Vector2(Random.Range(-0.15f, 0.15f), Random.Range(-0.15f, 0.15f));
         }        
 
         //Axis information
@@ -107,10 +118,12 @@ public class OjochScript : MonoBehaviour {
         if (invertTime != 0)
         {
             invertTime -= Time.deltaTime;
+            powerCombo.effects.zmatekText.text = "Zmatek: " + (int)invertTime;
             if (invertTime == 0 || invertTime < 0)
             {
                 this.InversionControlling();
                 invertTime = 0;
+                powerCombo.effects.zmatek.SetActive(false);
             }
         }   
 
@@ -118,10 +131,12 @@ public class OjochScript : MonoBehaviour {
         if (godMode != 0)
         {
             godMode -= Time.deltaTime;
+            powerCombo.effects.kosteniText.text = "Kosteni: " + (int)godMode;
             if (godMode <= 0)
             {
                 godMode = 0;
                 Destroy(transform.Find("smetacek(Clone)").gameObject);
+                powerCombo.effects.kosteni.SetActive(false);
             }
         }
 
@@ -170,7 +185,7 @@ public class OjochScript : MonoBehaviour {
         /// </summary> 
 
         //Skore
-        this.scoreText.text = "Skore: " + tmpscore;
+        this.scoreText.text = "Skóre: " + tmpscore;
         if (scorePerSecond <= 0) {
             tmpscore += 1 * modifikatorScore;
             scorePerSecond = 1;
@@ -192,7 +207,22 @@ public class OjochScript : MonoBehaviour {
         if (modifikatorScore > 9)
         {
             modifikatorScore = 9;
-        }        
+        }
+
+        if (tenSecondsTimer > 0)
+        {
+            
+            tenSecondsTimer -= Time.deltaTime;
+            tenSecondsSlider.value = tenSecondsTimer;
+            if(tenSecondsTimer <= 0)
+            {
+                tenSecondsObject.SetActive(false);
+                modifikatorScore = 0;
+                killedEnemies = 0;
+
+            }
+        }
+        
     }
     
 
@@ -200,7 +230,9 @@ public class OjochScript : MonoBehaviour {
     void OnCollisionEnter2D(Collision2D collision) {
 
         //S nepritelem -> ubere 2 zivotu a nepritele znici
-        if (collision.gameObject.tag == "Enemy" && !cleanSock) {
+        if (collision.gameObject.tag == "Enemy" && (!cleanSock || godMode <= 0)) {
+            socha.GetComponent<StatueControler>().howMuchForward += 0.75f;
+            socha.GetComponent<StatueControler>().howMuchBack = 0;
             modifikatorScore -= 1;
             SoundScript.instance.RandomSFX(damage1, damage2);
             animator.SetTrigger("hit");
@@ -221,6 +253,8 @@ public class OjochScript : MonoBehaviour {
         //S prekazkou -> ubere 5 zivotu a ucini na 3 vterin Ojocha nesmrtelnym
         if (collision.gameObject.tag == "Obstacle")
         {
+            socha.GetComponent<StatueControler>().howMuchForward += 1;
+            socha.GetComponent<StatueControler>().howMuchBack = 0;
             modifikatorScore -= 2;
             if (playerHealth != null || godMode == 0)
             {
@@ -251,6 +285,9 @@ public class OjochScript : MonoBehaviour {
         //S powerUpem -> Zvysi pocet powerupu, provede efekt powerUpu, a pokud je sbran jiz druhy power up
         //provede se kombo
         if (collision.gameObject.tag == "PowerUp") {
+            tenSecondsTimer = 5;
+            tenSecondsObject.SetActive(true);
+            tenSecondsSlider.value = tenSecondsTimer;
             SoundScript.instance.PlaySingle(grab);
             tmpscore += 5 * modifikatorScore;                                                       //Zapocitani skore 
             powerCombo.powerUps += 1;                                                               //zvyseni powerUpu
