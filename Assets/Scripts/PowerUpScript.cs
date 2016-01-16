@@ -31,6 +31,11 @@ public class PowerUpScript : MonoBehaviour {
     //Contra Bubbles
     public float contraTime = 0;
 
+    //Zakaleni
+    public SpriteRenderer zakaleniSprite;
+    public float zakaleniTime = 0;
+    public float zakaleniFade = 0;
+
 
     void Start() {
         ojoch = this.GetComponent<OjochScript>();
@@ -39,7 +44,6 @@ public class PowerUpScript : MonoBehaviour {
         effects = sessionController.GetComponent<ShowingEffects>();
 
         kejchTime = 0;
-
     }
 
     void Update() {
@@ -102,6 +106,23 @@ public class PowerUpScript : MonoBehaviour {
             {
                 ojoch.contraBubles = false;
                 effects.prdak.SetActive(false);
+            }
+        }
+
+        //Kontrola zakaleni
+        if (zakaleniTime > 0)
+        {
+            zakaleniTime -= Time.deltaTime;
+            zakaleniFade = Mathf.Clamp(zakaleniFade + (Time.deltaTime * 2), 0, 1);
+            zakaleniSprite.color = Color.Lerp(Color.clear, Color.white, zakaleniFade);
+        }
+        else
+        {
+            zakaleniTime = 0;
+            if (zakaleniSprite.color != Color.clear)
+            {
+                zakaleniFade = Mathf.Clamp(zakaleniFade - (Time.deltaTime * 2), 0, 1);
+                zakaleniSprite.color = Color.Lerp(Color.clear, Color.white, zakaleniFade);
             }
         }
     }
@@ -233,6 +254,7 @@ public class PowerUpScript : MonoBehaviour {
             case 19:
                 panelText.text = "Šoufl!";
                 odpocet = 3;
+                zakaleniTime = 5;
                 break;
 
 
