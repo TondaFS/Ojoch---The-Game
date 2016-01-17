@@ -11,7 +11,7 @@ public class RoomSpawner : MonoBehaviour {
 
     void Start()
     {
-        SpawnSpecialRoom(); //po spusteni hry spawni okamzite jednu mistnost
+        SpawnFirstRoom(); //po spusteni hry spawni okamzite jednu mistnost
     }
 
     void Update()
@@ -36,7 +36,7 @@ public class RoomSpawner : MonoBehaviour {
         //currentRoom = transform.GetChild(0).gameObject.AddComponent<>();
     }
 
-    void SpawnSpecialRoom()
+    void SpawnFirstRoom()
     {
         //vyber nahodnou mistnost ze seznamu
         GameObject room = rooms[0];
