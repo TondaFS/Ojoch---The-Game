@@ -6,9 +6,6 @@ public class StatueControler : MonoBehaviour {
     //Statue movement
     public float howMuchForward = 0;
     public float howMuchBack = 0;
-
-    
-
     //float c;
 
     void Update() {

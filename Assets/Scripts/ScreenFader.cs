@@ -22,12 +22,7 @@ public class ScreenFader : MonoBehaviour
         else if (isSceneEnding)
         {
             FadeOut();
-        }
-
-        if (Input.GetKeyDown(KeyCode.Escape)) {
-            FadeOutLoadNewScene("menu");
-            Time.timeScale = 1;
-        }
+        }        
     }
 
     void FadeIn()

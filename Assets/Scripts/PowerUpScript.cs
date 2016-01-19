@@ -113,6 +113,7 @@ public class PowerUpScript : MonoBehaviour {
         if (zakaleniTime > 0)
         {
             zakaleniTime -= Time.deltaTime;
+            effects.souflText.text = "Šoufl: " + (int)zakaleniTime;
             zakaleniFade = Mathf.Clamp(zakaleniFade + (Time.deltaTime * 2), 0, 1);
             zakaleniSprite.color = Color.Lerp(Color.clear, Color.white, zakaleniFade);
         }
@@ -123,6 +124,7 @@ public class PowerUpScript : MonoBehaviour {
             {
                 zakaleniFade = Mathf.Clamp(zakaleniFade - (Time.deltaTime * 2), 0, 1);
                 zakaleniSprite.color = Color.Lerp(Color.clear, Color.white, zakaleniFade);
+                effects.soufl.SetActive(false);
             }
         }
     }
@@ -255,6 +257,7 @@ public class PowerUpScript : MonoBehaviour {
                 panelText.text = "Šoufl!";
                 odpocet = 3;
                 zakaleniTime = 5;
+                effects.soufl.SetActive(true);
                 break;
 
 

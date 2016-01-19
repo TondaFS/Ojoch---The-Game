@@ -2,13 +2,16 @@
 using System.Collections;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
+using System.Collections.Generic;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance = null;
-
     public int numberOfClicks;
-    public int highscore = 0;
+    public BestScores highscores;
+
+    public bool newRecord = false;
+    public float recordScore = 0;
 
     void Awake()
     {
@@ -22,7 +25,8 @@ public class GameManager : MonoBehaviour
         }
 
         DontDestroyOnLoad(this.gameObject);
-        LoadData();
+        highscores = this.GetComponent<BestScores>();
+        LoadData();    
     }
 
     void Update()
@@ -46,7 +50,7 @@ public class GameManager : MonoBehaviour
         BinaryFormatter formatter = new BinaryFormatter();
         FileStream saveFile = File.Create("NothingHere/notSavesLOL.sav");
 
-        formatter.Serialize(saveFile, highscore);
+        formatter.Serialize(saveFile, highscores.scores);
         saveFile.Close();
     }
 
@@ -57,13 +61,11 @@ public class GameManager : MonoBehaviour
             BinaryFormatter formatter = new BinaryFormatter();
             FileStream saveFile = File.Open("NothingHere/notSavesLOL.sav", FileMode.Open);
 
-            highscore = (int)formatter.Deserialize(saveFile);
+            highscores.scores = (List<ScoreElement>)formatter.Deserialize(saveFile);
             saveFile.Close();
         }
-    }
-    
-       public void AdjustScore(float score)
-       {
-        highscore = (int)score;
-       }
+        else {
+            highscores.InitiateBestScores();            
+        }
+    }   
 }

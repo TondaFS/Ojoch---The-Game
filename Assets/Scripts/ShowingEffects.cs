@@ -10,6 +10,7 @@ public class ShowingEffects : MonoBehaviour {
     public GameObject zmatek;
     public GameObject ultrakejch;
     public GameObject slowtime;
+    public GameObject soufl;
 
     public Text ak47Text;
     public Text kosteniText;
@@ -17,6 +18,7 @@ public class ShowingEffects : MonoBehaviour {
     public Text zmatekText;
     public Text ultrakejchText;
     public Text slowtimeText;
+    public Text souflText;
 
     // Use this for initialization
     void Start () {
@@ -26,5 +28,6 @@ public class ShowingEffects : MonoBehaviour {
         zmatek.SetActive(false);
         ultrakejch.SetActive(false);
         slowtime.SetActive(false);
+        soufl.SetActive(false);
 	}
 }

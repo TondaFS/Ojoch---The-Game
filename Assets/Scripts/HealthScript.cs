@@ -12,10 +12,10 @@ public class HealthScript : MonoBehaviour {
     public int hp = 1;              //pocet zivotu
     public int sanity = 30;         //Pocet pricetnosti          
     public bool isEnemy = true;     //jedna se o hrace/nepritele?
-    GameObject ojoch;
+    OjochScript ojoch;
 
     void Start() {
-        ojoch = GameObject.FindWithTag("Player");
+        ojoch = GameObject.FindWithTag("Player").GetComponent<OjochScript>();
     }
 
     void Update() {
@@ -25,32 +25,9 @@ public class HealthScript : MonoBehaviour {
                 hp = 100;
             }
             if (hp <= 0) {
-                ojoch.GetComponent<OjochScript>().panelText.text = "GameOver!";
-                float finalScore = ojoch.GetComponent<OjochScript>().tmpscore;
-                if (sanity > 25)                {
-                    
-                    finalScore *= 3;
-                    ojoch.GetComponent<OjochScript>().scoreText.text = "Skore: " + finalScore;
-                }
-                else if(sanity > 15)
-                {                    
-                    finalScore *= 1.5f;
-                    ojoch.GetComponent<OjochScript>().scoreText.text = "Skore: " + finalScore;
-                }  
-                else if (sanity < 5)
-                {                    
-                    finalScore /= 2;
-                    ojoch.GetComponent<OjochScript>().scoreText.text = "Skore: " + finalScore;
-                }
-
-                if (GameManager.instance.highscore < finalScore)
-                {
-                    GameManager.instance.highscore = (int)finalScore;
-                }
-                GameManager.instance.SaveData();
-                Time.timeScale = 0.1f; 
+                Time.timeScale = 0.1f;
+                GameObject.Find("Session Controller").GetComponent<EndGameScript>().EndGame();             
                 Destroy(gameObject);
-
             }
         }
     }
@@ -60,12 +37,12 @@ public class HealthScript : MonoBehaviour {
         hp -= damageCount;
 
         if (hp <= 0 && gameObject.tag != "Player") {        //pouze pro nepratele
-            ojoch.GetComponent<OjochScript>().tenSecondsTimer = 5;
-            ojoch.GetComponent<OjochScript>().tenSecondsObject.SetActive(true);
-            ojoch.GetComponent<OjochScript>().tenSecondsSlider.value = ojoch.GetComponent<OjochScript>().tenSecondsTimer;
-            ojoch.GetComponent<OjochScript>().killedEnemies += 1;
+            ojoch.tenSecondsTimer = 5;
+            ojoch.tenSecondsObject.SetActive(true);
+            ojoch.tenSecondsSlider.value = ojoch.tenSecondsTimer;
+            ojoch.killedEnemies += 1;
             Destroy(gameObject);            
-            ojoch.GetComponent<OjochScript>().tmpscore += 10 * ojoch.GetComponent<OjochScript>().modifikatorScore;      //zapocitani skore
+            ojoch.tmpscore += 10 * ojoch.modifikatorScore;      //zapocitani skore
             
         }         
     }

@@ -92,13 +92,12 @@ public class OjochScript : MonoBehaviour {
 
     void Update () {
 
+        //Odražení od Sochy
         if (push > 0)
         {
             transform.Translate(0.25f, 0, 0);
             push -= Time.deltaTime;
-        }
-
-        
+        }        
 
         //Ultrakejch
         if (kejch)
@@ -142,7 +141,6 @@ public class OjochScript : MonoBehaviour {
 
         
         // Strelba    
-
         bool shoot = Input.GetButton("Fire1");          //Stisknutí mezerníku
 
         //Pokud chce hrac vystrelit, pouzije se skript weapon, který zavolá svou fci Attack a ubere mu to 1 život
@@ -155,8 +153,6 @@ public class OjochScript : MonoBehaviour {
                 {
                     weapons[0].Attack(false, new Vector2(1, 0));                       //atribut false -> jedna se o nepritele, kdo strili? 
                     animator.SetTrigger("fire");
-                    playerHealth.Damage(1);
-                    healthSlider.value = playerHealth.hp;
                     SoundScript.instance.PlaySingle(shootSound);                        //Zvuk vystrelu
 
                     if (contraBubles)

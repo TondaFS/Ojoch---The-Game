@@ -8,14 +8,9 @@ public class SessionController : MonoBehaviour
     public float speedUpTime = 50;
 
     public Text highscoreText;
-
-    /*
-    public int score;
-    public int scoreMultiplier;
-    public int highscore;*/
-
+    
     void Start() {
-        highscoreText.text = "Nejvyšší skóre: " + GameManager.instance.highscore;
+        highscoreText.text = "Nejvyšší skóre: " + GameManager.instance.highscores.scores[0].name + " " + GameManager.instance.highscores.scores[0].score;
     }
 
 	void FixedUpdate () {
@@ -38,5 +33,12 @@ public class SessionController : MonoBehaviour
         }
     }
 
-
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            GameObject.Find("OVERLAY").GetComponent<ScreenFader>().FadeOutLoadNewScene("highscore");
+            Time.timeScale = 1;
+        }
+    }
 }
