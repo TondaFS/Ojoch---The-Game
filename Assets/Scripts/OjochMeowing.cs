@@ -6,16 +6,19 @@ using System.Collections.Generic;
 [RequireComponent(typeof(AudioSource))]
 public class OjochMeowing : MonoBehaviour {
 
-    public AudioSource audio;
+    public AudioSource meowingAudio;
     public float maxVolume = 1;
 
     void Awake()
     {
-        audio = GetComponent<AudioSource>();
+        meowingAudio = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
-    void Update() {
+    void Update()
+    {
+        /*
+        // Na konzoli vypise jako tlacitko bylo zmackle
         {
             foreach (KeyCode kcode in Enum.GetValues(typeof(KeyCode)))
             {
@@ -23,14 +26,15 @@ public class OjochMeowing : MonoBehaviour {
                     Debug.Log("KeyCode down: " + kcode);
             }
         }
+        */
 
         if (Input.GetButton("Fire2"))
         {
-            audio.volume = Mathf.Clamp(audio.volume + (Time.deltaTime * 3), 0, maxVolume);
+            meowingAudio.volume = Mathf.Clamp(meowingAudio.volume + (Time.deltaTime * 3), 0, maxVolume);
         }
         else
         {
-            audio.volume = Mathf.Clamp(audio.volume - (Time.deltaTime * 3), 0, maxVolume);
+            meowingAudio.volume = Mathf.Clamp(meowingAudio.volume - (Time.deltaTime * 3), 0, maxVolume);
         } 
     }
 }

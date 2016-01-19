@@ -7,7 +7,6 @@ using System.Collections.Generic;
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance = null;
-    public int numberOfClicks;
     public BestScores highscores;
 
     public bool newRecord = false;
@@ -34,12 +33,6 @@ public class GameManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.L))
         {
             Application.LoadLevel("menu");
-        }
-
-        if (Input.GetMouseButtonDown(0))
-        {
-            ++numberOfClicks;
-            Debug.Log(numberOfClicks);
         }
     }
 

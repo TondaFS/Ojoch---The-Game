@@ -11,6 +11,7 @@ GameObject:
   - 212: {fileID: 21201198}
   - 61: {fileID: 6166888}
   - 114: {fileID: 11416562}
+  - 114: {fileID: 11480758}
   m_Layer: 0
   m_Name: smetak
   m_TagString: PowerUp
@@ -55,6 +56,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   powerUpID: 11
+--- !u!114 &11480758
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 193472}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c8d5cb4d956322b4e9ec3670c56ff41c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: {x: 1, y: 1}
+  direction: {x: -1, y: 0}
 --- !u!212 &21201198
 SpriteRenderer:
   m_ObjectHideFlags: 1

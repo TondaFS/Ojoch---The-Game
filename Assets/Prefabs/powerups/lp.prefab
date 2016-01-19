@@ -11,6 +11,7 @@ GameObject:
   - 212: {fileID: 21264156}
   - 61: {fileID: 6141370}
   - 114: {fileID: 11402598}
+  - 114: {fileID: 11441444}
   m_Layer: 0
   m_Name: lp
   m_TagString: PowerUp
@@ -55,6 +56,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   powerUpID: 3
+--- !u!114 &11441444
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 180846}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c8d5cb4d956322b4e9ec3670c56ff41c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: {x: 1, y: 1}
+  direction: {x: -1, y: 0}
 --- !u!212 &21264156
 SpriteRenderer:
   m_ObjectHideFlags: 1
