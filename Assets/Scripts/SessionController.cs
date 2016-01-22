@@ -11,6 +11,7 @@ public class SessionController : MonoBehaviour
     
     void Start() {
         highscoreText.text = "Nejvyšší skóre: " + GameManager.instance.highscores.scores[0].name + " " + GameManager.instance.highscores.scores[0].score;
+        GameObject.Find("Music").GetComponent<AudioSource>().volume = GameManager.instance.GetComponent<SoundManager>().musicVolume;
     }
 
 	void FixedUpdate () {

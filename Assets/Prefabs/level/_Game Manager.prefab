@@ -10,6 +10,8 @@ GameObject:
   - 4: {fileID: 477348}
   - 114: {fileID: 11492790}
   - 114: {fileID: 11448592}
+  - 114: {fileID: 11492982}
+  - 82: {fileID: 8292086}
   m_Layer: 0
   m_Name: _Game Manager
   m_TagString: Untagged
@@ -29,6 +31,76 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
+--- !u!82 &8292086
+AudioSource:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 147462}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
 --- !u!114 &11448592
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -41,6 +113,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scores: []
+  input: {fileID: 0}
 --- !u!114 &11492790
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -52,8 +125,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6bcd90616b6fed49b9d7c779bd5e903, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  numberOfClicks: 0
   highscores: {fileID: 0}
+  newRecord: 0
+  recordScore: 0
+--- !u!114 &11492982
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 147462}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a042f61045237a445b8c905a1a35336b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  musicVolume: 1
+  soundsVolume: 1
+  clipShoot: {fileID: 8300000, guid: e81562ae9f9bb7d44b42f5282e147594, type: 3}
+  clipDamage1: {fileID: 8300000, guid: 98099ecb857272843a12db6d235dfa6c, type: 3}
+  clipDamage2: {fileID: 8300000, guid: abef98b16f6c5514e8d103e5e1808da3, type: 3}
+  clipGrab: {fileID: 8300000, guid: d9b428646196a9041826fda15e82aacf, type: 3}
+  clipAk47: {fileID: 8300000, guid: 0c0360de2bc9ecf428e441927215b7f8, type: 3}
+  clipGood: {fileID: 8300000, guid: 3b4c9585f408daf459e73447a8876bfb, type: 3}
+  clipBad: {fileID: 8300000, guid: f6eacaa1e112e764ca2c6ade0b3e3964, type: 3}
+  clipBucket: {fileID: 8300000, guid: fd863be10fdbdcb479224df7363c7af3, type: 3}
+  clipEnemyHit: {fileID: 8300000, guid: 35f29ab6ca2c00e4f9b3c7308d864a31, type: 3}
+  clipBobblePoop: {fileID: 8300000, guid: defcd9b8c5bf91441ba2dc8313632c25, type: 3}
+  soundAudioSource: {fileID: 0}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
@@ -65,6 +163,46 @@ Prefab:
       propertyPath: highscores
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: clipDamage1
+      value: 
+      objectReference: {fileID: 8300000, guid: 98099ecb857272843a12db6d235dfa6c, type: 3}
+    - target: {fileID: 0}
+      propertyPath: clipDamage2
+      value: 
+      objectReference: {fileID: 8300000, guid: abef98b16f6c5514e8d103e5e1808da3, type: 3}
+    - target: {fileID: 0}
+      propertyPath: clipGrab
+      value: 
+      objectReference: {fileID: 8300000, guid: d9b428646196a9041826fda15e82aacf, type: 3}
+    - target: {fileID: 0}
+      propertyPath: clipGood
+      value: 
+      objectReference: {fileID: 8300000, guid: 3b4c9585f408daf459e73447a8876bfb, type: 3}
+    - target: {fileID: 0}
+      propertyPath: clipShoot
+      value: 
+      objectReference: {fileID: 8300000, guid: e81562ae9f9bb7d44b42f5282e147594, type: 3}
+    - target: {fileID: 0}
+      propertyPath: clipBad
+      value: 
+      objectReference: {fileID: 8300000, guid: f6eacaa1e112e764ca2c6ade0b3e3964, type: 3}
+    - target: {fileID: 0}
+      propertyPath: clipBucket
+      value: 
+      objectReference: {fileID: 8300000, guid: fd863be10fdbdcb479224df7363c7af3, type: 3}
+    - target: {fileID: 0}
+      propertyPath: clipAk47
+      value: 
+      objectReference: {fileID: 8300000, guid: 0c0360de2bc9ecf428e441927215b7f8, type: 3}
+    - target: {fileID: 0}
+      propertyPath: clipBobblePoop
+      value: 
+      objectReference: {fileID: 8300000, guid: defcd9b8c5bf91441ba2dc8313632c25, type: 3}
+    - target: {fileID: 0}
+      propertyPath: clipEnemyHit
+      value: 
+      objectReference: {fileID: 8300000, guid: 35f29ab6ca2c00e4f9b3c7308d864a31, type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 147462}

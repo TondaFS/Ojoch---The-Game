@@ -182,7 +182,7 @@ MonoBehaviour:
   shotPrefab: {fileID: 487496, guid: ebd85ed6047648548bc450c3f0697160, type: 2}
   akPrefab: {fileID: 444382, guid: 4f0b95cceed952449ba277b970cd5784, type: 2}
   heartPrefab: {fileID: 0}
-  shootingRate: .25
+  shootingRate: .150000006
 --- !u!114 &11432358
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -308,11 +308,7 @@ MonoBehaviour:
   invertTime: 0
   godMode: 0
   push: 0
-  shootSound: {fileID: 8300000, guid: e81562ae9f9bb7d44b42f5282e147594, type: 3}
-  damage1: {fileID: 8300000, guid: 98099ecb857272843a12db6d235dfa6c, type: 3}
-  damage2: {fileID: 8300000, guid: abef98b16f6c5514e8d103e5e1808da3, type: 3}
-  grab: {fileID: 8300000, guid: d9b428646196a9041826fda15e82aacf, type: 3}
-  ak47: {fileID: 8300000, guid: 0c0360de2bc9ecf428e441927215b7f8, type: 3}
+  managerSound: {fileID: 0}
   scoreText: {fileID: 0}
   modi: {fileID: 0}
   modifikatorScore: 1

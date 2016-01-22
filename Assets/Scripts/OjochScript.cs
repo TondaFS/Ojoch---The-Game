@@ -44,14 +44,7 @@ public class OjochScript : MonoBehaviour {
     //Push od sochy
     public float push = 0;
 
-    /***
-        ZVUKY
-    ***/
-    public AudioClip shootSound;
-    public AudioClip damage1;
-    public AudioClip damage2;
-    public AudioClip grab;
-    public AudioClip ak47;
+    public SoundManager managerSound;
 
     /// <summary>
     /// Co by mohlo z Ojocha pryc do jinych skriptu
@@ -78,10 +71,10 @@ public class OjochScript : MonoBehaviour {
         animator = transform.Find("sprite").gameObject.GetComponent<Animator>();
         weapons = GetComponentsInChildren<WeaponScript>();
         collect = GetComponent<CollectingScript>();
+        managerSound = GameManager.instance.GetComponent<SoundManager>();
         kejch = false;
         socha = GameObject.Find("statue");
-        
-
+        GetComponent<AudioSource>().volume = 0.3f * managerSound.soundsVolume;
 
         //Co muze pryc
         scorePerSecond = 1;
@@ -153,7 +146,7 @@ public class OjochScript : MonoBehaviour {
                 {
                     weapons[0].Attack(false, new Vector2(1, 0));                       //atribut false -> jedna se o nepritele, kdo strili? 
                     animator.SetTrigger("fire");
-                    SoundScript.instance.PlaySingle(shootSound);                        //Zvuk vystrelu
+                    managerSound.PlaySound(managerSound.clipShoot);                        //Zvuk vystrelu
 
                     if (contraBubles)
                     {
@@ -165,7 +158,7 @@ public class OjochScript : MonoBehaviour {
                 else
                 {
                     weapons[0].Ak47Attack(false, new Vector2(1, 0));
-                    SoundScript.instance.PlaySingle(ak47);
+                    managerSound.PlaySound(managerSound.clipAk47);
                     if (contraBubles)
                     {
                         weapons[1].Ak47Attack(false, new Vector2(1, 0.7f));
@@ -230,7 +223,7 @@ public class OjochScript : MonoBehaviour {
             socha.GetComponent<StatueControler>().howMuchForward += 0.75f;
             socha.GetComponent<StatueControler>().howMuchBack = 0;
             modifikatorScore -= 1;
-            SoundScript.instance.RandomSFX(damage1, damage2);
+            managerSound.PlayRandom(managerSound.clipDamage1, managerSound.clipDamage2);
             animator.SetTrigger("hit");
             Destroy(collision.gameObject);
             if (playerHealth != null) {
@@ -255,7 +248,7 @@ public class OjochScript : MonoBehaviour {
             if (playerHealth != null || godMode == 0)
             {
                 playerHealth.Damage(5);
-                SoundScript.instance.RandomSFX(damage1, damage2);
+                managerSound.PlayRandom(managerSound.clipDamage1, managerSound.clipDamage2);
                 healthSlider.value = playerHealth.hp;
             }
             collision.gameObject.GetComponent<ObstacleDestruction>().Destruction();
@@ -270,7 +263,7 @@ public class OjochScript : MonoBehaviour {
             if (playerHealth != null)
             {
                 playerHealth.Damage(30);
-                SoundScript.instance.RandomSFX(damage1, damage2);
+                managerSound.PlayRandom(managerSound.clipDamage1, managerSound.clipDamage2);
                 healthSlider.value = playerHealth.hp;
             }
             godMode = 3;
@@ -284,7 +277,7 @@ public class OjochScript : MonoBehaviour {
             tenSecondsTimer = 5;
             tenSecondsObject.SetActive(true);
             tenSecondsSlider.value = tenSecondsTimer;
-            SoundScript.instance.PlaySingle(grab);
+            managerSound.PlaySound(managerSound.clipGrab);
             tmpscore += 5 * modifikatorScore;                                                       //Zapocitani skore 
             powerCombo.powerUps += 1;                                                               //zvyseni powerUpu
             powerCombo.powerUpCombo += collision.gameObject.GetComponent<PowerUpID>().powerUpID;    //pridani ID   

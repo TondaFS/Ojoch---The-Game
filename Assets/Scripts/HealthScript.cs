@@ -36,12 +36,13 @@ public class HealthScript : MonoBehaviour {
     public void Damage(int damageCount) {
         hp -= damageCount;
 
-        if (hp <= 0 && gameObject.tag != "Player") {        //pouze pro nepratele
+        if (hp <= 0 && gameObject.tag != "Player") {        //pouze pro nepratele 
+            GameManager.instance.GetComponent<SoundManager>().PlaySound(GameManager.instance.GetComponent<SoundManager>().clipEnemyHit);
+            Destroy(gameObject);
             ojoch.tenSecondsTimer = 5;
             ojoch.tenSecondsObject.SetActive(true);
             ojoch.tenSecondsSlider.value = ojoch.tenSecondsTimer;
             ojoch.killedEnemies += 1;
-            Destroy(gameObject);            
             ojoch.tmpscore += 10 * ojoch.modifikatorScore;      //zapocitani skore
             
         }         

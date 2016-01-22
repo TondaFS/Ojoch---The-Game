@@ -3,7 +3,7 @@ using System.Collections;
 
 public class SoundScript : MonoBehaviour {
 
-    public AudioSource efxSource;       //Yvukove efekty
+    public AudioSource efxSource;       //zvukove efekty
     public static SoundScript instance = null;
 
     void Awake()
@@ -12,7 +12,6 @@ public class SoundScript : MonoBehaviour {
             instance = this;
         else if (instance != this)
             Destroy(gameObject);
-       // DontDestroyOnLoad(gameObject);
     }
     public void PlaySingle(AudioClip clip)
     {

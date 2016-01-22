@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance = null;
     public BestScores highscores;
+    
 
     public bool newRecord = false;
     public float recordScore = 0;
