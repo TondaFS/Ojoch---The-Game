@@ -1,9 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class ShakeImg : MonoBehaviour {
+[RequireComponent (typeof (SpriteRenderer))]
+public class ShakeImg : MonoBehaviour
+{
     public float shake;
     private SpriteRenderer sr;
+    private Vector3 originalPosition;
 
     void Awake()
     {
@@ -14,7 +17,9 @@ public class ShakeImg : MonoBehaviour {
 	void Update () {
         if (sr.color.a != 0)
         {
-            transform.position = Vector3.Lerp(transform.position, new Vector3(Random.Range(-shake, shake), Random.Range(-shake, shake) + 1), Time.deltaTime);
+            float x = Random.Range(-0.9f, 0.9f);
+            float y = Random.Range(0.5f, 1.5f);
+            transform.position = Vector3.Lerp(transform.position, new Vector3(x, y), Time.deltaTime * shake);
         }
     }
 }

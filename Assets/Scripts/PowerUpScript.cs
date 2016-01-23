@@ -33,9 +33,9 @@ public class PowerUpScript : MonoBehaviour {
     public float contraTime = 0;
 
     //Zakaleni
-    public SpriteRenderer zakaleniSprite;
+    public GameObject souflEffect;
     public float zakaleniTime = 0;
-    public float zakaleniFade = 0;
+    private float zakaleniFade = 0;
 
 
     void Start() {
@@ -116,17 +116,25 @@ public class PowerUpScript : MonoBehaviour {
             zakaleniTime -= Time.deltaTime;
             effects.souflText.text = "Šoufl: " + (int)zakaleniTime;
             zakaleniFade = Mathf.Clamp(zakaleniFade + (Time.deltaTime * 2), 0, 1);
-            zakaleniSprite.color = Color.Lerp(Color.clear, Color.white, zakaleniFade);
+            SpriteRenderer[] souflSR = souflEffect.GetComponentsInChildren<SpriteRenderer>();
+            foreach (SpriteRenderer sr in souflSR)
+            {
+                sr.color = Color.Lerp(Color.clear, Color.white, zakaleniFade);
+            }
         }
         else
         {
             zakaleniTime = 0;
-            if (zakaleniSprite.color != Color.clear)
+            SpriteRenderer[] souflSR = souflEffect.GetComponentsInChildren<SpriteRenderer>();
+            foreach (SpriteRenderer sr in souflSR)
             {
-                zakaleniFade = Mathf.Clamp(zakaleniFade - (Time.deltaTime * 2), 0, 1);
-                zakaleniSprite.color = Color.Lerp(Color.clear, Color.white, zakaleniFade);
-                effects.soufl.SetActive(false);
-            }
+                if (sr.color != Color.clear)
+                {
+                    zakaleniFade = Mathf.Clamp(zakaleniFade - (Time.deltaTime * 2), 0, 1);
+                    sr.color = Color.Lerp(Color.clear, Color.white, zakaleniFade);
+                    effects.soufl.SetActive(false);
+                }                
+            }            
         }
     }
 

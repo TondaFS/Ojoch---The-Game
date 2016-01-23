@@ -19,8 +19,8 @@ public class HouseSpawner : MonoBehaviour {
 
     void Start()
     {        
-        spawnDistance = Camera.main.ViewportToWorldPoint(new Vector3(1, 0)).x; //measure position of point where houses will spawn
-        destroyDistance = Camera.main.ViewportToWorldPoint(new Vector3(0, 0)).x; //measure position of point after which houses will be destroyed
+        spawnDistance = Camera.main.ViewportToWorldPoint(new Vector3(1, 0)).x + 2; //measure position of point where houses will spawn
+        destroyDistance = Camera.main.ViewportToWorldPoint(new Vector3(0, 0)).x - 2; //measure position of point after which houses will be destroyed
         maxSpawnHeight = Camera.main.ViewportToWorldPoint(new Vector3(0, 0)).y; //measure position of point at which houses will be spawned
 
         GameObject firstRandomHouse = houses[Random.Range(0, houses.Length)]; //choose first house at random
@@ -59,7 +59,7 @@ public class HouseSpawner : MonoBehaviour {
         if (lastHousePos < spawnDistance)
         {
             randomHouse = houses[Random.Range(0, houses.Length)];
-            randomHousePos = new Vector3(spawnDistance, maxSpawnHeight - Random.Range(0f, 1f));
+            randomHousePos = new Vector3(spawnDistance - 0.5f, maxSpawnHeight - Random.Range(0f, 5f));
             currentHouses.Add((GameObject)Instantiate(randomHouse, randomHousePos, Quaternion.identity));
         }
     }
