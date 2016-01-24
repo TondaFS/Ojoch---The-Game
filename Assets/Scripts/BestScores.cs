@@ -11,13 +11,7 @@ public class ScoreElement
 }
 
 public class BestScores : MonoBehaviour {
-    public List<ScoreElement> scores;
-    public InputField input;  
-    
-    void Start()
-    {
-        input = GameObject.Find("Pole").GetComponent<InputField>();
-    }     
+    public List<ScoreElement> scores;      
 
     public void InitiateBestScores() {
         for(int i = 0; i < 10; i++){

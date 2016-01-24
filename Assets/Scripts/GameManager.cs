@@ -8,11 +8,9 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance = null;
     public BestScores highscores;
-    
-
     public bool newRecord = false;
     public float recordScore = 0;
-
+    
     void Awake()
     {
         if (instance == null)
@@ -25,8 +23,8 @@ public class GameManager : MonoBehaviour
         }
 
         DontDestroyOnLoad(this.gameObject);
-        highscores = this.GetComponent<BestScores>();
-        LoadData();    
+        highscores = GetComponent<BestScores>();        
+        LoadData();
     }
 
     void Update()
@@ -45,6 +43,9 @@ public class GameManager : MonoBehaviour
         FileStream saveFile = File.Create("NothingHere/notSavesLOL.sav");
 
         formatter.Serialize(saveFile, highscores.scores);
+        formatter.Serialize(saveFile, GetComponent<SoundManager>().musicVolume);
+        formatter.Serialize(saveFile, GetComponent<SoundManager>().soundsVolume);
+        formatter.Serialize(saveFile, GetComponent<TaskManager>().activeTask);        
         saveFile.Close();
     }
 
@@ -56,10 +57,14 @@ public class GameManager : MonoBehaviour
             FileStream saveFile = File.Open("NothingHere/notSavesLOL.sav", FileMode.Open);
 
             highscores.scores = (List<ScoreElement>)formatter.Deserialize(saveFile);
-            saveFile.Close();
+            GetComponent<SoundManager>().musicVolume = (float)formatter.Deserialize(saveFile);
+            GetComponent<SoundManager>().soundsVolume = (float)formatter.Deserialize(saveFile);
+            GetComponent<TaskManager>().activeTask = (Task)formatter.Deserialize(saveFile);
+            saveFile.Close();            
         }
         else {
-            highscores.InitiateBestScores();            
+            highscores.InitiateBestScores();
+            GetComponent<TaskManager>().InitiateTask(1);
         }
     }   
 }

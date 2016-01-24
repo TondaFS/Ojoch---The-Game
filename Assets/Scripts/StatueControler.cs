@@ -6,9 +6,11 @@ public class StatueControler : MonoBehaviour {
     //Statue movement
     public float howMuchForward = 0;
     public float howMuchBack = 0;
+    public float statueMovement = 0.0003f;
     //float c;
 
     void Update() {
+        transform.Translate(statueMovement, 0, 0);
         if (howMuchForward > 0)
         {            
             transform.Translate(0.01f, 0, 0);
@@ -31,12 +33,5 @@ public class StatueControler : MonoBehaviour {
         Vector2 sine = new Vector2(transform.position.x, 1 + Mathf.Sin(c));
         transform.position = sine;
         */
-    }
-
-
-
-    
-    
-	
-	
+    }	
 }

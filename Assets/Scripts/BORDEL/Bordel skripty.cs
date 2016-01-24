@@ -4,6 +4,72 @@ using System.Collections;
 public class Bordelskripty : MonoBehaviour {	
 }
 
+/*
+    SCORE Z OJOCHA      
+      
+    //promenne na score
+
+    public Text scoreText;
+    public Text modi;                   
+    public float modifikatorScore = 1;              //Modfifikator
+    public float tmpscore;                          //hracovo skore
+    public float scorePerSecond = 0;                //pro zvyseni skore za kazdou vterinu  
+    public int killedEnemies;                       //pocet zabitych nepratel
+    public float tenSecondsTimer = 0;               //Timer na vynulovani modifikatoru skore
+    public Slider tenSecondsSlider;
+    public GameObject tenSecondsObject;
+
+
+    //Co muze pryc
+        scorePerSecond = 1;
+        tmpscore = 0;
+        killedEnemies = 0;
+        tenSecondsObject.SetActive(false);
+      
+    /// <summary>
+        /// Co by mohlo z Ojocha pryc
+        /// </summary> 
+
+        //Skore
+        this.scoreText.text = "Skóre: " + tmpscore;
+        if (scorePerSecond <= 0) {
+            tmpscore += 1 * modifikatorScore;
+            scorePerSecond = 1;
+        }
+        scorePerSecond -= Time.deltaTime;  
+
+        if(modifikatorScore < 1)
+        {
+            modifikatorScore = 1;
+        }
+        this.modi.text = "Modifikátor: " + modifikatorScore + "x";
+
+        if (killedEnemies == 3)
+        {
+            modifikatorScore += 1;
+            killedEnemies = 0;
+        }
+
+        if (modifikatorScore > 9)
+        {
+            modifikatorScore = 9;
+        }
+
+        if (tenSecondsTimer > 0)
+        {
+            
+            tenSecondsTimer -= Time.deltaTime;
+            tenSecondsSlider.value = tenSecondsTimer;
+            if(tenSecondsTimer <= 0)
+            {
+                tenSecondsObject.SetActive(false);
+                modifikatorScore = 0;
+                killedEnemies = 0;
+
+            }
+        }      
+*/
+
 /***
                  ---    BORDEL CO SE NEVYUŽIL   ---
                            Z OJOCH SKRIPTU

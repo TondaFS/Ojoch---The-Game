@@ -53,8 +53,9 @@ public class ScreenFader : MonoBehaviour
 
     public void FadeOutLoadNewScene(string newScene)
     {
+        Time.timeScale = 1;        
         fadeImg.enabled = true;
-        isSceneEnding = true;
+        isSceneEnding = true;        
         this.newScene = newScene;
     }
 }

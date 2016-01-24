@@ -30,7 +30,7 @@ public class ShotScript : MonoBehaviour {
         
         if (otherCollider.tag == "Player" && isEnemyShot)
         {
-            GameObject.Find("Ojoch").gameObject.GetComponent<OjochScript>().modifikatorScore -= 1;
+            GameObject.Find("Session Controller").GetComponent<ScoreScript>().modifikatorScore -= 1;
         }
     }
 

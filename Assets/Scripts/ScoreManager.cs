@@ -32,10 +32,17 @@ public class ScoreManager : MonoBehaviour {
     public GameObject pole;
     public bool shown = false;
 
+    public GameObject back;
+    public GameObject completedTask;
+
     void Start() {
         pole = GameObject.Find("policko");
         pole.SetActive(false);
-        score = GameManager.instance.highscores.scores;  
+        score = GameManager.instance.highscores.scores;
+        back = GameObject.Find("BacktoMenu");
+        back.SetActive(false);
+        completedTask = GameObject.Find("completedTask");
+        completedTask.SetActive(false);
     }
 
     void Update()
@@ -43,17 +50,22 @@ public class ScoreManager : MonoBehaviour {
         if (Input.GetKeyDown(KeyCode.Return))
         {
             GameManager.instance.newRecord = false;
+            NewName();
+
         }
         if (GameManager.instance.newRecord)
         {
             pole.SetActive(true);
         }
+        
         else
-        {
-            NewName();
+        {      
             if (!shown)
             {
                 DisplayScore();
+                GameManager.instance.GetComponent<TaskManager>().displayTask();
+                GameManager.instance.SaveData();
+                back.SetActive(true);
             }           
             if (Input.GetKeyDown(KeyCode.Escape))
             {
@@ -63,8 +75,8 @@ public class ScoreManager : MonoBehaviour {
     }
 
     void NewName()
-    {
-        for(int i = 0; i < 10; i++)
+    {        
+        for (int i = 0; i < 10; i++)
         {
             if(score[i].score == GameManager.instance.recordScore)
             {
@@ -107,7 +119,20 @@ public class ScoreManager : MonoBehaviour {
         desaty.text = score[9].name;
         desatyScore.text = "" + score[9].score;
 
-        shown = true;
+        shown = true;         
+    }
+
+    public void ChangeToScene(string sceneName)
+    {
+        Application.LoadLevel(sceneName);
+    }
+
+    public void NewTask()
+    {
+        
+        GameManager.instance.GetComponent<TaskManager>().InitiateTask(GameManager.instance.GetComponent<TaskManager>().activeTask.id + 1);
+        completedTask.SetActive(false);
+        GameManager.instance.GetComponent<TaskManager>().displayTask();
         GameManager.instance.SaveData();
     }
 }

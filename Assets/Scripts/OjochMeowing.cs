@@ -30,7 +30,7 @@ public class OjochMeowing : MonoBehaviour {
 
         if (Input.GetButton("Fire2"))
         {
-            meowingAudio.volume = Mathf.Clamp(meowingAudio.volume + (Time.deltaTime * 3), 0, maxVolume);
+            meowingAudio.volume = Mathf.Clamp(meowingAudio.volume + (Time.deltaTime * 3), 0, maxVolume) * GameManager.instance.GetComponent<SoundManager>().musicVolume;
         }
         else
         {

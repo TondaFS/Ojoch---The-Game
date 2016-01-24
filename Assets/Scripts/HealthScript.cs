@@ -26,7 +26,8 @@ public class HealthScript : MonoBehaviour {
             }
             if (hp <= 0) {
                 Time.timeScale = 0.1f;
-                GameObject.Find("Session Controller").GetComponent<EndGameScript>().EndGame();             
+                GameObject.Find("Session Controller").GetComponent<EndGameScript>().EndGame();
+                ojoch.powerCombo.powerUpImage.SetActive(true);         
                 Destroy(gameObject);
             }
         }
@@ -39,11 +40,12 @@ public class HealthScript : MonoBehaviour {
         if (hp <= 0 && gameObject.tag != "Player") {        //pouze pro nepratele 
             GameManager.instance.GetComponent<SoundManager>().PlaySound(GameManager.instance.GetComponent<SoundManager>().clipEnemyHit);
             Destroy(gameObject);
-            ojoch.tenSecondsTimer = 5;
-            ojoch.tenSecondsObject.SetActive(true);
-            ojoch.tenSecondsSlider.value = ojoch.tenSecondsTimer;
-            ojoch.killedEnemies += 1;
-            ojoch.tmpscore += 10 * ojoch.modifikatorScore;      //zapocitani skore
+            ojoch.session.FiveSecondsTimer();
+            ojoch.session.killedEnemies += 1;
+            ojoch.session.AdjustScore(10);
+            if((GameManager.instance.GetComponent<TaskManager>().activeTask.type == "kill") && (GameManager.instance.GetComponent<TaskManager>().activeTask.completed != true)){                
+                GameManager.instance.GetComponent<TaskManager>().CheckCountingTask();
+            }
             
         }         
     }
@@ -54,10 +56,9 @@ public class HealthScript : MonoBehaviour {
 
         if (shot != null) {
             if (shot.isEnemyShot != isEnemy) {      //Jedna se o mou strelu?
-                Damage(shot.damage);                //ddani zraneni
+                Damage(shot.damage);                //dani zraneni
                 Destroy(shot.gameObject);           //zniceni strely
             }
-
             
         }
     }

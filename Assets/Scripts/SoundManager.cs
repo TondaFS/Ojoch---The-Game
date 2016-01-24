@@ -37,4 +37,12 @@ public class SoundManager : MonoBehaviour {
     public void setPitch(AudioSource source, float pitch) {
         source.pitch = pitch;
     }    
+
+    public void MuteEverything(bool bolean)
+    {        
+        soundAudioSource.mute = bolean;
+        GameObject.Find("Music").GetComponent<AudioSource>().mute = bolean;
+        GameObject.Find("Ojoch").GetComponent<AudioSource>().mute = bolean;
+        GameObject.Find("Ojoch meowing").GetComponent<AudioSource>().mute = bolean;
+    }
 }

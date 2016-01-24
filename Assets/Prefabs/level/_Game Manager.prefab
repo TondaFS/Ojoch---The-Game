@@ -12,6 +12,7 @@ GameObject:
   - 114: {fileID: 11448592}
   - 114: {fileID: 11492982}
   - 82: {fileID: 8292086}
+  - 114: {fileID: 11413070}
   m_Layer: 0
   m_Name: _Game Manager
   m_TagString: Untagged
@@ -101,6 +102,22 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
+--- !u!114 &11413070
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 147462}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1711f56422225004981ee4873af7cfa9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  completed: 0
+  enemiesKilled: 0
+  powerUpsCollected: 0
+  gamesPlayed: 0
+  differentPowerUps: 0
 --- !u!114 &11448592
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -113,7 +130,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scores: []
-  input: {fileID: 0}
 --- !u!114 &11492790
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -128,6 +144,8 @@ MonoBehaviour:
   highscores: {fileID: 0}
   newRecord: 0
   recordScore: 0
+  currentTask: 1
+  taskProgress: 0
 --- !u!114 &11492982
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -148,7 +166,6 @@ MonoBehaviour:
   clipAk47: {fileID: 8300000, guid: 0c0360de2bc9ecf428e441927215b7f8, type: 3}
   clipGood: {fileID: 8300000, guid: 3b4c9585f408daf459e73447a8876bfb, type: 3}
   clipBad: {fileID: 8300000, guid: f6eacaa1e112e764ca2c6ade0b3e3964, type: 3}
-  clipBucket: {fileID: 8300000, guid: fd863be10fdbdcb479224df7363c7af3, type: 3}
   clipEnemyHit: {fileID: 8300000, guid: 35f29ab6ca2c00e4f9b3c7308d864a31, type: 3}
   clipBobblePoop: {fileID: 8300000, guid: defcd9b8c5bf91441ba2dc8313632c25, type: 3}
   soundAudioSource: {fileID: 0}

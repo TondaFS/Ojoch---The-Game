@@ -15,7 +15,7 @@ public class OjochScript : MonoBehaviour {
     public PowerUpScript powerCombo;
     private WeaponScript[] weapons;
     public Animator animator;
-    public Text panelText;                          //text
+    //public Text panelText;                          //text
     public bool cleanSock = false;                  //je powerUp Ciste ponozky aktivni?
     public CollectingScript collect;
     public GameObject socha;
@@ -24,7 +24,7 @@ public class OjochScript : MonoBehaviour {
     public bool kejch;
     public Vector2 ultraKejch = new Vector2(0,0);
 
-    //promenne na zivoty/palivo Ojocha
+    //promenne na zivoty Ojocha
     public Slider healthSlider;                 //Ukazatel zdravi   
     public HealthScript playerHealth;
 
@@ -45,26 +45,10 @@ public class OjochScript : MonoBehaviour {
     public float push = 0;
 
     public SoundManager managerSound;
-
-    /// <summary>
-    /// Co by mohlo z Ojocha pryc do jinych skriptu
-    /// </summary> 
-    /// 
-    
-
-    //promenne na score
-    public Text scoreText;
-    public Text modi;                   
-    public float modifikatorScore = 1;              //Modfifikator
-    public float tmpscore;                          //hracovo skore
-    public float scorePerSecond = 0;                //pro zvyseni skore za kazdou vterinu  
-    public int killedEnemies;                       //pocet zabitych nepratel
-    public float tenSecondsTimer = 0;               //Timer na vynulovani modifikatoru skore
-    public Slider tenSecondsSlider;
-    public GameObject tenSecondsObject;
-            
+    public ScoreScript session;  
 
     void Start() {
+        session = GameObject.Find("Session Controller").GetComponent<ScoreScript>();
         ojoch = GetComponent<Rigidbody2D>();
         powerCombo = GetComponent<PowerUpScript>();
         playerHealth = GetComponent<HealthScript>();        
@@ -75,12 +59,6 @@ public class OjochScript : MonoBehaviour {
         kejch = false;
         socha = GameObject.Find("statue");
         GetComponent<AudioSource>().volume = 0.3f * managerSound.soundsVolume;
-
-        //Co muze pryc
-        scorePerSecond = 1;
-        tmpscore = 0;
-        killedEnemies = 0;
-        tenSecondsObject.SetActive(false);
 }
 
     void Update () {
@@ -167,51 +145,7 @@ public class OjochScript : MonoBehaviour {
 
                 }
             }
-        }        
-
-        /// <summary>
-        /// Co by mohlo z Ojocha pryc
-        /// </summary> 
-
-        //Skore
-        this.scoreText.text = "Skóre: " + tmpscore;
-        if (scorePerSecond <= 0) {
-            tmpscore += 1 * modifikatorScore;
-            scorePerSecond = 1;
-        }
-        scorePerSecond -= Time.deltaTime;  
-
-        if(modifikatorScore < 1)
-        {
-            modifikatorScore = 1;
-        }
-        this.modi.text = "Modifikátor: " + modifikatorScore + "x";
-
-        if (killedEnemies == 3)
-        {
-            modifikatorScore += 1;
-            killedEnemies = 0;
-        }
-
-        if (modifikatorScore > 9)
-        {
-            modifikatorScore = 9;
-        }
-
-        if (tenSecondsTimer > 0)
-        {
-            
-            tenSecondsTimer -= Time.deltaTime;
-            tenSecondsSlider.value = tenSecondsTimer;
-            if(tenSecondsTimer <= 0)
-            {
-                tenSecondsObject.SetActive(false);
-                modifikatorScore = 0;
-                killedEnemies = 0;
-
-            }
-        }
-        
+        } 
     }
     
 
@@ -222,7 +156,7 @@ public class OjochScript : MonoBehaviour {
         if (collision.gameObject.tag == "Enemy" && (!cleanSock || godMode <= 0)) {
             socha.GetComponent<StatueControler>().howMuchForward += 0.75f;
             socha.GetComponent<StatueControler>().howMuchBack = 0;
-            modifikatorScore -= 1;
+            session.modifikatorScore -= 1;
             managerSound.PlayRandom(managerSound.clipDamage1, managerSound.clipDamage2);
             animator.SetTrigger("hit");
             Destroy(collision.gameObject);
@@ -244,7 +178,7 @@ public class OjochScript : MonoBehaviour {
         {
             socha.GetComponent<StatueControler>().howMuchForward += 1;
             socha.GetComponent<StatueControler>().howMuchBack = 0;
-            modifikatorScore -= 2;
+            session.modifikatorScore -= 2;
             if (playerHealth != null || godMode == 0)
             {
                 playerHealth.Damage(5);
@@ -259,7 +193,7 @@ public class OjochScript : MonoBehaviour {
         if (collision.gameObject.tag == "Socha")
         {
             animator.SetTrigger("isBack");
-            modifikatorScore -= 3;
+            session.modifikatorScore -= 3;
             if (playerHealth != null)
             {
                 playerHealth.Damage(30);
@@ -270,22 +204,19 @@ public class OjochScript : MonoBehaviour {
             push = 0.25f;
         }
 
-
         //S powerUpem -> Zvysi pocet powerupu, provede efekt powerUpu, a pokud je sbran jiz druhy power up
         //provede se kombo
         if (collision.gameObject.tag == "PowerUp") {
-            tenSecondsTimer = 5;
-            tenSecondsObject.SetActive(true);
-            tenSecondsSlider.value = tenSecondsTimer;
+            session.FiveSecondsTimer();            
             managerSound.PlaySound(managerSound.clipGrab);
-            tmpscore += 5 * modifikatorScore;                                                       //Zapocitani skore 
+            session.AdjustScore(5);                                                //Zapocitani skore 
             powerCombo.powerUps += 1;                                                               //zvyseni powerUpu
             powerCombo.powerUpCombo += collision.gameObject.GetComponent<PowerUpID>().powerUpID;    //pridani ID   
             collect.showObject(collision.gameObject.GetComponent<PowerUpID>().powerUpID, powerCombo.powerUps);
 
             //pokud je sebran jiz druhy powerUp -> provede se kombo
             if (powerCombo.powerUps == 2) {
-                modifikatorScore += 1;
+                session.modifikatorScore += 1;
                 powerCombo.PowerCombo(powerCombo.powerUpCombo);                                     //provedeni komba
                 powerCombo.powerUps = 0;                                                            //nastaveni poctu powerupu na nula
                 powerCombo.powerUpCombo = 0;                                                        //vymazani komba a priprava na dalsi                
