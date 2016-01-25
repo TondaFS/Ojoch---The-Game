@@ -9,11 +9,11 @@ public class BGScroller : MonoBehaviour
 
     private float tileSize;
     private Vector3 startPosition;
-    private SessionController sessionController;
+    //private SessionController sessionController;
 
     void Awake()
     {
-        sessionController = GameObject.FindWithTag("GameController").GetComponent<SessionController>();
+        //sessionController = GameObject.FindWithTag("GameController").GetComponent<SessionController>();
 
         tileSize = GetComponent<SpriteRenderer>().bounds.size.x;
         transform.position = Camera.main.ViewportToWorldPoint(new Vector3(1, 0, 10));

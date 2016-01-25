@@ -32,9 +32,10 @@ public class HouseSpawner : MonoBehaviour {
     {
         firstHousePos = currentHouses[0].GetComponent<SpriteRenderer>().bounds.max.x; //update position of first house
         lastHousePos = currentHouses[currentHouses.Count - 1].GetComponent<SpriteRenderer>().bounds.max.x; //update position of the last house
-        
+
         //====================================================================================================//
         //Debugovaci cary
+        /*
         Vector3 debugStart = currentHouses[currentHouses.Count - 1].GetComponent<SpriteRenderer>().bounds.min;
         Vector3 debugMid = currentHouses[currentHouses.Count - 1].GetComponent<SpriteRenderer>().bounds.center;
         Vector3 debugEnd = currentHouses[currentHouses.Count - 1].GetComponent<SpriteRenderer>().bounds.max;
@@ -45,6 +46,7 @@ public class HouseSpawner : MonoBehaviour {
 
         Debug.DrawLine(new Vector3(spawnDistance, -10), new Vector3(spawnDistance, 10), Color.white);
         Debug.DrawLine(new Vector3(destroyDistance, -10), new Vector3(destroyDistance, 10), Color.white);
+        */
         //====================================================================================================//
 
         //if first house is out of screen remove it from list and destroy it
@@ -59,7 +61,7 @@ public class HouseSpawner : MonoBehaviour {
         if (lastHousePos < spawnDistance)
         {
             randomHouse = houses[Random.Range(0, houses.Length)];
-            randomHousePos = new Vector3(spawnDistance - 0.5f, maxSpawnHeight - Random.Range(0f, 5f));
+            randomHousePos = new Vector3(spawnDistance - 0.3f, maxSpawnHeight - Random.Range(0f, 2f));
             currentHouses.Add((GameObject)Instantiate(randomHouse, randomHousePos, Quaternion.identity));
         }
     }

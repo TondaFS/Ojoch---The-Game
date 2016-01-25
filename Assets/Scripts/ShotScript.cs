@@ -15,7 +15,8 @@ public class ShotScript : MonoBehaviour {
     public AudioClip blop;
 
 
-    void Start() {
+    void Start()
+    {
         Destroy(gameObject, lifeTime);  //Zniceni objektu po vyprseni jeho doby zivotnosti   
     }
 
@@ -31,6 +32,11 @@ public class ShotScript : MonoBehaviour {
         if (otherCollider.tag == "Player" && isEnemyShot)
         {
             GameObject.Find("Session Controller").GetComponent<ScoreScript>().modifikatorScore -= 1;
+        }
+
+        if (otherCollider.gameObject.layer == LayerMask.NameToLayer("Corners"))
+        {
+            Debug.Log("Touched a rail");
         }
     }
 

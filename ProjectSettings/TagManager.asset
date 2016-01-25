@@ -10,6 +10,7 @@ TagManager:
   - clean
   - Obstacle
   - Particle
+  - Projectile
   layers:
   - Default
   - TransparentFX
@@ -19,9 +20,9 @@ TagManager:
   - UI
   - 
   - 
-  - 
-  - 
-  - 
+  - Player
+  - Corners
+  - Obstacle
   - 
   - 
   - 

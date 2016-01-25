@@ -15,7 +15,7 @@ GameObject:
   - 114: {fileID: 11463016}
   m_Layer: 0
   m_Name: bublina
-  m_TagString: Untagged
+  m_TagString: Projectile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -171,6 +171,10 @@ Prefab:
       propertyPath: blop
       value: 
       objectReference: {fileID: 8300000, guid: defcd9b8c5bf91441ba2dc8313632c25, type: 3}
+    - target: {fileID: 0}
+      propertyPath: m_TagString
+      value: Projectile
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 124546}
