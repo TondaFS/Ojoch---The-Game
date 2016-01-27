@@ -146,10 +146,10 @@ MonoBehaviour:
     type: score
     completed: 0
   - id: 2
-    description: "Dos\xE1hni sk\xF3re 1000."
+    description: "P\u0159ij\u010F o ve\u0161kerou p\u0159\xED\u010Detnost."
     progress: 0
-    target: 1000
-    type: score
+    target: 1
+    type: sanity
     completed: 0
   - id: 3
     description: "Dos\xE1hni sk\xF3re 5000."
@@ -158,29 +158,29 @@ MonoBehaviour:
     type: score
     completed: 0
   - id: 4
-    description: "P\u0159ij\u010F o ve\u0161kerou p\u0159\xED\u010Detnost."
+    description: "P\u0159ij\u010F o ve\u0161kerou p\u0159\xED\u010Detnost 3x."
     progress: 0
-    target: 1
+    target: 3
     type: sanity
     completed: 0
   allSecondTasks:
   - id: 0
-    description: Udrz modifikator x9 po dobu 10s
+    description: "Udr\u017E modifikator x9 po dobu 10s"
     progress: 0
     target: 10
     type: modify
     completed: 0
   - id: 1
-    description: "Zabij 10 nep\u0159\xE1tel."
-    progress: 0
-    target: 10
-    type: kill
-    completed: 0
-  - id: 2
     description: "Zabij 15 nep\u0159\xE1tel."
     progress: 0
     target: 15
     type: kill
+    completed: 0
+  - id: 2
+    description: "Zabij 10 nep\u0159\xE1tel v jedn\xE9 h\u0159e"
+    progress: 0
+    target: 10
+    type: killRound
     completed: 0
   - id: 3
     description: "Zabij 5 nep\u0159\xE1tel."
@@ -189,10 +189,10 @@ MonoBehaviour:
     type: kill
     completed: 0
   - id: 4
-    description: "Ura\u017E vzd\xE1lenost X."
+    description: "Udr\u017E modifikator x9 po dobu 20s"
     progress: 0
     target: 20
-    type: distance
+    type: modify
     completed: 0
   allThirdTasks:
   - id: 0
@@ -202,25 +202,25 @@ MonoBehaviour:
     type: grabRound
     completed: 0
   - id: 1
-    description: Odehrej hru 1x
-    progress: 0
-    target: 1
-    type: play
-    completed: 0
-  - id: 2
-    description: Odehrej hru 2x.
-    progress: 0
-    target: 2
-    type: play
-    completed: 0
-  - id: 3
-    description: Odehrej hru 3x.
+    description: Odehrej hru 3x
     progress: 0
     target: 3
     type: play
     completed: 0
+  - id: 2
+    description: "Ura\u017E vzd\xE1lenost 20."
+    progress: 0
+    target: 20
+    type: distance
+    completed: 0
+  - id: 3
+    description: Seber 3 PowerUpy.
+    progress: 0
+    target: 3
+    type: grab
+    completed: 0
   - id: 4
-    description: "Zabij 15 nep\u0159\xE1tel v jedn\xE9 h\u0159e"
+    description: "Zabij 25 nep\u0159\xE1tel v jedn\xE9 h\u0159e"
     progress: 0
     target: 15
     type: killRound
