@@ -9,12 +9,12 @@ public class EnemySpawner : MonoBehaviour {
     private List<Transform> currentEnemies = new List<Transform>();
     private List<Transform> currentPowerUps = new List<Transform>();
 
-    public float spawnDistance;
-    private float destroyDistance;
+    private float spawnDistance = 10;
+    //private float destroyDistance;
 
     void Start()
     {
-        destroyDistance = Camera.main.ViewportToWorldPoint(new Vector3(0, 0)).x - 2;
+        //destroyDistance = Camera.main.ViewportToWorldPoint(new Vector3(0, 0)).x - 2;
     }
 
     void Update ()
@@ -24,7 +24,7 @@ public class EnemySpawner : MonoBehaviour {
 
         if (currentEnemies.Count == 0)
         {
-            Transform newWave = waves[Random.Range(0, waves.Count - 1)];
+            Transform newWave = waves[Random.Range(0, waves.Count)];
             Transform[] newWaveChildren = newWave.GetComponentsInChildren<Transform>(true);
 
             foreach (Transform child in newWaveChildren)
