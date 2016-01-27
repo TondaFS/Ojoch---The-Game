@@ -16,7 +16,8 @@ public class HealthScript : MonoBehaviour {
 
     void Start() {
         ojoch = GameObject.FindWithTag("Player").GetComponent<OjochScript>();
-    }    
+    }     
+     
 
     // Započítání zranení a kontrola, jestli nemá být objekt zničen
     public void Damage(int damageCount) {

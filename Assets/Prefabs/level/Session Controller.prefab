@@ -539,7 +539,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 126420}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c192904b99dad8c49bc6fc311e65abae, type: 3}
   m_Name: 
@@ -547,6 +547,8 @@ MonoBehaviour:
   waves:
   - {fileID: 426488, guid: 4e884fc636c9c77459a3b1192513e00d, type: 2}
   - {fileID: 470522, guid: c1fd933c791be1a45a76951895ee2ba1, type: 2}
+  - {fileID: 484038, guid: f0351f495acc3ad4ab6d1686887c3d72, type: 2}
+  - {fileID: 426608, guid: 57bb6f54047e861438910d834c7bbbe2, type: 2}
 --- !u!114 &11444024
 MonoBehaviour:
   m_ObjectHideFlags: 1
