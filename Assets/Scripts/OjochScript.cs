@@ -162,7 +162,10 @@ public class OjochScript : MonoBehaviour {
             session.modifikatorScore -= 1;
             managerSound.PlayRandom(managerSound.clipDamage1, managerSound.clipDamage2);
             animator.SetTrigger("hit");
-            Destroy(collision.gameObject);
+
+            collision.gameObject.GetComponent<Collider2D>().enabled = false;
+            collision.gameObject.GetComponent<Animator>().SetTrigger("bDeath");
+            Destroy(collision.gameObject, 0.5f);
             if (playerHealth != null) {
                 playerHealth.Damage(5);
                 healthSlider.value = playerHealth.hp;

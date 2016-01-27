@@ -91,4 +91,15 @@ public class HealthScript : MonoBehaviour {
             
         }
     }
+
+    void OnCollisionEnter2D(Collision2D otherCollider)
+    {
+
+        if (otherCollider.gameObject.tag == "Socha" && gameObject.tag == "Enemy")
+        {
+            gameObject.GetComponent<Collider2D>().enabled = false;
+            gameObject.GetComponent<Animator>().SetTrigger("bDeath");
+            Destroy(gameObject, 0.5f);
+        }
+    }
 }
