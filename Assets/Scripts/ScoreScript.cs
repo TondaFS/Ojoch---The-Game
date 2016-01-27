@@ -53,9 +53,23 @@ public class ScoreScript : MonoBehaviour {
         }
 
         if (modifikatorScore > 9)
-        {
+        {            
             modifikatorScore = 9;
         }
+
+        if (modifikatorScore == 9)
+        {
+            GameManager.instance.GetComponent<TaskManager>().modifyTime += Time.deltaTime;
+
+        }
+        else
+        {
+            if(GameManager.instance.GetComponent<TaskManager>().modifyTmp < GameManager.instance.GetComponent<TaskManager>().modifyTime)
+            {
+                GameManager.instance.GetComponent<TaskManager>().modifyTmp = GameManager.instance.GetComponent<TaskManager>().modifyTime;
+            }
+            GameManager.instance.GetComponent<TaskManager>().modifyTime = 0;
+        }      
 
         if (fiveSecondsTimer > 0)
         {

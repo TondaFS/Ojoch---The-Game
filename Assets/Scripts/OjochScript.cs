@@ -15,18 +15,20 @@ public class OjochScript : MonoBehaviour {
     public PowerUpScript powerCombo;
     private WeaponScript[] weapons;
     public Animator animator;
-    //public Text panelText;                          //text
-    public bool cleanSock = false;                  //je powerUp Ciste ponozky aktivni?
     public CollectingScript collect;
     public GameObject socha;
-
+    public HealthScript playerHealth;
+    public SoundManager managerSound;
+    public ScoreScript session;   
+    
     //Pro ultrakejch 
-    public bool kejch;
+    public bool kejch = false;
     public Vector2 ultraKejch = new Vector2(0,0);
 
-    //promenne na zivoty Ojocha
-    public Slider healthSlider;                 //Ukazatel zdravi   
-    public HealthScript playerHealth;
+    //promenne na zivoty a sanity Ojocha
+    public Slider healthSlider;                 //Ukazatel zdravi  
+    public GameObject sanityBar;
+    public Slider sanitySlider;     
 
     //Kontra strelba
     public bool contraBubles = false;           //Rozptyl bublinek   
@@ -43,9 +45,7 @@ public class OjochScript : MonoBehaviour {
 
     //Push od sochy
     public float push = 0;
-
-    public SoundManager managerSound;
-    public ScoreScript session;  
+          
 
     void Start() {
         session = GameObject.Find("Session Controller").GetComponent<ScoreScript>();
@@ -56,9 +56,12 @@ public class OjochScript : MonoBehaviour {
         weapons = GetComponentsInChildren<WeaponScript>();
         collect = GetComponent<CollectingScript>();
         managerSound = GameManager.instance.GetComponent<SoundManager>();
-        kejch = false;
         socha = GameObject.Find("statue");
         GetComponent<AudioSource>().volume = 0.3f * managerSound.soundsVolume;
+        healthSlider = GameObject.Find("HeartSlider").GetComponent<Slider>();
+        sanityBar = GameObject.Find("Brain");
+        sanitySlider = GameObject.Find("SanitySlider").GetComponent<Slider>();
+        sanityBar.SetActive(false);        
 }
 
     void Update () {
@@ -88,7 +91,7 @@ public class OjochScript : MonoBehaviour {
         if (invertTime != 0)
         {
             invertTime -= Time.deltaTime;
-            powerCombo.effects.zmatekText.text = "Zmatek: " + (int)invertTime;
+            powerCombo.effects.zmatek.GetComponent<Text>().text = "Zmatek: " + (int)invertTime;
             if (invertTime == 0 || invertTime < 0)
             {
                 this.InversionControlling();
@@ -101,12 +104,12 @@ public class OjochScript : MonoBehaviour {
         if (godMode != 0)
         {
             godMode -= Time.deltaTime;
-            powerCombo.effects.kosteniText.text = "Kosteni: " + (int)godMode;
+            powerCombo.effects.smradostit.GetComponent<Text>().text = "Smradoštít: " + (int)godMode;
             if (godMode <= 0)
             {
                 godMode = 0;
-                Destroy(transform.Find("smetacek(Clone)").gameObject);
-                powerCombo.effects.kosteni.SetActive(false);
+                powerCombo.effects.smradostit.SetActive(false);
+                GameObject.Find("sprite").GetComponent<OpacityChanger>().active = false;
             }
         }
 
@@ -153,7 +156,7 @@ public class OjochScript : MonoBehaviour {
     void OnCollisionEnter2D(Collision2D collision) {
 
         //S nepritelem -> ubere 2 zivotu a nepritele znici
-        if (collision.gameObject.tag == "Enemy" && (!cleanSock || godMode <= 0)) {
+        if (collision.gameObject.tag == "Enemy" && (godMode <= 0)) {
             socha.GetComponent<StatueControler>().howMuchForward += 0.75f;
             socha.GetComponent<StatueControler>().howMuchBack = 0;
             session.modifikatorScore -= 1;
@@ -161,16 +164,18 @@ public class OjochScript : MonoBehaviour {
             animator.SetTrigger("hit");
             Destroy(collision.gameObject);
             if (playerHealth != null) {
-                playerHealth.Damage(2);
+                playerHealth.Damage(5);
                 healthSlider.value = playerHealth.hp;
             }
         }
 
-        else if (collision.gameObject.tag == "Enemy" && (cleanSock || godMode != 0)) 
+        else if (collision.gameObject.tag == "Enemy" && ( godMode != 0)) 
         {
+            GameManager.instance.GetComponent<SoundManager>().PlaySound(GameManager.instance.GetComponent<SoundManager>().clipEnemyHit);
+            session.AdjustScore(10);
+            session.killedEnemies += 1;
+            session.FiveSecondsTimer();
             Destroy(collision.gameObject);
-            Destroy(this.transform.Find("sockClean(Clone)").gameObject);
-            cleanSock = false;
         }
 
         //S prekazkou -> ubere 5 zivotu a ucini na 3 vterin Ojocha nesmrtelnym
@@ -209,7 +214,7 @@ public class OjochScript : MonoBehaviour {
         if (collision.gameObject.tag == "PowerUp") {
             session.FiveSecondsTimer();            
             managerSound.PlaySound(managerSound.clipGrab);
-            session.AdjustScore(5);                                                //Zapocitani skore 
+            session.AdjustScore(5);                                                                 //Zapocitani skore 
             powerCombo.powerUps += 1;                                                               //zvyseni powerUpu
             powerCombo.powerUpCombo += collision.gameObject.GetComponent<PowerUpID>().powerUpID;    //pridani ID   
             collect.showObject(collision.gameObject.GetComponent<PowerUpID>().powerUpID, powerCombo.powerUps);

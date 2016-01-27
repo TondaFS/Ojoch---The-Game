@@ -5,99 +5,142 @@ using System.Collections.Generic;
 
 [System.Serializable]
 public class Task
-{
+{    
     public int id;
     public string description;
     public int progress;
     public int target;
     public string type;
-    public bool completed;   
+    public bool completed;
+
+    public Task(int v1, string v2, int v3, int v4, string v5, bool v6)
+    {
+        this.id = v1;
+        this.description = v2;
+        this.progress = v3;
+        this.target = v4;
+        this.type = v5;
+        this.completed = v6;
+    }
 }
 
 public class TaskManager : MonoBehaviour {
-    public Task activeTask = new Task();
+    public Task[] activeTasks = new Task[]
+    {
+        new Task(0, "none", 0, 0, "none", false),
+        new Task(0, "none", 0, 0, "none", false),
+        new Task(0, "none", 0, 0, "none", false)
+    };  
 
-    public int enemiesKilled;
-    public int powerUpsCollected;
-    public int gamesPlayed;
-    public int differentPowerUps;    
+    public Task[] allFirstTasks = new Task[] {  new Task(0, "Udrž si maximální příčetnost po 1 hru.", 0, 1, "sanityFull", false),
+                                                new Task(1, "Dosáhni skóre 500.", 0, 500, "score", false),
+                                                new Task(2, "Přijď o veškerou příčetnost.", 0, 1, "sanity", false),
+                                                new Task(3, "Dosáhni skóre 5000.", 0, 5000, "score", false),
+                                                new Task(4, "Přijď o veškerou příčetnost 3x.", 0, 3, "sanity", false),};
+
+    public Task[] allSecondTasks = new Task[] { new Task(0, "Udrž modifikator x9 po dobu 10s", 0, 10, "modify", false),
+                                                new Task(1, "Zabij 15 nepřátel.", 0, 15, "kill", false),
+                                                new Task(2, "Zabij 10 nepřátel v jedné hře", 0, 10, "killRound", false),
+                                                new Task(3, "Zabij 5 nepřátel.", 0, 5, "kill", false),
+                                                new Task(4, "Udrž modifikator x9 po dobu 20s", 0, 20, "modify", false),};
+
+    public Task[] allThirdTasks = new Task[] {  new Task(0, "Seber v 1 hře jeden powerUp.", 0, 1, "grabRound", false),
+                                                new Task(1, "Odehrej hru 3x", 0, 3, "play", false),
+                                                new Task(2, "Uraž vzdálenost 20.", 0, 20, "distance", false),
+                                                new Task(3, "Seber 3 PowerUpy.", 0, 3, "grab", false),
+                                                new Task(4, "Zabij 25 nepřátel v jedné hře", 0, 15, "killRound", false),};
+
+    public int killsPerGame;
+    public int grabsPerGame;
+    public float modifyTime;
+    public float modifyTmp;
+
 
     void Start()
     {
-        enemiesKilled = 0;
-        powerUpsCollected = 0;
-        gamesPlayed = 0;
-        differentPowerUps = 0;
+        modifyTime = 0;
+        killsPerGame = 0;
+        modifyTmp = 0;
+        grabsPerGame = 0;
     }
-
-    public void InitiateTask (int taskId){        
-        switch(taskId){
+    
+    public void InitiateTask (int taskId, int activeQuest)
+    {
+        Task brandNewTask = new Task(0, "none", 0, 0, "none", false);
+        switch (activeQuest) {
+            case 0:
+                brandNewTask = allFirstTasks[taskId];
+                break;
             case 1:
-                setTask("Dosáhni skóre 500.", taskId, 500, 0, "score", false);
+                brandNewTask = allSecondTasks[taskId];
                 break;
-
             case 2:
-                setTask("Zabij 5 nepřátel.", taskId, 5, 0, "kill", false);
-                break;
-
-            case 3:
-                setTask("Seber 5 PowerUpů.", taskId, 5, 0, "grab", false);
-                break;
-
-            case 4:
-                setTask("Odehrej hru 5x.", taskId, 5, 0, "play", false);
-                break;            
-
-            case 5:
-                setTask("Dosáhni skóre 1 000.", taskId, 1000, 0, "score", false);
-                break;
-            default:
-                setTask("Všechny úkoly splněny.", -1, -1, 0, "complete", false);
+                brandNewTask = allThirdTasks[taskId];
                 break;
         }
-    }
+        activeTasks[activeQuest].id = brandNewTask.id;
+        activeTasks[activeQuest].description = brandNewTask.description;
+        activeTasks[activeQuest].target = brandNewTask.target;
+        activeTasks[activeQuest].progress = brandNewTask.progress;
+        activeTasks[activeQuest].type = brandNewTask.type;
+        activeTasks[activeQuest].completed = brandNewTask.completed;
+    }    
 
-    public void setTask(string description, int id, int target, int progress, string type, bool complete)
+    public void CheckOnceTask(float finalScore, int idTask)
     {
-        activeTask.id = id;        
-        activeTask.description = description;
-        activeTask.target = target;
-        activeTask.progress = progress;
-        activeTask.type = type;
-        activeTask.completed = complete;
-    }
-
-    public void CheckScoreTask(float finalScore)
-    {
-        if (activeTask.progress < (int)finalScore)
+        if (activeTasks[idTask].progress < (int)finalScore)
         {
-            activeTask.progress = (int)finalScore;
+            activeTasks[idTask].progress = (int)finalScore;
         }
-        if(activeTask.progress >= activeTask.target)
+        if(activeTasks[idTask].progress >= activeTasks[idTask].target)
         {
-            activeTask.completed = true;
+            activeTasks[idTask].completed = true;
         }
     }        
 
     /// <summary>
     /// Pro splneni tasku: zabiti nepratel, sebrani powerUpu, odehrani her
     /// </summary>
-    public void CheckCountingTask()
+    public void CheckCountingTask(int idTask)
     {
-        activeTask.progress += 1;
-        if(activeTask.progress >= activeTask.target)
+        activeTasks[idTask].progress += 1;
+        if(activeTasks[idTask].progress >= activeTasks[idTask].target)
         {
-            activeTask.completed = true;
+            activeTasks[idTask].completed = true;
         }
     }
 
-    public void displayTask()
+    public void displayTasks()
     {
-        GameObject.Find("taskDescription").GetComponent<Text>().text = activeTask.description;
-        GameObject.Find("taskprogress").GetComponent<Text>().text = "Splněno: " + activeTask.progress + " / " + activeTask.target;
-        if (activeTask.completed)
+        DisplayFirst();
+        DisplaySecond();
+        DisplayThird();       
+    }  
+    public void DisplayFirst()
+    {
+        GameObject.Find("firstDescription").GetComponent<Text>().text = activeTasks[0].description;
+        GameObject.Find("firstProgress").GetComponent<Text>().text = "Splněno: " + activeTasks[0].progress + " / " + activeTasks[0].target;
+        if (activeTasks[0].completed)
         {
-            GameObject.Find("scoreManager").GetComponent<ScoreManager>().completedTask.SetActive(true);
+            GameObject.Find("scoreManager").GetComponent<ScoreManager>().firstComplete.SetActive(true);
         }
-    }    
+    }  
+    public void DisplaySecond()
+    {
+        GameObject.Find("secondDescription").GetComponent<Text>().text = activeTasks[1].description;
+        GameObject.Find("secondProgress").GetComponent<Text>().text = "Splněno: " + activeTasks[1].progress + " / " + activeTasks[1].target;
+        if (activeTasks[1].completed)
+        {
+            GameObject.Find("scoreManager").GetComponent<ScoreManager>().secondComplete.SetActive(true);
+        }
+    }
+    public void DisplayThird()
+    {
+        GameObject.Find("thirdDescription").GetComponent<Text>().text = activeTasks[2].description;
+        GameObject.Find("thirdProgress").GetComponent<Text>().text = "Splněno: " + activeTasks[2].progress + " / " + activeTasks[2].target;
+        if (activeTasks[2].completed)
+        {
+            GameObject.Find("scoreManager").GetComponent<ScoreManager>().thirdComplete.SetActive(true);
+        }
+    }
 }

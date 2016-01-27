@@ -8,7 +8,6 @@ public class CollectingScript : MonoBehaviour {
     public Sprite koreni;
     public Sprite bubble;
     public Sprite sock;
-    public Sprite koste;
     public Sprite uivisible;
     public Sprite tmp;
 
@@ -43,6 +42,7 @@ public class CollectingScript : MonoBehaviour {
         switch (number)
         {
             case 1:
+                
                 if (prvni.sprite != uivisible)
                 {
                     occupied = true;
@@ -77,10 +77,7 @@ public class CollectingScript : MonoBehaviour {
                 return lp;                
 
             case 8:
-                return sock;
-
-            case 11:
-                return koste;
+                return sock;                
 
             case 20:
                 return koreni;

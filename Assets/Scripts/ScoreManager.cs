@@ -33,7 +33,17 @@ public class ScoreManager : MonoBehaviour {
     public bool shown = false;
 
     public GameObject back;
-    public GameObject completedTask;
+
+    private bool highscore = true;
+    public GameObject tasks;
+    public GameObject scores;
+
+    public GameObject firstComplete;
+    public GameObject secondComplete;
+    public GameObject thirdComplete;
+
+    public Text changer;
+
 
     void Start() {
         pole = GameObject.Find("policko");
@@ -41,8 +51,16 @@ public class ScoreManager : MonoBehaviour {
         score = GameManager.instance.highscores.scores;
         back = GameObject.Find("BacktoMenu");
         back.SetActive(false);
-        completedTask = GameObject.Find("completedTask");
-        completedTask.SetActive(false);
+        firstComplete = GameObject.Find("newFirst");
+        firstComplete.SetActive(false);
+        secondComplete = GameObject.Find("newSecond");
+        secondComplete.SetActive(false);
+        thirdComplete = GameObject.Find("newThird");
+        thirdComplete.SetActive(false);
+        tasks = GameObject.Find("Task");
+        tasks.SetActive(false);
+        scores = GameObject.Find("scores");
+              
     }
 
     void Update()
@@ -63,7 +81,7 @@ public class ScoreManager : MonoBehaviour {
             if (!shown)
             {
                 DisplayScore();
-                GameManager.instance.GetComponent<TaskManager>().displayTask();
+                
                 GameManager.instance.SaveData();
                 back.SetActive(true);
             }           
@@ -83,6 +101,7 @@ public class ScoreManager : MonoBehaviour {
                 score[i].name = pole.GetComponent<InputField>().text;                
                 GameManager.instance.recordScore = 0;
                 pole.SetActive(false);
+                break;
             }
         }
     }
@@ -127,12 +146,43 @@ public class ScoreManager : MonoBehaviour {
         Application.LoadLevel(sceneName);
     }
 
-    public void NewTask()
-    {
-        
-        GameManager.instance.GetComponent<TaskManager>().InitiateTask(GameManager.instance.GetComponent<TaskManager>().activeTask.id + 1);
-        completedTask.SetActive(false);
-        GameManager.instance.GetComponent<TaskManager>().displayTask();
+    public void SwitchShow() {
+        if (highscore)
+        {
+            highscore = false;
+            tasks.SetActive(true);
+            scores.SetActive(false);
+            GameManager.instance.GetComponent<TaskManager>().displayTasks();
+            changer.text = "Tabulka nejlepších.";
+
+        }
+        else
+        {
+            highscore = true;
+            tasks.SetActive(false);
+            scores.SetActive(true);
+            changer.text = "Aktivní úkoly.";
+        }
+    }
+
+    public void NewTask(int questRow)
+    {        
+        GameManager.instance.GetComponent<TaskManager>().InitiateTask(GameManager.instance.GetComponent<TaskManager>().activeTasks[questRow].id + 1, questRow);
+        switch (questRow)
+        {
+            case 0:
+                firstComplete.SetActive(false);
+                GameManager.instance.GetComponent<TaskManager>().DisplayFirst();
+                break;
+            case 1:
+                secondComplete.SetActive(false);
+                GameManager.instance.GetComponent<TaskManager>().DisplaySecond();
+                break;
+            case 2:
+                thirdComplete.SetActive(false);
+                GameManager.instance.GetComponent<TaskManager>().DisplayThird();
+                break;
+        }
         GameManager.instance.SaveData();
     }
 }

@@ -113,11 +113,122 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1711f56422225004981ee4873af7cfa9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  completed: 0
-  enemiesKilled: 0
-  powerUpsCollected: 0
-  gamesPlayed: 0
-  differentPowerUps: 0
+  activeTasks:
+  - id: 0
+    description: none
+    progress: 0
+    target: 0
+    type: none
+    completed: 0
+  - id: 0
+    description: none
+    progress: 0
+    target: 0
+    type: none
+    completed: 0
+  - id: 0
+    description: none
+    progress: 0
+    target: 0
+    type: none
+    completed: 0
+  allFirstTasks:
+  - id: 0
+    description: "Udr\u017E si maxim\xE1ln\xED p\u0159\xED\u010Detnost po 1 hru."
+    progress: 0
+    target: 1
+    type: sanityFull
+    completed: 0
+  - id: 1
+    description: "Dos\xE1hni sk\xF3re 500."
+    progress: 0
+    target: 500
+    type: score
+    completed: 0
+  - id: 2
+    description: "Dos\xE1hni sk\xF3re 1000."
+    progress: 0
+    target: 1000
+    type: score
+    completed: 0
+  - id: 3
+    description: "Dos\xE1hni sk\xF3re 5000."
+    progress: 0
+    target: 5000
+    type: score
+    completed: 0
+  - id: 4
+    description: "P\u0159ij\u010F o ve\u0161kerou p\u0159\xED\u010Detnost."
+    progress: 0
+    target: 1
+    type: sanity
+    completed: 0
+  allSecondTasks:
+  - id: 0
+    description: Udrz modifikator x9 po dobu 10s
+    progress: 0
+    target: 10
+    type: modify
+    completed: 0
+  - id: 1
+    description: "Zabij 10 nep\u0159\xE1tel."
+    progress: 0
+    target: 10
+    type: kill
+    completed: 0
+  - id: 2
+    description: "Zabij 15 nep\u0159\xE1tel."
+    progress: 0
+    target: 15
+    type: kill
+    completed: 0
+  - id: 3
+    description: "Zabij 5 nep\u0159\xE1tel."
+    progress: 0
+    target: 5
+    type: kill
+    completed: 0
+  - id: 4
+    description: "Ura\u017E vzd\xE1lenost X."
+    progress: 0
+    target: 20
+    type: distance
+    completed: 0
+  allThirdTasks:
+  - id: 0
+    description: "Seber v 1 h\u0159e jeden powerUp."
+    progress: 0
+    target: 1
+    type: grabRound
+    completed: 0
+  - id: 1
+    description: Odehrej hru 1x
+    progress: 0
+    target: 1
+    type: play
+    completed: 0
+  - id: 2
+    description: Odehrej hru 2x.
+    progress: 0
+    target: 2
+    type: play
+    completed: 0
+  - id: 3
+    description: Odehrej hru 3x.
+    progress: 0
+    target: 3
+    type: play
+    completed: 0
+  - id: 4
+    description: "Zabij 15 nep\u0159\xE1tel v jedn\xE9 h\u0159e"
+    progress: 0
+    target: 15
+    type: killRound
+    completed: 0
+  killsPerGame: 0
+  grabsPerGame: 0
+  modifyTime: 0
+  modifyTmp: 0
 --- !u!114 &11448592
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -144,8 +255,6 @@ MonoBehaviour:
   highscores: {fileID: 0}
   newRecord: 0
   recordScore: 0
-  currentTask: 1
-  taskProgress: 0
 --- !u!114 &11492982
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -166,6 +275,12 @@ MonoBehaviour:
   clipAk47: {fileID: 8300000, guid: 0c0360de2bc9ecf428e441927215b7f8, type: 3}
   clipGood: {fileID: 8300000, guid: 3b4c9585f408daf459e73447a8876bfb, type: 3}
   clipBad: {fileID: 8300000, guid: f6eacaa1e112e764ca2c6ade0b3e3964, type: 3}
+  clipOjochDeath: {fileID: 8300000, guid: a4d94135860a0ed4db15b8b73ecfb78b, type: 3}
+  squirrelDeath: {fileID: 8300000, guid: a06bfa2d02a82f541a7d02e764d63158, type: 3}
+  pokoutnikDeath: {fileID: 8300000, guid: 155283152d7af534c915d0adb60a9f93, type: 3}
+  birdDeath: {fileID: 8300000, guid: b692f9ea88045114d8217f9b6be85d01, type: 3}
+  ratDeath: {fileID: 8300000, guid: a309230eb29e6cd438cf5a1064f960e4, type: 3}
+  ghost: {fileID: 8300000, guid: aea4d71f8ac9d0e459a842f49c492d08, type: 3}
   clipEnemyHit: {fileID: 8300000, guid: 35f29ab6ca2c00e4f9b3c7308d864a31, type: 3}
   clipBobblePoop: {fileID: 8300000, guid: defcd9b8c5bf91441ba2dc8313632c25, type: 3}
   soundAudioSource: {fileID: 0}
@@ -220,6 +335,30 @@ Prefab:
       propertyPath: clipEnemyHit
       value: 
       objectReference: {fileID: 8300000, guid: 35f29ab6ca2c00e4f9b3c7308d864a31, type: 3}
+    - target: {fileID: 0}
+      propertyPath: clipOjochDeath
+      value: 
+      objectReference: {fileID: 8300000, guid: a4d94135860a0ed4db15b8b73ecfb78b, type: 3}
+    - target: {fileID: 0}
+      propertyPath: squirrelDeath
+      value: 
+      objectReference: {fileID: 8300000, guid: a06bfa2d02a82f541a7d02e764d63158, type: 3}
+    - target: {fileID: 0}
+      propertyPath: pokoutnikDeath
+      value: 
+      objectReference: {fileID: 8300000, guid: 155283152d7af534c915d0adb60a9f93, type: 3}
+    - target: {fileID: 0}
+      propertyPath: birdDeath
+      value: 
+      objectReference: {fileID: 8300000, guid: b692f9ea88045114d8217f9b6be85d01, type: 3}
+    - target: {fileID: 0}
+      propertyPath: ratDeath
+      value: 
+      objectReference: {fileID: 8300000, guid: a309230eb29e6cd438cf5a1064f960e4, type: 3}
+    - target: {fileID: 0}
+      propertyPath: ghost
+      value: 
+      objectReference: {fileID: 8300000, guid: aea4d71f8ac9d0e459a842f49c492d08, type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 147462}

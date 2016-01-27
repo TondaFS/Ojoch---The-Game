@@ -3,6 +3,62 @@ using System.Collections;
 
 public class Bordelskripty : MonoBehaviour {	
 }
+/*
+POWER UPS
+//lp + ponozky
+            //Kovadleni
+            case 11:
+                ShowPowerUpText("Kovadlení", false);
+                break;
+
+
+            
+
+
+            //lp + koreni
+            //Napoj lasky
+            //Socha vysterli na Ojocha srdicka
+            case 23:
+                ShowPowerUpText("Nápoj lásky", false);
+                socha.GetComponent<StatueAttackScript>().heartAttack = true;
+                break;
+
+
+            //ponozky + ponozky
+            //Dušení
+            //Duch Prepere Smradinoha
+            case 16:
+                ShowPowerUpText("Dušení", false);
+                break;
+
+
+            
+
+
+            //ponozky + koreni 
+            //Inverzni ovladani
+            case 28:
+                ShowPowerUpText("Zmatek", false);
+
+                //Inverze
+                ojoch.InversionControlling();
+                ojoch.invertTime = 10;
+                effects.zmatek.SetActive(true);
+                break;
+
+
+            //smetak + smetak 
+            //Nesmrtelnost po určitou dobu - kolem ojocha budou rotovat 2 smetáky
+            case 22:
+                ShowPowerUpText("Koštění", true);
+
+                ojoch.godMode = 5;
+                var smet = Instantiate(smetacek) as Transform;
+                smet.position = transform.position + new Vector3(0.2f, 0.2f, 0);
+                smet.parent = ojoch.transform;
+                //effects.kosteni.SetActive(true);
+                break;
+*/
 
 /*
     SCORE Z OJOCHA      

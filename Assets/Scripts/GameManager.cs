@@ -45,7 +45,7 @@ public class GameManager : MonoBehaviour
         formatter.Serialize(saveFile, highscores.scores);
         formatter.Serialize(saveFile, GetComponent<SoundManager>().musicVolume);
         formatter.Serialize(saveFile, GetComponent<SoundManager>().soundsVolume);
-        formatter.Serialize(saveFile, GetComponent<TaskManager>().activeTask);        
+        formatter.Serialize(saveFile, GetComponent<TaskManager>().activeTasks);           
         saveFile.Close();
     }
 
@@ -59,12 +59,14 @@ public class GameManager : MonoBehaviour
             highscores.scores = (List<ScoreElement>)formatter.Deserialize(saveFile);
             GetComponent<SoundManager>().musicVolume = (float)formatter.Deserialize(saveFile);
             GetComponent<SoundManager>().soundsVolume = (float)formatter.Deserialize(saveFile);
-            GetComponent<TaskManager>().activeTask = (Task)formatter.Deserialize(saveFile);
+            GetComponent<TaskManager>().activeTasks = (Task[])formatter.Deserialize(saveFile);
             saveFile.Close();            
         }
         else {
             highscores.InitiateBestScores();
-            GetComponent<TaskManager>().InitiateTask(1);
+            GetComponent<TaskManager>().InitiateTask(0, 0);
+            GetComponent<TaskManager>().InitiateTask(0, 1);
+            GetComponent<TaskManager>().InitiateTask(0, 2);
         }
     }   
 }

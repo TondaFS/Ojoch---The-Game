@@ -4,30 +4,30 @@ using UnityEngine.UI;
 
 public class ShowingEffects : MonoBehaviour {
 
-    public GameObject ak47;
-    public GameObject kosteni;
-    public GameObject prdak;
-    public GameObject zmatek;
-    public GameObject ultrakejch;
     public GameObject slowtime;
-    public GameObject soufl;
-
-    public Text ak47Text;
-    public Text kosteniText;
-    public Text prdakText;
-    public Text zmatekText;
-    public Text ultrakejchText;
-    public Text slowtimeText;
-    public Text souflText;
+    public GameObject prdak;
+    public GameObject ak47;
+    public GameObject smradostit;
+    public GameObject duseni;
+    public GameObject zmatek;   
+    public GameObject soufl;   
 
     // Use this for initialization
     void Start () {
-        ak47.SetActive(false);
-        kosteni.SetActive(false);
-        prdak.SetActive(false);
-        zmatek.SetActive(false);
-        ultrakejch.SetActive(false);
+        slowtime = GameObject.Find("slowtimeui");
+        prdak = GameObject.Find("prdakui");
+        ak47 = GameObject.Find("ak47ui");
+        smradostit = GameObject.Find("smradostitui");
+        duseni = GameObject.Find("duseniui");
+        zmatek = GameObject.Find("zmatekui");
+        soufl = GameObject.Find("souflui");
+
         slowtime.SetActive(false);
+        prdak.SetActive(false);
+        ak47.SetActive(false);
+        smradostit.SetActive(false);
+        duseni.SetActive(false);
+        zmatek.SetActive(false);       
         soufl.SetActive(false);
 	}
 }
