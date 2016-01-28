@@ -65,6 +65,7 @@ GameObject:
   - 4: {fileID: 487260}
   - 212: {fileID: 21286812}
   - 95: {fileID: 9540122}
+  - 114: {fileID: 11451474}
   m_Layer: 8
   m_Name: sprite
   m_TagString: Untagged
@@ -268,6 +269,19 @@ MonoBehaviour:
   akPrefab: {fileID: 444382, guid: 4f0b95cceed952449ba277b970cd5784, type: 2}
   heartPrefab: {fileID: 0}
   shootingRate: .150000006
+--- !u!114 &11451474
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 155770}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e5735ac6209d0ea4faebd341c66a74ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  c: 1
+  active: 0
 --- !u!114 &11459722
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -284,21 +298,22 @@ MonoBehaviour:
   obstacle: {fileID: 0}
   powerCombo: {fileID: 0}
   animator: {fileID: 0}
-  cleanSock: 0
   collect: {fileID: 0}
   socha: {fileID: 0}
+  playerHealth: {fileID: 0}
+  managerSound: {fileID: 0}
+  session: {fileID: 0}
   kejch: 0
   ultraKejch: {x: 0, y: 0}
   healthSlider: {fileID: 0}
-  playerHealth: {fileID: 0}
+  sanityBar: {fileID: 0}
+  sanitySlider: {fileID: 0}
   contraBubles: 0
   isAkacko: 0
   isInverted: 0
   invertTime: 0
   godMode: 0
   push: 0
-  managerSound: {fileID: 0}
-  session: {fileID: 0}
 --- !u!114 &11460854
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -314,7 +329,6 @@ MonoBehaviour:
   koreni: {fileID: 21300000, guid: 6f7dd0b2d12233e4fa7acfc29ce813c7, type: 3}
   bubble: {fileID: 21300000, guid: 75ba1ad19effd3746a5a9c5d8033b910, type: 3}
   sock: {fileID: 21300000, guid: c819ebfc37fbdc642a7c84037e2f6632, type: 3}
-  koste: {fileID: 21300000, guid: fe9edbf5900d01f43931ac0d5c905962, type: 3}
   uivisible: {fileID: 10917, guid: 0000000000000000f000000000000000, type: 0}
   tmp: {fileID: 0}
   occupied: 0
@@ -364,18 +378,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   powerUps: 0
   powerUpCombo: 0
-  sockClean: {fileID: 473580, guid: 0ba171618224faf4c955ff42fe3f1f84, type: 2}
+  sockClean: {fileID: 0}
   smetacek: {fileID: 419822, guid: 07256aa70510c3b43b9caac63dd211cd, type: 2}
   socha: {fileID: 0}
   sessionController: {fileID: 0}
   effects: {fileID: 0}
   powerUpImage: {fileID: 0}
+  ghostPrefab: {fileID: 193596, guid: f08258db41a88ac4f85fe3d4c0e5b908, type: 2}
   good: {fileID: 8300000, guid: 3b4c9585f408daf459e73447a8876bfb, type: 3}
   bad: {fileID: 8300000, guid: f6eacaa1e112e764ca2c6ade0b3e3964, type: 3}
   odpocet: 0
   panelText: {fileID: 0}
   timeSlow: 0
-  kejchTime: 0
+  duseniTime: 0
   akTime: 0
   contraTime: 0
   souflEffect: {fileID: 0}

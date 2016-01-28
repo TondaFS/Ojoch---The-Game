@@ -12,7 +12,7 @@ GameObject:
   - 58: {fileID: 5860034}
   - 114: {fileID: 11497952}
   - 114: {fileID: 11481072}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: koreni
   m_TagString: PowerUp
   m_Icon: {fileID: 0}
@@ -138,6 +138,10 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_Radius
       value: 2.55999994
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Layer
+      value: 11
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

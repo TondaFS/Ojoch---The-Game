@@ -23,8 +23,8 @@ TagManager:
   - Player
   - Corners
   - Obstacle
-  - 
-  - 
+  - PowerUps
+  - Enemies
   - 
   - 
   - 
@@ -54,9 +54,15 @@ TagManager:
   - name: Obstacles
     uniqueID: 2446702053
     locked: 0
+  - name: Power-ups
+    uniqueID: 92924783
+    locked: 0
+  - name: Statue
+    uniqueID: 1549584885
+    locked: 0
   - name: Ojoch
     uniqueID: 1199424103
     locked: 0
-  - name: Power-ups and enemies
-    uniqueID: 92924783
+  - name: Enemies
+    uniqueID: 2553175177
     locked: 0
