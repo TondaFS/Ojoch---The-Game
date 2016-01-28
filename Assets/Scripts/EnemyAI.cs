@@ -56,6 +56,7 @@ public class EnemyAI : MonoBehaviour {
     public float ignitionRadius;
     private float ignitionSpeed; 
     private bool ignited = false;
+    private bool exploded = false;
     private Vector3 originalScale;
 
     /////////////////////chase
@@ -226,9 +227,10 @@ public class EnemyAI : MonoBehaviour {
             }
         }
 
-        if (explosionCountdown < 0)
+        if (explosionCountdown < 0 && !exploded)
         {
-            Debug.LogError("Tondo, podivej se, neexploduje to");
+            GetComponent<HealthScript>().Damage(100);
+            exploded = true;
         }
     }
 

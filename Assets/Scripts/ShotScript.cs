@@ -18,7 +18,7 @@ public class ShotScript : MonoBehaviour {
     void Start()
     {
         Destroy(gameObject, lifeTime);  //Zniceni objektu po vyprseni jeho doby zivotnosti   
-    }
+    }    
 
     void OnTriggerEnter2D(Collider2D otherCollider)
     {
@@ -38,6 +38,11 @@ public class ShotScript : MonoBehaviour {
         {
             Debug.Log("Touched a rail");
         }
+    }
+
+    void OnBecameInvisible()
+    {
+        Destroy(gameObject); 
     }
 
 

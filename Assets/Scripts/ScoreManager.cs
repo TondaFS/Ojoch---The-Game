@@ -3,7 +3,7 @@ using System.Collections;
 using UnityEngine.UI;
 using System.Collections.Generic;
 
-public class ScoreManager : MonoBehaviour {
+public class ScoreManager : MonoBehaviour {    
     public Text prvni;
     public Text prvniScore;
     public Text druhy;
@@ -35,6 +35,7 @@ public class ScoreManager : MonoBehaviour {
     public GameObject back;
 
     private bool highscore = true;
+    
     public GameObject tasks;
     public GameObject scores;
 
@@ -43,7 +44,9 @@ public class ScoreManager : MonoBehaviour {
     public GameObject thirdComplete;
 
     public Text changer;
+    public Text prepnutiText;
 
+    public GameObject prepnuti;
 
     void Start() {
         pole = GameObject.Find("policko");
@@ -60,30 +63,36 @@ public class ScoreManager : MonoBehaviour {
         tasks = GameObject.Find("Task");
         tasks.SetActive(false);
         scores = GameObject.Find("scores");
+
+        prepnuti = GameObject.Find("prepnutiWhole");
+        prepnuti.SetActive(false);
               
     }
 
     void Update()
-    {
+    {        
+
         if (Input.GetKeyDown(KeyCode.Return))
         {
             GameManager.instance.newRecord = false;
             NewName();
 
         }
+
         if (GameManager.instance.newRecord)
         {
             pole.SetActive(true);
+            pole.GetComponent<InputField>().Select();
         }
-        
+
         else
-        {      
+        {
+            prepnuti.SetActive(true);    
             if (!shown)
             {
                 DisplayScore();
-                
-                GameManager.instance.SaveData();
                 back.SetActive(true);
+                GameManager.instance.SaveData();                
             }           
             if (Input.GetKeyDown(KeyCode.Escape))
             {
@@ -99,11 +108,11 @@ public class ScoreManager : MonoBehaviour {
             if(score[i].score == GameManager.instance.recordScore)
             {
                 score[i].name = pole.GetComponent<InputField>().text;                
-                GameManager.instance.recordScore = 0;
-                pole.SetActive(false);
+                GameManager.instance.recordScore = 0;                
                 break;
             }
         }
+        pole.SetActive(false);
     }
 
     void DisplayScore()
@@ -153,7 +162,9 @@ public class ScoreManager : MonoBehaviour {
             tasks.SetActive(true);
             scores.SetActive(false);
             GameManager.instance.GetComponent<TaskManager>().displayTasks();
-            changer.text = "Tabulka nejlepších.";
+            changer.text = "Aktivní úkoly";
+            prepnutiText.text = "Skóre";
+
 
         }
         else
@@ -161,7 +172,8 @@ public class ScoreManager : MonoBehaviour {
             highscore = true;
             tasks.SetActive(false);
             scores.SetActive(true);
-            changer.text = "Aktivní úkoly.";
+            changer.text = "Tabulka nejlepších";
+            prepnutiText.text = "Úkoly";
         }
     }
 

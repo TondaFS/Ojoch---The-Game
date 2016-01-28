@@ -134,95 +134,71 @@ MonoBehaviour:
     completed: 0
   allFirstTasks:
   - id: 0
-    description: "Udr\u017E si maxim\xE1ln\xED p\u0159\xED\u010Detnost po 1 hru."
-    progress: 0
-    target: 1
-    type: sanityFull
-    completed: 0
-  - id: 1
     description: "Dos\xE1hni sk\xF3re 500."
     progress: 0
     target: 500
     type: score
     completed: 0
-  - id: 2
-    description: "P\u0159ij\u010F o ve\u0161kerou p\u0159\xED\u010Detnost."
-    progress: 0
-    target: 1
-    type: sanity
-    completed: 0
-  - id: 3
-    description: "Dos\xE1hni sk\xF3re 5000."
-    progress: 0
-    target: 5000
-    type: score
-    completed: 0
-  - id: 4
-    description: "P\u0159ij\u010F o ve\u0161kerou p\u0159\xED\u010Detnost 3x."
-    progress: 0
-    target: 3
-    type: sanity
-    completed: 0
   allSecondTasks:
   - id: 0
-    description: "Udr\u017E modifikator x9 po dobu 10s"
-    progress: 0
-    target: 10
-    type: modify
-    completed: 0
-  - id: 1
     description: "Zabij 15 nep\u0159\xE1tel."
     progress: 0
     target: 15
     type: kill
     completed: 0
-  - id: 2
-    description: "Zabij 10 nep\u0159\xE1tel v jedn\xE9 h\u0159e"
+  - id: 1
+    description: "Zabij 20 nep\u0159\xE1tel v jedn\xE9 h\u0159e"
     progress: 0
-    target: 10
+    target: 20
     type: killRound
     completed: 0
-  - id: 3
-    description: "Zabij 5 nep\u0159\xE1tel."
+  - id: 2
+    description: "Udr\u017E si modifikator x9 po dobu 15s"
     progress: 0
-    target: 5
+    target: 15
+    type: modify
+    completed: 0
+  - id: 3
+    description: "Zabij 50 nep\u0159\xE1tel."
+    progress: 0
+    target: 50
     type: kill
     completed: 0
   - id: 4
-    description: "Udr\u017E modifikator x9 po dobu 20s"
+    description: "Udr\u017E si modifikator x9 po dobu 30s"
     progress: 0
-    target: 20
+    target: 30
     type: modify
     completed: 0
   allThirdTasks:
   - id: 0
-    description: "Seber v 1 h\u0159e jeden powerUp."
+    description: "Seber v jedn\xE9 h\u0159e 5 powerUp\u016F."
     progress: 0
-    target: 1
+    target: 5
     type: grabRound
     completed: 0
   - id: 1
-    description: Odehrej hru 3x
+    description: Odehrej hru 5x
     progress: 0
-    target: 3
+    target: 5
     type: play
     completed: 0
   - id: 2
-    description: "Ura\u017E vzd\xE1lenost 20."
+    description: "Ura\u017E vzd\xE1lenost 100."
     progress: 0
-    target: 20
+    target: 100
     type: distance
     completed: 0
   - id: 3
-    description: Seber 3 PowerUpy.
+    description: "Seber 30 PowerUp\u016F."
     progress: 0
-    target: 3
+    target: 30
     type: grab
     completed: 0
   - id: 4
     description: "Zabij 25 nep\u0159\xE1tel v jedn\xE9 h\u0159e"
     progress: 0
-    target: 15
+    target: 25
     type: killRound
     completed: 0
   killsPerGame: 0
@@ -283,7 +259,7 @@ MonoBehaviour:
   ghost: {fileID: 8300000, guid: aea4d71f8ac9d0e459a842f49c492d08, type: 3}
   clipEnemyHit: {fileID: 8300000, guid: 35f29ab6ca2c00e4f9b3c7308d864a31, type: 3}
   clipBobblePoop: {fileID: 8300000, guid: defcd9b8c5bf91441ba2dc8313632c25, type: 3}
-  soundAudioSource: {fileID: 0}
+  soundAudioSource: {fileID: 8292086}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
@@ -359,6 +335,10 @@ Prefab:
       propertyPath: ghost
       value: 
       objectReference: {fileID: 8300000, guid: aea4d71f8ac9d0e459a842f49c492d08, type: 3}
+    - target: {fileID: 0}
+      propertyPath: soundAudioSource
+      value: 
+      objectReference: {fileID: 8292086}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 147462}

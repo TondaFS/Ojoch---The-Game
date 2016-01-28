@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class OpacityChanger : MonoBehaviour {
+public class ColorChanger : MonoBehaviour {
     public float c = 1;
     bool change = true;
     public bool active = false;
@@ -9,6 +9,12 @@ public class OpacityChanger : MonoBehaviour {
     void Update() {
         if (active)
         {
+
+            float sin = Mathf.Sin(Time.time * 10) * 0.3f + 0.7f;
+            Color newColor = new Color(sin, 255, sin);
+            this.GetComponent<SpriteRenderer>().color = newColor;
+
+            /*
             if (change)
             {
                 c -= 0.04f;
@@ -27,19 +33,19 @@ public class OpacityChanger : MonoBehaviour {
                 {
                     change = true;
                 }
-            }
+            }*/
         }
         else
         {
-            if(c <= 1)
+            /*if(c <= 1)
             {
                 c += 0.1f;
                 if (c > 1)
                 {
                     c = 1;
                 }
-            }
-            GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, c);
+            }*/
+            GetComponent<SpriteRenderer>().color = new Color(1, 1, 1);
         }
     }
 }

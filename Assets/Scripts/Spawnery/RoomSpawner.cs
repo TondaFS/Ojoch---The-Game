@@ -17,6 +17,7 @@ public class RoomSpawner : MonoBehaviour {
     void Update()
     {
         //pokud je konec predchozi mistnosti ve spawnDistance, spawne se nova mistnost
+        
         if (currentRoom.transform.GetChild(0).position.x < spawnDistance)
         {
             SpawnRoom();

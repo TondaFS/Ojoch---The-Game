@@ -24,40 +24,37 @@ public class EndGameScript : MonoBehaviour {
     }
 
     public void EndGame() {
+        FinalScore();
         GetComponent<SessionController>().ojochDead = true;        
         GameObject.Find("PanelText").GetComponent<Text>().text = "GameOver!"; 
-               
-        FinalScore();
     }
 
     void FinalScore() {
         finalScore = session.tmpscore;
-        if (ojochHealth.sanity > 25)
+        if (ojochHealth.sanity > 3)
         {
             finalScore *= 3;
-            session.tmpscore = finalScore; 
-            
-            if(ojochHealth.sanity >= 30)
+            session.tmpscore = (int)finalScore;
+
+            //check tasku
+            for (int i = 0; i < 3; i++)
             {
-                for (int i = 0; i < 3; i++)
+                if (GameManager.instance.GetComponent<TaskManager>().activeTasks[i].type == "sanityFull")
                 {
-                    if (GameManager.instance.GetComponent<TaskManager>().activeTasks[i].type == "sanityFull")
-                    {
-                        GameManager.instance.GetComponent<TaskManager>().CheckCountingTask(i);
-                    }
+                    GameManager.instance.GetComponent<TaskManager>().CheckCountingTask(i);
                 }
-            }           
+            }         
         }
-        else if (ojochHealth.sanity > 15)
+        else if (ojochHealth.sanity > 2)
         {
             finalScore *= 1.5f;
-            session.tmpscore = finalScore;
+            session.tmpscore = (int)finalScore;
         }
-        else if (ojochHealth.sanity < 5)
+        else if (ojochHealth.sanity < 1)
         {
             
             finalScore /= 2;
-            session.tmpscore = finalScore;
+            session.tmpscore = (int)finalScore;
 
             if (ojochHealth.sanity <= 0)
             {
@@ -70,6 +67,7 @@ public class EndGameScript : MonoBehaviour {
                 }
             }
         }
+        session.scoreText.text = "" + finalScore;
 
         for (int i = 0; i < 3; i++) {
             if (GameManager.instance.GetComponent<TaskManager>().activeTasks[i].type == "score")

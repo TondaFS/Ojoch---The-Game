@@ -6,16 +6,11 @@ public class PowerUpScript : MonoBehaviour {
     public int powerUps = 0;        //sebrano powerUpu
     public int powerUpCombo = 0;    //jake combo bude
     private OjochScript ojoch;
-    public Transform sockClean;
-    public Transform smetacek;
     public GameObject socha;
     public GameObject sessionController;
     public ShowingEffects effects;
     public GameObject powerUpImage;
-    public GameObject ghostPrefab;
-        
-    public AudioClip good;
-    public AudioClip bad;
+    public GameObject ghostPrefab;   
 
     //promenne na panelText
     public float odpocet = 0;                       //jak dlouho tam bude text
@@ -164,8 +159,7 @@ public class PowerUpScript : MonoBehaviour {
             
             case 2:
                 ShowPowerUpText("Bublinace", true);                
-                ojoch.playerHealth.Damage(-30);
-                ojoch.healthSlider.value = ojoch.playerHealth.hp;
+                ojoch.playerHealth.Damage(-1);                
                 break;
 
             /// <summary>
@@ -194,7 +188,7 @@ public class PowerUpScript : MonoBehaviour {
                 ShowPowerUpText("Smradoštít", true);
                 ojoch.godMode = 5;
                 effects.smradostit.SetActive(true);
-                GameObject.Find("sprite").GetComponent<OpacityChanger>().active = true;                
+                GameObject.Find("sprite").GetComponent<ColorChanger>().active = true;                
                 break;
 
 
@@ -289,10 +283,10 @@ public class PowerUpScript : MonoBehaviour {
                 ojoch.kejch = true;
                 duseniTime = 5;
                 effects.duseni.SetActive(true);                
-                ojoch.playerHealth.LooseSanity(5);                
+                ojoch.playerHealth.LooseSanity(1);                
 
                 var fuckingGhost = Instantiate(ghostPrefab) as GameObject;                              
-                fuckingGhost.GetComponent<Transform>().position = transform.position + new Vector3(1f, 0, 0);
+                fuckingGhost.GetComponent<Transform>().position = transform.position + new Vector3(0.2f, -.5f, 0);
                 GameManager.instance.GetComponent<SoundManager>().PlaySound(GameManager.instance.GetComponent<SoundManager>().ghost);
                 ojoch.animator.SetBool("duseni", true);
                 break;

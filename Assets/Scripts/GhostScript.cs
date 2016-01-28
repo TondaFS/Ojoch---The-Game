@@ -22,5 +22,8 @@ public class GhostScript : MonoBehaviour {
         }
 	}
 
-
+    void OnBecameInvisible()
+    {
+        Destroy(gameObject);
+    }
 }

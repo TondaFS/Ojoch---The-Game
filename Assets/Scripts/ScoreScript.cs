@@ -30,7 +30,7 @@ public class ScoreScript : MonoBehaviour {
 
     void Update()
     {
-        scoreText.text = "Skóre: " + tmpscore;
+        scoreText.text = "" + tmpscore;
 
         if (scorePerSecond <= 0)
         {
@@ -44,7 +44,7 @@ public class ScoreScript : MonoBehaviour {
             modifikatorScore = 1;
         }
 
-        modi.text = "Modifikátor: " + modifikatorScore + "x";
+        modi.text = "x" + modifikatorScore;
 
         if (killedEnemies == 3)
         {

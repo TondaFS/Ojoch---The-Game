@@ -26,9 +26,7 @@ public class OjochScript : MonoBehaviour {
     public Vector2 ultraKejch = new Vector2(0,0);
 
     //promenne na zivoty a sanity Ojocha
-    public Slider healthSlider;                 //Ukazatel zdravi  
-    public GameObject sanityBar;
-    public Slider sanitySlider;     
+    public GameObject sanityBar;   
 
     //Kontra strelba
     public bool contraBubles = false;           //Rozptyl bublinek   
@@ -58,9 +56,7 @@ public class OjochScript : MonoBehaviour {
         managerSound = GameManager.instance.GetComponent<SoundManager>();
         socha = GameObject.Find("statue");
         GetComponent<AudioSource>().volume = 0.3f * managerSound.soundsVolume;
-        healthSlider = GameObject.Find("HeartSlider").GetComponent<Slider>();
         sanityBar = GameObject.Find("Brain");
-        sanitySlider = GameObject.Find("SanitySlider").GetComponent<Slider>();
         sanityBar.SetActive(false);        
 }
 
@@ -109,7 +105,7 @@ public class OjochScript : MonoBehaviour {
             {
                 godMode = 0;
                 powerCombo.effects.smradostit.SetActive(false);
-                GameObject.Find("sprite").GetComponent<OpacityChanger>().active = false;
+                GameObject.Find("sprite").GetComponent<ColorChanger>().active = false;
             }
         }
 
@@ -139,6 +135,7 @@ public class OjochScript : MonoBehaviour {
                 else
                 {
                     weapons[0].Ak47Attack(false, new Vector2(1, 0));
+                    animator.SetTrigger("akFire");
                     managerSound.PlaySound(managerSound.clipAk47);
                     if (contraBubles)
                     {
@@ -165,10 +162,11 @@ public class OjochScript : MonoBehaviour {
 
             collision.gameObject.GetComponent<Collider2D>().enabled = false;
             collision.gameObject.GetComponent<Animator>().SetTrigger("bDeath");
+            GameManager.instance.GetComponent<SoundManager>().PlaySound(GameManager.instance.GetComponent<SoundManager>().clipEnemyHit);
             Destroy(collision.gameObject, 0.5f);
             if (playerHealth != null) {
-                playerHealth.Damage(5);
-                healthSlider.value = playerHealth.hp;
+                playerHealth.Damage(1);
+                //healthSlider.value = playerHealth.hp;
             }
         }
 
@@ -189,9 +187,9 @@ public class OjochScript : MonoBehaviour {
             session.modifikatorScore -= 2;
             if (playerHealth != null || godMode == 0)
             {
-                playerHealth.Damage(5);
+                playerHealth.Damage(1);
                 managerSound.PlayRandom(managerSound.clipDamage1, managerSound.clipDamage2);
-                healthSlider.value = playerHealth.hp;
+                //healthSlider.value = playerHealth.hp;
             }
             collision.gameObject.GetComponent<ObstacleDestruction>().Destruction();
             godMode = 3;
@@ -200,15 +198,15 @@ public class OjochScript : MonoBehaviour {
         //Se sochou
         if (collision.gameObject.tag == "Socha")
         {
-            animator.SetTrigger("isBack");
-            session.modifikatorScore -= 3;
-            if (playerHealth != null)
+            playerHealth.Damage(1);
+            managerSound.PlayRandom(managerSound.clipDamage1, managerSound.clipDamage2);
+            //healthSlider.value = playerHealth.hp;
+            if (playerHealth.hp > 0)
             {
-                playerHealth.Damage(30);
-                managerSound.PlayRandom(managerSound.clipDamage1, managerSound.clipDamage2);
-                healthSlider.value = playerHealth.hp;
-            }
-            godMode = 3;
+                animator.SetTrigger("isBack");                
+            }     
+                   
+            session.modifikatorScore -= 3;     
             push = 0.25f;
         }
 
@@ -219,8 +217,9 @@ public class OjochScript : MonoBehaviour {
             managerSound.PlaySound(managerSound.clipGrab);
             session.AdjustScore(5);                                                                 //Zapocitani skore 
             powerCombo.powerUps += 1;                                                               //zvyseni powerUpu
-            powerCombo.powerUpCombo += collision.gameObject.GetComponent<PowerUpID>().powerUpID;    //pridani ID   
-            collect.showObject(collision.gameObject.GetComponent<PowerUpID>().powerUpID, powerCombo.powerUps);
+            powerCombo.powerUpCombo += collision.gameObject.GetComponent<PowerUpID>().powerUpID;    //pridani ID            
+            collect.showObject(collision.gameObject.GetComponent<PowerUpID>().powerUpID, powerCombo.powerUps, powerCombo.powerUpCombo);
+            
 
             //pokud je sebran jiz druhy powerUp -> provede se kombo
             if (powerCombo.powerUps == 2) {
@@ -229,6 +228,7 @@ public class OjochScript : MonoBehaviour {
                 powerCombo.powerUps = 0;                                                            //nastaveni poctu powerupu na nula
                 powerCombo.powerUpCombo = 0;                                                        //vymazani komba a priprava na dalsi                
             }
+            
             Destroy(collision.gameObject);
         }
     }    

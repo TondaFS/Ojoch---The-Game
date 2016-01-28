@@ -104,7 +104,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 101430}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 6, y: 1, z: 0}
+  m_LocalPosition: {x: 6.07000017, y: 2.8499999, z: 0}
   m_LocalScale: {x: .5, y: .5, z: 1}
   m_Children:
   - {fileID: 442914}
@@ -251,9 +251,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10389e101edba2545af6392a06bce56b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hp: 100
-  sanity: 30
+  hp: 6
+  sanity: 4
   isEnemy: 0
+  sanityOne: {fileID: 0}
+  sanityTwo: {fileID: 0}
+  sanityThree: {fileID: 0}
+  healthOne: {fileID: 0}
+  healthTwo: {fileID: 0}
+  healthThree: {fileID: 0}
+  healthFour: {fileID: 0}
+  healthFive: {fileID: 0}
+  healthSix: {fileID: 0}
 --- !u!114 &11440372
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -305,9 +314,7 @@ MonoBehaviour:
   session: {fileID: 0}
   kejch: 0
   ultraKejch: {x: 0, y: 0}
-  healthSlider: {fileID: 0}
   sanityBar: {fileID: 0}
-  sanitySlider: {fileID: 0}
   contraBubles: 0
   isAkacko: 0
   isInverted: 0
@@ -329,12 +336,14 @@ MonoBehaviour:
   koreni: {fileID: 21300000, guid: 6f7dd0b2d12233e4fa7acfc29ce813c7, type: 3}
   bubble: {fileID: 21300000, guid: 75ba1ad19effd3746a5a9c5d8033b910, type: 3}
   sock: {fileID: 21300000, guid: c819ebfc37fbdc642a7c84037e2f6632, type: 3}
-  uivisible: {fileID: 10917, guid: 0000000000000000f000000000000000, type: 0}
   tmp: {fileID: 0}
-  occupied: 0
-  prvni: {fileID: 0}
-  druhy: {fileID: 0}
-  time: 0
+  prvni: {fileID: 11464910, guid: 5bf67fd6ca173c249bc3b762e58fc90a, type: 2}
+  druhy: {fileID: 11460832, guid: 8763b4042fd95ab4385905577fa9612c, type: 2}
+  first: {fileID: 0}
+  occupied: 
+  pozice: 0
+  umisteni: 0
+  tmpUmisteni: 0
 --- !u!114 &11471622
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -378,15 +387,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   powerUps: 0
   powerUpCombo: 0
-  sockClean: {fileID: 0}
-  smetacek: {fileID: 419822, guid: 07256aa70510c3b43b9caac63dd211cd, type: 2}
   socha: {fileID: 0}
   sessionController: {fileID: 0}
   effects: {fileID: 0}
   powerUpImage: {fileID: 0}
   ghostPrefab: {fileID: 193596, guid: f08258db41a88ac4f85fe3d4c0e5b908, type: 2}
-  good: {fileID: 8300000, guid: 3b4c9585f408daf459e73447a8876bfb, type: 3}
-  bad: {fileID: 8300000, guid: f6eacaa1e112e764ca2c6ade0b3e3964, type: 3}
   odpocet: 0
   panelText: {fileID: 0}
   timeSlow: 0

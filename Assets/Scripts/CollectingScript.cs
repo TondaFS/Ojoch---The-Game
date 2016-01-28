@@ -3,65 +3,78 @@ using System.Collections;
 using UnityEngine.UI;
 
 public class CollectingScript : MonoBehaviour {
-    //Promenne 
+    //Sprity predmetu
     public Sprite lp;
     public Sprite koreni;
     public Sprite bubble;
     public Sprite sock;
-    public Sprite uivisible;
     public Sprite tmp;
 
-    public bool occupied = false;
-
+    //Promenna na tvorbu obrazku a pozice, kde se maji vytvorit
     public Image prvni;
     public Image druhy;
+    public Transform first;
 
-    public float time = 0;
+    public bool[] occupied;
 
-    void Update() {
-        if (time > 0)
-        {
-            time -= Time.deltaTime;
-            if(time <= 0)
-            {
-                RemoveImages();
-                if (occupied)
-                {
-                    prvni.sprite = tmp;
-                    occupied = false;
-                }
-            }
-        }
+    public int pozice;
+    public int umisteni;
+    public int tmpUmisteni;
 
-    }
-
-	public void showObject(int id, int number)
+    void Start()
     {
+        occupied = new bool[3] { false, false, false };
+        umisteni = 0;
+        tmpUmisteni = 0;
+    }    
+
+	public void showObject(int id, int number, int combo)
+    {
+        pozice = 0;
         
         Sprite coll;
+
+        for(int i = 0; i < occupied.Length; i++)
+        {
+            if (occupied[i])
+            {
+                pozice += 60;
+            }
+            else
+            {
+                umisteni = i;
+                break;
+            }
+        }       
+
         switch (number)
         {
-            case 1:
-                
-                if (prvni.sprite != uivisible)
-                {
-                    occupied = true;
-                }
+            case 1:  
+                var firstOne = Instantiate(prvni) as Image;
+                firstOne.GetComponent<Transform>().SetParent(first);
+                firstOne.GetComponent<Transform>().position = first.position + new Vector3(0, -pozice, 0);                
+                firstOne.color = new Color(1, 1, 1, 0);
                 coll = CollInstance(id);
-                if (occupied)
-                {
-                    tmp = coll;
-                }
-                else
-                {
-                    prvni.sprite = coll;
-                }                
+                firstOne.sprite = coll;
+                firstOne.GetComponent<CollItemScript>().created = true;
+                firstOne.GetComponent<CollItemScript>().row = umisteni;
+                tmpUmisteni = umisteni;                             
                 break;
 
             case 2:
+                var secondOne = Instantiate(druhy) as Image;
+                secondOne.GetComponent<Transform>().position = first.position + new Vector3(80, -60 * tmpUmisteni, 0);
+                secondOne.GetComponent<Transform>().SetParent(first);
+                secondOne.color = new Color(1, 1, 1, 0);
+                occupied[tmpUmisteni] = true;
+
+                secondOne.GetComponent<CollItemScript>().created = true;
+                secondOne.GetComponent<CollItemScript>().row = tmpUmisteni;
+                secondOne.GetComponent<CollItemScript>().second = true;
+                secondOne.GetComponent<CollItemScript>().combo = combo;
+
                 coll = CollInstance(id);
-                druhy.sprite = coll;                
-                time = 1;
+                secondOne.sprite = coll;                                  
                 break;
         }
     }
@@ -69,26 +82,19 @@ public class CollectingScript : MonoBehaviour {
     public Sprite CollInstance(int id)
     {
         switch (id)
-        {            
+        {
             case 1:
                 return bubble;
 
             case 3:
-                return lp;                
+                return lp;
 
             case 8:
-                return sock;                
+                return sock;
 
             case 20:
                 return koreni;
         }
-        return null;    
-    }
-
-    public void RemoveImages()
-    {
-        prvni.sprite = uivisible;
-        druhy.sprite = uivisible;
-    }
-	
+        return null;
+    }   
 }

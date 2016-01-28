@@ -11,6 +11,8 @@ TagManager:
   - Obstacle
   - Particle
   - Projectile
+  - imageOne
+  - ImageTwo
   layers:
   - Default
   - TransparentFX

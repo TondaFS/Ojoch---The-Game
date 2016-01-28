@@ -26,15 +26,7 @@ public class GameManager : MonoBehaviour
         highscores = GetComponent<BestScores>();        
         LoadData();
     }
-
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.L))
-        {
-            Application.LoadLevel("menu");
-        }
-    }
-
+    
     public void SaveData() {
         if (!Directory.Exists("NothingHere"))
             Directory.CreateDirectory("NothingHere");

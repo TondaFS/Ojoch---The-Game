@@ -30,25 +30,25 @@ public class TaskManager : MonoBehaviour {
         new Task(0, "none", 0, 0, "none", false),
         new Task(0, "none", 0, 0, "none", false),
         new Task(0, "none", 0, 0, "none", false)
-    };  
+    };
 
-    public Task[] allFirstTasks = new Task[] {  new Task(0, "Udrž si maximální příčetnost po 1 hru.", 0, 1, "sanityFull", false),
-                                                new Task(1, "Dosáhni skóre 500.", 0, 500, "score", false),
+    public Task[] allFirstTasks = new Task[] {  new Task(0, "Dosáhni skóre 500.", 0, 500, "score", false),
+                                                new Task(1, "Udrž si maximální příčetnost 3x.", 0, 3, "sanityFull", false),
                                                 new Task(2, "Přijď o veškerou příčetnost.", 0, 1, "sanity", false),
                                                 new Task(3, "Dosáhni skóre 5000.", 0, 5000, "score", false),
                                                 new Task(4, "Přijď o veškerou příčetnost 3x.", 0, 3, "sanity", false),};
 
-    public Task[] allSecondTasks = new Task[] { new Task(0, "Udrž modifikator x9 po dobu 10s", 0, 10, "modify", false),
-                                                new Task(1, "Zabij 15 nepřátel.", 0, 15, "kill", false),
-                                                new Task(2, "Zabij 10 nepřátel v jedné hře", 0, 10, "killRound", false),
-                                                new Task(3, "Zabij 5 nepřátel.", 0, 5, "kill", false),
-                                                new Task(4, "Udrž modifikator x9 po dobu 20s", 0, 20, "modify", false),};
+    public Task[] allSecondTasks = new Task[] { new Task(0, "Zabij 15 nepřátel.", 0, 15, "kill", false),
+                                                new Task(1, "Zabij 20 nepřátel v jedné hře", 0, 20, "killRound", false),
+                                                new Task(2, "Udrž si modifikator x9 po dobu 15s", 0, 15, "modify", false ),
+                                                new Task(3, "Zabij 50 nepřátel.", 0, 50, "kill", false),
+                                                new Task(4, "Udrž si modifikator x9 po dobu 30s", 0, 30, "modify", false),};
 
-    public Task[] allThirdTasks = new Task[] {  new Task(0, "Seber v 1 hře jeden powerUp.", 0, 1, "grabRound", false),
-                                                new Task(1, "Odehrej hru 3x", 0, 3, "play", false),
-                                                new Task(2, "Uraž vzdálenost 20.", 0, 20, "distance", false),
-                                                new Task(3, "Seber 3 PowerUpy.", 0, 3, "grab", false),
-                                                new Task(4, "Zabij 25 nepřátel v jedné hře", 0, 15, "killRound", false),};
+    public Task[] allThirdTasks = new Task[] {  new Task(0, "Seber v jedné hře 5 powerUpů.", 0, 5, "grabRound", false),
+                                                new Task(1, "Odehrej hru 5x", 0, 5, "play", false),
+                                                new Task(2, "Uraž vzdálenost 100.", 0, 100, "distance", false),
+                                                new Task(3, "Seber 30 PowerUpů.", 0, 30, "grab", false),
+                                                new Task(4, "Zabij 25 nepřátel v jedné hře", 0, 25, "killRound", false),};
 
     public int killsPerGame;
     public int grabsPerGame;
@@ -66,24 +66,32 @@ public class TaskManager : MonoBehaviour {
     
     public void InitiateTask (int taskId, int activeQuest)
     {
-        Task brandNewTask = new Task(0, "none", 0, 0, "none", false);
-        switch (activeQuest) {
-            case 0:
-                brandNewTask = allFirstTasks[taskId];
-                break;
-            case 1:
-                brandNewTask = allSecondTasks[taskId];
-                break;
-            case 2:
-                brandNewTask = allThirdTasks[taskId];
-                break;
+        Task brandNewTask = new Task(-1, "Všechno splněno", 0, 0, "done", false);
+        if (taskId >= 5)
+        {
+            activeTasks[activeQuest] = brandNewTask;
         }
-        activeTasks[activeQuest].id = brandNewTask.id;
-        activeTasks[activeQuest].description = brandNewTask.description;
-        activeTasks[activeQuest].target = brandNewTask.target;
-        activeTasks[activeQuest].progress = brandNewTask.progress;
-        activeTasks[activeQuest].type = brandNewTask.type;
-        activeTasks[activeQuest].completed = brandNewTask.completed;
+        else
+        {
+            switch (activeQuest)
+            {
+                case 0:
+                    brandNewTask = allFirstTasks[taskId];
+                    break;
+                case 1:
+                    brandNewTask = allSecondTasks[taskId];
+                    break;
+                case 2:
+                    brandNewTask = allThirdTasks[taskId];
+                    break;
+            }
+            activeTasks[activeQuest].id = brandNewTask.id;
+            activeTasks[activeQuest].description = brandNewTask.description;
+            activeTasks[activeQuest].target = brandNewTask.target;
+            activeTasks[activeQuest].progress = brandNewTask.progress;
+            activeTasks[activeQuest].type = brandNewTask.type;
+            activeTasks[activeQuest].completed = brandNewTask.completed;
+        }
     }    
 
     public void CheckOnceTask(float finalScore, int idTask)
