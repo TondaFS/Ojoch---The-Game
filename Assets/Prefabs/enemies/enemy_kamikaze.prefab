@@ -117,12 +117,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movementSpeed: 2
   states: 02000000
+  turns: 1
   flyOnScreenPosX: 1
   points: []
   explosionCountdown: 1
   ignitionRadius: 3
   missile: {fileID: 0}
   ammo: 0
+  missileCooldown: 1
   waitTime: -1
 --- !u!114 &11487896
 MonoBehaviour:
@@ -135,9 +137,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10389e101edba2545af6392a06bce56b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hp: 1
+  hp: 3
   sanity: 30
   isEnemy: 1
+  sanityOne: {fileID: 0}
+  sanityTwo: {fileID: 0}
+  sanityThree: {fileID: 0}
+  healthOne: {fileID: 0}
+  healthTwo: {fileID: 0}
+  healthThree: {fileID: 0}
+  healthFour: {fileID: 0}
+  healthFive: {fileID: 0}
+  healthSix: {fileID: 0}
 --- !u!212 &21260580
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -181,7 +192,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: hp
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
