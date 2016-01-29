@@ -136,41 +136,42 @@ public class HealthScript : MonoBehaviour {
         if(damage > 0)
         {
             hp -= damage;
-            smth = false;                         
+            smth = false;
+            switch (hp)
+            {
+                case 6:
+                    damage = 0;
+                    break;
+                case 5:
+                    healthSix.SetActive(smth);
+                    break;
+                case 4:
+                    healthFive.SetActive(smth);
+                    break;
+                case 3:
+                    healthFour.SetActive(smth);
+                    break;
+                case 2:
+                    healthThree.SetActive(smth);
+                    break;
+                case 1:
+                    healthTwo.SetActive(smth);
+                    break;
+                case 0:
+                    healthOne.SetActive(smth);
+                    StartCoroutine(DieOjoch());
+                    break;
+            }
         }
         else
         {
             smth = true;
-        }
-        
-        switch (hp)
-        {
-            case 6:
-                damage = 0;
-                break;            
-            case 5:
-                healthSix.SetActive(smth);
-                break;
-            case 4:
-                healthFive.SetActive(smth);
-                break;
-            case 3:
-                healthFour.SetActive(smth);
-                break;
-            case 2:
-                healthThree.SetActive(smth);
-                break;
-            case 1:
-                healthTwo.SetActive(smth);
-                break;
-            case 0:
-                healthOne.SetActive(smth);
-                StartCoroutine(DieOjoch());
-                break;
-        }
-        if (smth)
-        {
-            hp -= damage;
-        }
+            hp = 6;
+            healthTwo.SetActive(smth);
+            healthThree.SetActive(smth);
+            healthFour.SetActive(smth);
+            healthFive.SetActive(smth);
+            healthSix.SetActive(smth);
+        }       
     }
 }

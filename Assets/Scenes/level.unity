@@ -553,11 +553,19 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 22456050, guid: 389e42bf80d272a41989ad28747cc24e, type: 2}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 184470, guid: 389e42bf80d272a41989ad28747cc24e, type: 2}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 22451336, guid: 389e42bf80d272a41989ad28747cc24e, type: 2}
+      propertyPath: m_SizeDelta.x
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 22451336, guid: 389e42bf80d272a41989ad28747cc24e, type: 2}
+      propertyPath: m_SizeDelta.y
+      value: 50
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 389e42bf80d272a41989ad28747cc24e, type: 2}

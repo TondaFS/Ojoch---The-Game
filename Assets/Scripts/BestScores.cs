@@ -17,7 +17,7 @@ public class BestScores : MonoBehaviour {
         for(int i = 0; i < 10; i++){
             ScoreElement element = new ScoreElement();
             element.name = "OjochMaster";
-            element.score = Random.Range(1, 10);
+            element.score = Random.Range(100, 10000);
             scores.Add(element);   
         }
         SortScores();        

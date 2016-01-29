@@ -139,6 +139,30 @@ MonoBehaviour:
     target: 500
     type: score
     completed: 0
+  - id: 1
+    description: "Udr\u017E si maxim\xE1ln\xED p\u0159\xED\u010Detnost 3x."
+    progress: 0
+    target: 3
+    type: sanityFull
+    completed: 0
+  - id: 2
+    description: "P\u0159ij\u010F o ve\u0161kerou p\u0159\xED\u010Detnost."
+    progress: 0
+    target: 1
+    type: sanity
+    completed: 0
+  - id: 3
+    description: "Dos\xE1hni sk\xF3re 5000."
+    progress: 0
+    target: 5000
+    type: score
+    completed: 0
+  - id: 4
+    description: "P\u0159ij\u010F o ve\u0161kerou p\u0159\xED\u010Detnost 3x."
+    progress: 0
+    target: 3
+    type: sanity
+    completed: 0
   allSecondTasks:
   - id: 0
     description: "Zabij 15 nep\u0159\xE1tel."
