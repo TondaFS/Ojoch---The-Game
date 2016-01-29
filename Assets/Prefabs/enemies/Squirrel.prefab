@@ -15,7 +15,7 @@ GameObject:
   - 114: {fileID: 11400312}
   m_Layer: 12
   m_Name: Squirrel
-  m_TagString: Enemy
+  m_TagString: Boss
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -103,12 +103,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movementSpeed: 4
   states: 0000000004000000
+  turns: 1
   flyOnScreenPosX: .800000012
   points: []
   explosionCountdown: 0
   ignitionRadius: 0
   missile: {fileID: 458796, guid: 73d559162835d0147a142e5c645602c5, type: 2}
   ammo: 10
+  missileCooldown: 1
   waitTime: 0
 --- !u!114 &11416488
 MonoBehaviour:
@@ -124,6 +126,15 @@ MonoBehaviour:
   hp: 1
   sanity: 30
   isEnemy: 1
+  sanityOne: {fileID: 0}
+  sanityTwo: {fileID: 0}
+  sanityThree: {fileID: 0}
+  healthOne: {fileID: 0}
+  healthTwo: {fileID: 0}
+  healthThree: {fileID: 0}
+  healthFour: {fileID: 0}
+  healthFive: {fileID: 0}
+  healthSix: {fileID: 0}
 --- !u!212 &21213002
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -164,6 +175,10 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_SortingLayerID
       value: -1741792119
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_TagString
+      value: Boss
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

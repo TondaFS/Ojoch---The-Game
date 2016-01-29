@@ -29,16 +29,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: caf86577b28df7546b285ae1c8dbd99d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bublinace: {fileID: 0}
-  prdak: {fileID: 0}
-  panCasu: {fileID: 0}
-  duseni: {fileID: 0}
-  zmatek: {fileID: 0}
-  napojLasky: {fileID: 0}
-  akacko: {fileID: 0}
-  smradostit: {fileID: 0}
-  nitro: {fileID: 0}
-  soufl: {fileID: 0}
+  bublinace: {fileID: 21300000, guid: d6ff2b02b72ce634783ac1fb1e1ee1b2, type: 3}
+  prdak: {fileID: 21300000, guid: 33223377d5c9f3f40915cd5a1f94c7a8, type: 3}
+  panCasu: {fileID: 21300000, guid: 59a0378eaa502e741bb6ecdc67731ef8, type: 3}
+  duseni: {fileID: 21300000, guid: 2ea0dcba4eba00d47b4e1034c841864f, type: 3}
+  zmatek: {fileID: 21300000, guid: 8da322c15e2852942a20223096da7be2, type: 3}
+  napojLasky: {fileID: 21300000, guid: 6213de22b104dc2428f77d96ad105598, type: 3}
+  akacko: {fileID: 21300000, guid: c97e17a216c83d940ac24c1c28a42eb3, type: 3}
+  smradostit: {fileID: 21300000, guid: c4fc5d2ab86cb7e4caa3901d992555b6, type: 3}
+  nitro: {fileID: 21300000, guid: 0d914fd1045ccba4faa3f9f2d1c670bc, type: 3}
+  soufl: {fileID: 21300000, guid: 7fad86ace1b13e648a626ac70a3eda32, type: 3}
   opacity: 0
   time: 0
   row: 0
@@ -98,7 +98,57 @@ Prefab:
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
-    m_Modifications: []
+    m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: akacko
+      value: 
+      objectReference: {fileID: 21300000, guid: c97e17a216c83d940ac24c1c28a42eb3,
+        type: 3}
+    - target: {fileID: 0}
+      propertyPath: bublinace
+      value: 
+      objectReference: {fileID: 21300000, guid: d6ff2b02b72ce634783ac1fb1e1ee1b2,
+        type: 3}
+    - target: {fileID: 0}
+      propertyPath: prdak
+      value: 
+      objectReference: {fileID: 21300000, guid: 33223377d5c9f3f40915cd5a1f94c7a8,
+        type: 3}
+    - target: {fileID: 0}
+      propertyPath: duseni
+      value: 
+      objectReference: {fileID: 21300000, guid: 2ea0dcba4eba00d47b4e1034c841864f,
+        type: 3}
+    - target: {fileID: 0}
+      propertyPath: smradostit
+      value: 
+      objectReference: {fileID: 21300000, guid: c4fc5d2ab86cb7e4caa3901d992555b6,
+        type: 3}
+    - target: {fileID: 0}
+      propertyPath: soufl
+      value: 
+      objectReference: {fileID: 21300000, guid: 7fad86ace1b13e648a626ac70a3eda32,
+        type: 3}
+    - target: {fileID: 0}
+      propertyPath: zmatek
+      value: 
+      objectReference: {fileID: 21300000, guid: 8da322c15e2852942a20223096da7be2,
+        type: 3}
+    - target: {fileID: 0}
+      propertyPath: panCasu
+      value: 
+      objectReference: {fileID: 21300000, guid: 59a0378eaa502e741bb6ecdc67731ef8,
+        type: 3}
+    - target: {fileID: 0}
+      propertyPath: nitro
+      value: 
+      objectReference: {fileID: 21300000, guid: 0d914fd1045ccba4faa3f9f2d1c670bc,
+        type: 3}
+    - target: {fileID: 0}
+      propertyPath: napojLasky
+      value: 
+      objectReference: {fileID: 21300000, guid: 6213de22b104dc2428f77d96ad105598,
+        type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 157500}

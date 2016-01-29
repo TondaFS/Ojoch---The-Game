@@ -30,21 +30,19 @@ public class WeaponScript : MonoBehaviour {
         if (CanAttack)      // viz fce nize
         {           
             shootCooldown = shootingRate;                                                       //nastaveni cooldownu
-                       
-                var shotTransform = Instantiate(shotPrefab) as Transform;                              //vytvoreni nove strely
-                shotTransform.position = transform.position + new Vector3(0.3f, 0, 0);                //prirazeni pozice strely
-
-                ShotScript shot = shotTransform.gameObject.GetComponent<ShotScript>();                 //Bereme ShotScript
-                if (shot != null)
-                {
-                    shot.isEnemyShot = isEnemy;                                                        //aplikace vstupniho parametru a jeho prirazeni ke strele - kdo vystrelil? hrac/enemy
-                }
-
-                MovingScript move = shotTransform.gameObject.GetComponent<MovingScript>();             //Bereme MovingScript strely
-                if (move != null)
-                {
-                    move.direction = directionP;                                          //Strela se vystreli smerem vpravo
-                }          
+            
+            var shotTransform = Instantiate(shotPrefab) as Transform;                             //vytvoreni nove strely
+            shotTransform.position = transform.position + new Vector3(-0.2f, 0, 0);                //prirazeni pozice strely
+            ShotScript shot = shotTransform.gameObject.GetComponent<ShotScript>();                 //Bereme ShotScript
+            if (shot != null)
+            {
+                shot.isEnemyShot = isEnemy;                                                        //aplikace vstupniho parametru a jeho prirazeni ke strele - kdo vystrelil? hrac/enemy
+            }
+            BulletScript move = shotTransform.gameObject.GetComponent<BulletScript>();             //Bereme MovingScript strely
+            if (move != null)
+            {
+                move.direction = directionP;                                                       //Strela se vystreli smerem vpravo
+            }          
             
             
         }
@@ -73,7 +71,7 @@ public class WeaponScript : MonoBehaviour {
                 shot.isEnemyShot = isEnemy;                                                        //aplikace vstupniho parametru a jeho prirazeni ke strele - kdo vystrelil? hrac/enemy
             }
 
-            MovingScript move = akTransform.gameObject.GetComponent<MovingScript>();             //Bereme MovingScript strely
+            BulletScript move = akTransform.gameObject.GetComponent<BulletScript>();             //Bereme MovingScript strely
             if (move != null)
             {
                 move.direction = directionP;                                                    //Strela se vystreli smerem vpravo

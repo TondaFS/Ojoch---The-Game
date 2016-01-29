@@ -13,22 +13,25 @@ public class ShotScript : MonoBehaviour {
     public int lifeTime = 5;            //Doba zivotnosti strely
 
     public AudioClip blop;
-
-
+    
     void Start()
     {
-        Destroy(gameObject, lifeTime);  //Zniceni objektu po vyprseni jeho doby zivotnosti   
+        if (lifeTime != -1)
+        {
+            Destroy(gameObject, lifeTime);  //Zniceni objektu po vyprseni jeho doby zivotnosti   
+        }
     }    
 
     void OnTriggerEnter2D(Collider2D otherCollider)
     {
+
         if (otherCollider.tag == "Obstacle")
         {
             SoundScript.instance.PlaySingle(blop);
             Destroy(this.gameObject);           //zniceni strely
 
-        }  
-        
+        }
+
         if (otherCollider.tag == "Player" && isEnemyShot)
         {
             GameObject.Find("Session Controller").GetComponent<ScoreScript>().modifikatorScore -= 1;

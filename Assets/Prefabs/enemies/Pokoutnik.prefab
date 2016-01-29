@@ -10,9 +10,27 @@ GameObject:
   - 4: {fileID: 427702}
   - 212: {fileID: 21229692}
   - 95: {fileID: 9562720}
+  - 114: {fileID: 11433376}
+  - 58: {fileID: 5864564}
+  - 114: {fileID: 11463392}
   m_Layer: 12
   m_Name: Pokoutnik
-  m_TagString: Enemy
+  m_TagString: Boss
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &177608
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 481272}
+  m_Layer: 12
+  m_Name: missile_launcher
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -24,11 +42,37 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 110618}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.34794235, y: 4.19214487, z: 0}
-  m_LocalScale: {x: .899999976, y: .899999976, z: 1}
-  m_Children: []
+  m_LocalPosition: {x: 11.7399998, y: 1, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 481272}
   m_Father: {fileID: 0}
   m_RootOrder: 0
+--- !u!4 &481272
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 177608}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -2, y: .119999997, z: 0}
+  m_LocalScale: {x: .316585362, y: .316585362, z: .71231705}
+  m_Children: []
+  m_Father: {fileID: 427702}
+  m_RootOrder: 0
+--- !u!58 &5864564
+CircleCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 110618}
+  m_Enabled: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_Offset: {x: -2, y: .200000003}
+  serializedVersion: 2
+  m_Radius: 1.04999995
 --- !u!95 &9562720
 Animator:
   serializedVersion: 3
@@ -46,6 +90,51 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &11433376
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 110618}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10389e101edba2545af6392a06bce56b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hp: 10
+  sanity: 30
+  isEnemy: 1
+  sanityOne: {fileID: 0}
+  sanityTwo: {fileID: 0}
+  sanityThree: {fileID: 0}
+  healthOne: {fileID: 0}
+  healthTwo: {fileID: 0}
+  healthThree: {fileID: 0}
+  healthFour: {fileID: 0}
+  healthFive: {fileID: 0}
+  healthSix: {fileID: 0}
+--- !u!114 &11463392
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 110618}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b04802ad55ac1c449e5b5b594453364, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  movementSpeed: 2
+  states: 0000000004000000
+  turns: 0
+  flyOnScreenPosX: 1
+  points: []
+  explosionCountdown: 0
+  ignitionRadius: 0
+  missile: {fileID: 430316, guid: fd4324faf7d8cdf4fa388b01870578ae, type: 2}
+  ammo: -1
+  missileCooldown: 1
+  waitTime: 0
 --- !u!212 &21229692
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -86,6 +175,10 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_SortingLayerID
       value: -1741792119
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_TagString
+      value: Boss
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

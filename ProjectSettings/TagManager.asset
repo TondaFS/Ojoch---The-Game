@@ -13,6 +13,7 @@ TagManager:
   - Projectile
   - imageOne
   - ImageTwo
+  - Boss
   layers:
   - Default
   - TransparentFX

@@ -45,7 +45,7 @@ public class HealthScript : MonoBehaviour {
         else
         {
             hp -= damageCount;
-            if (hp <= 0 && gameObject.tag == "Enemy")
+            if (hp <= 0 && (gameObject.tag == "Enemy" || gameObject.tag == "Boss"))
             { 
                 GameManager.instance.GetComponent<SoundManager>().PlaySound(GameManager.instance.GetComponent<SoundManager>().clipEnemyHit);
                 gameObject.GetComponent<Animator>().SetTrigger("bDeath");
@@ -122,7 +122,7 @@ public class HealthScript : MonoBehaviour {
     void OnCollisionEnter2D(Collision2D otherCollider)
     {
 
-        if (otherCollider.gameObject.tag == "Socha" && gameObject.tag == "Enemy")
+        if (otherCollider.gameObject.tag == "Socha" && (gameObject.tag == "Enemy" || gameObject.tag == "Boss"))
         {
             gameObject.GetComponent<Collider2D>().enabled = false;
             gameObject.GetComponent<Animator>().SetTrigger("bDeath");

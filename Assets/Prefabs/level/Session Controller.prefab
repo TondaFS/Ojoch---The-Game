@@ -47,7 +47,6 @@ GameObject:
   - 114: {fileID: 11432858}
   - 114: {fileID: 11488834}
   - 114: {fileID: 11415292}
-  - 114: {fileID: 11471162}
   - 114: {fileID: 11484954}
   - 114: {fileID: 11477732}
   - 114: {fileID: 11410104}
@@ -545,10 +544,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   waves:
-  - {fileID: 426488, guid: 4e884fc636c9c77459a3b1192513e00d, type: 2}
-  - {fileID: 470522, guid: c1fd933c791be1a45a76951895ee2ba1, type: 2}
-  - {fileID: 484038, guid: f0351f495acc3ad4ab6d1686887c3d72, type: 2}
-  - {fileID: 426608, guid: 57bb6f54047e861438910d834c7bbbe2, type: 2}
+  - {fileID: 493142, guid: 82f501c7e89e24e4e9bfa15425bf2365, type: 2}
 --- !u!114 &11444024
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -589,6 +585,10 @@ MonoBehaviour:
   - {fileID: 193272, guid: b6b00fc5ad979fc4a85b0e6b628209c9, type: 2}
   - {fileID: 169390, guid: 4feed48d8ed9dd14d9989f0d47f9ab82, type: 2}
   - {fileID: 100700, guid: 0049fac2f191cf147bc203f5cd71c927, type: 2}
+  - {fileID: 157336, guid: 41b7697b65802a4479494d62585359bf, type: 2}
+  - {fileID: 161144, guid: ea748d590b0790f4d978c4d8799c0181, type: 2}
+  - {fileID: 197856, guid: 88a38553fddd27d4da519ebe2c631323, type: 2}
+  - {fileID: 193518, guid: 3fe24449bb4343f4192c9ecd6147e8db, type: 2}
 --- !u!114 &11469974
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -600,18 +600,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a00db236af8cdc74e92af59f7305b5d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &11471162
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 126420}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 38f92e99db06ba44ab4e007e33acd3b1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  efxSource: {fileID: 0}
 --- !u!114 &11475484
 MonoBehaviour:
   m_ObjectHideFlags: 1

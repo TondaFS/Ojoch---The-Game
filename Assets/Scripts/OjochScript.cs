@@ -76,8 +76,8 @@ public class OjochScript : MonoBehaviour {
         }        
 
         //Axis information
-        float inputX = Input.GetAxis("Horizontal") * (isInverted ? -1 : 1) ;
-        float inputY = Input.GetAxis("Vertical") * (isInverted ? -1 : 1) ;
+        float inputX = Input.GetAxisRaw("Horizontal") * (isInverted ? -1 : 1) ;
+        float inputY = Input.GetAxisRaw("Vertical") * (isInverted ? -1 : 1) ;
 
         // Pohyb 
         movement = new Vector2(speed.x * inputX * Time.deltaTime + ultraKejch.x, speed.y * inputY * Time.deltaTime + ultraKejch.y);
@@ -153,24 +153,27 @@ public class OjochScript : MonoBehaviour {
     void OnCollisionEnter2D(Collision2D collision) {
 
         //S nepritelem -> ubere 2 zivotu a nepritele znici
-        if (collision.gameObject.tag == "Enemy" && (godMode <= 0)) {
+        if ((collision.gameObject.tag == "Enemy" || collision.gameObject.tag == "Boss") && (godMode <= 0)) {
             socha.GetComponent<StatueControler>().howMuchForward += 0.75f;
             socha.GetComponent<StatueControler>().howMuchBack = 0;
             session.modifikatorScore -= 1;
             managerSound.PlayRandom(managerSound.clipDamage1, managerSound.clipDamage2);
             animator.SetTrigger("hit");
 
-            collision.gameObject.GetComponent<Collider2D>().enabled = false;
-            collision.gameObject.GetComponent<Animator>().SetTrigger("bDeath");
-            GameManager.instance.GetComponent<SoundManager>().PlaySound(GameManager.instance.GetComponent<SoundManager>().clipEnemyHit);
-            Destroy(collision.gameObject, 0.5f);
+            if (collision.gameObject.tag == "Enemy")
+            {
+                collision.gameObject.GetComponent<Collider2D>().enabled = false;
+                collision.gameObject.GetComponent<Animator>().SetTrigger("bDeath");
+                GameManager.instance.GetComponent<SoundManager>().PlaySound(GameManager.instance.GetComponent<SoundManager>().clipEnemyHit);
+                Destroy(collision.gameObject, 0.5f);
+            }
             if (playerHealth != null) {
                 playerHealth.Damage(1);
                 //healthSlider.value = playerHealth.hp;
             }
         }
 
-        else if (collision.gameObject.tag == "Enemy" && ( godMode != 0)) 
+        else if ((collision.gameObject.tag == "Enemy" || collision.gameObject.tag == "Boss") && ( godMode != 0)) 
         {
             GameManager.instance.GetComponent<SoundManager>().PlaySound(GameManager.instance.GetComponent<SoundManager>().clipEnemyHit);
             session.AdjustScore(10);

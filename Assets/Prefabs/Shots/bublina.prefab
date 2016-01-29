@@ -74,7 +74,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 1
   isEnemyShot: 0
-  lifeTime: 5
+  lifeTime: 2
   blop: {fileID: 8300000, guid: defcd9b8c5bf91441ba2dc8313632c25, type: 3}
 --- !u!114 &11470252
 MonoBehaviour:
@@ -89,21 +89,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   direction: {x: 1, y: 0}
   speed: 10
-  speedAnimation:
-    serializedVersion: 2
-    m_Curve:
-    - time: 0
-      value: 0
-      inSlope: -7.41787958
-      outSlope: -7.41787958
-      tangentMode: 0
-    - time: .100000001
-      value: 1
-      inSlope: 4.07663155
-      outSlope: 4.07663155
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
 --- !u!212 &21240724
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -127,7 +112,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1199424103
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 49f9d639ff3945044b5a5dbec555836b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1001 &100100000
@@ -143,7 +128,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: lifeTime
-      value: 5
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_IsTrigger
@@ -237,6 +222,10 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: speedAnimation.m_Curve.Array.data[2].outSlope
       value: 4.07663155
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_SortingOrder
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

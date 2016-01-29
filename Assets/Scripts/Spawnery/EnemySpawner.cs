@@ -30,7 +30,7 @@ public class EnemySpawner : MonoBehaviour {
             foreach (Transform child in newWaveChildren)
             {
                 
-                if (child.tag == "Enemy")
+                if (child.tag == "Enemy" || child.tag == "Boss")
                 {
                     Transform newEnemy = (Transform) Instantiate(child, new Vector3(child.position.x + spawnDistance, child.position.y), Quaternion.identity);
                     currentEnemies.Add(newEnemy);
@@ -38,6 +38,7 @@ public class EnemySpawner : MonoBehaviour {
 
                 if (child.tag == "PowerUp")
                 {
+                    Debug.Log(child + " spawned!");
                     Transform newPowerUp = (Transform) Instantiate(child, new Vector3(child.position.x + spawnDistance, child.position.y), Quaternion.identity);
                     currentPowerUps.Add(newPowerUp);
                 }                 

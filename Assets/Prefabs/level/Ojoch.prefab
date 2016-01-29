@@ -104,7 +104,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 101430}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 6.07000017, y: 2.8499999, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: .5, y: .5, z: 1}
   m_Children:
   - {fileID: 442914}
@@ -302,7 +302,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22a10883f72dde340be4c6a12835563d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: {x: 8, y: 8}
+  speed: {x: 10, y: 10}
   ojoch: {fileID: 0}
   obstacle: {fileID: 0}
   powerCombo: {fileID: 0}
@@ -332,10 +332,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1099315a2b349a04791b0dcbbd349311, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lp: {fileID: 21300000, guid: 0e95adeaacf5526478afebee18685d97, type: 3}
-  koreni: {fileID: 21300000, guid: 6f7dd0b2d12233e4fa7acfc29ce813c7, type: 3}
-  bubble: {fileID: 21300000, guid: 75ba1ad19effd3746a5a9c5d8033b910, type: 3}
-  sock: {fileID: 21300000, guid: c819ebfc37fbdc642a7c84037e2f6632, type: 3}
+  lp: {fileID: 21300000, guid: 451fbb4a7fdce2a47be28e2ba6ad4949, type: 3}
+  koreni: {fileID: 21300000, guid: b8bf699db6b3dcd4ca82082ec7706d93, type: 3}
+  bubble: {fileID: 21300000, guid: c160659cd31a6e340a964c435cce0f85, type: 3}
+  sock: {fileID: 21300000, guid: 4d40cd6557a5f274ea316c2337e6bef9, type: 3}
   tmp: {fileID: 0}
   prvni: {fileID: 11464910, guid: 5bf67fd6ca173c249bc3b762e58fc90a, type: 2}
   druhy: {fileID: 11460832, guid: 8763b4042fd95ab4385905577fa9612c, type: 2}

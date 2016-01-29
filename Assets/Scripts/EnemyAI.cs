@@ -18,11 +18,12 @@ public enum AIStates
 
 public class EnemyAI : MonoBehaviour {
 
-    public float movementSpeed;    
+    public float movementSpeed;
     public List<AIStates> states;
     private AIStates currentState;
 
     //facing player
+    public bool turns = true;
     private GameObject player;
     private bool facingLeft = true;
 
@@ -31,12 +32,12 @@ public class EnemyAI : MonoBehaviour {
     private float topBoundary;
     private float botBoundary;
 
-    [Space(10, order=0)]
+    [Space(10, order = 0)]
     [Header("==AI PROPERTIES==", order = 1)]
     [Space(5, order = 3)]
     /////////////////////flyOnScreen
     [Header("Fly On Screen", order = 4)]
-    [Space(5, order = 5)]    
+    [Space(5, order = 5)]
     [Range(0, 1)]
     public float flyOnScreenPosX; //hodnota je v procentech 0 vlevo, 1 vlevo
     private Vector3 flyOnScreenPos;
@@ -54,7 +55,7 @@ public class EnemyAI : MonoBehaviour {
     [Space(5, order = 3)]
     public float explosionCountdown;
     public float ignitionRadius;
-    private float ignitionSpeed; 
+    private float ignitionSpeed;
     private bool ignited = false;
     private bool exploded = false;
     private Vector3 originalScale;
@@ -68,7 +69,8 @@ public class EnemyAI : MonoBehaviour {
     public Transform missile;
     public int ammo;
     private Vector3 missileLauncherPos;
-    private float missileCooldown = 1;
+    public float missileCooldown = 1;
+    private float currentMissileCooldown;
 
     /////////////////////chargeAttack
     private float chargeUpTime = 2;
@@ -76,10 +78,10 @@ public class EnemyAI : MonoBehaviour {
     /////////////////////wait
     [Space(5, order = 0)]
     [Header("Wait", order = 1)]
-    [Space(5, order = 3)]    
+    [Space(5, order = 3)]
     public float waitTime;
 
-    
+
 
     void Start()
     {
@@ -102,9 +104,9 @@ public class EnemyAI : MonoBehaviour {
             points[0] = Camera.main.ViewportToWorldPoint(points[0]);
         }
     }
-	
-	void Update ()
-    {     
+
+    void Update()
+    {
         //Debug.Log("State: " + currentState);
         DestroyOffScreeners();
 
@@ -121,23 +123,35 @@ public class EnemyAI : MonoBehaviour {
                 }
                 else
                 {
-                    TurnAtPlayer();
+                    if (turns)
+                    {
+                        TurnAtPlayer();
+                    }
                     FlyToPoint();
                 }
                 break;
 
             case AIStates.kamikaze:
-                TurnAtPlayer();
+                if (turns)
+                {
+                    TurnAtPlayer();
+                }
                 Kamikaze();
                 break;
 
             case AIStates.chase:
-                TurnAtPlayer();
+                if (turns)
+                {
+                    TurnAtPlayer();
+                }
                 Chase();
                 break;
 
             case AIStates.stopAndShoot:
-                TurnAtPlayer();
+                if (turns)
+                {
+                    TurnAtPlayer();
+                }
                 StopAndShoot();
                 break;
 
@@ -152,15 +166,15 @@ public class EnemyAI : MonoBehaviour {
                 }
                 Wait();
                 break;
-        }      
-	}
-      
+        }
+    }
+
 
     //AI leti na stanovene misto na obrazovku, kdyz tam doleti, prepne so dalsiho stavu
     private void FlyOnScreen()
     {
-        transform.position = Vector3.MoveTowards(transform.position, flyOnScreenPos, movementSpeed * Time.deltaTime);             
-        
+        transform.position = Vector3.MoveTowards(transform.position, flyOnScreenPos, movementSpeed * Time.deltaTime);
+
         if (transform.position.x == flyOnScreenPosX)
         {
             SwitchToNextState();
@@ -168,10 +182,10 @@ public class EnemyAI : MonoBehaviour {
     }
 
     private void FlyToPoint()
-    {      
+    {
         // pohybuj se smerem k dalsimu bodu
-        transform.position = Vector3.MoveTowards(transform.position, (Vector3) points[0], movementSpeed * Time.deltaTime);
-        
+        transform.position = Vector3.MoveTowards(transform.position, (Vector3)points[0], movementSpeed * Time.deltaTime);
+
         // pokud jsi v bodu, let k dalsimu
         if (transform.position == (Vector3)points[0])
         {
@@ -188,7 +202,7 @@ public class EnemyAI : MonoBehaviour {
             {
                 points[0] = Camera.main.ViewportToWorldPoint(points[0]);
             }
-            
+
         }
     }
 
@@ -241,23 +255,28 @@ public class EnemyAI : MonoBehaviour {
 
     private void StopAndShoot()
     {
-        if (missileCooldown > 0)
+        if (currentMissileCooldown > 0)
         {
-            missileCooldown -= Time.deltaTime;
+            currentMissileCooldown -= Time.deltaTime;
         }
         else
         {
-            missileCooldown = 1;
+            currentMissileCooldown = missileCooldown;
             gameObject.GetComponent<Animator>().SetTrigger("sAttack");
             ammo--;
-            missileLauncherPos = this.transform.GetChild(0).transform.position;
-            Debug.Log(missileLauncherPos);
-            Instantiate(missile, missileLauncherPos, Quaternion.identity);
         }
+
         if (ammo == 0)
         {
             SwitchToNextState();
         }
+    }
+
+    private void Launch()
+    {
+        missileLauncherPos = this.transform.GetChild(0).transform.position;
+        //Debug.Log(missileLauncherPos);
+        Instantiate(missile, missileLauncherPos, Quaternion.identity);
     }
 
     //AI se nabije a leti rovne az mimo obrazovku
@@ -330,5 +349,10 @@ public class EnemyAI : MonoBehaviour {
         {
             Destroy(this.gameObject);
         }
+    }
+
+    private void DestroyThis()
+    {
+        Destroy(gameObject);
     }
 }

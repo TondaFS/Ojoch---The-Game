@@ -8,13 +8,14 @@ public class MissileScript : MonoBehaviour {
     public float movementSpeed = 4;
     public bool homing = false;
     public bool spinning = false;
+    public int health;
 
     private float rotation;
 
 	void Start () {
         player = GameObject.FindGameObjectWithTag("Player");
         flightDirection = (player.transform.position - transform.position).normalized;
-        rotation = Random.Range(-20, 20);
+        rotation = Random.Range(10, 20);
 
 	}
 
@@ -38,5 +39,24 @@ public class MissileScript : MonoBehaviour {
             float rot_z = Mathf.Atan2(flightDirection.y, flightDirection.x) * Mathf.Rad2Deg;
             transform.rotation = Quaternion.Euler(0f, 0f, rot_z + 180);
         }
+
+        if (health == 0)
+        {
+            Destroy(gameObject);
+        }
+
     }
+
+    void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Player")
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            health--;
+        }
+    }
+
 }

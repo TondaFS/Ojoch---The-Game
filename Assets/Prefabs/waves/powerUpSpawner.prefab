@@ -1,52 +1,49 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &147272
+--- !u!1 &108872
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 4
   m_Component:
-  - 4: {fileID: 430084}
-  - 114: {fileID: 11490090}
+  - 4: {fileID: 469348}
+  - 114: {fileID: 11468588}
   m_Layer: 0
-  m_Name: Power-up spawn point
-  m_TagString: Untagged
+  m_Name: powerUpSpawner
+  m_TagString: PowerUp
   m_Icon: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &430084
+--- !u!4 &469348
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 147272}
+  m_GameObject: {fileID: 108872}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -.0630000383, y: .462800443, z: .189453125}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
---- !u!114 &11490090
+--- !u!114 &11468588
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 147272}
+  m_GameObject: {fileID: 108872}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4ab1b26257c3b2043a3751103fa095f4, type: 3}
+  m_Script: {fileID: 11500000, guid: 69ec62551c758fc4a97bd7ef6d210e95, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  powerup:
-  - {fileID: 180846, guid: e48ecef242c6ccc499bc973193da7df3, type: 2}
-  - {fileID: 193472, guid: 23425adb063050548b3eeffdc3259461, type: 2}
-  - {fileID: 153190, guid: 95ccb58cf192ec64bab8dca692e72a7f, type: 2}
-  - {fileID: 150540, guid: 0e91683fa87698c41a33e113dd3d1e90, type: 2}
-  - {fileID: 172254, guid: bf5d35dfa1ccfa341aa94546286bac83, type: 2}
-  - {fileID: 0}
-  - {fileID: 0}
+  powerUps:
+  - {fileID: 416148, guid: e48ecef242c6ccc499bc973193da7df3, type: 2}
+  - {fileID: 416596, guid: 95ccb58cf192ec64bab8dca692e72a7f, type: 2}
+  - {fileID: 428698, guid: 0e91683fa87698c41a33e113dd3d1e90, type: 2}
+  - {fileID: 423978, guid: bf5d35dfa1ccfa341aa94546286bac83, type: 2}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
@@ -55,18 +52,18 @@ Prefab:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 0}
-      propertyPath: powerup.Array.size
-      value: 7
+      propertyPath: powerUps.Array.size
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 0}
-      propertyPath: powerup.Array.data[5]
-      value: 
+      propertyPath: m_LocalPosition.y
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 0}
-      propertyPath: powerup.Array.data[6]
-      value: 
+      propertyPath: m_TagString
+      value: PowerUp
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 147272}
+  m_RootGameObject: {fileID: 108872}
   m_IsPrefabParent: 1
