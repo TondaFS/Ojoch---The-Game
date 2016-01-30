@@ -54,7 +54,7 @@ public class CollItemScript : MonoBehaviour {
     public void MoveToFirst()
     {
         fast += 2f;
-        Vector3 posunuti = new Vector3(0, row * 60, 0); 
+        Vector3 posunuti = new Vector3(0, row * 120, 0); 
         transform.position = Vector3.MoveTowards(transform.position, first.transform.position - posunuti, fast * Time.deltaTime);
         if (((first.transform.position - posunuti) - transform.position).sqrMagnitude <= (difference*difference))
         {

@@ -87,7 +87,7 @@ public class OjochScript : MonoBehaviour {
         if (invertTime != 0)
         {
             invertTime -= Time.deltaTime;
-            powerCombo.effects.zmatek.GetComponent<Text>().text = "Zmatek: " + (int)invertTime;
+            powerCombo.effects.zText.text = "" + (int)(invertTime + 1);
             if (invertTime == 0 || invertTime < 0)
             {
                 this.InversionControlling();
@@ -100,7 +100,7 @@ public class OjochScript : MonoBehaviour {
         if (godMode != 0)
         {
             godMode -= Time.deltaTime;
-            powerCombo.effects.smradostit.GetComponent<Text>().text = "Smradoštít: " + (int)godMode;
+            powerCombo.effects.sText.text = "" + (int)(godMode + 1);
             if (godMode <= 0)
             {
                 godMode = 0;

@@ -5,15 +5,16 @@ using UnityEngine.UI;
 public class AchievedPowerUP : MonoBehaviour {
 
     public Sprite bublinace;
-    public Sprite prdak;
-    public Sprite panCasu;
+   
     public Sprite duseni;
     public Sprite zmatek;
     public Sprite napojLasky;
-    public Sprite akacko;
-    public Sprite smradostit;
+    public Sprite rambouch;    
     public Sprite nitro;
-    public Sprite soufl;
+    //public Sprite soufl;
+    //public Sprite prdak;
+    //public Sprite panCasu;
+    //public Sprite smradostit;
 
     public float opacity;
     public float time;
@@ -48,25 +49,30 @@ public class AchievedPowerUP : MonoBehaviour {
         switch (id)
         {
             case 2:
-                return bublinace;
+                return bublinace;            
+            case 9:
+                return napojLasky;            
+            case 16:
+                return nitro;
+            case 21:
+                return zmatek;
+            case 28:
+                return duseni;
+            case 40:
+                return rambouch;
+
+            /*
             case 6:
                 return zmatek;
-            case 9:
-                return smradostit;
-            case 21:
-                return prdak;
             case 23:
                 return nitro;
-            case 28:
-                return akacko;
+            
             case 4:
                 return napojLasky;
             case 11:
                 return panCasu;
-            case 16:
-                return soufl;
-            case 40:
-                return duseni;
+            */
+            
         }
         return null;
     }

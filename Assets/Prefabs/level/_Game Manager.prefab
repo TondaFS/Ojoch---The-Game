@@ -275,7 +275,7 @@ MonoBehaviour:
   clipAk47: {fileID: 8300000, guid: 0c0360de2bc9ecf428e441927215b7f8, type: 3}
   clipGood: {fileID: 8300000, guid: 3b4c9585f408daf459e73447a8876bfb, type: 3}
   clipBad: {fileID: 8300000, guid: f6eacaa1e112e764ca2c6ade0b3e3964, type: 3}
-  clipOjochDeath: {fileID: 8300000, guid: a4d94135860a0ed4db15b8b73ecfb78b, type: 3}
+  clipOjochDeath: {fileID: 8300000, guid: 2e362ac39b5dfe745a86d5869e6624d5, type: 3}
   squirrelDeath: {fileID: 8300000, guid: a06bfa2d02a82f541a7d02e764d63158, type: 3}
   pokoutnikDeath: {fileID: 8300000, guid: 155283152d7af534c915d0adb60a9f93, type: 3}
   birdDeath: {fileID: 8300000, guid: b692f9ea88045114d8217f9b6be85d01, type: 3}
@@ -338,7 +338,7 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: clipOjochDeath
       value: 
-      objectReference: {fileID: 8300000, guid: a4d94135860a0ed4db15b8b73ecfb78b, type: 3}
+      objectReference: {fileID: 8300000, guid: 2e362ac39b5dfe745a86d5869e6624d5, type: 3}
     - target: {fileID: 0}
       propertyPath: squirrelDeath
       value: 

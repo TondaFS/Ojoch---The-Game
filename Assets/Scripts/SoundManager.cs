@@ -14,7 +14,7 @@ public class SoundManager : MonoBehaviour {
     public AudioClip clipAk47;
     public AudioClip clipGood;
     public AudioClip clipBad;
-    public AudioClip clipOjochDeath;
+    public AudioClip clipOjochDeath;    
 
     public AudioClip squirrelDeath;
     public AudioClip pokoutnikDeath;

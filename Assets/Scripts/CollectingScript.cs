@@ -20,12 +20,14 @@ public class CollectingScript : MonoBehaviour {
     public int pozice;
     public int umisteni;
     public int tmpUmisteni;
+    public int tmpPozice;
 
     void Start()
     {
         occupied = new bool[3] { false, false, false };
         umisteni = 0;
         tmpUmisteni = 0;
+        tmpPozice = 0;
     }    
 
 	public void showObject(int id, int number, int combo)
@@ -38,7 +40,7 @@ public class CollectingScript : MonoBehaviour {
         {
             if (occupied[i])
             {
-                pozice += 60;
+                pozice += 120;
             }
             else
             {
@@ -58,12 +60,13 @@ public class CollectingScript : MonoBehaviour {
                 firstOne.sprite = coll;
                 firstOne.GetComponent<CollItemScript>().created = true;
                 firstOne.GetComponent<CollItemScript>().row = umisteni;
-                tmpUmisteni = umisteni;                             
+                tmpPozice = pozice;
+                tmpUmisteni = umisteni;                       
                 break;
 
             case 2:
-                var secondOne = Instantiate(druhy) as Image;
-                secondOne.GetComponent<Transform>().position = first.position + new Vector3(80, -60 * tmpUmisteni, 0);
+                var secondOne = Instantiate(druhy) as Image;                
+                secondOne.GetComponent<Transform>().position = first.position + new Vector3(125, -tmpPozice * tmpUmisteni, 0);
                 secondOne.GetComponent<Transform>().SetParent(first);
                 secondOne.color = new Color(1, 1, 1, 0);
                 occupied[tmpUmisteni] = true;

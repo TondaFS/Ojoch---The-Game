@@ -30,15 +30,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bublinace: {fileID: 21300000, guid: d6ff2b02b72ce634783ac1fb1e1ee1b2, type: 3}
-  prdak: {fileID: 21300000, guid: 33223377d5c9f3f40915cd5a1f94c7a8, type: 3}
-  panCasu: {fileID: 21300000, guid: 59a0378eaa502e741bb6ecdc67731ef8, type: 3}
   duseni: {fileID: 21300000, guid: 2ea0dcba4eba00d47b4e1034c841864f, type: 3}
   zmatek: {fileID: 21300000, guid: 8da322c15e2852942a20223096da7be2, type: 3}
   napojLasky: {fileID: 21300000, guid: 6213de22b104dc2428f77d96ad105598, type: 3}
-  akacko: {fileID: 21300000, guid: c97e17a216c83d940ac24c1c28a42eb3, type: 3}
-  smradostit: {fileID: 21300000, guid: c4fc5d2ab86cb7e4caa3901d992555b6, type: 3}
+  rambouch: {fileID: 21300000, guid: c97e17a216c83d940ac24c1c28a42eb3, type: 3}
   nitro: {fileID: 21300000, guid: 0d914fd1045ccba4faa3f9f2d1c670bc, type: 3}
-  soufl: {fileID: 21300000, guid: 7fad86ace1b13e648a626ac70a3eda32, type: 3}
   opacity: 0
   time: 0
   row: 0
@@ -157,6 +153,11 @@ Prefab:
       propertyPath: m_SizeDelta.y
       value: 125
       objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: rambouch
+      value: 
+      objectReference: {fileID: 21300000, guid: c97e17a216c83d940ac24c1c28a42eb3,
+        type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 157500}

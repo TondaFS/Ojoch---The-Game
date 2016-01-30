@@ -159,6 +159,7 @@ public class HealthScript : MonoBehaviour {
                     break;
                 case 0:
                     healthOne.SetActive(smth);
+                    GameManager.instance.GetComponent<SoundManager>().PlaySound(GameManager.instance.GetComponent<SoundManager>().clipOjochDeath);
                     StartCoroutine(DieOjoch());
                     break;
             }

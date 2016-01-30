@@ -637,10 +637,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   powerUps:
-  - {fileID: 416148, guid: e48ecef242c6ccc499bc973193da7df3, type: 2}
+  - {fileID: 423978, guid: bf5d35dfa1ccfa341aa94546286bac83, type: 2}
   - {fileID: 416596, guid: 95ccb58cf192ec64bab8dca692e72a7f, type: 2}
   - {fileID: 428698, guid: 0e91683fa87698c41a33e113dd3d1e90, type: 2}
-  - {fileID: 423978, guid: bf5d35dfa1ccfa341aa94546286bac83, type: 2}
 --- !u!114 &11430648
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -986,9 +985,21 @@ Prefab:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 0}
+      propertyPath: powerUps.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
       propertyPath: m_TagString
       value: PowerUp
       objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: powerUps.Array.data[3]
+      value: 
+      objectReference: {fileID: 423978, guid: bf5d35dfa1ccfa341aa94546286bac83, type: 2}
+    - target: {fileID: 0}
+      propertyPath: powerUps.Array.data[0]
+      value: 
+      objectReference: {fileID: 423978, guid: bf5d35dfa1ccfa341aa94546286bac83, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 104284}

@@ -14,10 +14,7 @@ public class PowerUpScript : MonoBehaviour {
 
     //promenne na panelText
     public float odpocet = 0;                       //jak dlouho tam bude text
-    public Text panelText;                          //text
-
-    //Slowtime
-    public float timeSlow = 0;                      //jak dlouho bude zpomaleny cas
+    public Text panelText;                          //text    
 
     //Ultrakejch
     public float duseniTime;
@@ -27,12 +24,6 @@ public class PowerUpScript : MonoBehaviour {
 
     //Contra Bubbles
     public float contraTime = 0;
-
-    //Zakaleni
-    public GameObject souflEffect;
-    public float zakaleniTime = 0;
-    private float zakaleniFade = 0;
-
 
     void Start() {
         ojoch = this.GetComponent<OjochScript>();
@@ -57,25 +48,13 @@ public class PowerUpScript : MonoBehaviour {
                 odpocet = 0;
                 powerUpImage.SetActive(false);
             }
-        }
-
-        //Kontrola zpomaleni casu
-        if (timeSlow > 0)
-        {            
-            timeSlow -= Time.deltaTime;
-            effects.slowtime.GetComponent<Text>().text = "SLOWTIME: " + (int)(timeSlow * 1.75f);
-            if (timeSlow <= 0)
-            {
-                SlowTime(false);
-                effects.slowtime.SetActive(false);
-            }
-        }
+        }        
 
         //Kontrola Dušení
         if (duseniTime > 0)
         {
             duseniTime -= Time.deltaTime;
-            effects.duseni.GetComponent<Text>().text = "Dušení: " + (int)duseniTime;
+            effects.dText.text = "" + (int)(duseniTime + 1);
             if(duseniTime <= 0)
             {
                 ojoch.kejch = false;
@@ -85,19 +64,20 @@ public class PowerUpScript : MonoBehaviour {
             }
         }
 
-        //Kontrola Akacka
+        //Kontrola Rambouch
         if (akTime > 0)
         {
             akTime -= Time.deltaTime;
-            effects.ak47.GetComponent<Text>().text = "AK-47: " + (int)akTime;
+            effects.rText.text = "" + (int)(akTime + 1);
             if (akTime <= 0)
             {
                 ojoch.isAkacko = false;
                 ojoch.animator.SetBool("isAk47", false);
-                effects.ak47.SetActive(false);
+                effects.rambouch.SetActive(false);
             }
         }
 
+        /*
         //Kontrola contra strelby / prdak
         if (contraTime > 0)
         {
@@ -108,34 +88,7 @@ public class PowerUpScript : MonoBehaviour {
                 ojoch.contraBubles = false;
                 effects.prdak.SetActive(false);
             }
-        }
-
-        //Kontrola zakaleni
-        if (zakaleniTime > 0)
-        {
-            zakaleniTime -= Time.deltaTime;
-            effects.soufl.GetComponent<Text>().text = "Šoufl: " + (int)zakaleniTime;
-            zakaleniFade = Mathf.Clamp(zakaleniFade + (Time.deltaTime * 2), 0, 1);
-            SpriteRenderer[] souflSR = souflEffect.GetComponentsInChildren<SpriteRenderer>();
-            foreach (SpriteRenderer sr in souflSR)
-            {
-                sr.color = Color.Lerp(Color.clear, Color.white, zakaleniFade);
-            }
-        }
-        else
-        {
-            zakaleniTime = 0;
-            SpriteRenderer[] souflSR = souflEffect.GetComponentsInChildren<SpriteRenderer>();
-            foreach (SpriteRenderer sr in souflSR)
-            {
-                if (sr.color != Color.clear)
-                {
-                    zakaleniFade = Mathf.Clamp(zakaleniFade - (Time.deltaTime * 2), 0, 1);
-                    sr.color = Color.Lerp(Color.clear, Color.white, zakaleniFade);
-                    effects.soufl.SetActive(false);
-                }                
-            }            
-        }
+        }*/
     }
 
     //provedení komba po sebrání 2 powerupů
@@ -152,22 +105,75 @@ public class PowerUpScript : MonoBehaviour {
         }
         switch (combo)
         {
+            //POWERUPS
+
             /// <summary>
             /// BUBLINACE: Mýdlo + Mýdlo
             /// Přidá Ojochovi životy
-            /// </summary>            
-            
+            /// </summary>    
             case 2:
                 ShowPowerUpText("Bublinace", true);                
                 ojoch.playerHealth.Damage(-1);                
                 break;
 
             /// <summary>
-            /// ZMATEK: LP + LP
-            /// Vynuluje modifikátor skóre a nastaví inverzní ovládání
-            /// </summary>
-            
-            case 6:
+            /// NITRO: Ponozka + Ponozka
+            /// Zpomali pohyb vseho a zaroven zpomali celkovou uroven zrychleni + 5s nesmrtelnsot    
+            /// </summary> 
+            case 16:
+                ShowPowerUpText("NITRO", true);
+
+                ojoch.godMode = 5;
+                effects.smradostit.SetActive(true);
+                GameObject.Find("sprite").GetComponent<ColorChanger>().active = true;
+
+                sessionController.GetComponent<SessionController>().speedUpTime += 4;
+                sessionController.GetComponent<SessionController>().gameSpeed -= 1f;
+                socha.GetComponent<StatueControler>().howMuchForward = 0;
+                socha.GetComponent<StatueControler>().howMuchBack = 2f;
+                break;
+
+            /// <summary>
+            /// AK47: Koření + Koření
+            ///  S ojochem to na nekolik vterin hazi a objeví se duch           
+            /// </summary> 
+            case 40:
+                ShowPowerUpText("Rambouch", true);
+                int chance = Random.Range(0, 100);
+
+                if (chance <= 33)
+                {
+                    ojoch.contraBubles = true;
+                    contraTime = 10;
+                }
+                else if (chance > 33 && chance <= 66)
+                {
+                    ojoch.isAkacko = true;
+                    akTime = 10;
+                    ojoch.animator.SetBool("isAk47", true);
+                }
+                else
+                {
+                    ojoch.contraBubles = true;
+                    contraTime = 10;
+
+                    ojoch.isAkacko = true;
+                    akTime = 10;
+                    ojoch.animator.SetBool("isAk47", true);
+                }
+
+                akTime = 10;
+                effects.rambouch.SetActive(true);
+                break;
+
+
+           //POWERDOWNS
+
+            /// <summary>
+            /// ZMATEK: Mýdlo + Koření
+            /// Iverzní ovládání + zrušení modif. skóre
+            /// </summary>  
+            case 21:
                 ShowPowerUpText("Zmatek", true);
                 ojoch.session.modifikatorScore = 1;
 
@@ -176,70 +182,14 @@ public class PowerUpScript : MonoBehaviour {
                 {
                     ojoch.InversionControlling();
                     effects.zmatek.SetActive(true);
-                }                
+                }
                 break;
 
             /// <summary>
-            /// SMRADOŠTÍT: Mýdlo + Ponožka
-            /// Nesmrtelnost (shield)
+            /// NÁPOJ LÁSKY: Mýdlo + Ponožka
+            /// Zrychli pohyb vseho a zaroven o neco zrychli celkovy posun zrychleni + Nápoj lásky 
             /// </summary>  
-            
             case 9:
-                ShowPowerUpText("Smradoštít", true);
-                ojoch.godMode = 5;
-                effects.smradostit.SetActive(true);
-                GameObject.Find("sprite").GetComponent<ColorChanger>().active = true;                
-                break;
-
-
-            /// <summary>
-            /// PRĎÁK: Mýdlo + Koření
-            /// Zapnutí Contra střelby
-            /// </summary>  
-                    
-            case 21:
-                ShowPowerUpText("Prďák", true);
-                ojoch.contraBubles = true;
-                contraTime = 10;                
-                effects.prdak.SetActive(true);
-                break;
-
-
-            /// <summary>
-            /// NITRO: LP + Koreni
-            /// Zpomali pohyb vseho a zaroven zpomali celkovou uroven zrychleni           
-            /// </summary>
-
-            case 23:
-                ShowPowerUpText("NITRO", true);               
-
-                sessionController.GetComponent<SessionController>().speedUpTime += 4;
-                sessionController.GetComponent<SessionController>().gameSpeed -= 1f;
-                socha.GetComponent<StatueControler>().howMuchForward = 0;
-                socha.GetComponent<StatueControler>().howMuchBack = 2f;                
-                break;
-
-            /// <summary>
-            /// AK47: Ponozka + Koreni
-            /// AK47 na nejakou dobu
-            /// </summary>  
-
-            case 28:
-                ShowPowerUpText("AK-47", true);
-
-                ojoch.isAkacko = true;
-                akTime = 10;
-                ojoch.animator.SetTrigger("good");
-                ojoch.animator.SetBool("isAk47", true);
-                effects.ak47.SetActive(true);
-                break;
-
-            /// <summary>
-            /// NÁPOJ LÁSKY: Mýdlo + LP
-            /// Zrychli pohyb vseho a zaroven o neco zrychli celkovy posun zrychleni + Nápoj lásky
-            /// </summary> 
-
-            case 4:
                 ShowPowerUpText("Nápoj lásky", false);
                 socha.GetComponent<StatueAttackScript>().heartAttack = true;
 
@@ -249,63 +199,22 @@ public class PowerUpScript : MonoBehaviour {
                 socha.GetComponent<StatueControler>().howMuchBack = 0;
                 break;
 
-
             /// <summary>
-            /// PÁN ČASU: LP + Ponozka
-            /// Zpomalení času
+            /// DUŠENÍ: Ponozka + Koreni
+            /// S ojochem to na nekolik vterin hazi a objeví se duch  
             /// </summary>  
-            
-            case 11:
-                ShowPowerUpText("Pán času", true);
-                odpocet = 1;
-                SlowTime(true);                
-                effects.slowtime.SetActive(true);                
-                break;
-
-            /// <summary>
-            /// ŠOUFL: Ponozka + Ponozka
-            /// Zakali Ojochovi na nejakou dobu pohled
-            /// </summary> 
-
-            case 16:
-                ShowPowerUpText("Šoufl", false);
-                zakaleniTime = 5;
-                effects.soufl.SetActive(true);
-                break;
-
-            /// <summary>
-            /// DUŠENÍ: Koření + Koření
-            ///  S ojochem to na nekolik vterin hazi a objeví se duch           
-            /// </summary> 
-            
-            case 40:
+            case 28:
                 ShowPowerUpText("Dušení", false);
                 ojoch.kejch = true;
                 duseniTime = 5;
-                effects.duseni.SetActive(true);                
-                ojoch.playerHealth.LooseSanity(1);                
+                effects.duseni.SetActive(true);
+                ojoch.playerHealth.LooseSanity(1);
 
-                var fuckingGhost = Instantiate(ghostPrefab) as GameObject;                              
+                var fuckingGhost = Instantiate(ghostPrefab) as GameObject;
                 fuckingGhost.GetComponent<Transform>().position = transform.position + new Vector3(0.2f, -.5f, 0);
                 GameManager.instance.GetComponent<SoundManager>().PlaySound(GameManager.instance.GetComponent<SoundManager>().ghost);
                 ojoch.animator.SetBool("duseni", true);
-                break;
-        }
-    }
-
-    //Zpomali/vrati cas
-    public void SlowTime(bool slow)
-    {
-        if (slow)
-        {
-            ojoch.managerSound.setPitch(ojoch.managerSound.soundAudioSource, 0.5f);
-            Time.timeScale = 0.5f;
-            timeSlow = 3;            
-        }
-        else
-        {
-            ojoch.managerSound.setPitch(ojoch.managerSound.soundAudioSource, 1f);
-            Time.timeScale = 1;            
+                break;  
         }
     }
 
