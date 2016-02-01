@@ -22,6 +22,8 @@ public class CollItemScript : MonoBehaviour {
         first = GameObject.Find("prvniPozice").GetComponent<Transform>();
         move = false;
         difference = 0.2f;
+
+
         foreach (GameObject objekt in GameObject.FindGameObjectsWithTag("imageOne"))
         {
             if(objekt.GetComponent<CollItemScript>().row == row)
@@ -33,12 +35,15 @@ public class CollItemScript : MonoBehaviour {
 
     void Update()
     {
+        //Pokud byl objekt prave vyvtoren, bude se jeho opacita menit z 0 na 1
         if (created)
         {            
             GetComponent<Image>().color += new Color(0, 0, 0, 0.1f);
+            //az se tak stane, prestane se
             if (GetComponent<Image>().color.a >= 1)
             {
                 created = false;
+                //a pokud se jedna o druhy sebrany predmet, zacne se pohybovat na pozici prveho
                 if (second)
                 {
                     move = true;
@@ -51,6 +56,7 @@ public class CollItemScript : MonoBehaviour {
         }
     }
     
+    //Posune obrazek na pozici prevniho predmetu
     public void MoveToFirst()
     {
         fast += 2f;
@@ -63,7 +69,7 @@ public class CollItemScript : MonoBehaviour {
         }
     }
 
-
+    //odstrani obrazky predmetu a na jejich pozici vytvori odpovidajici obrazek PowerUpu
     public void RemoveImages()
     {
         Create(transform.position, combo); 
@@ -72,6 +78,7 @@ public class CollItemScript : MonoBehaviour {
     }
    
 
+    //Vytvori PowerUp
     public void Create(Vector3 position, int id)
     {
         var poowerUp = Instantiate(powerUp) as Image;

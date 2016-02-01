@@ -27,6 +27,7 @@ public class GameManager : MonoBehaviour
         LoadData();
     }
     
+    //Ulozi data do Slozky (pokud neexistuje, vytvori jej)
     public void SaveData() {
         if (!Directory.Exists("NothingHere"))
             Directory.CreateDirectory("NothingHere");
@@ -34,13 +35,14 @@ public class GameManager : MonoBehaviour
         BinaryFormatter formatter = new BinaryFormatter();
         FileStream saveFile = File.Create("NothingHere/notSavesLOL.sav");
 
-        formatter.Serialize(saveFile, highscores.scores);
-        formatter.Serialize(saveFile, GetComponent<SoundManager>().musicVolume);
+        formatter.Serialize(saveFile, highscores.scores);                           //ulozi tabulku skore
+        formatter.Serialize(saveFile, GetComponent<SoundManager>().musicVolume);    //ulozci nastaveni hlasitosti
         formatter.Serialize(saveFile, GetComponent<SoundManager>().soundsVolume);
-        formatter.Serialize(saveFile, GetComponent<TaskManager>().activeTasks);           
+        formatter.Serialize(saveFile, GetComponent<TaskManager>().activeTasks);     //ulozi prave aktvini ukoly   
         saveFile.Close();
     }
 
+    //nacte data ze slozky
     public void LoadData()
     {
         if (File.Exists("NothingHere/notSavesLOL.sav"))
@@ -54,6 +56,7 @@ public class GameManager : MonoBehaviour
             GetComponent<TaskManager>().activeTasks = (Task[])formatter.Deserialize(saveFile);
             saveFile.Close();            
         }
+        //Pokud soubor neexistuje, vytvori novou nahodnou tabulku se skore a pripravi prvni ukol z kayde sady ukolu
         else {
             highscores.InitiateBestScores();
             GetComponent<TaskManager>().InitiateTask(0, 0);

@@ -28,14 +28,18 @@ public class AchievedPowerUP : MonoBehaviour {
     
     void Update()
     {
+        //Dokud nevyprsi cas, nic se nedeje
         if(time > 0)
         {
             time -= Time.deltaTime;
         }
+        //Pak se zacne snizovat pruhlednost
         else
         {
             opacity -= 0.01f;
             GetComponent<Image>().color = new Color(1, 1, 1, opacity);
+
+            //Az se obrazek nakonec znici
             if (opacity <= 0)
             {
                 GameObject.Find("Ojoch").GetComponent<CollectingScript>().occupied[row] = false;
@@ -44,6 +48,7 @@ public class AchievedPowerUP : MonoBehaviour {
         }
     }
 
+    //Vybere obrazek PoweUpu
     public Sprite PowerImage(int id)
     {
         switch (id)

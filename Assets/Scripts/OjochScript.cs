@@ -43,7 +43,14 @@ public class OjochScript : MonoBehaviour {
 
     //Push od sochy
     public float push = 0;
-          
+
+    
+    //Zakaleni obrayovky, kdyz ojoch prijde o veskerou pricetnost
+    public GameObject souflEffect;
+    public float zakaleniTime = 0;
+    private float zakaleniFade = 0;
+    
+
 
     void Start() {
         session = GameObject.Find("Session Controller").GetComponent<ScoreScript>();
@@ -61,6 +68,17 @@ public class OjochScript : MonoBehaviour {
 }
 
     void Update () {
+        
+        //Kontrola zakaleni obrazovkz
+        if (zakaleniTime > 0)
+        {
+            zakaleniFade = Mathf.Clamp(zakaleniFade + (Time.deltaTime * 2), 0, 1);
+            SpriteRenderer[] souflSR = souflEffect.GetComponentsInChildren<SpriteRenderer>();
+            foreach (SpriteRenderer sr in souflSR)
+            {
+                sr.color = Color.Lerp(Color.clear, Color.white, zakaleniFade);
+            }
+        }
 
         //Odražení od Sochy
         if (push > 0)
@@ -69,7 +87,7 @@ public class OjochScript : MonoBehaviour {
             push -= Time.deltaTime;
         }        
 
-        //Ultrakejch
+        //Ultrakejch = pri duseni se Ojoch trese
         if (kejch)
         {
             ultraKejch = new Vector2(Random.Range(-0.15f, 0.15f), Random.Range(-0.15f, 0.15f));
@@ -96,7 +114,7 @@ public class OjochScript : MonoBehaviour {
             }
         }   
 
-        //Kontrola, zda neni Ojoch zrovna nesmrtelny, pokud je, odecte cas z godMode a pokud dojde na nulu, okamzite mu opet zapne BoxCollider
+        //Kontrola, zda neni Ojoch zrovna nesmrtelny, pokud je, odecte cas z godMode
         if (godMode != 0)
         {
             godMode -= Time.deltaTime;
@@ -113,7 +131,7 @@ public class OjochScript : MonoBehaviour {
         // Strelba    
         bool shoot = Input.GetButton("Fire1");          //Stisknutí mezerníku
 
-        //Pokud chce hrac vystrelit, pouzije se skript weapon, který zavolá svou fci Attack a ubere mu to 1 život
+        //Pokud chce hrac vystrelit, pouzije se skript weapon, který zavolá svou fci Attack 
         if (shoot)
         {
             if (weapons != null && weapons[0].CanAttack)
@@ -125,6 +143,7 @@ public class OjochScript : MonoBehaviour {
                     animator.SetTrigger("fire");
                     managerSound.PlaySound(managerSound.clipShoot);                        //Zvuk vystrelu
 
+                    //Pokud je aktivovany prdak: Contra strelba
                     if (contraBubles)
                     {
                         weapons[1].Attack(false, new Vector2(1, 0.7f));
@@ -132,11 +151,15 @@ public class OjochScript : MonoBehaviour {
 
                     }
                 }
+
+                //pokud je aktivovany prdak: Ak47
                 else
                 {
                     weapons[0].Ak47Attack(false, new Vector2(1, 0));
                     animator.SetTrigger("akFire");
                     managerSound.PlaySound(managerSound.clipAk47);
+
+                    //Ak47 + contra
                     if (contraBubles)
                     {
                         weapons[1].Ak47Attack(false, new Vector2(1, 0.7f));
@@ -152,14 +175,18 @@ public class OjochScript : MonoBehaviour {
     //Kolize 
     void OnCollisionEnter2D(Collision2D collision) {
 
-        //S nepritelem -> ubere 2 zivotu a nepritele znici
+        //S nepritelem -> ubere zivot a nepritele znici
         if ((collision.gameObject.tag == "Enemy" || collision.gameObject.tag == "Boss") && (godMode <= 0)) {
+
+            //Posunuti sochy kupredu
             socha.GetComponent<StatueControler>().howMuchForward += 0.75f;
             socha.GetComponent<StatueControler>().howMuchBack = 0;
+
             session.modifikatorScore -= 1;
             managerSound.PlayRandom(managerSound.clipDamage1, managerSound.clipDamage2);
             animator.SetTrigger("hit");
 
+            //Pokud se nejedna o Bosse, je nepritel znicen, prehrana animace, a zvuk narazeni do nepritele
             if (collision.gameObject.tag == "Enemy")
             {
                 collision.gameObject.GetComponent<Collider2D>().enabled = false;
@@ -167,43 +194,51 @@ public class OjochScript : MonoBehaviour {
                 GameManager.instance.GetComponent<SoundManager>().PlaySound(GameManager.instance.GetComponent<SoundManager>().clipEnemyHit);
                 Destroy(collision.gameObject, 0.5f);
             }
+
+            //Ojochovi da zraneni
             if (playerHealth != null) {
                 playerHealth.Damage(1);
-                //healthSlider.value = playerHealth.hp;
             }
         }
 
+        //Pokud je srazka a Ojoch je nesmrtelny, zvuk srazky a upravi se skore a podobne
         else if ((collision.gameObject.tag == "Enemy" || collision.gameObject.tag == "Boss") && ( godMode != 0)) 
         {
+            collision.gameObject.GetComponent<Collider2D>().enabled = false;
+            collision.gameObject.GetComponent<Animator>().SetTrigger("bDeath");
             GameManager.instance.GetComponent<SoundManager>().PlaySound(GameManager.instance.GetComponent<SoundManager>().clipEnemyHit);
+            Destroy(collision.gameObject, 0.5f);
+
             session.AdjustScore(10);
             session.killedEnemies += 1;
-            session.FiveSecondsTimer();
-            Destroy(collision.gameObject);
+            session.FiveSecondsTimer();            
         }
 
-        //S prekazkou -> ubere 5 zivotu a ucini na 3 vterin Ojocha nesmrtelnym
+        //S prekazkou -> ubere zivot a ucini na 3 vterin Ojocha nesmrtelnym
         if (collision.gameObject.tag == "Obstacle")
         {
+            //Posunuti sochy
             socha.GetComponent<StatueControler>().howMuchForward += 1;
             socha.GetComponent<StatueControler>().howMuchBack = 0;
             session.modifikatorScore -= 2;
+
+            //Ojoch neni mrty a neni nesmrtelny -> dostane zraneni a prehraje zvuk zraneni
             if (playerHealth != null || godMode == 0)
             {
                 playerHealth.Damage(1);
                 managerSound.PlayRandom(managerSound.clipDamage1, managerSound.clipDamage2);
-                //healthSlider.value = playerHealth.hp;
             }
+
             collision.gameObject.GetComponent<ObstacleDestruction>().Destruction();
             godMode = 3;
         }
 
-        //Se sochou
+        //Se sochou -> Da zraneni, prehraje se animace a zvuk, Ojocha to odhcodi kupredu
         if (collision.gameObject.tag == "Socha")
         {
             playerHealth.Damage(1);
             managerSound.PlayRandom(managerSound.clipDamage1, managerSound.clipDamage2);
-            //healthSlider.value = playerHealth.hp;
+            GameObject.Find("Statue Sprite").GetComponent<Animator>().SetTrigger("hit");
             if (playerHealth.hp > 0)
             {
                 animator.SetTrigger("isBack");                
@@ -213,17 +248,17 @@ public class OjochScript : MonoBehaviour {
             push = 0.25f;
         }
 
-        //S powerUpem -> Zvysi pocet powerupu, provede efekt powerUpu, a pokud je sbran jiz druhy power up
-        //provede se kombo
+        //S powerUpem -> Zvysi pocet sebranych predmety a pokud je sbran jiz druhy , provede kombo }powerUp/Down]
         if (collision.gameObject.tag == "PowerUp") {
-            session.FiveSecondsTimer();            
-            managerSound.PlaySound(managerSound.clipGrab);
+            session.FiveSecondsTimer();                            
+            managerSound.PlaySound(managerSound.clipGrab);      //zvuk sebrani
             session.AdjustScore(5);                                                                 //Zapocitani skore 
             powerCombo.powerUps += 1;                                                               //zvyseni powerUpu
-            powerCombo.powerUpCombo += collision.gameObject.GetComponent<PowerUpID>().powerUpID;    //pridani ID            
+            powerCombo.powerUpCombo += collision.gameObject.GetComponent<PowerUpID>().powerUpID;    //pridani ID   
+            
+            //zobrazeni sebraneho predmetu         
             collect.showObject(collision.gameObject.GetComponent<PowerUpID>().powerUpID, powerCombo.powerUps, powerCombo.powerUpCombo);
             
-
             //pokud je sebran jiz druhy powerUp -> provede se kombo
             if (powerCombo.powerUps == 2) {
                 session.modifikatorScore += 1;

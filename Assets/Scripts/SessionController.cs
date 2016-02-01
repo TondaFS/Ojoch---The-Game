@@ -9,11 +9,23 @@ public class SessionController : MonoBehaviour
 
     public bool pause;
     public GameObject pauseMenu;
-    public bool ojochDead;    
+    public bool ojochDead;
+
+    public GameObject deathMenu;
+    public GameObject newHighScoreText;
+    public GameObject taskCompletedText;
+      
     
     void Start() {
         pauseMenu = GameObject.Find("PAUSE");
         pauseMenu.SetActive(false);
+        taskCompletedText = GameObject.Find("taskCompleted");
+        taskCompletedText.SetActive(false);
+        newHighScoreText = GameObject.Find("NewHighscore");
+        newHighScoreText.SetActive(false);
+        deathMenu = GameObject.Find("DEATH");
+        deathMenu.SetActive(false);
+        
         pause = false;
         ojochDead = false;        
         GameObject.Find("Music").GetComponent<AudioSource>().volume = GameManager.instance.GetComponent<SoundManager>().musicVolume;
@@ -51,9 +63,13 @@ public class SessionController : MonoBehaviour
         }
         else if (ojochDead)
         {
-            if (Input.GetKeyDown(KeyCode.Escape))
+            if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Escape))
             {
                 GameObject.Find("OVERLAY").GetComponent<ScreenFader>().FadeOutLoadNewScene("highscore");
+            }
+            if (Input.GetKeyDown(KeyCode.R))
+            {
+                GameObject.Find("OVERLAY").GetComponent<ScreenFader>().FadeOutLoadNewScene("level");
             }
         }
         else

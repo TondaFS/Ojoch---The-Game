@@ -347,6 +347,7 @@ MonoBehaviour:
   hp: 10
   sanity: 30
   isEnemy: 1
+  enemyType: 1
   sanityOne: {fileID: 0}
   sanityTwo: {fileID: 0}
   sanityThree: {fileID: 0}
@@ -422,6 +423,7 @@ MonoBehaviour:
   hp: 10
   sanity: 30
   isEnemy: 1
+  enemyType: 1
   sanityOne: {fileID: 0}
   sanityTwo: {fileID: 0}
   sanityThree: {fileID: 0}
@@ -506,6 +508,10 @@ Prefab:
       propertyPath: powerUps.Array.data[0]
       value: 
       objectReference: {fileID: 423978, guid: bf5d35dfa1ccfa341aa94546286bac83, type: 2}
+    - target: {fileID: 0}
+      propertyPath: enemyType
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 104284}

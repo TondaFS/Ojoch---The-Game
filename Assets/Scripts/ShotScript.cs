@@ -22,16 +22,18 @@ public class ShotScript : MonoBehaviour {
         }
     }    
 
+    //Pri srazce 
     void OnTriggerEnter2D(Collider2D otherCollider)
     {
-
+        //S prekazkou -> znici 
         if (otherCollider.tag == "Obstacle")
         {
             SoundScript.instance.PlaySingle(blop);
-            Destroy(this.gameObject);           //zniceni strely
+            Destroy(this.gameObject);                           
 
         }
 
+        //s hracem a je to nepratelska strela
         if (otherCollider.tag == "Player" && isEnemyShot)
         {
             GameObject.Find("Session Controller").GetComponent<ScoreScript>().modifikatorScore -= 1;
@@ -43,6 +45,7 @@ public class ShotScript : MonoBehaviour {
         }
     }
 
+    //Znici objekt, kdyz opusti obrazovku
     void OnBecameInvisible()
     {
         Destroy(gameObject); 

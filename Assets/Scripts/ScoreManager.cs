@@ -3,7 +3,9 @@ using System.Collections;
 using UnityEngine.UI;
 using System.Collections.Generic;
 
-public class ScoreManager : MonoBehaviour {    
+public class ScoreManager : MonoBehaviour {   
+    
+    //textova pole pro skore 
     public Text prvni;
     public Text prvniScore;
     public Text druhy;
@@ -29,13 +31,17 @@ public class ScoreManager : MonoBehaviour {
     public ScreenFader fader;
     public BestScores best;
 
+    //Pole pro zadavani jmena
     public GameObject pole;
     public bool shown = false;
 
+    //Tlacitka zpet a restart
     public GameObject back;
+    public GameObject restart;
 
     private bool highscore = true;
     
+    //Veci tykajici se ukolu
     public GameObject tasks;
     public GameObject scores;
 
@@ -53,6 +59,8 @@ public class ScoreManager : MonoBehaviour {
         pole.SetActive(false);
         score = GameManager.instance.highscores.scores;
         back = GameObject.Find("BacktoMenu");
+        restart = GameObject.Find("Restart");
+        restart.SetActive(false);
         back.SetActive(false);
         firstComplete = GameObject.Find("newFirst");
         firstComplete.SetActive(false);
@@ -71,20 +79,21 @@ public class ScoreManager : MonoBehaviour {
 
     void Update()
     {        
-
+        //Az hrac stiskne enter, zobrazi se skore se zadanym jmenem
         if (Input.GetKeyDown(KeyCode.Return))
         {
             GameManager.instance.newRecord = false;
             NewName();
 
         }
-
+        //Pokud bylo dosahnuto noveho rekordu, lze zadat nove jmeno
         if (GameManager.instance.newRecord)
-        {
+        {            
             pole.SetActive(true);
             pole.GetComponent<InputField>().Select();
         }
 
+        //Zobrazeni skore a ostatnich prvku
         else
         {
             prepnuti.SetActive(true);    
@@ -92,6 +101,7 @@ public class ScoreManager : MonoBehaviour {
             {
                 DisplayScore();
                 back.SetActive(true);
+                restart.SetActive(true);
                 GameManager.instance.SaveData();                
             }           
             if (Input.GetKeyDown(KeyCode.Escape))
@@ -101,8 +111,10 @@ public class ScoreManager : MonoBehaviour {
         }
     }
 
+    //Vlozi zadane jmeno k prave ziskanemu rekordu ve hre
     void NewName()
     {        
+        //najde odpovidajici skore
         for (int i = 0; i < 10; i++)
         {
             if(score[i].score == GameManager.instance.recordScore)
@@ -112,9 +124,11 @@ public class ScoreManager : MonoBehaviour {
                 break;
             }
         }
+        //vypne pole
         pole.SetActive(false);
     }
 
+    //Zobrazi tabulku skore
     void DisplayScore()
     {
         prvni.text = score[0].name;
@@ -155,6 +169,7 @@ public class ScoreManager : MonoBehaviour {
         Application.LoadLevel(sceneName);
     }
 
+    //Prepne zobrazeni skore a ukolu
     public void SwitchShow() {
         if (highscore)
         {
@@ -177,6 +192,7 @@ public class ScoreManager : MonoBehaviour {
         }
     }
 
+    //Pokud hrac klikne na moynost noveho ukolu, vytvori se a ihned zobrazi
     public void NewTask(int questRow)
     {        
         GameManager.instance.GetComponent<TaskManager>().InitiateTask(GameManager.instance.GetComponent<TaskManager>().activeTasks[questRow].id + 1, questRow);
@@ -195,6 +211,7 @@ public class ScoreManager : MonoBehaviour {
                 GameManager.instance.GetComponent<TaskManager>().DisplayThird();
                 break;
         }
+        //vse se ulozi
         GameManager.instance.SaveData();
     }
 }

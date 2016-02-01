@@ -57,7 +57,7 @@ public class EnemyAI : MonoBehaviour {
     public float ignitionRadius;
     private float ignitionSpeed;
     private bool ignited = false;
-    private bool exploded = false;
+    public bool exploded = false;
     private Vector3 originalScale;
 
     /////////////////////chase
@@ -243,8 +243,8 @@ public class EnemyAI : MonoBehaviour {
 
         if (explosionCountdown < 0 && !exploded)
         {
-            GetComponent<HealthScript>().Damage(100);
             exploded = true;
+            GetComponent<HealthScript>().Damage(100);           
         }
     }
 

@@ -13,6 +13,7 @@ public class ScoreElement
 public class BestScores : MonoBehaviour {
     public List<ScoreElement> scores;      
 
+    //Funkce vytvori nahodnou tabulku 10 nejlepsich skore
     public void InitiateBestScores() {
         for(int i = 0; i < 10; i++){
             ScoreElement element = new ScoreElement();
@@ -23,11 +24,13 @@ public class BestScores : MonoBehaviour {
         SortScores();        
     }
 
+    //Seradi skore v tabulce
     public void SortScores()
     {
         scores.Sort((x, y) => y.score.CompareTo(x.score));
     }
 
+    //Zkontroluje, jestli nebylo dosahnuto nove skore, pokud ano, vytvori novy zaznam
     public void CheckScores(float final)
     {
         for (int i = 0; i < 10; i++)

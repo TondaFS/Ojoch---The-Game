@@ -30,27 +30,31 @@ public class CollectingScript : MonoBehaviour {
         tmpPozice = 0;
     }    
 
+    //Zobrazi prave sebrany predmet
 	public void showObject(int id, int number, int combo)
     {
-        pozice = 0;
-        
+        pozice = 0;        
         Sprite coll;
 
+        //Zkotroluje, jestli se prave nezobrazuji uz jine sebrane predmety
         for(int i = 0; i < occupied.Length; i++)
         {
+            //Pokud ano, nastavi jinou pozici pro zobrazeni
             if (occupied[i])
             {
                 pozice += 120;
             }
             else
-            {
+            {                
                 umisteni = i;
                 break;
             }
         }       
 
+        //Kolikaty predmet zobrazuji?
         switch (number)
         {
+            //Pokud prvni, vytvorim jej a ulozim informace o jeho pozici 
             case 1:  
                 var firstOne = Instantiate(prvni) as Image;
                 firstOne.GetComponent<Transform>().SetParent(first);
@@ -64,6 +68,7 @@ public class CollectingScript : MonoBehaviour {
                 tmpUmisteni = umisteni;                       
                 break;
 
+            //Pokud druhy, zjistim pozici odpovidajiciho prvniho predmetu a del toho ho zobrazim
             case 2:
                 var secondOne = Instantiate(druhy) as Image;                
                 secondOne.GetComponent<Transform>().position = first.position + new Vector3(125, -tmpPozice * tmpUmisteni, 0);
@@ -82,6 +87,7 @@ public class CollectingScript : MonoBehaviour {
         }
     }
 	
+    //nalezeni spravneho spritu predmetu
     public Sprite CollInstance(int id)
     {
         switch (id)

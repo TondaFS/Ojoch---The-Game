@@ -32,20 +32,24 @@ public class SoundManager : MonoBehaviour {
         soundAudioSource = GetComponent<AudioSource>();
     }	
 
+    //Prehraje zvuk
     public void PlaySound(AudioClip sound){
         soundAudioSource.PlayOneShot(sound, soundsVolume);
     }
 
+    //Prehraje nahodny zvuk 
     public void PlayRandom(params AudioClip[] clips) {
         int randomIndex = Random.Range(0, clips.Length);
         AudioClip clip = clips[randomIndex];
         soundAudioSource.PlayOneShot(clip, soundsVolume);
     }
 
+    //Nastavi Pitch
     public void setPitch(AudioSource source, float pitch) {
         source.pitch = pitch;
     }    
 
+    //Vsechno ztlumi
     public void MuteEverything(bool bolean)
     {        
         soundAudioSource.mute = bolean;

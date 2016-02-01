@@ -24,7 +24,7 @@ public class EnemySpawner : MonoBehaviour {
         currentEnemies.RemoveAll(item => item == null);
         currentBosses.RemoveAll(item => item == null);
 
-        Debug.Log(currentBosses.Count);
+       // Debug.Log(currentBosses.Count);
 
         if (currentEnemies.Count < 2 && currentBosses.Count == 0)
         {

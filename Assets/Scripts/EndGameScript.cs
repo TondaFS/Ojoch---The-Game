@@ -3,13 +3,12 @@ using System.Collections;
 using UnityEngine.UI;
 
 public class EndGameScript : MonoBehaviour {
+    
     HealthScript ojochHealth;    
     ScoreScript session;
     public float finalScore;
-    public bool sanityLost = false;
-    public float distance = 0;
-    
-
+    public bool sanityLost = false;         //Prisel Ojoch o pricetnost?
+    public float distance = 0;              //Urazena vzdalenost (kvuli ukolum)
 
     void Start()
     {
@@ -24,11 +23,25 @@ public class EndGameScript : MonoBehaviour {
     }
 
     public void EndGame() {
+        session.end = true;     //prestane pocitat skore
         FinalScore();
-        GetComponent<SessionController>().ojochDead = true;        
-        GameObject.Find("PanelText").GetComponent<Text>().text = "GameOver!"; 
+        GetComponent<SessionController>().ojochDead = true;
+        GetComponent<SessionController>().deathMenu.SetActive(true);
+        if (GameManager.instance.newRecord)
+        {
+            GetComponent<SessionController>().newHighScoreText.SetActive(true);
+        }
+        for(int i = 0; i < 3; i++)
+        {
+            if (GameManager.instance.GetComponent<TaskManager>().activeTasks[i].completed)
+            {
+                GetComponent<SessionController>().taskCompletedText.SetActive(true);
+                break;
+            }
+        }
     }
 
+    //Spocita finalni skore na zaklade hracovy finalni pricetnosti a zkontroluje aktivni ukoly, ktere se cekuji vydzy na knci hry
     void FinalScore() {
         finalScore = session.tmpscore;
         if (ojochHealth.sanity > 3)
@@ -39,6 +52,7 @@ public class EndGameScript : MonoBehaviour {
             //check tasku
             for (int i = 0; i < 3; i++)
             {
+                //Zkontroluje ukol maximalni pricetnosti
                 if (GameManager.instance.GetComponent<TaskManager>().activeTasks[i].type == "sanityFull")
                 {
                     GameManager.instance.GetComponent<TaskManager>().CheckCountingTask(i);
@@ -60,6 +74,7 @@ public class EndGameScript : MonoBehaviour {
             {
                 for (int i = 0; i < 3; i++)
                 {
+                    //Zkontroluje ukol ztraty veskere pricetnosti
                     if (GameManager.instance.GetComponent<TaskManager>().activeTasks[i].type == "sanity")
                     {
                         GameManager.instance.GetComponent<TaskManager>().CheckCountingTask(i);
@@ -69,8 +84,9 @@ public class EndGameScript : MonoBehaviour {
         }
         session.scoreText.text = "" + finalScore;
 
+        //Kontrola ukolu
         for (int i = 0; i < 3; i++) {
-            if (GameManager.instance.GetComponent<TaskManager>().activeTasks[i].type == "score")
+            if (GameManager.instance.GetComponent<TaskManager>().activeTasks[i].type == "score")   
             {
                 GameManager.instance.GetComponent<TaskManager>().CheckOnceTask(finalScore, i);
             }
@@ -97,6 +113,9 @@ public class EndGameScript : MonoBehaviour {
             }
         }
 
+        //Zkontroluje, jestli neni novy rekord
         GameManager.instance.highscores.CheckScores(finalScore);        
     }    
+
+    
 }

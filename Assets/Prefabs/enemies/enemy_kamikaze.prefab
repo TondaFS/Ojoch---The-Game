@@ -140,6 +140,7 @@ MonoBehaviour:
   hp: 3
   sanity: 30
   isEnemy: 1
+  enemyType: 3
   sanityOne: {fileID: 0}
   sanityTwo: {fileID: 0}
   sanityThree: {fileID: 0}
@@ -192,6 +193,10 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: hp
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: enemyType
       value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []

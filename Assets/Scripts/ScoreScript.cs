@@ -11,12 +11,14 @@ public class ScoreScript : MonoBehaviour {
     public int killedEnemies;                       //pocet zabitych nepratel
     public float fiveSecondsTimer = 0;               //Timer na vynulovani modifikatoru skore
 
+    public bool end;
+
     public Slider fiveSecondsSlider;
     public GameObject fiveSecondsObject;
 
     void Start()
     {
-        
+        end = false;
         scorePerSecond = 1;
         tmpscore = 0;
         killedEnemies = 0;
@@ -30,8 +32,13 @@ public class ScoreScript : MonoBehaviour {
 
     void Update()
     {
-        scoreText.text = "" + tmpscore;
+        //Pokud neni konec, zobrazuje nove skore
+        if (!end)
+        {
+            scoreText.text = "" + tmpscore;
+        }
 
+        //kazdou vterinu pricita skore
         if (scorePerSecond <= 0)
         {
             tmpscore += 1 * modifikatorScore;
@@ -39,6 +46,7 @@ public class ScoreScript : MonoBehaviour {
         }
         scorePerSecond -= Time.deltaTime;
 
+        
         if (modifikatorScore < 1)
         {
             modifikatorScore = 1;
@@ -46,22 +54,27 @@ public class ScoreScript : MonoBehaviour {
 
         modi.text = "x" + modifikatorScore;
 
+        //Pri 3 zabitych nepratelich zvysi modifikator o 1
         if (killedEnemies == 3)
         {
             modifikatorScore += 1;
             killedEnemies = 0;
         }
 
+        //modifikator 9 je max!
         if (modifikatorScore > 9)
         {            
             modifikatorScore = 9;
         }
 
+        //Pocita dobu udrzeni modifikatoru x9
         if (modifikatorScore == 9)
         {
             GameManager.instance.GetComponent<TaskManager>().modifyTime += Time.deltaTime;
 
         }
+
+        //V pripade ze neni modif.9 - nuluje veskery cas a uklada nejdelsi dobu, kterou v kole hrac ziskal
         else
         {
             if(GameManager.instance.GetComponent<TaskManager>().modifyTmp < GameManager.instance.GetComponent<TaskManager>().modifyTime)
@@ -71,6 +84,7 @@ public class ScoreScript : MonoBehaviour {
             GameManager.instance.GetComponent<TaskManager>().modifyTime = 0;
         }      
 
+        //Kontrola Timeru pro modifikator 
         if (fiveSecondsTimer > 0)
         {
 
@@ -86,11 +100,13 @@ public class ScoreScript : MonoBehaviour {
         }
     }
 
+    //Upravi skore o danou hodnotu
     public void AdjustScore(float value)
     {
         tmpscore += value * modifikatorScore;
     }
 
+    //Nastavi Timer pro modifikator
     public void FiveSecondsTimer()
     {
         fiveSecondsTimer = 5;

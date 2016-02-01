@@ -93,6 +93,16 @@ MonoBehaviour:
   hp: 2
   sanity: 30
   isEnemy: 1
+  enemyType: 0
+  sanityOne: {fileID: 0}
+  sanityTwo: {fileID: 0}
+  sanityThree: {fileID: 0}
+  healthOne: {fileID: 0}
+  healthTwo: {fileID: 0}
+  healthThree: {fileID: 0}
+  healthFour: {fileID: 0}
+  healthFive: {fileID: 0}
+  healthSix: {fileID: 0}
 --- !u!114 &11457146
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -106,12 +116,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movementSpeed: 3
   states: 03000000
+  turns: 1
   flyOnScreenPosX: .800000012
   points: []
   explosionCountdown: 0
   ignitionRadius: 0
   missile: {fileID: 0}
   ammo: 0
+  missileCooldown: 1
   waitTime: -1
 --- !u!212 &21282144
 SpriteRenderer:
@@ -181,6 +193,10 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: waitTime
       value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: enemyType
+      value: bird
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

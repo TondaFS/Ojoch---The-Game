@@ -77,18 +77,17 @@ public class PowerUpScript : MonoBehaviour {
             }
         }
 
-        /*
+        
         //Kontrola contra strelby / prdak
         if (contraTime > 0)
         {
             contraTime -= Time.deltaTime;
-            effects.prdak.GetComponent<Text>().text = "Prďák: " + (int)contraTime;
             if (contraTime <= 0)
             {
                 ojoch.contraBubles = false;
-                effects.prdak.SetActive(false);
             }
-        }*/
+        }
+        
     }
 
     //provedení komba po sebrání 2 powerupů
@@ -135,7 +134,7 @@ public class PowerUpScript : MonoBehaviour {
 
             /// <summary>
             /// AK47: Koření + Koření
-            ///  S ojochem to na nekolik vterin hazi a objeví se duch           
+            ///  30% sance, ze ojoch dosatne kontra strelbu, ak47, anebo oboji        
             /// </summary> 
             case 40:
                 ShowPowerUpText("Rambouch", true);
@@ -174,7 +173,7 @@ public class PowerUpScript : MonoBehaviour {
             /// Iverzní ovládání + zrušení modif. skóre
             /// </summary>  
             case 21:
-                ShowPowerUpText("Zmatek", true);
+                ShowPowerUpText("Zmatek", false);
                 ojoch.session.modifikatorScore = 1;
 
                 ojoch.invertTime = 10;
@@ -187,11 +186,12 @@ public class PowerUpScript : MonoBehaviour {
 
             /// <summary>
             /// NÁPOJ LÁSKY: Mýdlo + Ponožka
-            /// Zrychli pohyb vseho a zaroven o neco zrychli celkovy posun zrychleni + Nápoj lásky 
+            /// Zrychli pohyb vseho a zaroven o neco zrychli celkovy posun zrychleni + Nápoj lásky(socha vystreli srdicka) 
             /// </summary>  
             case 9:
                 ShowPowerUpText("Nápoj lásky", false);
                 socha.GetComponent<StatueAttackScript>().heartAttack = true;
+                GameObject.Find("Statue Sprite").GetComponent<Animator>().SetTrigger("shoot");
 
                 sessionController.GetComponent<SessionController>().speedUpTime -= 5;
                 sessionController.GetComponent<SessionController>().gameSpeed += 0.5f;
@@ -218,7 +218,7 @@ public class PowerUpScript : MonoBehaviour {
         }
     }
 
-    //Zobrazi text powerupu
+    //Zobrazi text powerupu a prehraje dobry/spatny zvuk
     public void ShowPowerUpText(string powerUp, bool type) {
         if (type)
         {

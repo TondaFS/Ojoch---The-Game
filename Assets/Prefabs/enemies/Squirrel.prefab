@@ -126,6 +126,7 @@ MonoBehaviour:
   hp: 1
   sanity: 30
   isEnemy: 1
+  enemyType: 1
   sanityOne: {fileID: 0}
   sanityTwo: {fileID: 0}
   sanityThree: {fileID: 0}
@@ -179,6 +180,10 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_TagString
       value: Boss
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: enemyType
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
