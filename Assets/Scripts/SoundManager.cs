@@ -34,7 +34,14 @@ public class SoundManager : MonoBehaviour {
 
     //Prehraje zvuk
     public void PlaySound(AudioClip sound){
+        soundAudioSource.pitch = 1;
         soundAudioSource.PlayOneShot(sound, soundsVolume);
+    }
+
+    public void PlaySoundPitchShift(AudioClip sound)
+    {
+        soundAudioSource.pitch = Random.Range(0.92f, 1.08f);
+        soundAudioSource.PlayOneShot(sound, soundsVolume - 0.2f);
     }
 
     //Prehraje nahodny zvuk 

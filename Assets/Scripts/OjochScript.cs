@@ -142,7 +142,7 @@ public class OjochScript : MonoBehaviour {
                 {
                     weapons[0].Attack(false, new Vector2(1, 0));                       //atribut false -> jedna se o nepritele, kdo strili? 
                     animator.SetTrigger("fire");
-                    managerSound.PlaySound(managerSound.clipShoot);                        //Zvuk vystrelu
+                    managerSound.PlaySoundPitchShift(managerSound.clipShoot);                        //Zvuk vystrelu
 
                     //Pokud je aktivovany prdak: Contra strelba
                     if (contraBubles)
@@ -158,7 +158,7 @@ public class OjochScript : MonoBehaviour {
                 {
                     weapons[0].Ak47Attack(false, new Vector2(1, 0));
                     animator.SetTrigger("akFire");
-                    managerSound.PlaySound(managerSound.clipAk47);
+                    managerSound.PlaySoundPitchShift(managerSound.clipAk47);
 
                     //Ak47 + contra
                     if (contraBubles)
