@@ -10,7 +10,9 @@ GameObject:
   - 4: {fileID: 428392}
   - 212: {fileID: 21256070}
   - 114: {fileID: 11409246}
-  m_Layer: 0
+  - 61: {fileID: 6135352}
+  - 61: {fileID: 6111362}
+  m_Layer: 9
   m_Name: building_02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -29,6 +31,32 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
+--- !u!61 &6111362
+BoxCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 169390}
+  m_Enabled: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_Offset: {x: 4.05865383, y: 1.79642439}
+  serializedVersion: 2
+  m_Size: {x: 2.34762597, y: 1.69307613}
+--- !u!61 &6135352
+BoxCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 169390}
+  m_Enabled: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_Offset: {x: 10.5143671, y: 6.38754368}
+  serializedVersion: 2
+  m_Size: {x: 3.36787605, y: 1.2357254}
 --- !u!114 &11409246
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -74,7 +102,11 @@ Prefab:
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
-    m_Modifications: []
+    m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 169390}

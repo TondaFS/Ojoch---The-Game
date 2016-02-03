@@ -21,15 +21,12 @@ public class PlayVideo : MonoBehaviour {
 	
 	void Update ()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && intro.isPlaying)
+        if (Input.anyKeyDown)
         {
-            intro.Pause();
+            introAudio.volume = 0;
+            fader.FadeOutLoadNewScene("menu");
         }
-        else if(Input.GetKeyDown(KeyCode.Space) && !intro.isPlaying)
-        {
-            intro.Play();
-        }
-        else if (Input.anyKeyDown)
+        if (!intro.isPlaying)
         {
             fader.FadeOutLoadNewScene("menu");
         }

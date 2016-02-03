@@ -50,6 +50,7 @@ GameObject:
   - 114: {fileID: 11484954}
   - 114: {fileID: 11477732}
   - 114: {fileID: 11410104}
+  - 114: {fileID: 11416092}
   m_Layer: 0
   m_Name: Session Controller
   m_TagString: GameController
@@ -313,9 +314,9 @@ BoxCollider2D:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_UsedByEffector: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 5.70006943, y: 0}
   serializedVersion: 2
-  m_Size: {x: 1, y: 15}
+  m_Size: {x: 12.4001293, y: 15}
 --- !u!61 &6152960
 BoxCollider2D:
   m_ObjectHideFlags: 1
@@ -326,9 +327,9 @@ BoxCollider2D:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_UsedByEffector: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: 2.45912194}
   serializedVersion: 2
-  m_Size: {x: 20, y: 1}
+  m_Size: {x: 20, y: 5.91823435}
 --- !u!61 &6154732
 BoxCollider2D:
   m_ObjectHideFlags: 1
@@ -339,9 +340,9 @@ BoxCollider2D:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_UsedByEffector: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: -3.24825883}
   serializedVersion: 2
-  m_Size: {x: 20, y: 1}
+  m_Size: {x: 20, y: 7.49651718}
 --- !u!81 &8124680
 AudioListener:
   m_ObjectHideFlags: 1
@@ -514,6 +515,7 @@ MonoBehaviour:
   scorePerSecond: 0
   killedEnemies: 0
   fiveSecondsTimer: 0
+  end: 0
   fiveSecondsSlider: {fileID: 0}
   fiveSecondsObject: {fileID: 0}
 --- !u!114 &11415292
@@ -532,6 +534,21 @@ MonoBehaviour:
   pause: 0
   pauseMenu: {fileID: 0}
   ojochDead: 0
+  deathMenu: {fileID: 0}
+  newHighScoreText: {fileID: 0}
+  taskCompletedText: {fileID: 0}
+--- !u!114 &11416092
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 126420}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b590b3bb92c988c4ea43617a45f2e652, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  delay: 5
 --- !u!114 &11432858
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -544,8 +561,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   waves:
+  - {fileID: 496572, guid: 2c524732b2ef8924d989c2073829abd4, type: 2}
+  - {fileID: 413720, guid: d6d4608fdf2a6c84e80af3cf099b889e, type: 2}
+  - {fileID: 473092, guid: 6f15d1d0f54c26547bdf5be112a1109d, type: 2}
+  - {fileID: 488132, guid: 6fec9b6acf085e140bd13b86a335beff, type: 2}
+  - {fileID: 492388, guid: 32d0134ad5f308f4fbdc8a29919aeb13, type: 2}
   - {fileID: 493142, guid: 82f501c7e89e24e4e9bfa15425bf2365, type: 2}
   - {fileID: 493142, guid: 207adecc00b86e44fae0e7f603101b43, type: 2}
+  - {fileID: 493142, guid: 5d79d4af17f96ea4790c6a5dd80656f5, type: 2}
+  - {fileID: 493142, guid: 807b20966621e9f46aa44df0738d6203, type: 2}
+  - {fileID: 493142, guid: 82f91753899bbd3429c31df87f6a1bed, type: 2}
+  - {fileID: 493142, guid: 799e89ee11743b44d87f6017ddda88af, type: 2}
+  - {fileID: 440330, guid: 5b83f56788296874990a1829cf822c0f, type: 2}
 --- !u!114 &11444024
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -637,12 +664,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2fc86856ae39384e8d938ceb7bac24d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  slowtime: {fileID: 0}
-  prdak: {fileID: 0}
-  ak47: {fileID: 0}
+  rambouch: {fileID: 0}
   smradostit: {fileID: 0}
   duseni: {fileID: 0}
   zmatek: {fileID: 0}
+  rText: {fileID: 0}
+  sText: {fileID: 0}
+  dText: {fileID: 0}
+  zText: {fileID: 0}
   soufl: {fileID: 0}
 --- !u!114 &11488834
 MonoBehaviour:

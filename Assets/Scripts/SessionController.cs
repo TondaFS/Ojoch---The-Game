@@ -56,14 +56,14 @@ public class SessionController : MonoBehaviour
     {
         if (pause)
         {
-            if (Input.GetKeyDown(KeyCode.Escape))
+            if (Input.GetButtonDown("Pause"))
             {
                 PausingGame(false);   
             }
         }
         else if (ojochDead)
         {
-            if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Escape))
+            if (Input.GetKeyDown(KeyCode.Space) || Input.GetButtonDown("Pause"))
             {
                 GameObject.Find("OVERLAY").GetComponent<ScreenFader>().FadeOutLoadNewScene("highscore");
             }
@@ -74,7 +74,7 @@ public class SessionController : MonoBehaviour
         }
         else
         {
-            if (Input.GetKeyDown(KeyCode.Escape))
+            if (Input.GetButtonDown("Pause"))
             {
                 PausingGame(true);
             }

@@ -1,49 +1,48 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &167406
+--- !u!1 &180986
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 4
   m_Component:
-  - 4: {fileID: 491136}
-  - 114: {fileID: 11408570}
-  - 114: {fileID: 11408240}
-  - 82: {fileID: 8224466}
-  - 114: {fileID: 11433182}
-  - 114: {fileID: 11464716}
+  - 4: {fileID: 451066}
+  - 114: {fileID: 11405296}
+  - 114: {fileID: 11416962}
+  - 114: {fileID: 11472556}
+  - 82: {fileID: 8218110}
   m_Layer: 0
-  m_Name: Main Menu Controller
-  m_TagString: GameController
+  m_Name: scoreManager
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &491136
+--- !u!4 &451066
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 167406}
+  m_GameObject: {fileID: 180986}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 1.11833525, y: -.050272122, z: 11.828125}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
---- !u!82 &8224466
+--- !u!82 &8218110
 AudioSource:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 167406}
+  m_GameObject: {fileID: 180986}
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: d9877c2c0aa92eb4aa90888e5c2f2563, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 9752d3b22a7ae294fbc0062bd2cb67cb, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: .5
+  m_Volume: .200000003
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -102,12 +101,58 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
---- !u!114 &11408240
+--- !u!114 &11405296
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 167406}
+  m_GameObject: {fileID: 180986}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f008b0ecb42b5e4e8b460a76593b789, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prvni: {fileID: 0}
+  prvniScore: {fileID: 0}
+  druhy: {fileID: 0}
+  druhyScore: {fileID: 0}
+  treti: {fileID: 0}
+  tretiScore: {fileID: 0}
+  ctvrty: {fileID: 0}
+  ctvrtyScore: {fileID: 0}
+  paty: {fileID: 0}
+  patyScore: {fileID: 0}
+  sesty: {fileID: 0}
+  sestyScore: {fileID: 0}
+  sedmy: {fileID: 0}
+  sedmyScore: {fileID: 0}
+  osmy: {fileID: 0}
+  osmyScore: {fileID: 0}
+  devaty: {fileID: 0}
+  devatyScore: {fileID: 0}
+  desaty: {fileID: 0}
+  desatyScore: {fileID: 0}
+  score: []
+  fader: {fileID: 0}
+  best: {fileID: 0}
+  pole: {fileID: 0}
+  shown: 0
+  back: {fileID: 0}
+  restart: {fileID: 0}
+  tasks: {fileID: 0}
+  scores: {fileID: 0}
+  firstComplete: {fileID: 0}
+  secondComplete: {fileID: 0}
+  thirdComplete: {fileID: 0}
+  changer: {fileID: 0}
+  prepnutiText: {fileID: 0}
+  prepnuti: {fileID: 0}
+--- !u!114 &11416962
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 180986}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 556c27de8cc28d54c8f86626c72e1183, type: 3}
@@ -117,51 +162,18 @@ MonoBehaviour:
   fadeSpeed: 2
   isSceneStarting: 1
   isSceneEnding: 0
---- !u!114 &11408570
+--- !u!114 &11472556
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 167406}
+  m_GameObject: {fileID: 180986}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a6f51c928fcdcb042b06a975f217861e, type: 3}
+  m_Script: {fileID: 11500000, guid: 211bab2c1e44d484bb79b0d5dd72021c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  menuScreen: {fileID: 0}
-  settingScreen: {fileID: 0}
-  extraScreen: {fileID: 0}
-  authorsScreen: {fileID: 0}
-  changeSetting: 0
-  music: {fileID: 0}
-  sounds: {fileID: 0}
---- !u!114 &11433182
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 167406}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ebf9305b24d18e7429cc153fbe5423f7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rooms:
-  - {fileID: 0}
-  spawnHeight: -5
-  spawnDistance: 10
---- !u!114 &11464716
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 167406}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 618da468d3ab0af4f861af7e63671bf1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gameManager: {fileID: 147462, guid: 7011819d57f1bb248ad121654bc3fb81, type: 2}
+  scores: []
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
@@ -171,5 +183,5 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 167406}
+  m_RootGameObject: {fileID: 180986}
   m_IsPrefabParent: 1

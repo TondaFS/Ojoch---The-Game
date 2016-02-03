@@ -125,6 +125,7 @@ public class PowerUpScript : MonoBehaviour {
                 ojoch.godMode = 5;
                 effects.smradostit.SetActive(true);
                 GameObject.Find("sprite").GetComponent<ColorChanger>().active = true;
+                GameObject.Find("sock pivot").GetComponent<SpinSocks>().enabled = true;
 
                 sessionController.GetComponent<SessionController>().speedUpTime += 4;
                 sessionController.GetComponent<SessionController>().gameSpeed -= 1f;

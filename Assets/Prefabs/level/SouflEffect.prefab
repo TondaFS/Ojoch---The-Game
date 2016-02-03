@@ -16,7 +16,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &127360
 GameObject:
   m_ObjectHideFlags: 0
@@ -33,7 +33,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &144028
 GameObject:
   m_ObjectHideFlags: 0
@@ -65,14 +65,14 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &442124
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 157802}
-  m_LocalRotation: {x: 0, y: 0, z: -.707106829, w: .707106709}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 1}
   m_Children: []
@@ -99,7 +99,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 127360}
-  m_LocalRotation: {x: 0, y: 0, z: .707106829, w: .707106709}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 1}
   m_Children: []
@@ -177,8 +177,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: .5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 92924783
-  m_SortingOrder: 152
+  m_SortingLayerID: -1741792119
+  m_SortingOrder: 201
   m_Sprite: {fileID: 21300000, guid: 1b8df3c9c0a6d78479b09a31e3aaac23, type: 3}
   m_Color: {r: 0, g: 0, b: 0, a: 0}
 --- !u!212 &21256974
@@ -203,8 +203,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: .5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 92924783
-  m_SortingOrder: 150
+  m_SortingLayerID: -1741792119
+  m_SortingOrder: 200
   m_Sprite: {fileID: 21300000, guid: 3228ec22c8e28b347a0d5ce96ce3ea2d, type: 3}
   m_Color: {r: 0, g: 0, b: 0, a: 0}
 --- !u!212 &21296364
@@ -229,8 +229,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: .5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 92924783
-  m_SortingOrder: 150
+  m_SortingLayerID: -1741792119
+  m_SortingOrder: 200
   m_Sprite: {fileID: 21300000, guid: 3228ec22c8e28b347a0d5ce96ce3ea2d, type: 3}
   m_Color: {r: 0, g: 0, b: 0, a: 0}
 --- !u!1001 &100100000

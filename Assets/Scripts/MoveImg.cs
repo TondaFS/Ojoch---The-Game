@@ -22,7 +22,7 @@ public class MoveImg : MonoBehaviour
         }
         else
         {
-            transform.Translate(new Vector3(tileSize, 0));
+            transform.Translate(new Vector3(0, tileSize));
         }
         startPosition = transform.position;
     }

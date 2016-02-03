@@ -48,7 +48,7 @@ public class EnemySpawner : MonoBehaviour {
 
                 if (child.tag == "PowerUp")
                 {
-                    Debug.Log(child + " spawned!");
+                    //Debug.Log(child + " spawned!");
                     Transform newPowerUp = (Transform) Instantiate(child, new Vector3(child.position.x, child.position.y), Quaternion.identity);
                     currentPowerUps.Add(newPowerUp);
                 }                 

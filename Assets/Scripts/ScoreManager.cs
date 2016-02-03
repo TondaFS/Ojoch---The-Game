@@ -72,6 +72,8 @@ public class ScoreManager : MonoBehaviour {
         tasks.SetActive(false);
         scores = GameObject.Find("scores");
 
+        fader = gameObject.GetComponent<ScreenFader>();
+
         prepnuti = GameObject.Find("prepnutiWhole");
         prepnuti.SetActive(false);
               

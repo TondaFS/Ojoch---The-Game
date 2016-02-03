@@ -124,6 +124,7 @@ public class OjochScript : MonoBehaviour {
                 godMode = 0;
                 powerCombo.effects.smradostit.SetActive(false);
                 GameObject.Find("sprite").GetComponent<ColorChanger>().active = false;
+                GameObject.Find("sock pivot").GetComponent<SpinSocks>().enabled = false;
             }
         }
 

@@ -2,8 +2,6 @@
 using System.Collections;
 
 public class ColorChanger : MonoBehaviour {
-    public float c = 1;
-    bool change = true;
     public bool active = false;
 
     void Update() {
