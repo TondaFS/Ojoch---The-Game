@@ -45,11 +45,9 @@ public class ShotScript : MonoBehaviour {
         }
     }
 
-    //Znici objekt, kdyz opusti obrazovku
+    //Znici se po opusteni obrazovky
     void OnBecameInvisible()
     {
-        Destroy(gameObject); 
+        Destroy(gameObject);
     }
-
-
 }

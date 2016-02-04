@@ -33,25 +33,61 @@ public class TaskManager : MonoBehaviour {
     };
 
     //Prvni sada ukolu
-    public Task[] allFirstTasks = new Task[] {  new Task(0, "Dosáhni skóre 500.", 0, 500, "score", false),
-                                                new Task(1, "Udrž si maximální příčetnost 3x.", 0, 3, "sanityFull", false),
-                                                new Task(2, "Přijď o veškerou příčetnost.", 0, 1, "sanity", false),
-                                                new Task(3, "Dosáhni skóre 5000.", 0, 5000, "score", false),
-                                                new Task(4, "Přijď o veškerou příčetnost 3x.", 0, 3, "sanity", false),};
+    public Task[] allFirstTasks = new Task[] {  new Task(0, "Zabij 20 nepřátel.", 0, 20, "kill", false),
+                                                new Task(1, "Zabij 15 nepřátel v jedné hře.", 0, 15, "killRound", false),
+                                                new Task(2, "Zabij 50 nepřátel.", 0, 50, "kill", false),
+                                                new Task(3, "Zabij 30 nepřátel v jedné hře.", 0, 30, "kill", false),
+                                                new Task(4, "Zabij 75 nepřátel.", 0, 75, "kill", false),
+                                                new Task(5, "Zabij 40 nepřátel v jedné hře.", 0, 40, "killRound", false),
+                                                new Task(6, "Přijď o veškerou příčetnost.", 0, 1, "sanity", false),
+                                                new Task(7, "Zabij 100 nepřátel.", 0, 100, "kill", false),
+                                                new Task(8, "Zabij 50 nepřátel v jedné hře.", 0, 75, "killRound", false),
+                                                new Task(9, "Přijď o veškerou příčetnost 3x.", 0, 3, "sanity", false),
+                                                new Task(10, "Zabij 150 nepřátel.", 0, 150, "kill", false),
+                                                new Task(11, "Zabij 75 nepřátel v jedné hře.", 0, 75, "killRound", false),
+                                                new Task(12, "Přijď o veškerou příčetnost 5x.", 0, 5, "sanity", false),
+                                                new Task(13, "Zabij 300 nepřátel.", 0, 300, "kill", false),
+                                                new Task(14, "Zabij 100 nepřátel v jedné hře.", 0, 100, "killRound", false),
+                                                new Task(15, "Opusť ten Hejt!", 0, 0, "completed", false),
+    };
 
     //Druha sada ukolu
-    public Task[] allSecondTasks = new Task[] { new Task(0, "Zabij 15 nepřátel.", 0, 15, "kill", false),
-                                                new Task(1, "Zabij 20 nepřátel v jedné hře", 0, 20, "killRound", false),
-                                                new Task(2, "Udrž si modifikator x9 po dobu 15s", 0, 15, "modify", false ),
-                                                new Task(3, "Zabij 50 nepřátel.", 0, 50, "kill", false),
-                                                new Task(4, "Udrž si modifikator x9 po dobu 30s", 0, 30, "modify", false),};
+    public Task[] allSecondTasks = new Task[] { new Task(0, "Dosáhni skóre 10 000.", 0, 10000, "score", false),
+                                                new Task(1, "Vydrž s Ojochem naživu po dobu 60s.", 0, 60, "distance", false),
+                                                new Task(2, "Udrž si modifikator x9 po dobu 10s.", 0, 15, "modify", false),
+                                                new Task(3, "Dosáhni skóre 25 000.", 0, 25000, "score", false),
+                                                new Task(4, "Vydrž s Ojochem naživu po dobu 120s.", 0, 120, "distance", false),
+                                                new Task(5, "Udrž si modifikator x9 po dobu 15s.", 0, 15, "modify", false),
+                                                new Task(6, "Dosáhni skóre 50 000.", 0, 50000, "score", false),
+                                                new Task(7, "Vydrž s Ojochem naživu po dobu 150s.", 0, 150, "distance", false),
+                                                new Task(8, "Udrž si modifikator x9 po dobu 25s.", 0, 25, "modify", false),
+                                                new Task(9, "Dosáhni skóre 100 000.", 0, 100000, "score", false),
+                                                new Task(10, "Vydrž s Ojochem naživu po dobu 200s.", 0, 200, "distance", false),
+                                                new Task(11, "Udrž si modifikator x9 po dobu 35s.", 0, 35, "modify", false),
+                                                new Task(12, "Dosáhni skóre 200 000.", 0, 200000, "score", false),
+                                                new Task(13, "Vydrž s Ojochem naživu po dobu 300s.", 0, 300, "distance", false),
+                                                new Task(14, "Udrž si modifikator x9 po dobu 45s.", 0, 45, "modify", false),
+                                                new Task(15, "Když chceš postavit loď, tak nepotřebuješ dřevo... nebo tak nějak.", 0, 0, "completed", false),
+    };
 
     //Treti sada ukolu
-    public Task[] allThirdTasks = new Task[] {  new Task(0, "Seber v jedné hře 5 powerUpů.", 0, 5, "grabRound", false),
-                                                new Task(1, "Odehrej hru 5x", 0, 5, "play", false),
-                                                new Task(2, "Uraž vzdálenost 100.", 0, 100, "distance", false),
-                                                new Task(3, "Seber 30 PowerUpů.", 0, 30, "grab", false),
-                                                new Task(4, "Zabij 25 nepřátel v jedné hře", 0, 25, "killRound", false),};
+    public Task[] allThirdTasks = new Task[] {  new Task(0, "Seber 5 PowerUpů / PowerDownů.", 0, 5, "grab", false),
+                                                new Task(1, "Seber 5 PowerUpů / PowerDownů během jedné hry.", 0, 5, "grabRound", false),
+                                                new Task(2, "Udrž si maximální příčetnost. Délka hry musí být alsepoň 60s.", 0, 60, "sanityFull", false),
+                                                new Task(3, "Seber 10 PowerUpů / PowerDownů.", 0, 10, "grab", false),
+                                                new Task(4, "Seber 10 PowerUpů / PowerDownů během jedné hry.", 0, 10, "grabRound", false),
+                                                new Task(5, "Udrž si maximální příčetnost. Délka hry musí být alsepoň 120s.", 0, 120, "sanityFull", false),
+                                                new Task(6, "Seber 25 PowerUpů / PowerDownů.", 0, 25, "grab", false),
+                                                new Task(7, "Seber 15 PowerUpů / PowerDownů během jedné hry.", 0, 15, "grabRound", false),
+                                                new Task(8, "Udrž si maximální příčetnost. Délka hry musí být alsepoň 180s.", 0, 180, "sanityFull", false),
+                                                new Task(9, "Seber 50 PowerUpů / PowerDownů.", 0, 50, "grab", false),
+                                                new Task(10, "Seber 20 PowerUpů / PowerDownů během jedné hry.", 0, 20, "grabRound", false),
+                                                new Task(11, "Udrž si maximální příčetnost. Délka hry musí být alsepoň 240s.", 0, 240, "sanityFull", false),
+                                                new Task(12, "Seber 100 PowerUpů / PowerDownů.", 0, 100, "grab", false),
+                                                new Task(13, "Seber 30 PowerUpů / PowerDownů během jedné hry.", 0, 30, "grabRound", false),
+                                                new Task(14, "Udrž si maximální příčetnost. Délka hry musí být alsepoň 300s.", 0, 300, "sanityFull", false),
+                                                new Task(15, "Iä! Iä! Cthulhu fhtagn! Ph'nglui mglw'nfah Cthulhu R'lyeh wgah'nagl fhtagn!", 0, 0, "completed", false),
+    };
 
     public int killsPerGame;
     public int grabsPerGame;
@@ -73,7 +109,7 @@ public class TaskManager : MonoBehaviour {
         Task brandNewTask = new Task(-1, "Všechno splněno", 0, 0, "done", false);
 
         //Pokud jsou vsechny ukoly ze sady splneny -> nastavi tam ze je vse splneno
-        if (taskId >= 5)
+        if (taskId >= 17)
         {
             activeTasks[activeQuest] = brandNewTask;
         }

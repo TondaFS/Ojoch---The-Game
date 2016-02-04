@@ -41,7 +41,7 @@ public class ScoreScript : MonoBehaviour {
         //kazdou vterinu pricita skore
         if (scorePerSecond <= 0)
         {
-            tmpscore += 1 * modifikatorScore;
+            tmpscore += 5 * modifikatorScore;
             scorePerSecond = 1;
         }
         scorePerSecond -= Time.deltaTime;

@@ -9,6 +9,7 @@ public class MissileScript : MonoBehaviour {
     public bool homing = false;
     public bool spinning = false;
     public int health;
+    public bool death;
 
     private float rotation;
 
@@ -16,6 +17,7 @@ public class MissileScript : MonoBehaviour {
         player = GameObject.FindGameObjectWithTag("Player");
         flightDirection = (player.transform.position - transform.position).normalized;
         rotation = Random.Range(10, 20);
+        death = false;
 
 	}
 
@@ -42,7 +44,14 @@ public class MissileScript : MonoBehaviour {
 
         if (health == 0)
         {
-            Destroy(gameObject);
+            GetComponentInChildren<Animator>().SetTrigger("shooted");
+            GetComponent<Collider2D>().enabled = false;
+            if (!death)
+            {
+                GameManager.instance.GetComponent<SoundManager>().PlaySound(GameManager.instance.GetComponent<SoundManager>().vodka);
+                death = true;
+            }
+            Destroy(gameObject, 0.33f);
         }
 
     }

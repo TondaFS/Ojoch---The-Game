@@ -134,96 +134,301 @@ MonoBehaviour:
     completed: 0
   allFirstTasks:
   - id: 0
-    description: "Dos\xE1hni sk\xF3re 500."
+    description: "Zabij 20 nep\u0159\xE1tel."
     progress: 0
-    target: 500
-    type: score
-    completed: 0
-  - id: 1
-    description: "Udr\u017E si maxim\xE1ln\xED p\u0159\xED\u010Detnost 3x."
-    progress: 0
-    target: 3
-    type: sanityFull
-    completed: 0
-  - id: 2
-    description: "P\u0159ij\u010F o ve\u0161kerou p\u0159\xED\u010Detnost."
-    progress: 0
-    target: 1
-    type: sanity
-    completed: 0
-  - id: 3
-    description: "Dos\xE1hni sk\xF3re 5000."
-    progress: 0
-    target: 5000
-    type: score
-    completed: 0
-  - id: 4
-    description: "P\u0159ij\u010F o ve\u0161kerou p\u0159\xED\u010Detnost 3x."
-    progress: 0
-    target: 3
-    type: sanity
-    completed: 0
-  allSecondTasks:
-  - id: 0
-    description: "Zabij 15 nep\u0159\xE1tel."
-    progress: 0
-    target: 15
+    target: 20
     type: kill
     completed: 0
   - id: 1
-    description: "Zabij 20 nep\u0159\xE1tel v jedn\xE9 h\u0159e"
+    description: "Zabij 15 nep\u0159\xE1tel v jedn\xE9 h\u0159e."
     progress: 0
-    target: 20
+    target: 15
     type: killRound
     completed: 0
   - id: 2
-    description: "Udr\u017E si modifikator x9 po dobu 15s"
-    progress: 0
-    target: 15
-    type: modify
-    completed: 0
-  - id: 3
     description: "Zabij 50 nep\u0159\xE1tel."
     progress: 0
     target: 50
     type: kill
     completed: 0
-  - id: 4
-    description: "Udr\u017E si modifikator x9 po dobu 30s"
+  - id: 3
+    description: "Zabij 30 nep\u0159\xE1tel v jedn\xE9 h\u0159e."
     progress: 0
     target: 30
+    type: kill
+    completed: 0
+  - id: 4
+    description: "Zabij 75 nep\u0159\xE1tel."
+    progress: 0
+    target: 75
+    type: kill
+    completed: 0
+  - id: 5
+    description: "Zabij 40 nep\u0159\xE1tel v jedn\xE9 h\u0159e."
+    progress: 0
+    target: 40
+    type: killRound
+    completed: 0
+  - id: 6
+    description: "P\u0159ij\u010F o ve\u0161kerou p\u0159\xED\u010Detnost."
+    progress: 0
+    target: 1
+    type: sanity
+    completed: 0
+  - id: 7
+    description: "Zabij 100 nep\u0159\xE1tel."
+    progress: 0
+    target: 100
+    type: kill
+    completed: 0
+  - id: 8
+    description: "Zabij 50 nep\u0159\xE1tel v jedn\xE9 h\u0159e."
+    progress: 0
+    target: 75
+    type: killRound
+    completed: 0
+  - id: 9
+    description: "P\u0159ij\u010F o ve\u0161kerou p\u0159\xED\u010Detnost 3x."
+    progress: 0
+    target: 3
+    type: sanity
+    completed: 0
+  - id: 10
+    description: "Zabij 150 nep\u0159\xE1tel."
+    progress: 0
+    target: 150
+    type: kill
+    completed: 0
+  - id: 11
+    description: "Zabij 75 nep\u0159\xE1tel v jedn\xE9 h\u0159e."
+    progress: 0
+    target: 75
+    type: killRound
+    completed: 0
+  - id: 12
+    description: "P\u0159ij\u010F o ve\u0161kerou p\u0159\xED\u010Detnost 5x."
+    progress: 0
+    target: 5
+    type: sanity
+    completed: 0
+  - id: 13
+    description: "Zabij 300 nep\u0159\xE1tel."
+    progress: 0
+    target: 300
+    type: kill
+    completed: 0
+  - id: 14
+    description: "Zabij 100 nep\u0159\xE1tel v jedn\xE9 h\u0159e."
+    progress: 0
+    target: 100
+    type: killRound
+    completed: 0
+  - id: 15
+    description: "Opus\u0165 ten Hejt!"
+    progress: 0
+    target: 0
+    type: completed
+    completed: 0
+  allSecondTasks:
+  - id: 0
+    description: "Dos\xE1hni sk\xF3re 10 000."
+    progress: 0
+    target: 10000
+    type: score
+    completed: 0
+  - id: 1
+    description: "Vydr\u017E s Ojochem na\u017Eivu po dobu 60s."
+    progress: 0
+    target: 60
+    type: distance
+    completed: 0
+  - id: 2
+    description: "Udr\u017E si modifikator x9 po dobu 10s."
+    progress: 0
+    target: 15
     type: modify
+    completed: 0
+  - id: 3
+    description: "Dos\xE1hni sk\xF3re 25 000."
+    progress: 0
+    target: 25000
+    type: score
+    completed: 0
+  - id: 4
+    description: "Vydr\u017E s Ojochem na\u017Eivu po dobu 120s."
+    progress: 0
+    target: 120
+    type: distance
+    completed: 0
+  - id: 5
+    description: "Udr\u017E si modifikator x9 po dobu 15s."
+    progress: 0
+    target: 15
+    type: modify
+    completed: 0
+  - id: 6
+    description: "Dos\xE1hni sk\xF3re 50 000."
+    progress: 0
+    target: 50000
+    type: score
+    completed: 0
+  - id: 7
+    description: "Vydr\u017E s Ojochem na\u017Eivu po dobu 150s."
+    progress: 0
+    target: 150
+    type: distance
+    completed: 0
+  - id: 8
+    description: "Udr\u017E si modifikator x9 po dobu 25s."
+    progress: 0
+    target: 25
+    type: modify
+    completed: 0
+  - id: 9
+    description: "Dos\xE1hni sk\xF3re 100 000."
+    progress: 0
+    target: 100000
+    type: score
+    completed: 0
+  - id: 10
+    description: "Vydr\u017E s Ojochem na\u017Eivu po dobu 200s."
+    progress: 0
+    target: 200
+    type: distance
+    completed: 0
+  - id: 11
+    description: "Udr\u017E si modifikator x9 po dobu 35s."
+    progress: 0
+    target: 35
+    type: modify
+    completed: 0
+  - id: 12
+    description: "Dos\xE1hni sk\xF3re 200 000."
+    progress: 0
+    target: 200000
+    type: score
+    completed: 0
+  - id: 13
+    description: "Vydr\u017E s Ojochem na\u017Eivu po dobu 300s."
+    progress: 0
+    target: 300
+    type: distance
+    completed: 0
+  - id: 14
+    description: "Udr\u017E si modifikator x9 po dobu 45s."
+    progress: 0
+    target: 45
+    type: modify
+    completed: 0
+  - id: 15
+    description: "Kdy\u017E chce\u0161 postavit lo\u010F, tak nepot\u0159ebuje\u0161
+      d\u0159evo... nebo tak n\u011Bjak."
+    progress: 0
+    target: 0
+    type: completed
     completed: 0
   allThirdTasks:
   - id: 0
-    description: "Seber v jedn\xE9 h\u0159e 5 powerUp\u016F."
+    description: "Seber 5 PowerUp\u016F / PowerDown\u016F."
+    progress: 0
+    target: 5
+    type: grab
+    completed: 0
+  - id: 1
+    description: "Seber 5 PowerUp\u016F / PowerDown\u016F b\u011Bhem jedn\xE9 hry."
     progress: 0
     target: 5
     type: grabRound
     completed: 0
-  - id: 1
-    description: Odehrej hru 5x
-    progress: 0
-    target: 5
-    type: play
-    completed: 0
   - id: 2
-    description: "Ura\u017E vzd\xE1lenost 100."
+    description: "Udr\u017E si maxim\xE1ln\xED p\u0159\xED\u010Detnost. D\xE9lka hry
+      mus\xED b\xFDt alsepo\u0148 60s."
     progress: 0
-    target: 100
-    type: distance
+    target: 60
+    type: sanityFull
     completed: 0
   - id: 3
-    description: "Seber 30 PowerUp\u016F."
+    description: "Seber 10 PowerUp\u016F / PowerDown\u016F."
     progress: 0
-    target: 30
+    target: 10
     type: grab
     completed: 0
   - id: 4
-    description: "Zabij 25 nep\u0159\xE1tel v jedn\xE9 h\u0159e"
+    description: "Seber 10 PowerUp\u016F / PowerDown\u016F b\u011Bhem jedn\xE9 hry."
+    progress: 0
+    target: 10
+    type: grabRound
+    completed: 0
+  - id: 5
+    description: "Udr\u017E si maxim\xE1ln\xED p\u0159\xED\u010Detnost. D\xE9lka hry
+      mus\xED b\xFDt alsepo\u0148 120s."
+    progress: 0
+    target: 120
+    type: sanityFull
+    completed: 0
+  - id: 6
+    description: "Seber 25 PowerUp\u016F / PowerDown\u016F."
     progress: 0
     target: 25
-    type: killRound
+    type: grab
+    completed: 0
+  - id: 7
+    description: "Seber 15 PowerUp\u016F / PowerDown\u016F b\u011Bhem jedn\xE9 hry."
+    progress: 0
+    target: 15
+    type: grabRound
+    completed: 0
+  - id: 8
+    description: "Udr\u017E si maxim\xE1ln\xED p\u0159\xED\u010Detnost. D\xE9lka hry
+      mus\xED b\xFDt alsepo\u0148 180s."
+    progress: 0
+    target: 180
+    type: sanityFull
+    completed: 0
+  - id: 9
+    description: "Seber 50 PowerUp\u016F / PowerDown\u016F."
+    progress: 0
+    target: 50
+    type: grab
+    completed: 0
+  - id: 10
+    description: "Seber 20 PowerUp\u016F / PowerDown\u016F b\u011Bhem jedn\xE9 hry."
+    progress: 0
+    target: 20
+    type: grabRound
+    completed: 0
+  - id: 11
+    description: "Udr\u017E si maxim\xE1ln\xED p\u0159\xED\u010Detnost. D\xE9lka hry
+      mus\xED b\xFDt alsepo\u0148 240s."
+    progress: 0
+    target: 240
+    type: sanityFull
+    completed: 0
+  - id: 12
+    description: "Seber 100 PowerUp\u016F / PowerDown\u016F."
+    progress: 0
+    target: 100
+    type: grab
+    completed: 0
+  - id: 13
+    description: "Seber 30 PowerUp\u016F / PowerDown\u016F b\u011Bhem jedn\xE9 hry."
+    progress: 0
+    target: 30
+    type: grabRound
+    completed: 0
+  - id: 14
+    description: "Udr\u017E si maxim\xE1ln\xED p\u0159\xED\u010Detnost. D\xE9lka hry
+      mus\xED b\xFDt alsepo\u0148 300s."
+    progress: 0
+    target: 300
+    type: sanityFull
+    completed: 0
+  - id: 15
+    description: "I\xE4! I\xE4! Cthulhu fhtagn! Ph'nglui mglw'nfah Cthulhu R'lyeh
+      wgah'nagl fhtagn!"
+    progress: 0
+    target: 0
+    type: completed
     completed: 0
   killsPerGame: 0
   grabsPerGame: 0
@@ -281,6 +486,7 @@ MonoBehaviour:
   birdDeath: {fileID: 8300000, guid: b692f9ea88045114d8217f9b6be85d01, type: 3}
   ratDeath: {fileID: 8300000, guid: a309230eb29e6cd438cf5a1064f960e4, type: 3}
   ghost: {fileID: 8300000, guid: aea4d71f8ac9d0e459a842f49c492d08, type: 3}
+  vodka: {fileID: 8300000, guid: 69c6f3b0c79163a4397142eceb70d48a, type: 3}
   clipEnemyHit: {fileID: 8300000, guid: 35f29ab6ca2c00e4f9b3c7308d864a31, type: 3}
   clipBobblePoop: {fileID: 8300000, guid: defcd9b8c5bf91441ba2dc8313632c25, type: 3}
   soundAudioSource: {fileID: 8292086}
@@ -363,6 +569,10 @@ Prefab:
       propertyPath: soundAudioSource
       value: 
       objectReference: {fileID: 8292086}
+    - target: {fileID: 0}
+      propertyPath: vodka
+      value: 
+      objectReference: {fileID: 8300000, guid: 69c6f3b0c79163a4397142eceb70d48a, type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 147462}

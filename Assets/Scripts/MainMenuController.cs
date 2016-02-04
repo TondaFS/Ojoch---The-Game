@@ -8,6 +8,8 @@ public class MainMenuController : MonoBehaviour
     public GameObject settingScreen;
     public GameObject extraScreen;
     public GameObject authorsScreen;
+    public GameObject howto;
+    public GameObject logo;
     public bool changeSetting;
     //public bool mainMenu;
 
@@ -24,6 +26,9 @@ public class MainMenuController : MonoBehaviour
         extraScreen.SetActive(false);
         authorsScreen = GameObject.Find("screenAuthors");
         authorsScreen.SetActive(false);
+        howto = GameObject.Find("HowToPlay");
+        howto.SetActive(false);
+        logo = GameObject.Find("logo");
 
         music.value = (int)(GameManager.instance.GetComponent<SoundManager>().musicVolume * 10);
         sounds.value = (int)(GameManager.instance.GetComponent<SoundManager>().soundsVolume * 10);
@@ -61,6 +66,13 @@ public class MainMenuController : MonoBehaviour
             GameManager.instance.SaveData();
         }
     }
+
+    public void HowToPlay(bool change) {
+        extraScreen.SetActive(!change);
+        howto.SetActive(change);
+        logo.SetActive(!change);
+    }
+
 
     public void ExtraScreen(bool change)
     {

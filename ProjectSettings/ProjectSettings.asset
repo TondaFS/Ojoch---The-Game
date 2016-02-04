@@ -11,8 +11,8 @@ PlayerSettings:
   useOnDemandResources: 0
   accelerometerFrequency: 60
   companyName: Lamy z Lemmy
-  productName: Ojoch
-  defaultCursor: {fileID: 0}
+  productName: "Ojoch: Velk\xFD \xFAlet"
+  defaultCursor: {fileID: 2800000, guid: 34054e31ac80a7b47b4b3ce2bb62c389, type: 3}
   cursorHotspot: {x: 0, y: 0}
   m_ShowUnitySplashScreen: 1
   defaultScreenWidth: 1920
@@ -163,7 +163,7 @@ PlayerSettings:
   m_BuildTargetIcons:
   - m_BuildTarget: 
     m_Icons:
-    - m_Icon: {fileID: 0}
+    - m_Icon: {fileID: 2800000, guid: e2c1c250c4f92ae478a17d9b584b2b59, type: 3}
       m_Size: 128
   m_BuildTargetBatching: []
   m_BuildTargetGraphicsAPIs:

@@ -345,7 +345,7 @@ Prefab:
     - target: {fileID: 11432858, guid: 96bc249eae6b24a4b97c9d856553c3db, type: 2}
       propertyPath: waves.Array.data[0]
       value: 
-      objectReference: {fileID: 413720, guid: d6d4608fdf2a6c84e80af3cf099b889e, type: 2}
+      objectReference: {fileID: 403680, guid: bbd6797bd2055d840a73acdf355a1c85, type: 2}
     - target: {fileID: 11432858, guid: 96bc249eae6b24a4b97c9d856553c3db, type: 2}
       propertyPath: m_Enabled
       value: 1
@@ -676,7 +676,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2064999203
 Transform:
   m_ObjectHideFlags: 0

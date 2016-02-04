@@ -46,7 +46,7 @@ public class EndGameScript : MonoBehaviour {
         finalScore = session.tmpscore;
         if (ojochHealth.sanity > 3)
         {
-            finalScore *= 3;
+            finalScore *= 2;
             session.tmpscore = (int)finalScore;
 
             //check tasku
@@ -55,7 +55,7 @@ public class EndGameScript : MonoBehaviour {
                 //Zkontroluje ukol maximalni pricetnosti
                 if (GameManager.instance.GetComponent<TaskManager>().activeTasks[i].type == "sanityFull")
                 {
-                    GameManager.instance.GetComponent<TaskManager>().CheckCountingTask(i);
+                    GameManager.instance.GetComponent<TaskManager>().CheckOnceTask(distance, i);                    
                 }
             }         
         }
@@ -67,7 +67,7 @@ public class EndGameScript : MonoBehaviour {
         else if (ojochHealth.sanity < 1)
         {
             
-            finalScore /= 2;
+            finalScore /= 1.5f;
             session.tmpscore = (int)finalScore;
 
             if (ojochHealth.sanity <= 0)

@@ -60,7 +60,7 @@ public class HealthScript : MonoBehaviour {
                     {                        
                         ojoch.session.FiveSecondsTimer();
                         ojoch.session.killedEnemies += 1;
-                        ojoch.session.AdjustScore(10);
+                        ojoch.session.AdjustScore(50);
 
                         //Čekování na úkoly
                         for (int i = 0; i < 3; i++)
@@ -142,9 +142,11 @@ public class HealthScript : MonoBehaviour {
                     }                    
                 }
                 else
-                {
+                {                    
                     Damage(shot.damage);                //dani zraneni
-                }
+                }                          
+                //shot.gameObject.GetComponentInChildren<Animator>().SetTrigger("shooted");
+                //shot.GetComponent<Collider2D>().enabled = false;
                 Destroy(shot.gameObject);           //zniceni strely
             }
             

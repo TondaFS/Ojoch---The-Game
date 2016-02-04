@@ -210,7 +210,7 @@ public class OjochScript : MonoBehaviour {
             GameManager.instance.GetComponent<SoundManager>().PlaySound(GameManager.instance.GetComponent<SoundManager>().clipEnemyHit);
             Destroy(collision.gameObject, 0.5f);
 
-            session.AdjustScore(10);
+            session.AdjustScore(50);
             session.killedEnemies += 1;
             session.FiveSecondsTimer();            
         }
@@ -253,7 +253,7 @@ public class OjochScript : MonoBehaviour {
         if (collision.gameObject.tag == "PowerUp") {
             session.FiveSecondsTimer();                            
             managerSound.PlaySound(managerSound.clipGrab);      //zvuk sebrani
-            session.AdjustScore(5);                                                                 //Zapocitani skore 
+            session.AdjustScore(25);                                                                 //Zapocitani skore 
             powerCombo.powerUps += 1;                                                               //zvyseni powerUpu
             powerCombo.powerUpCombo += collision.gameObject.GetComponent<PowerUpID>().powerUpID;    //pridani ID   
             
