@@ -104,8 +104,7 @@ QualitySettings:
     lodBias: 1
     maximumLODLevel: 0
     particleRaycastBudget: 256
-    excludedTargetPlatforms:
-    - Standalone
+    excludedTargetPlatforms: []
   - serializedVersion: 2
     name: Beautiful
     pixelLightCount: 3
@@ -129,8 +128,7 @@ QualitySettings:
     lodBias: 1.5
     maximumLODLevel: 0
     particleRaycastBudget: 1024
-    excludedTargetPlatforms:
-    - Standalone
+    excludedTargetPlatforms: []
   - serializedVersion: 2
     name: Fantastic
     pixelLightCount: 4

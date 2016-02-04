@@ -293,43 +293,43 @@ Prefab:
       objectReference: {fileID: 820398080}
     - target: {fileID: 22466754, guid: 64204c89be7e2fb479434ac5f9460072, type: 2}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 22466754, guid: 64204c89be7e2fb479434ac5f9460072, type: 2}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 22429160, guid: 64204c89be7e2fb479434ac5f9460072, type: 2}
       propertyPath: m_AnchorMin.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 22429160, guid: 64204c89be7e2fb479434ac5f9460072, type: 2}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 22429160, guid: 64204c89be7e2fb479434ac5f9460072, type: 2}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 22420856, guid: 64204c89be7e2fb479434ac5f9460072, type: 2}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 22420856, guid: 64204c89be7e2fb479434ac5f9460072, type: 2}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 22473172, guid: 64204c89be7e2fb479434ac5f9460072, type: 2}
       propertyPath: m_AnchorMin.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 22473172, guid: 64204c89be7e2fb479434ac5f9460072, type: 2}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 22473172, guid: 64204c89be7e2fb479434ac5f9460072, type: 2}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 11475688, guid: 64204c89be7e2fb479434ac5f9460072, type: 2}
       propertyPath: m_Navigation.m_Mode
