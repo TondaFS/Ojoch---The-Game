@@ -26,7 +26,7 @@ public class EnemySpawner : MonoBehaviour {
 
        // Debug.Log(currentBosses.Count);
 
-        if (currentEnemies.Count < 2 && currentBosses.Count == 0)
+        if (currentEnemies.Count <= 2 && currentBosses.Count == 0)
         {
             Transform newWave = waves[Random.Range(0, waves.Count)];
             Transform[] newWaveChildren = newWave.GetComponentsInChildren<Transform>(true);

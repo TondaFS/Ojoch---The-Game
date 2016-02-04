@@ -10,7 +10,7 @@ public class ShotScript : MonoBehaviour {
     //Proměnné
     public int damage = 1;              //davane zraneni
     public bool isEnemyShot = false;    //patri strela hraci/nepriteli?
-    public int lifeTime = 5;            //Doba zivotnosti strely
+    public float lifeTime = 5;            //Doba zivotnosti strely
 
     public AudioClip blop;
     
@@ -39,9 +39,17 @@ public class ShotScript : MonoBehaviour {
             GameObject.Find("Session Controller").GetComponent<ScoreScript>().modifikatorScore -= 1;
         }
 
-        if (otherCollider.gameObject.layer == LayerMask.NameToLayer("Corners"))
+        if (otherCollider.gameObject.layer == LayerMask.NameToLayer("Corners") && gameObject.layer == LayerMask.NameToLayer("OjochProjectile"))
         {
-            Debug.Log("Touched a rail");
+            if (gameObject.GetComponent<BoxCollider2D>() != null)
+            {
+                gameObject.GetComponent<BoxCollider2D>().enabled = false;
+            }
+            else
+            {
+                gameObject.GetComponent<CircleCollider2D>().enabled = false;
+            }
+
         }
     }
 

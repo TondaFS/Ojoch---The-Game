@@ -329,6 +329,7 @@ MonoBehaviour:
   points: []
   explosionCountdown: 0
   ignitionRadius: 0
+  exploded: 0
   missile: {fileID: 458796, guid: 73d559162835d0147a142e5c645602c5, type: 2}
   ammo: 10
   missileCooldown: 1
@@ -405,6 +406,7 @@ MonoBehaviour:
   points: []
   explosionCountdown: 0
   ignitionRadius: 0
+  exploded: 0
   missile: {fileID: 458796, guid: 73d559162835d0147a142e5c645602c5, type: 2}
   ammo: 10
   missileCooldown: 1

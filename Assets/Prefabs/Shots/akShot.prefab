@@ -14,7 +14,7 @@ GameObject:
   - 114: {fileID: 11469088}
   - 61: {fileID: 6173844}
   - 95: {fileID: 9572052}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: akShot
   m_TagString: Projectile
   m_Icon: {fileID: 0}
@@ -105,7 +105,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 3
   isEnemyShot: 0
-  lifeTime: 5
+  lifeTime: 1.20000005
   blop: {fileID: 8300000, guid: defcd9b8c5bf91441ba2dc8313632c25, type: 3}
 --- !u!212 &21228272
 SpriteRenderer:
@@ -176,6 +176,14 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_SortingOrder
       value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: lifeTime
+      value: 1.20000005
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Layer
+      value: 13
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
