@@ -31,7 +31,7 @@ public class BestScores : MonoBehaviour {
         new ScoreElement("Lama z Lemmy", 60000),
         new ScoreElement("Procent", 40000),
         new ScoreElement("Tetinka Mydlinka", 10000),
-        new ScoreElement("Johnnyho máma", 500000)
+        new ScoreElement("Johnnyho máma", 250000)
     }; 
 
     //Funkce vytvori nahodnou tabulku 10 nejlepsich skore

@@ -85,15 +85,16 @@ public class EndGameScript : MonoBehaviour {
         session.scoreText.text = "" + finalScore;
 
         //Kontrola ukolu
-        for (int i = 0; i < 3; i++) {
+       for (int i = 0; i < 3; i++) {
             if (GameManager.instance.GetComponent<TaskManager>().activeTasks[i].type == "score")   
             {
                 GameManager.instance.GetComponent<TaskManager>().CheckOnceTask(finalScore, i);
             }
+            /*
             else if (GameManager.instance.GetComponent<TaskManager>().activeTasks[i].type == "play")
             {
                 GameManager.instance.GetComponent<TaskManager>().CheckCountingTask(i);
-            }
+            }*/
             else if (GameManager.instance.GetComponent<TaskManager>().activeTasks[i].type == "distance")
             {
                 GameManager.instance.GetComponent<TaskManager>().CheckOnceTask(distance, i);

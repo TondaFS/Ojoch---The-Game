@@ -108,7 +108,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 190644}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 8.10000038, y: 2, z: 0}
+  m_LocalPosition: {x: 13, y: 2, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 428938}
@@ -157,7 +157,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 155752}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5.14780378, y: .83181572, z: 0}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 458298}
@@ -172,7 +172,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 147722}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 8.82999992, y: -2, z: 0}
+  m_LocalPosition: {x: 13, y: -2, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 412164}
@@ -259,7 +259,7 @@ MonoBehaviour:
   exploded: 0
   missile: {fileID: 430316, guid: fd4324faf7d8cdf4fa388b01870578ae, type: 2}
   ammo: -1
-  missileCooldown: 1
+  missileCooldown: 1.5
   waitTime: 0
 --- !u!114 &11426104
 MonoBehaviour:
@@ -297,7 +297,7 @@ MonoBehaviour:
   exploded: 0
   missile: {fileID: 430316, guid: fd4324faf7d8cdf4fa388b01870578ae, type: 2}
   ammo: -1
-  missileCooldown: 1
+  missileCooldown: 1.5
   waitTime: 0
 --- !u!114 &11486228
 MonoBehaviour:

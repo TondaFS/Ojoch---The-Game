@@ -7,7 +7,7 @@ public class DelayWaveSpawning : MonoBehaviour {
 
     private EnemySpawner spawner;
 
-    void Awake()
+    void Start()
     {
         spawner = gameObject.GetComponent<EnemySpawner>();
         spawner.enabled = false;

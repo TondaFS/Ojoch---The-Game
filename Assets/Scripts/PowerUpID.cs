@@ -11,6 +11,7 @@ public class PowerUpID : MonoBehaviour {
 
     void Start()
     {
+        Destroy(this.gameObject, 20);
         originalScale = transform.localScale;
         Physics2D.IgnoreLayerCollision(11, 12, true);
         Physics2D.IgnoreLayerCollision(11, 0, true);
