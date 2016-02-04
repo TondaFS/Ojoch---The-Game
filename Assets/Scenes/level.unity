@@ -276,6 +276,10 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 11432858, guid: 96bc249eae6b24a4b97c9d856553c3db, type: 2}
+      propertyPath: waves.Array.size
+      value: 16
+      objectReference: {fileID: 0}
     - target: {fileID: 417948, guid: 96bc249eae6b24a4b97c9d856553c3db, type: 2}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -316,6 +320,18 @@ Prefab:
       propertyPath: soufl
       value: 
       objectReference: {fileID: 785083465}
+    - target: {fileID: 11432858, guid: 96bc249eae6b24a4b97c9d856553c3db, type: 2}
+      propertyPath: waves.Array.data[4]
+      value: 
+      objectReference: {fileID: 494372, guid: 7fd7052cac7bc1049ace06d55e0895d1, type: 2}
+    - target: {fileID: 11432858, guid: 96bc249eae6b24a4b97c9d856553c3db, type: 2}
+      propertyPath: waves.Array.data[14]
+      value: 
+      objectReference: {fileID: 490156, guid: c802dedf8dfd5f64ba9860e560df6e97, type: 2}
+    - target: {fileID: 11432858, guid: 96bc249eae6b24a4b97c9d856553c3db, type: 2}
+      propertyPath: waves.Array.data[15]
+      value: 
+      objectReference: {fileID: 416020, guid: c1f396a1d7d9f4f4bb277439e571b0a6, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 96bc249eae6b24a4b97c9d856553c3db, type: 2}
   m_IsPrefabParent: 0

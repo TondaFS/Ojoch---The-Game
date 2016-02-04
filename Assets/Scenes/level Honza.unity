@@ -345,7 +345,7 @@ Prefab:
     - target: {fileID: 11432858, guid: 96bc249eae6b24a4b97c9d856553c3db, type: 2}
       propertyPath: waves.Array.data[0]
       value: 
-      objectReference: {fileID: 403680, guid: bbd6797bd2055d840a73acdf355a1c85, type: 2}
+      objectReference: {fileID: 471246, guid: 12b43c15189b91e43ade629f5a7b41ee, type: 2}
     - target: {fileID: 11432858, guid: 96bc249eae6b24a4b97c9d856553c3db, type: 2}
       propertyPath: m_Enabled
       value: 1

@@ -177,7 +177,7 @@ public class PowerUpScript : MonoBehaviour {
                 ShowPowerUpText("Zmatek", false);
                 ojoch.session.modifikatorScore = 1;
 
-                ojoch.invertTime = 10;
+                ojoch.invertTime = 5;
                 if (!ojoch.isInverted)
                 {
                     ojoch.InversionControlling();
