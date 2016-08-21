@@ -14,6 +14,7 @@ public class SessionController : MonoBehaviour
     public GameObject deathMenu;
     public GameObject newHighScoreText;
     public GameObject taskCompletedText;
+    public GameObject ojoch;
       
     
     void Start() {
@@ -25,7 +26,7 @@ public class SessionController : MonoBehaviour
         newHighScoreText.SetActive(false);
         deathMenu = GameObject.Find("DEATH");
         deathMenu.SetActive(false);
-        
+               
         pause = false;
         ojochDead = false;        
         GameObject.Find("Music").GetComponent<AudioSource>().volume = GameManager.instance.GetComponent<SoundManager>().musicVolume;

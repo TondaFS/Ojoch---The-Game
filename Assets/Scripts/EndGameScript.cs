@@ -27,6 +27,7 @@ public class EndGameScript : MonoBehaviour {
         FinalScore();
         GetComponent<SessionController>().ojochDead = true;
         GetComponent<SessionController>().deathMenu.SetActive(true);
+
         if (GameManager.instance.newRecord)
         {
             GetComponent<SessionController>().newHighScoreText.SetActive(true);

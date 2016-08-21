@@ -42,7 +42,7 @@ public class AchievedPowerUP : MonoBehaviour {
             //Az se obrazek nakonec znici
             if (opacity <= 0)
             {
-                GameObject.Find("Ojoch").GetComponent<CollectingScript>().occupied[row] = false;
+                OjochManager.instance.ojochCollect.occupied[row] = false;
                 Destroy(gameObject);
             }
         }

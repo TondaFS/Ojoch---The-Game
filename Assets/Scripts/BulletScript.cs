@@ -1,10 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class BulletScript : MonoBehaviour {
-
-    //Proměnné
-    public Vector2 direction;     //smer    
+/*
+    Script handles the movement and velocity of the Bullets
+*/
+public class BulletScript : MonoBehaviour {    
+    public Vector2 direction;                         //smer    
     private Vector2 movement;                         //pohyb
 
     public float speed;                               //rychlost

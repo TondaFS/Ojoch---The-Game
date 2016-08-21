@@ -100,6 +100,19 @@ public class ScoreScript : MonoBehaviour {
         }
     }
 
+    //Aktualizuje skore, modifikator, pocet zabitych nepratel a casovac modifikatoru
+    public void UpdateScoreStuff(float score, int modifier, int enemy, bool timer)
+    {
+        AdjustScore(score);
+        modifikatorScore += modifier;
+        killedEnemies += enemy;
+        if (timer)
+        {
+            FiveSecondsTimer();
+        }
+
+    }
+
     //Upravi skore o danou hodnotu
     public void AdjustScore(float value)
     {

@@ -3,6 +3,7 @@ using System.Collections;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
 using System.Collections.Generic;
+using SmartLocalization;
 
 public class GameManager : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class GameManager : MonoBehaviour
     public BestScores highscores;
     public bool newRecord = false;
     public float recordScore = 0;
+    public LanguageManager languageManager;
     
     void Awake()
     {
@@ -25,6 +27,7 @@ public class GameManager : MonoBehaviour
         DontDestroyOnLoad(this.gameObject);
         highscores = GetComponent<BestScores>();        
         LoadData();
+        languageManager = LanguageManager.Instance; 
     }
     
     //Ulozi data do Slozky (pokud neexistuje, vytvori jej)

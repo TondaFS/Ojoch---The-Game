@@ -56,6 +56,7 @@ public class MissileScript : MonoBehaviour {
 
     }
 
+    
     void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Player")
@@ -67,5 +68,4 @@ public class MissileScript : MonoBehaviour {
             health--;
         }
     }
-
 }

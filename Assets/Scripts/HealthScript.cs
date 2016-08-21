@@ -57,10 +57,8 @@ public class HealthScript : MonoBehaviour {
                     gameObject.GetComponent<Animator>().SetTrigger("bDeath");
                                         
                     if (!gameObject.GetComponent<EnemyAI>().exploded)
-                    {                        
-                        ojoch.session.FiveSecondsTimer();
-                        ojoch.session.killedEnemies += 1;
-                        ojoch.session.AdjustScore(50);
+                    {
+                        ojoch.session.UpdateScoreStuff(50, 0, 1, true);   
 
                         //Čekování na úkoly
                         for (int i = 0; i < 3; i++)
@@ -123,49 +121,7 @@ public class HealthScript : MonoBehaviour {
         GameObject.Find("Music").GetComponent<AudioSource>().mute = true;
         Destroy(gameObject);
     }
-
-    //Kolize se střelou
-    void OnTriggerEnter2D(Collider2D otherCollider)
-    {
-        ShotScript shot = otherCollider.gameObject.GetComponent<ShotScript>();
-        if (shot != null) {
-            if (shot.isEnemyShot != isEnemy) {      //Jedna se o mou strelu?
-                                
-                if (gameObject.tag == "Player")
-                {
-                    //Pokud je hrac neni nesmrtelny, strely mu budou davat zraneni a prehraje se zvuk zraneni
-                    if (gameObject.GetComponent<OjochScript>().godMode <= 0)
-                    {
-                        Damage(shot.damage);
-                        GameManager.instance.GetComponent<SoundManager>().PlayRandom(GameManager.instance.GetComponent<SoundManager>().clipDamage1, GameManager.instance.GetComponent<SoundManager>().clipDamage2);
-                        gameObject.GetComponent<OjochScript>().animator.SetTrigger("hit");
-                    }                    
-                }
-                else
-                {                    
-                    Damage(shot.damage);                //dani zraneni
-                }                          
-                //shot.gameObject.GetComponentInChildren<Animator>().SetTrigger("shooted");
-                //shot.GetComponent<Collider2D>().enabled = false;
-                Destroy(shot.gameObject);           //zniceni strely
-            }
-            
-        }
-    }
-
-    //Když nepřítel narazí do sochy, zničí se
-    void OnCollisionEnter2D(Collision2D otherCollider)
-    {
-
-        if (otherCollider.gameObject.tag == "Socha" && (gameObject.tag == "Enemy" || gameObject.tag == "Boss"))
-        {
-            gameObject.GetComponent<Collider2D>().enabled = false;
-            gameObject.GetComponent<Animator>().SetTrigger("bDeath");
-            GameManager.instance.GetComponent<SoundManager>().PlaySound(GameManager.instance.GetComponent<SoundManager>().clipEnemyHit);
-            Destroy(gameObject, 0.5f);
-        }
-    }
-
+    
     //Da zraneni ojochovi a podle toho upravi pocet zivotu, pokud dostava bublinaci, vyleci vse
     public void AdjustHealthBar(int damage)
     {        

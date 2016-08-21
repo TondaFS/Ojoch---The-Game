@@ -15,6 +15,7 @@ GameObject:
   - 114: {fileID: 11487896}
   - 114: {fileID: 11477774}
   - 50: {fileID: 5003274}
+  - 114: {fileID: 114000014139492600}
   m_Layer: 12
   m_Name: enemy_kamikaze
   m_TagString: Enemy
@@ -30,7 +31,8 @@ Transform:
   m_GameObject: {fileID: 123626}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: .300000012, y: .300000012, z: 1}
+  m_LocalScale: {x: 0.3, y: 0.3, z: 1}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -41,9 +43,10 @@ Rigidbody2D:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 123626}
+  m_UseAutoMass: 0
   m_Mass: 1
   m_LinearDrag: 0
-  m_AngularDrag: .0500000007
+  m_AngularDrag: 0.05
   m_GravityScale: 0
   m_IsKinematic: 0
   m_Interpolate: 0
@@ -57,6 +60,7 @@ CircleCollider2D:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 123626}
   m_Enabled: 0
+  m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_UsedByEffector: 0
@@ -70,23 +74,24 @@ PolygonCollider2D:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 123626}
   m_Enabled: 1
+  m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_Offset: {x: 0, y: 0}
   m_Points:
     m_Paths:
-    - - {x: 2.22790027, y: -1.41815376}
-      - {x: 2.26130795, y: -.649442434}
-      - {x: 1.48952341, y: -.684077024}
-      - {x: 1.53058779, y: 1.30626845}
-      - {x: 1.16049063, y: 2.32536793}
-      - {x: -.50170368, y: 2.33984232}
-      - {x: -.88390249, y: .648979127}
-      - {x: -1.01012516, y: -.737240314}
-      - {x: -2.34135866, y: -1.05446446}
-      - {x: -2.31351495, y: -2.03944302}
-      - {x: 1.39320385, y: -2.01933074}
+    - - {x: 2.2279003, y: -1.4181538}
+      - {x: 2.261308, y: -0.64944243}
+      - {x: 1.4895234, y: -0.684077}
+      - {x: 1.5305878, y: 1.3062685}
+      - {x: 1.1604906, y: 2.325368}
+      - {x: -0.5017037, y: 2.3398423}
+      - {x: -0.8839025, y: 0.6489791}
+      - {x: -1.0101252, y: -0.7372403}
+      - {x: -2.3413587, y: -1.0544645}
+      - {x: -2.313515, y: -2.039443}
+      - {x: 1.3932039, y: -2.0193307}
 --- !u!95 &9526468
 Animator:
   serializedVersion: 3
@@ -122,6 +127,7 @@ MonoBehaviour:
   points: []
   explosionCountdown: 1
   ignitionRadius: 3
+  exploded: 0
   missile: {fileID: 0}
   ammo: 0
   missileCooldown: 1
@@ -159,23 +165,30 @@ SpriteRenderer:
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 0
+  m_ReflectionProbeUsage: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000e000000000000000, type: 0}
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
-  m_UseLightProbes: 0
-  m_ReflectionProbeUsage: 0
   m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
   m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_AutoUVMaxDistance: .5
+  m_SelectedWireframeHidden: 1
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1741792119
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 035bc0a5858108c4ca16e4d0f773a1bb, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
@@ -203,3 +216,14 @@ Prefab:
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 123626}
   m_IsPrefabParent: 1
+--- !u!114 &114000014139492600
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 123626}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57926016a28524146b7f70febe09ff88, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

@@ -23,23 +23,9 @@ public class ShotScript : MonoBehaviour {
     }    
 
     //Pri srazce 
-    void OnTriggerEnter2D(Collider2D otherCollider)
+    void OnTriggerEnter2D(Collider2D col)
     {
-        //S prekazkou -> znici 
-        if (otherCollider.tag == "Obstacle")
-        {
-            SoundScript.instance.PlaySingle(blop);
-            Destroy(this.gameObject);                           
-
-        }
-
-        //s hracem a je to nepratelska strela
-        if (otherCollider.tag == "Player" && isEnemyShot)
-        {
-            GameObject.Find("Session Controller").GetComponent<ScoreScript>().modifikatorScore -= 1;
-        }
-
-        if (otherCollider.gameObject.layer == LayerMask.NameToLayer("Corners") && gameObject.layer == LayerMask.NameToLayer("OjochProjectile"))
+        if (col.gameObject.layer == LayerMask.NameToLayer("Corners") && gameObject.layer == LayerMask.NameToLayer("OjochProjectile"))
         {
             if (gameObject.GetComponent<BoxCollider2D>() != null)
             {
@@ -49,7 +35,6 @@ public class ShotScript : MonoBehaviour {
             {
                 gameObject.GetComponent<CircleCollider2D>().enabled = false;
             }
-
         }
     }
 

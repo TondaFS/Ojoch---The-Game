@@ -111,7 +111,8 @@ public class PowerUpScript : MonoBehaviour {
             /// Přidá Ojochovi životy
             /// </summary>    
             case 2:
-                ShowPowerUpText("Bublinace", true);                
+                string text = GameManager.instance.languageManager.GetTextValue("PowerUp.Bubbles");
+                ShowPowerUpText(text, true);                
                 ojoch.playerHealth.Damage(-1);                
                 break;
 
