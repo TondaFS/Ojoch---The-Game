@@ -10,13 +10,23 @@ public class EndGameScript : MonoBehaviour {
     public bool sanityLost = false;         //Prisel Ojoch o pricetnost?
     public float distance = 0;              //Urazena vzdalenost (kvuli ukolum)
 
+    public int enemyInSession;
+    public int powersInSession;
+
+
     void Start()
     {
         ojochHealth = GameObject.FindWithTag("Player").GetComponent<HealthScript>();
         session = GameObject.Find("Session Controller").GetComponent<ScoreScript>();
         finalScore = 0;
-    }        
-    
+
+        enemyInSession = 0;        
+        powersInSession = 0;
+
+        //enemyTotal = GameManager.instance.GetComponent<GameStatistics>().enemiesKilled;
+        //powersTotal = GameManager.instance.GetComponent<GameStatistics>().powerUpsCollected;
+    }
+
     void Update()
     {
         distance += Time.deltaTime;
@@ -32,7 +42,18 @@ public class EndGameScript : MonoBehaviour {
         {
             GetComponent<SessionController>().newHighScoreText.SetActive(true);
         }
-        for(int i = 0; i < 3; i++)
+
+        /*
+        for (int i = 0; i < 3; i++)
+        {
+            if (GameManager.instance.GetComponent<TaskManager>().activeTasks[i].type == "kill")
+            {
+                GameManager.instance.GetComponent<TaskManager>().CheckCountingTaskAtTheEnd(i, enemyInSession);
+            }
+        }
+        */
+
+        for (int i = 0; i < 3; i++)
         {
             if (GameManager.instance.GetComponent<TaskManager>().activeTasks[i].completed)
             {
@@ -40,6 +61,11 @@ public class EndGameScript : MonoBehaviour {
                 break;
             }
         }
+               
+        GameManager.instance.GetComponent<GameStatistics>().UpdateStatistics(1, enemyInSession, powersInSession, (int)distance);
+        enemyInSession = 0;
+        powersInSession = 0;
+        GameManager.instance.SaveData();
     }
 
     //Spocita finalni skore na zaklade hracovy finalni pricetnosti a zkontroluje aktivni ukoly, ktere se cekuji vydzy na knci hry
@@ -49,6 +75,9 @@ public class EndGameScript : MonoBehaviour {
         {
             finalScore *= 2;
             session.tmpscore = (int)finalScore;
+
+            //Staistika
+            GameManager.instance.GetComponent<GameStatistics>().stats.fullSanity += 1;
 
             //check tasku
             for (int i = 0; i < 3; i++)
@@ -71,6 +100,9 @@ public class EndGameScript : MonoBehaviour {
             finalScore /= 1.5f;
             session.tmpscore = (int)finalScore;
 
+            //Statistika
+            GameManager.instance.GetComponent<GameStatistics>().stats.gotMad += 1;
+
             if (ojochHealth.sanity <= 0)
             {
                 for (int i = 0; i < 3; i++)
@@ -91,6 +123,14 @@ public class EndGameScript : MonoBehaviour {
             {
                 GameManager.instance.GetComponent<TaskManager>().CheckOnceTask(finalScore, i);
             }
+            if (GameManager.instance.GetComponent<TaskManager>().activeTasks[i].type == "kill")
+            {
+                GameManager.instance.GetComponent<TaskManager>().CheckCountingTaskAtTheEnd(i, enemyInSession);
+            }
+            if (GameManager.instance.GetComponent<TaskManager>().activeTasks[i].type == "grab")
+            {
+                GameManager.instance.GetComponent<TaskManager>().CheckCountingTaskAtTheEnd(i, powersInSession);
+            }
             /*
             else if (GameManager.instance.GetComponent<TaskManager>().activeTasks[i].type == "play")
             {
@@ -102,22 +142,22 @@ public class EndGameScript : MonoBehaviour {
             }
             else if (GameManager.instance.GetComponent<TaskManager>().activeTasks[i].type == "killRound")
             {
-                GameManager.instance.GetComponent<TaskManager>().CheckOnceTask(GameManager.instance.GetComponent<TaskManager>().killsPerGame, i);
-                GameManager.instance.GetComponent<TaskManager>().killsPerGame = 0;
+                GameManager.instance.GetComponent<TaskManager>().CheckOnceTask(enemyInSession, i);
+                //GameManager.instance.GetComponent<TaskManager>().killsPerGame = 0;
+                
             } else if(GameManager.instance.GetComponent<TaskManager>().activeTasks[i].type == "modify")
             {
                 GameManager.instance.GetComponent<TaskManager>().CheckOnceTask(GameManager.instance.GetComponent<TaskManager>().modifyTmp, i);
                 GameManager.instance.GetComponent<TaskManager>().modifyTmp = 0;
             } else if (GameManager.instance.GetComponent<TaskManager>().activeTasks[i].type == "grabRound")
             {
-                GameManager.instance.GetComponent<TaskManager>().CheckOnceTask(GameManager.instance.GetComponent<TaskManager>().grabsPerGame, i);
-                GameManager.instance.GetComponent<TaskManager>().grabsPerGame = 0;
+                GameManager.instance.GetComponent<TaskManager>().CheckOnceTask(powersInSession, i);
+                //GameManager.instance.GetComponent<TaskManager>().grabsPerGame = 0;
             }
         }
 
         //Zkontroluje, jestli neni novy rekord
         GameManager.instance.highscores.CheckScores(finalScore);        
-    }    
+    }
 
-    
 }

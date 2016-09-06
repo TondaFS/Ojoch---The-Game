@@ -84,6 +84,11 @@ public class SessionController : MonoBehaviour
         
     }
 
+    /// <summary>
+    /// Funkce přepíná pozastavení hry.
+    /// <para>Pozastaví, popř. opět spustí hru -> vypnutí/zapnutí hudby, zobrazení menu.</para>
+    /// </summary>
+    /// <param name="bolean">Mám pozastavit hru?</param>
     public void PausingGame(bool bolean)
     {
         if (bolean)
@@ -99,4 +104,5 @@ public class SessionController : MonoBehaviour
         pauseMenu.SetActive(bolean);
         pause = bolean;
     }
+        
 }

@@ -168,11 +168,16 @@ public class OjochScript : MonoBehaviour {
         } 
     }
  
-    //Inverze ovladani
+    /// <summary>
+    /// Přepíná inverzní ovládání
+    /// </summary>
     public void InversionControlling() {
         this.isInverted = !(isInverted);
     }    
     
+    /// <summary>
+    /// Přehraje jeden z Ojochových zranění.
+    /// </summary>
     public void PlayDamageSound()
     {
         managerSound.PlayRandom(managerSound.clipDamage1, managerSound.clipDamage2);

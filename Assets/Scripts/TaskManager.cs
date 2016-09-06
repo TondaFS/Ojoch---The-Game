@@ -3,6 +3,17 @@ using System.Collections;
 using UnityEngine.UI;
 using System.Collections.Generic;
 
+/// <summary>
+/// ÚKOL a jeho jednotlivé položky.
+/// <para>
+/// ID: Identifikační číslo úkolu.
+/// DESCRIPTION: Popis úkolu.
+/// PROGRESS: Aktuální progress.
+/// TARGET: Cílová hodnota úkolu (při zabití, sebrání předmětů apod.)
+/// TYPE: O jaký typ úkolu se jedná? (kill, modify, score...)
+/// COMPLETED: Je již splněn?
+/// </para>
+/// </summary>
 [System.Serializable]
 public class Task
 {    
@@ -36,7 +47,7 @@ public class TaskManager : MonoBehaviour {
     public Task[] allFirstTasks = new Task[] {  new Task(0, "Zabij 20 nepřátel.", 0, 20, "kill", false),
                                                 new Task(1, "Zabij 15 nepřátel v jedné hře.", 0, 15, "killRound", false),
                                                 new Task(2, "Zabij 50 nepřátel.", 0, 50, "kill", false),
-                                                new Task(3, "Zabij 30 nepřátel v jedné hře.", 0, 30, "kill", false),
+                                                new Task(3, "Zabij 30 nepřátel v jedné hře.", 0, 30, "killRound", false),
                                                 new Task(4, "Zabij 75 nepřátel.", 0, 75, "kill", false),
                                                 new Task(5, "Zabij 40 nepřátel v jedné hře.", 0, 40, "killRound", false),
                                                 new Task(6, "Přijď o veškerou příčetnost.", 0, 1, "sanity", false),
@@ -163,6 +174,20 @@ public class TaskManager : MonoBehaviour {
             activeTasks[idTask].completed = true;
         }
     }
+
+    /// <summary>
+    /// Zkontroluje, jeslti není splněn jeden z počítacích úkolů (kill, grab)
+    /// </summary>
+    /// <param name="idTask">ID Úkoĺu</param>
+    /// <param name="update">O kolik se zvětšilo</param>
+    public void CheckCountingTaskAtTheEnd(int idTask, int update)
+    {
+        activeTasks[idTask].progress += update;
+        if (activeTasks[idTask].progress >= activeTasks[idTask].target)
+        {
+            activeTasks[idTask].completed = true;
+        }
+    }    
 
     //Zobrazi ukoly
     public void displayTasks()

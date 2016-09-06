@@ -92,6 +92,8 @@ public class PowerUpScript : MonoBehaviour {
 
     //provedení komba po sebrání 2 powerupů
     public void PowerCombo(int combo) {
+        sessionController.GetComponent<EndGameScript>().powersInSession += 1;
+        /*
         for (int i = 0; i < 3; i++)
         {
             if ((GameManager.instance.GetComponent<TaskManager>().activeTasks[i].type == "grab") && (GameManager.instance.GetComponent<TaskManager>().activeTasks[i].completed != true))
@@ -102,6 +104,7 @@ public class PowerUpScript : MonoBehaviour {
                 GameManager.instance.GetComponent<TaskManager>().grabsPerGame += 1;
             }
         }
+        */
         switch (combo)
         {
             //POWERUPS

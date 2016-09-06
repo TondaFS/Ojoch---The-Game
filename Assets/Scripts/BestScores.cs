@@ -3,6 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
 
+/// <summary>
+/// Položka Tabulky nejlepších.
+/// <para>Obsahuje jméno a doažené skóre.</para>
+/// </summary>
 [System.Serializable]
 public class ScoreElement
 {
@@ -17,6 +21,9 @@ public class ScoreElement
     }
 }
 
+/// <summary>
+/// Skript řeší Tabulku nejlepších dosažených výsledků
+/// </summary>
 public class BestScores : MonoBehaviour {
     public List<ScoreElement> scores;
 
@@ -32,23 +39,30 @@ public class BestScores : MonoBehaviour {
         new ScoreElement("Procent", 40000),
         new ScoreElement("Tetinka Mydlinka", 10000),
         new ScoreElement("Johnnyho máma", 250000)
-    }; 
+    };
 
-    //Funkce vytvori nahodnou tabulku 10 nejlepsich skore
+    /// <summary>
+    /// Vytvoří novou Tabulku nejlepších dle přednastaveného seznamu.
+    /// </summary>
     public void InitiateBestScores() {
         for(int i = 0; i < 10; i++){                        
             scores.Add(tabulkaNejlepsich[i]);   
         }
         SortScores();        
     }
-
-    //Seradi skore v tabulce
+    
+    /// <summary>
+    /// Seřadí Tabulku nejlepších
+    /// </summary>
     public void SortScores()
     {
         scores.Sort((x, y) => y.score.CompareTo(x.score));
     }
 
-    //Zkontroluje, jestli nebylo dosahnuto nove skore, pokud ano, vytvori novy zaznam
+    /// <summary>
+    /// Zkontroluje, jestli nebylo dosáhnuto nové skóre, pokud ano, vytvoří nový záznam.
+    /// </summary>
+    /// <param name="final">Nové dosažené skóre.</param>
     public void CheckScores(float final)
     {
         for (int i = 0; i < 10; i++)
@@ -57,8 +71,6 @@ public class BestScores : MonoBehaviour {
             {                
                 GameManager.instance.highscores.scores.RemoveAt(9);
                 ScoreElement skore = new ScoreElement("Nový Ojoch", (int)final);
-                //skore.name = "Nový Ojoch";
-                //skore.score = (int)final;
                 GameManager.instance.newRecord = true;
                 GameManager.instance.recordScore = final;
                 GameManager.instance.highscores.scores.Add(skore);

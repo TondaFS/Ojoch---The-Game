@@ -13,6 +13,8 @@ GameObject:
   - 114: {fileID: 11492982}
   - 82: {fileID: 8292086}
   - 114: {fileID: 11413070}
+  - 114: {fileID: 114000012461592660}
+  - 114: {fileID: 114000013775915190}
   m_Layer: 0
   m_Name: _Game Manager
   m_TagString: Untagged
@@ -583,3 +585,33 @@ Prefab:
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 147462}
   m_IsPrefabParent: 1
+--- !u!114 &114000012461592660
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 147462}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aeea93387a623ab4b9c22b8a6d97b5f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stats:
+    gamesPlayed: 0
+    enemiesKilled: 0
+    powerUpsCollected: 0
+    longestTimePlayed: 0
+    gotMad: 0
+    fullSanity: 0
+--- !u!114 &114000013775915190
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 147462}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd0200a7bca548b4bb4b027b2987f1a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  coins: 0

@@ -47,8 +47,12 @@ public class AchievedPowerUP : MonoBehaviour {
             }
         }
     }
-
-    //Vybere obrazek PoweUpu
+    
+    /// <summary>
+    /// Vybere obrázek PowerUpu
+    /// </summary>
+    /// <param name="id">ID PowerUpu</param>
+    /// <returns></returns>
     public Sprite PowerImage(int id)
     {
         switch (id)
@@ -65,19 +69,6 @@ public class AchievedPowerUP : MonoBehaviour {
                 return duseni;
             case 40:
                 return rambouch;
-
-            /*
-            case 6:
-                return zmatek;
-            case 23:
-                return nitro;
-            
-            case 4:
-                return napojLasky;
-            case 11:
-                return panCasu;
-            */
-            
         }
         return null;
     }

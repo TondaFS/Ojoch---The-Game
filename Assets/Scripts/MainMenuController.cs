@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class MainMenuController : MonoBehaviour
 {
@@ -11,10 +12,19 @@ public class MainMenuController : MonoBehaviour
     public GameObject howto;
     public GameObject logo;
     public bool changeSetting;
-    //public bool mainMenu;
 
     public Slider music;
-    public Slider sounds;
+    public Slider sounds;   
+
+    public GUIStyle label;
+    public GUIStyle nameLabel;
+
+    void OnGUI()
+    {
+        // Make a button. We pass in the GUIStyle defined above as the style to use
+        GUI.Label(new Rect(10, 10, 150, 20), "PRÁVĚ HRAJE:", label);
+        GameManager.instance.playerName = GUI.TextField(new Rect(10, 30, 150, 20), GameManager.instance.playerName, 20, nameLabel);
+    }
 
     void Start() {
         //mainMenu = true;
@@ -48,7 +58,7 @@ public class MainMenuController : MonoBehaviour
 
     public void ChangeToScene(string sceneName)
     {
-        Application.LoadLevel(sceneName);
+        SceneManager.LoadScene(sceneName);
     }
 
     public void ExitGame()

@@ -99,8 +99,14 @@ public class ScoreScript : MonoBehaviour {
             }
         }
     }
-
-    //Aktualizuje skore, modifikator, pocet zabitych nepratel a casovac modifikatoru
+        
+    /// <summary>
+    /// Aktualizuje skóre, modifikátor, počet zabitých nepřátel a časovač modifikátoru.
+    /// </summary>
+    /// <param name="score">Získané skóre</param>
+    /// <param name="modifier">Úprava modifikátoru</param>
+    /// <param name="enemy">Počet zabitých nepřátel</param>
+    /// <param name="timer">Mám nastavit 5s časovač modifikátoru skóre?</param>
     public void UpdateScoreStuff(float score, int modifier, int enemy, bool timer)
     {
         AdjustScore(score);
@@ -112,14 +118,19 @@ public class ScoreScript : MonoBehaviour {
         }
 
     }
-
-    //Upravi skore o danou hodnotu
+    
+    /// <summary>
+    /// Upraví skóre o danou hodnotu
+    /// </summary>
+    /// <param name="value">Získané skóre</param>
     public void AdjustScore(float value)
     {
         tmpscore += value * modifikatorScore;
     }
-
-    //Nastavi Timer pro modifikator
+    
+    /// <summary>
+    /// Nastaví timer modifikatoru skóre na 5s.
+    /// </summary>
     public void FiveSecondsTimer()
     {
         fiveSecondsTimer = 5;

@@ -2,6 +2,7 @@
 using System.Collections;
 using UnityEngine.UI;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 
 public class ScoreManager : MonoBehaviour {   
     
@@ -168,7 +169,7 @@ public class ScoreManager : MonoBehaviour {
 
     public void ChangeToScene(string sceneName)
     {
-        Application.LoadLevel(sceneName);
+        SceneManager.LoadScene(sceneName);
     }
 
     //Prepne zobrazeni skore a ukolu

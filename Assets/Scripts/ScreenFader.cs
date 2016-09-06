@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class ScreenFader : MonoBehaviour
 {
@@ -47,7 +48,7 @@ public class ScreenFader : MonoBehaviour
             fadeImg.color = Color.black;
 
             isSceneEnding = false;
-            Application.LoadLevel(newScene);
+            SceneManager.LoadScene(newScene);
         }
     }
 

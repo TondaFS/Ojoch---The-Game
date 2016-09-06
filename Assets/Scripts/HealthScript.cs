@@ -3,9 +3,8 @@ using UnityEngine.UI;
 using System.Collections;
 
 /// <summary>
-///  Životy a zranění
+/// Skript řešící životy, příčetnost a zranění
 /// </summary>
-
 public class HealthScript : MonoBehaviour {
 
     //Promenne
@@ -15,6 +14,8 @@ public class HealthScript : MonoBehaviour {
     OjochScript ojoch;
     public int enemyType;
     private bool dead = false;
+    public GameObject sescontr;
+    
 
     //Ojochovy staty
     [Space(10, order = 0)]
@@ -33,7 +34,9 @@ public class HealthScript : MonoBehaviour {
 
 
     void Start() {
-        ojoch = GameObject.FindWithTag("Player").GetComponent<OjochScript>();        
+        ojoch = GameObject.FindWithTag("Player").GetComponent<OjochScript>();
+        sescontr = GameObject.Find("Session Controller");
+        
     }          
 
     // Započítání zranení a kontrola, jestli nemá být objekt zničen
@@ -58,8 +61,11 @@ public class HealthScript : MonoBehaviour {
                                         
                     if (!gameObject.GetComponent<EnemyAI>().exploded)
                     {
-                        ojoch.session.UpdateScoreStuff(50, 0, 1, true);   
+                        ojoch.session.UpdateScoreStuff(50, 0, 1, true);
 
+                        sescontr.GetComponent<EndGameScript>().enemyInSession += 1;
+
+                        /*
                         //Čekování na úkoly
                         for (int i = 0; i < 3; i++)
                         {
@@ -72,6 +78,7 @@ public class HealthScript : MonoBehaviour {
                                 GameManager.instance.GetComponent<TaskManager>().killsPerGame += 1;
                             }
                         }
+                        */
                     }
                 }  
                 Destroy(gameObject, .5f);  
@@ -132,7 +139,7 @@ public class HealthScript : MonoBehaviour {
             smth = false;
             ojoch.godMode = 2;
             ojoch.powerCombo.effects.smradostit.SetActive(true);
-            GameObject.Find("sprite").GetComponent<ColorChanger>().active = true;
+            OjochManager.instance.sprite.active = true;
             switch (hp)
             {
                 case 6:
@@ -172,7 +179,10 @@ public class HealthScript : MonoBehaviour {
         }       
     }
 
-    //Jak zemre nepritel, vybere spravny zvuk smrti a prehraje jej
+    /// <summary>
+    /// Přehraje odpovídající zvuk smrti daného nepřítele
+    /// </summary>
+    /// <param name="enemy">ID nepřítele</param>
     public void EnemyDeathSound(int enemy)
     {
         switch (enemy)
