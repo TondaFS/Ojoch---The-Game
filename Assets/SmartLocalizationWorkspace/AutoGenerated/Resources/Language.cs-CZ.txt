@@ -125,25 +125,40 @@
 	<data name="Menu.Continue" xml:space="preserve">
 		<value>Pokračovat</value>
 	</data>
+	<data name="Menu.Exit" xml:space="preserve">
+		<value>Konec</value>
+	</data>
+	<data name="Menu.Extra" xml:space="preserve">
+		<value>Extra</value>
+	</data>
+	<data name="Menu.Highscore" xml:space="preserve">
+		<value>Úkoly a skóre</value>
+	</data>
 	<data name="Menu.NewHighscore" xml:space="preserve">
 		<value>Nové skóre</value>
 	</data>
 	<data name="Menu.Play" xml:space="preserve">
-		<value>Hrej</value>
+		<value>Hrej!</value>
 	</data>
 	<data name="Menu.TaskCompleted" xml:space="preserve">
 		<value>Splnil jsi úkol</value>
 	</data>
-	<data name="New Key0" xml:space="preserve">
-		<value />
-	</data>
-	<data name="New Key1" xml:space="preserve">
-		<value />
-	</data>
-	<data name="New Key2" xml:space="preserve">
-		<value />
-	</data>
 	<data name="PowerUp.Bubbles" xml:space="preserve">
-		<value>Muhaha</value>
+		<value>Bublinace</value>
+	</data>
+	<data name="PowerUp.Confuse" xml:space="preserve">
+		<value>Zmatek</value>
+	</data>
+	<data name="PowerUp.Ghost" xml:space="preserve">
+		<value>Dušení</value>
+	</data>
+	<data name="PowerUp.Nitro" xml:space="preserve">
+		<value>Nitro</value>
+	</data>
+	<data name="PowerUp.Rambouch" xml:space="preserve">
+		<value>Rambouch</value>
+	</data>
+	<data name="PoweUp.Love" xml:space="preserve">
+		<value>Nápoj lásky</value>
 	</data>
 </root>

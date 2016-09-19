@@ -61,8 +61,8 @@ public class ScoreManager : MonoBehaviour {
         score = GameManager.instance.highscores.scores;
         back = GameObject.Find("BacktoMenu");
         restart = GameObject.Find("Restart");
-        restart.SetActive(false);
-        back.SetActive(false);
+        //restart.SetActive(false);
+        //back.SetActive(false);
         firstComplete = GameObject.Find("newFirst");
         firstComplete.SetActive(false);
         secondComplete = GameObject.Find("newSecond");
@@ -76,12 +76,26 @@ public class ScoreManager : MonoBehaviour {
         fader = gameObject.GetComponent<ScreenFader>();
 
         prepnuti = GameObject.Find("prepnutiWhole");
-        prepnuti.SetActive(false);
-              
+        //prepnuti.SetActive(false);
+
+        prepnuti.SetActive(true);        
+        DisplayScore();
+        back.SetActive(true);
+        restart.SetActive(true);
+        GameManager.instance.SaveData();
+       
+
     }
 
     void Update()
     {        
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            this.GetComponent<ScreenFader>().FadeOutLoadNewScene("menu");
+        }
+
+
+        /*    
         //Az hrac stiskne enter, zobrazi se skore se zadanym jmenem
         if (Input.GetKeyDown(KeyCode.Return))
         {
@@ -112,8 +126,10 @@ public class ScoreManager : MonoBehaviour {
                 this.GetComponent<ScreenFader>().FadeOutLoadNewScene("menu");
             }
         }
+        */
     }
-
+    
+    /*
     //Vlozi zadane jmeno k prave ziskanemu rekordu ve hre
     void NewName()
     {        
@@ -130,6 +146,7 @@ public class ScoreManager : MonoBehaviour {
         //vypne pole
         pole.SetActive(false);
     }
+    */
 
     //Zobrazi tabulku skore
     void DisplayScore()

@@ -27,15 +27,17 @@ public class OjochManager : MonoBehaviour {
         {
             Destroy(this.gameObject);
         }
-    } 
 
-    void Start () {
         ojochScript = GetComponent<OjochScript>();
         ojochHealth = GetComponent<HealthScript>();
         ojochWeapon = GetComponent<WeaponScript>();
         ojochCollect = GetComponent<CollectingScript>();
         ojochPowerUp = GetComponent<PowerUpScript>();
         ojochCollision = GetComponent<OjochCollisions>();
+    } 
+
+    void Start () {
+        //kvůli zranění - viz. HealthScript
         sprite = GameObject.Find("sprite").GetComponent<ColorChanger>();
     }
 	

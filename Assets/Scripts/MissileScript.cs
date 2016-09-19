@@ -15,14 +15,17 @@ public class MissileScript : MonoBehaviour {
 
 	void Start () {
         player = GameObject.FindGameObjectWithTag("Player");
-        flightDirection = (player.transform.position - transform.position).normalized;
+        if(player != null){
+            flightDirection = (player.transform.position - transform.position).normalized;
+        }
+        
         rotation = Random.Range(10, 20);
         death = false;
 
 	}
 
 	void Update () {
-        if (homing)
+        if (homing && (player != null))
         {
             transform.position = Vector3.MoveTowards(transform.position, player.transform.position, movementSpeed * Time.deltaTime);
         }

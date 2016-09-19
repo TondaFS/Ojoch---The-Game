@@ -2,6 +2,7 @@
 using System.Collections;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using SmartLocalization;
 
 public class MainMenuController : MonoBehaviour
 {
@@ -21,9 +22,9 @@ public class MainMenuController : MonoBehaviour
 
     void OnGUI()
     {
-        // Make a button. We pass in the GUIStyle defined above as the style to use
-        GUI.Label(new Rect(10, 10, 150, 20), "PRÁVĚ HRAJE:", label);
-        GameManager.instance.playerName = GUI.TextField(new Rect(10, 30, 150, 20), GameManager.instance.playerName, 20, nameLabel);
+
+        GUI.Label(new Rect(10, 10, 150, 50), "PRÁVĚ HRAJE:", label);
+        GameManager.instance.playerName = GUI.TextField(new Rect(10, 40, 200, 50), GameManager.instance.playerName, 15, nameLabel);
     }
 
     void Start() {
@@ -56,16 +57,29 @@ public class MainMenuController : MonoBehaviour
         
     }
 
+    /// <summary>
+    /// Přechod do jiné scény
+    /// </summary>
+    /// <param name="sceneName">Jméno scény</param>
     public void ChangeToScene(string sceneName)
     {
         SceneManager.LoadScene(sceneName);
     }
 
+    /// <summary>
+    /// Ukončí hru
+    /// </summary>
     public void ExitGame()
     {
+        GameManager.instance.GetComponent<GameStatistics>().stats.playedTime += Time.realtimeSinceStartup;
+        GameManager.instance.SaveData();
         Application.Quit();
     }
 
+    /// <summary>
+    /// Přepíná mezi nastavením a menu Extra
+    /// </summary>
+    /// <param name="change">Mám ukázat nastavení?</param>
     public void SettingScreen(bool change)
     {
         extraScreen.SetActive(!change);
@@ -77,21 +91,48 @@ public class MainMenuController : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Zobrazení: Jak hrát
+    /// </summary>
+    /// <param name="change">Mám zobrazit jak hrát?</param>
     public void HowToPlay(bool change) {
         extraScreen.SetActive(!change);
         howto.SetActive(change);
         logo.SetActive(!change);
     }
 
-
+    /// <summary>
+    /// Přepínání mezi Extra a Hlavním Menu
+    /// </summary>
+    /// <param name="change">Mám přepnout na Extra?</param>
     public void ExtraScreen(bool change)
     {
         menuScreen.SetActive(!change);
         extraScreen.SetActive(change);
     }
 
+    /// <summary>
+    /// Přepne z Extra na Autory
+    /// </summary>
+    /// <param name="change">Mám přepnout na autory?</param>
     public void AuthorsScreen(bool change) {
         authorsScreen.SetActive(change);
         extraScreen.SetActive(!change);
     }
+
+    /// <summary>
+    /// Změní jazyk hry.
+    /// </summary>
+    /// <param name="language">true: čeština, false: eng</param>
+    public void ChangeLanguage(bool language)
+    {
+        if (language)
+        {
+            GameManager.instance.languageManager.ChangeLanguage("cs-CZ");
+        }
+        else
+        {
+            GameManager.instance.languageManager.ChangeLanguage("en-GB");
+        }
+    }    
 }

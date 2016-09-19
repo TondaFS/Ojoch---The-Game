@@ -5,6 +5,7 @@ using UnityEngine.UI;
 public class PowerUpScript : MonoBehaviour {
     public int powerUps = 0;        //sebrano powerUpu
     public int powerUpCombo = 0;    //jake combo bude
+
     private OjochScript ojoch;
     public GameObject socha;
     public GameObject sessionController;
@@ -93,22 +94,9 @@ public class PowerUpScript : MonoBehaviour {
     //provedení komba po sebrání 2 powerupů
     public void PowerCombo(int combo) {
         sessionController.GetComponent<EndGameScript>().powersInSession += 1;
-        /*
-        for (int i = 0; i < 3; i++)
-        {
-            if ((GameManager.instance.GetComponent<TaskManager>().activeTasks[i].type == "grab") && (GameManager.instance.GetComponent<TaskManager>().activeTasks[i].completed != true))
-            {
-                GameManager.instance.GetComponent<TaskManager>().CheckCountingTask(i);
-            } else if (GameManager.instance.GetComponent<TaskManager>().activeTasks[i].type == "grabRound")
-            {
-                GameManager.instance.GetComponent<TaskManager>().grabsPerGame += 1;
-            }
-        }
-        */
+
         switch (combo)
         {
-            //POWERUPS
-
             /// <summary>
             /// BUBLINACE: Mýdlo + Mýdlo
             /// Přidá Ojochovi životy
@@ -124,7 +112,7 @@ public class PowerUpScript : MonoBehaviour {
             /// Zpomali pohyb vseho a zaroven zpomali celkovou uroven zrychleni + 5s nesmrtelnsot    
             /// </summary> 
             case 16:
-                ShowPowerUpText("NITRO", true);
+                ShowPowerUpText(GameManager.instance.languageManager.GetTextValue("PowerUp.Nitro"), true);
 
                 ojoch.godMode = 5;
                 effects.smradostit.SetActive(true);
@@ -142,7 +130,7 @@ public class PowerUpScript : MonoBehaviour {
             ///  30% sance, ze ojoch dosatne kontra strelbu, ak47, anebo oboji        
             /// </summary> 
             case 40:
-                ShowPowerUpText("Rambouch", true);
+                ShowPowerUpText(GameManager.instance.languageManager.GetTextValue("PowerUp.Rambouch"), true);
                 int chance = Random.Range(0, 100);
 
                 if (chance <= 33)
@@ -178,7 +166,7 @@ public class PowerUpScript : MonoBehaviour {
             /// Iverzní ovládání + zrušení modif. skóre
             /// </summary>  
             case 21:
-                ShowPowerUpText("Zmatek", false);
+                ShowPowerUpText(GameManager.instance.languageManager.GetTextValue("PowerUp.Confuse"), false);
                 ojoch.session.modifikatorScore = 1;
 
                 ojoch.invertTime = 5;
@@ -194,7 +182,7 @@ public class PowerUpScript : MonoBehaviour {
             /// Zrychli pohyb vseho a zaroven o neco zrychli celkovy posun zrychleni + Nápoj lásky(socha vystreli srdicka) 
             /// </summary>  
             case 9:
-                ShowPowerUpText("Nápoj lásky", false);
+                ShowPowerUpText(GameManager.instance.languageManager.GetTextValue("PowerUp.Love"), false);
                 socha.GetComponent<StatueAttackScript>().heartAttack = true;
                 GameObject.Find("Statue Sprite").GetComponent<Animator>().SetTrigger("shoot");
 
@@ -209,7 +197,7 @@ public class PowerUpScript : MonoBehaviour {
             /// S ojochem to na nekolik vterin hazi a objeví se duch  
             /// </summary>  
             case 28:
-                ShowPowerUpText("Dušení", false);
+                ShowPowerUpText(GameManager.instance.languageManager.GetTextValue("PowerUp.Ghost"), false);
                 ojoch.kejch = true;
                 duseniTime = 5;
                 effects.duseni.SetActive(true);
@@ -224,6 +212,11 @@ public class PowerUpScript : MonoBehaviour {
     }
 
     //Zobrazi text powerupu a prehraje dobry/spatny zvuk
+    /// <summary>
+    /// Zobrazi text powerUpu a přehraje zvuk
+    /// </summary>
+    /// <param name="powerUp">Jméno PowerUpu</param>
+    /// <param name="type">Dobrý (true) / Špatný (false) zvuk</param>
     public void ShowPowerUpText(string powerUp, bool type) {
         if (type)
         {

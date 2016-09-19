@@ -182,7 +182,7 @@ public class OjochCollisions : MonoBehaviour {
     /// <param name="col">Mince</param>
     void CoinCollision(Collision2D col)
     {
-        GameManager.instance.GetComponent<CoinsManager>().coins += 1;
+        GameManager.instance.GetComponent<CoinsManager>().AjustCoins(col.gameObject.GetComponent<Coins>().value);
         Destroy(col.gameObject);
     }
 }

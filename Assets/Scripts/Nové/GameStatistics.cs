@@ -12,9 +12,9 @@ public class Stats
     public int longestTimePlayed;
     public int gotMad;
     public int fullSanity;
-
+    public float playedTime;
     
-    public Stats(int v1, int v2, int v3, int v4, int v5, int v6)
+    public Stats(int v1, int v2, int v3, int v4, int v5, int v6, int v7)
     {
         this.gamesPlayed = v1;
         this.enemiesKilled = v2;
@@ -22,12 +22,13 @@ public class Stats
         this.longestTimePlayed = v4;
         this.gotMad = v5;
         this.fullSanity = v6;
+        this.playedTime = v7;
     }
     
 }
 
 public class GameStatistics : MonoBehaviour{
-    public Stats stats = new Stats(0,0,0,0,0,0);    
+    public Stats stats = new Stats(0,0,0,0,0,0,0);    
 
     /// <summary>
     /// Zvýší statistiky o dané hondoty.

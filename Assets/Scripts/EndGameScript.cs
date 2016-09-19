@@ -16,15 +16,13 @@ public class EndGameScript : MonoBehaviour {
 
     void Start()
     {
-        ojochHealth = GameObject.FindWithTag("Player").GetComponent<HealthScript>();
-        session = GameObject.Find("Session Controller").GetComponent<ScoreScript>();
+        ojochHealth = OjochManager.instance.ojochHealth;
+
+        session = GetComponent<ScoreScript>();
         finalScore = 0;
 
         enemyInSession = 0;        
-        powersInSession = 0;
-
-        //enemyTotal = GameManager.instance.GetComponent<GameStatistics>().enemiesKilled;
-        //powersTotal = GameManager.instance.GetComponent<GameStatistics>().powerUpsCollected;
+        powersInSession = 0;        
     }
 
     void Update()
@@ -41,17 +39,7 @@ public class EndGameScript : MonoBehaviour {
         if (GameManager.instance.newRecord)
         {
             GetComponent<SessionController>().newHighScoreText.SetActive(true);
-        }
-
-        /*
-        for (int i = 0; i < 3; i++)
-        {
-            if (GameManager.instance.GetComponent<TaskManager>().activeTasks[i].type == "kill")
-            {
-                GameManager.instance.GetComponent<TaskManager>().CheckCountingTaskAtTheEnd(i, enemyInSession);
-            }
-        }
-        */
+        }        
 
         for (int i = 0; i < 3; i++)
         {
@@ -131,11 +119,6 @@ public class EndGameScript : MonoBehaviour {
             {
                 GameManager.instance.GetComponent<TaskManager>().CheckCountingTaskAtTheEnd(i, powersInSession);
             }
-            /*
-            else if (GameManager.instance.GetComponent<TaskManager>().activeTasks[i].type == "play")
-            {
-                GameManager.instance.GetComponent<TaskManager>().CheckCountingTask(i);
-            }*/
             else if (GameManager.instance.GetComponent<TaskManager>().activeTasks[i].type == "distance")
             {
                 GameManager.instance.GetComponent<TaskManager>().CheckOnceTask(distance, i);
@@ -143,7 +126,6 @@ public class EndGameScript : MonoBehaviour {
             else if (GameManager.instance.GetComponent<TaskManager>().activeTasks[i].type == "killRound")
             {
                 GameManager.instance.GetComponent<TaskManager>().CheckOnceTask(enemyInSession, i);
-                //GameManager.instance.GetComponent<TaskManager>().killsPerGame = 0;
                 
             } else if(GameManager.instance.GetComponent<TaskManager>().activeTasks[i].type == "modify")
             {
@@ -152,7 +134,6 @@ public class EndGameScript : MonoBehaviour {
             } else if (GameManager.instance.GetComponent<TaskManager>().activeTasks[i].type == "grabRound")
             {
                 GameManager.instance.GetComponent<TaskManager>().CheckOnceTask(powersInSession, i);
-                //GameManager.instance.GetComponent<TaskManager>().grabsPerGame = 0;
             }
         }
 

@@ -316,24 +316,27 @@ public class EnemyAI : MonoBehaviour {
     //Sprite se otoci na stranu kde je hrac
     private void TurnAtPlayer()
     {
-        if (transform.position.x > player.transform.position.x)
+        if (player != null)
         {
-            if (!facingLeft)
+            if (transform.position.x > player.transform.position.x)
             {
-                Vector3 scale = transform.localScale;
-                scale.x *= -1;
-                transform.localScale = scale;
-                facingLeft = true;
+                if (!facingLeft)
+                {
+                    Vector3 scale = transform.localScale;
+                    scale.x *= -1;
+                    transform.localScale = scale;
+                    facingLeft = true;
+                }
             }
-        }
-        else
-        {
-            if (facingLeft)
+            else
             {
-                Vector3 scale = transform.localScale;
-                scale.x *= -1;
-                transform.localScale = scale;
-                facingLeft = false;
+                if (facingLeft)
+                {
+                    Vector3 scale = transform.localScale;
+                    scale.x *= -1;
+                    transform.localScale = scale;
+                    facingLeft = false;
+                }
             }
         }
     }

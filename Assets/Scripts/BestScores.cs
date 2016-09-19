@@ -70,7 +70,7 @@ public class BestScores : MonoBehaviour {
             if (final >= GameManager.instance.highscores.scores[i].score)
             {                
                 GameManager.instance.highscores.scores.RemoveAt(9);
-                ScoreElement skore = new ScoreElement("Nový Ojoch", (int)final);
+                ScoreElement skore = new ScoreElement(GameManager.instance.playerName, (int)final);
                 GameManager.instance.newRecord = true;
                 GameManager.instance.recordScore = final;
                 GameManager.instance.highscores.scores.Add(skore);

@@ -31,12 +31,11 @@ public class HealthScript : MonoBehaviour {
     public GameObject healthFour;
     public GameObject healthFive;
     public GameObject healthSix;
-
+    
 
     void Start() {
-        ojoch = GameObject.FindWithTag("Player").GetComponent<OjochScript>();
-        sescontr = GameObject.Find("Session Controller");
-        
+        ojoch = OjochManager.instance.ojochScript;               
+        sescontr = GameObject.Find("Session Controller");        
     }          
 
     // Započítání zranení a kontrola, jestli nemá být objekt zničen
@@ -62,29 +61,12 @@ public class HealthScript : MonoBehaviour {
                     if (!gameObject.GetComponent<EnemyAI>().exploded)
                     {
                         ojoch.session.UpdateScoreStuff(50, 0, 1, true);
-
                         sescontr.GetComponent<EndGameScript>().enemyInSession += 1;
-
-                        /*
-                        //Čekování na úkoly
-                        for (int i = 0; i < 3; i++)
-                        {
-                            if ((GameManager.instance.GetComponent<TaskManager>().activeTasks[i].type == "kill") && (GameManager.instance.GetComponent<TaskManager>().activeTasks[i].completed != true))
-                            {
-                                GameManager.instance.GetComponent<TaskManager>().CheckCountingTask(i);
-                            }
-                            else if (GameManager.instance.GetComponent<TaskManager>().activeTasks[i].type == "killRound")
-                            {
-                                GameManager.instance.GetComponent<TaskManager>().killsPerGame += 1;
-                            }
-                        }
-                        */
                     }
                 }  
                 Destroy(gameObject, .5f);  
             }
-        }
-        
+        }        
     }
 
     //Funkce, ktera ojochovi ubira pricetnost a nasledne upravuje pocet mozku ve hre
@@ -107,10 +89,9 @@ public class HealthScript : MonoBehaviour {
 
                 //Pokud ojoch ztrati veskerou pricetnost, informace o tom se ulozi a  spusti se efekt soufl
                 case 0:
-                    sanityOne.SetActive(false);
-                    
-                    GameObject.Find("Session Controller").GetComponent<EndGameScript>().sanityLost = true;
-                    GameObject.Find("Session Controller").GetComponent<ShowingEffects>().soufl.SetActive(true);
+                    sanityOne.SetActive(false);                    
+                    sescontr.GetComponent<EndGameScript>().sanityLost = true;
+                    sescontr.GetComponent<ShowingEffects>().soufl.SetActive(true);
                     ojoch.zakaleniTime = 1;
                     break;
             }
@@ -123,7 +104,7 @@ public class HealthScript : MonoBehaviour {
     {
         ojoch.animator.SetTrigger("dead");
         yield return new WaitForSeconds(0.75f);
-        GameObject.Find("Session Controller").GetComponent<EndGameScript>().EndGame();
+        sescontr.GetComponent<EndGameScript>().EndGame();
         Time.timeScale = 0.1f;
         GameObject.Find("Music").GetComponent<AudioSource>().mute = true;
         Destroy(gameObject);

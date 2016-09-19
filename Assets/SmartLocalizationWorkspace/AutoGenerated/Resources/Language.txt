@@ -125,6 +125,15 @@
 	<data name="Menu.Continue" xml:space="preserve">
 		<value>Continue</value>
 	</data>
+	<data name="Menu.Exit" xml:space="preserve">
+		<value>Exit</value>
+	</data>
+	<data name="Menu.Extra" xml:space="preserve">
+		<value>Extra</value>
+	</data>
+	<data name="Menu.Highscore" xml:space="preserve">
+		<value>Tasks and Highscore</value>
+	</data>
 	<data name="Menu.NewHighscore" xml:space="preserve">
 		<value>New Highscore</value>
 	</data>
@@ -134,16 +143,22 @@
 	<data name="Menu.TaskCompleted" xml:space="preserve">
 		<value>Task Completed</value>
 	</data>
-	<data name="New Key0" xml:space="preserve">
-		<value>New Value</value>
-	</data>
-	<data name="New Key1" xml:space="preserve">
-		<value>New Value</value>
-	</data>
-	<data name="New Key2" xml:space="preserve">
-		<value>New Value</value>
-	</data>
 	<data name="PowerUp.Bubbles" xml:space="preserve">
 		<value>Bubbles</value>
+	</data>
+	<data name="PowerUp.Confuse" xml:space="preserve">
+		<value>Confusion</value>
+	</data>
+	<data name="PowerUp.Ghost" xml:space="preserve">
+		<value>Ghost</value>
+	</data>
+	<data name="PowerUp.Nitro" xml:space="preserve">
+		<value>Nitro</value>
+	</data>
+	<data name="PowerUp.Rambouch" xml:space="preserve">
+		<value>Ak47</value>
+	</data>
+	<data name="PoweUp.Love" xml:space="preserve">
+		<value>Love Potion</value>
 	</data>
 </root>

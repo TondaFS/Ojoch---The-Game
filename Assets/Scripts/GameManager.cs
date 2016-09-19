@@ -30,7 +30,7 @@ public class GameManager : MonoBehaviour
         highscores = GetComponent<BestScores>();
         playerName = "Ojoch";  
         LoadData();
-        languageManager = LanguageManager.Instance; 
+        languageManager = LanguageManager.Instance;        
     }
     
     //Ulozi data do Slozky (pokud neexistuje, vytvori jej)
