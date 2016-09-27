@@ -58,17 +58,17 @@ public class AchievedPowerUP : MonoBehaviour {
         switch (id)
         {
             case 2:
-                return bublinace;            
+                return zmatek;            
             case 9:
-                return napojLasky;            
+                return nitro;            
             case 16:
-                return nitro;
-            case 21:
-                return zmatek;
-            case 28:
                 return duseni;
-            case 40:
+            case 21:
+                return bublinace;
+            case 28:
                 return rambouch;
+            case 40:
+                return napojLasky;
         }
         return null;
     }

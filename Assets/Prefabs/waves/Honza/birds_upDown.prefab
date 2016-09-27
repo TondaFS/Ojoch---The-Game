@@ -53,6 +53,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 426472}
   - 114: {fileID: 11481344}
+  - 114: {fileID: 114000013321294180}
   m_Layer: 0
   m_Name: powerUpSpawner (1)
   m_TagString: PowerUp
@@ -84,6 +85,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 420006}
   - 114: {fileID: 11479734}
+  - 114: {fileID: 114000011926728504}
   m_Layer: 0
   m_Name: powerUpSpawner
   m_TagString: PowerUp
@@ -803,6 +805,7 @@ MonoBehaviour:
   sanity: 30
   isEnemy: 1
   enemyType: 0
+  sescontr: {fileID: 0}
   sanityOne: {fileID: 0}
   sanityTwo: {fileID: 0}
   sanityThree: {fileID: 0}
@@ -855,6 +858,7 @@ MonoBehaviour:
   sanity: 30
   isEnemy: 1
   enemyType: 0
+  sescontr: {fileID: 0}
   sanityOne: {fileID: 0}
   sanityTwo: {fileID: 0}
   sanityThree: {fileID: 0}
@@ -879,6 +883,7 @@ MonoBehaviour:
   sanity: 30
   isEnemy: 1
   enemyType: 0
+  sescontr: {fileID: 0}
   sanityOne: {fileID: 0}
   sanityTwo: {fileID: 0}
   sanityThree: {fileID: 0}
@@ -931,6 +936,7 @@ MonoBehaviour:
   sanity: 30
   isEnemy: 1
   enemyType: 0
+  sescontr: {fileID: 0}
   sanityOne: {fileID: 0}
   sanityTwo: {fileID: 0}
   sanityThree: {fileID: 0}
@@ -983,6 +989,7 @@ MonoBehaviour:
   sanity: 30
   isEnemy: 1
   enemyType: 0
+  sescontr: {fileID: 0}
   sanityOne: {fileID: 0}
   sanityTwo: {fileID: 0}
   sanityThree: {fileID: 0}
@@ -1007,6 +1014,7 @@ MonoBehaviour:
   sanity: 30
   isEnemy: 1
   enemyType: 0
+  sescontr: {fileID: 0}
   sanityOne: {fileID: 0}
   sanityTwo: {fileID: 0}
   sanityThree: {fileID: 0}
@@ -1059,6 +1067,7 @@ MonoBehaviour:
   sanity: 30
   isEnemy: 1
   enemyType: 0
+  sescontr: {fileID: 0}
   sanityOne: {fileID: 0}
   sanityTwo: {fileID: 0}
   sanityThree: {fileID: 0}
@@ -1113,6 +1122,7 @@ MonoBehaviour:
   sanity: 30
   isEnemy: 1
   enemyType: 0
+  sescontr: {fileID: 0}
   sanityOne: {fileID: 0}
   sanityTwo: {fileID: 0}
   sanityThree: {fileID: 0}
@@ -1536,6 +1546,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57926016a28524146b7f70febe09ff88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114000011926728504
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 144730}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 957aff2d211605e4b9c5a71ce00619bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114000012422917654
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1556,6 +1577,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 57926016a28524146b7f70febe09ff88, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &114000013321294180
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 137286}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 957aff2d211605e4b9c5a71ce00619bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &114000014218090650

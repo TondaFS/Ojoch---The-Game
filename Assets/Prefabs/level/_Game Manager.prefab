@@ -15,6 +15,7 @@ GameObject:
   - 114: {fileID: 11413070}
   - 114: {fileID: 114000012461592660}
   - 114: {fileID: 114000013775915190}
+  - 114: {fileID: 114000010246662468}
   m_Layer: 0
   m_Name: _Game Manager
   m_TagString: Untagged
@@ -468,6 +469,8 @@ MonoBehaviour:
   newRecord: 0
   recordScore: 0
   languageManager: {fileID: 0}
+  playerName: 
+  activeLanguage: 
 --- !u!114 &11492982
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -585,6 +588,18 @@ Prefab:
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 147462}
   m_IsPrefabParent: 1
+--- !u!114 &114000010246662468
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 147462}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4bfe841715431bf4fa3d3ddbfee005d8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ojochHasHat: 0
 --- !u!114 &114000012461592660
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -603,6 +618,7 @@ MonoBehaviour:
     longestTimePlayed: 0
     gotMad: 0
     fullSanity: 0
+    playedTime: 0
 --- !u!114 &114000013775915190
 MonoBehaviour:
   m_ObjectHideFlags: 1

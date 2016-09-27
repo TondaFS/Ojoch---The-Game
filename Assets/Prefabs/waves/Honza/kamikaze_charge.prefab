@@ -93,6 +93,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 478628}
   - 114: {fileID: 11481452}
+  - 114: {fileID: 114000013103319920}
   m_Layer: 0
   m_Name: powerUpSpawner (1)
   m_TagString: PowerUp
@@ -132,6 +133,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 426134}
   - 114: {fileID: 11414210}
+  - 114: {fileID: 114000010424039562}
   m_Layer: 0
   m_Name: powerUpSpawner
   m_TagString: PowerUp
@@ -653,6 +655,7 @@ MonoBehaviour:
   sanity: 30
   isEnemy: 1
   enemyType: 3
+  sescontr: {fileID: 0}
   sanityOne: {fileID: 0}
   sanityTwo: {fileID: 0}
   sanityThree: {fileID: 0}
@@ -677,6 +680,7 @@ MonoBehaviour:
   sanity: 30
   isEnemy: 1
   enemyType: 3
+  sescontr: {fileID: 0}
   sanityOne: {fileID: 0}
   sanityTwo: {fileID: 0}
   sanityThree: {fileID: 0}
@@ -739,6 +743,7 @@ MonoBehaviour:
   sanity: 30
   isEnemy: 1
   enemyType: 3
+  sescontr: {fileID: 0}
   sanityOne: {fileID: 0}
   sanityTwo: {fileID: 0}
   sanityThree: {fileID: 0}
@@ -847,6 +852,7 @@ MonoBehaviour:
   sanity: 30
   isEnemy: 1
   enemyType: 3
+  sescontr: {fileID: 0}
   sanityOne: {fileID: 0}
   sanityTwo: {fileID: 0}
   sanityThree: {fileID: 0}
@@ -894,6 +900,7 @@ MonoBehaviour:
   sanity: 30
   isEnemy: 1
   enemyType: 3
+  sescontr: {fileID: 0}
   sanityOne: {fileID: 0}
   sanityTwo: {fileID: 0}
   sanityThree: {fileID: 0}
@@ -1079,6 +1086,17 @@ Prefab:
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 123182}
   m_IsPrefabParent: 1
+--- !u!114 &114000010424039562
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 173248}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 957aff2d211605e4b9c5a71ce00619bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114000011543544026
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1099,6 +1117,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 57926016a28524146b7f70febe09ff88, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &114000013103319920
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 142138}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 957aff2d211605e4b9c5a71ce00619bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &114000013932923666

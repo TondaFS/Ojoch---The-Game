@@ -12,10 +12,12 @@ public class TextOfButton : MonoBehaviour {
         buttonText = GetComponent<Text>().text;
         GetComponent<Text>().text = GameManager.instance.languageManager.GetTextValue(buttonText);
     }
-
+    
     void OnChangeLanguage(LanguageManager thisLanguageManager)
     {
-        GetComponent<Text>().text = thisLanguageManager.GetTextValue(buttonText);
+        if(!(this == null))
+        {
+            GetComponent<Text>().text = GameManager.instance.languageManager.GetTextValue(buttonText);
+        }        
     }
-	
 }

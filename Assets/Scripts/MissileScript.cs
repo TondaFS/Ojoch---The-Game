@@ -40,9 +40,13 @@ public class MissileScript : MonoBehaviour {
         }
         else
         {
-            flightDirection = (player.transform.position - transform.position).normalized;
-            float rot_z = Mathf.Atan2(flightDirection.y, flightDirection.x) * Mathf.Rad2Deg;
-            transform.rotation = Quaternion.Euler(0f, 0f, rot_z + 180);
+            if (player != null)
+            {
+                flightDirection = (player.transform.position - transform.position).normalized;
+                float rot_z = Mathf.Atan2(flightDirection.y, flightDirection.x) * Mathf.Rad2Deg;
+                transform.rotation = Quaternion.Euler(0f, 0f, rot_z + 180);
+            }
+            
         }
 
         if (health == 0)

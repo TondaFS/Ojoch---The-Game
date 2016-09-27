@@ -209,48 +209,52 @@ public class EnemyAI : MonoBehaviour {
     //AI leti za hracem, kdyz je blizko, zazehne a vybouchne
     private void Kamikaze()
     {
-        transform.position = Vector3.MoveTowards(transform.position, player.transform.position, movementSpeed * Time.deltaTime);
-
-        float playerDistance = Vector2.Distance(transform.position, player.transform.position);
-
-        if (playerDistance < ignitionRadius)
+        if (player != null)
         {
-            ignited = true;
-            movementSpeed = ignitionSpeed;
-        }
+            transform.position = Vector3.MoveTowards(transform.position, player.transform.position, movementSpeed * Time.deltaTime);
 
-        if (ignited)
-        {
-            //countdown
-            explosionCountdown -= Time.deltaTime;
+            float playerDistance = Vector2.Distance(transform.position, player.transform.position);
 
-            //blink
-            float sin = Mathf.Sin(Time.time * 10) * 0.3f + 0.7f;
-            Color newColor = new Color(255, sin, sin);
-            this.GetComponent<SpriteRenderer>().color = newColor;
-
-            //pulse
-            float pulse = Mathf.Sin(Time.time * 30) * 0.05f;
-            if (facingLeft)
+            if (playerDistance < ignitionRadius)
             {
-                transform.localScale = new Vector3(originalScale.x - pulse, originalScale.y + pulse);
+                ignited = true;
+                movementSpeed = ignitionSpeed;
             }
-            else
-            {
-                transform.localScale = new Vector3((originalScale.x * -1) - pulse, originalScale.y - pulse);
-            }
-        }
 
-        if (explosionCountdown < 0 && !exploded)
-        {
-            exploded = true;
-            GetComponent<HealthScript>().Damage(100);           
+            if (ignited)
+            {
+                //countdown
+                explosionCountdown -= Time.deltaTime;
+
+                //blink
+                float sin = Mathf.Sin(Time.time * 10) * 0.3f + 0.7f;
+                Color newColor = new Color(255, sin, sin);
+                this.GetComponent<SpriteRenderer>().color = newColor;
+
+                //pulse
+                float pulse = Mathf.Sin(Time.time * 30) * 0.05f;
+                if (facingLeft)
+                {
+                    transform.localScale = new Vector3(originalScale.x - pulse, originalScale.y + pulse);
+                }
+                else
+                {
+                    transform.localScale = new Vector3((originalScale.x * -1) - pulse, originalScale.y - pulse);
+                }
+            }
+
+            if (explosionCountdown < 0 && !exploded)
+            {
+                exploded = true;
+                GetComponent<HealthScript>().Damage(100);
+            }
         }
     }
 
     private void Chase()
     {
-        transform.position = Vector3.MoveTowards(transform.position, player.transform.position, movementSpeed * Time.deltaTime);
+        if(player != null)
+            transform.position = Vector3.MoveTowards(transform.position, player.transform.position, movementSpeed * Time.deltaTime);
     }
 
     private void StopAndShoot()

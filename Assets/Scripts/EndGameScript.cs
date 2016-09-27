@@ -14,15 +14,21 @@ public class EndGameScript : MonoBehaviour {
     public int powersInSession;
 
 
+    public GameObject coins;
+
+    public GameObject newRecord;
+
     void Start()
     {
+        newRecord.SetActive(false);
         ojochHealth = OjochManager.instance.ojochHealth;
 
         session = GetComponent<ScoreScript>();
         finalScore = 0;
 
         enemyInSession = 0;        
-        powersInSession = 0;        
+        powersInSession = 0;       
+
     }
 
     void Update()
@@ -32,13 +38,14 @@ public class EndGameScript : MonoBehaviour {
 
     public void EndGame() {
         session.end = true;     //prestane pocitat skore
+        GameObject.Find("ShowPowerUP").SetActive(false);
         FinalScore();
         GetComponent<SessionController>().ojochDead = true;
         GetComponent<SessionController>().deathMenu.SetActive(true);
 
         if (GameManager.instance.newRecord)
         {
-            GetComponent<SessionController>().newHighScoreText.SetActive(true);
+            newRecord.SetActive(true);
         }        
 
         for (int i = 0; i < 3; i++)
@@ -49,7 +56,10 @@ public class EndGameScript : MonoBehaviour {
                 break;
             }
         }
-               
+
+        
+        coins.GetComponent<Text>().text = "" + GameManager.instance.GetComponent<CoinsManager>().coins;
+
         GameManager.instance.GetComponent<GameStatistics>().UpdateStatistics(1, enemyInSession, powersInSession, (int)distance);
         enemyInSession = 0;
         powersInSession = 0;
@@ -103,10 +113,11 @@ public class EndGameScript : MonoBehaviour {
                 }
             }
         }
-        session.scoreText.text = "" + finalScore;
-
+        session.scoreText.text = "" + finalScore;        
+        GetComponent<SessionController>().deathScore.GetComponent<Text>().text = GameManager.instance.languageManager.GetTextValue("Death.Score") + " " + finalScore;
+                
         //Kontrola ukolu
-       for (int i = 0; i < 3; i++) {
+        for (int i = 0; i < 3; i++) {
             if (GameManager.instance.GetComponent<TaskManager>().activeTasks[i].type == "score")   
             {
                 GameManager.instance.GetComponent<TaskManager>().CheckOnceTask(finalScore, i);

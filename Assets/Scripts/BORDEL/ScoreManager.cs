@@ -196,7 +196,7 @@ public class ScoreManager : MonoBehaviour {
             highscore = false;
             tasks.SetActive(true);
             scores.SetActive(false);
-            GameManager.instance.GetComponent<TaskManager>().displayTasks();
+           // GameManager.instance.GetComponent<TaskManager>().displayTasks();
             changer.text = "Aktivní úkoly";
             prepnutiText.text = "Skóre";
 
@@ -211,7 +211,7 @@ public class ScoreManager : MonoBehaviour {
             prepnutiText.text = "Úkoly";
         }
     }
-
+    /*
     //Pokud hrac klikne na moynost noveho ukolu, vytvori se a ihned zobrazi
     public void NewTask(int questRow)
     {        
@@ -232,6 +232,6 @@ public class ScoreManager : MonoBehaviour {
                 break;
         }
         //vse se ulozi
-        GameManager.instance.SaveData();
-    }
+        GameManager.instance.SaveData()*/
+    
 }

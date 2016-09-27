@@ -116,32 +116,117 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-	<data name="key" xml:space="preserve">
-		<value />
+	<data name="Bonus.Activate" xml:space="preserve">
+		<value>Aktivovat</value>
+	</data>
+	<data name="Bonus.Buy" xml:space="preserve">
+		<value>Koupit za 20</value>
+	</data>
+	<data name="Bonus.Deactivate" xml:space="preserve">
+		<value>Deaktivovat</value>
+	</data>
+	<data name="Bonus.Error" xml:space="preserve">
+		<value>Nedostatek peněz!</value>
+	</data>
+	<data name="Bonus.HatDescription" xml:space="preserve">
+		<value>Slušivý klobouček dělá Ojocha krásnějším.</value>
+	</data>
+	<data name="Bonus.HatTitle" xml:space="preserve">
+		<value>Slušivý Klobouček</value>
+	</data>
+	<data name="Bonus.Locked" xml:space="preserve">
+		<value>Zamčeno!</value>
+	</data>
+	<data name="Death.Again" xml:space="preserve">
+		<value>Znova!</value>
+	</data>
+	<data name="Death.Back" xml:space="preserve">
+		<value>Zpět do Menu</value>
+	</data>
+	<data name="Death.NewHighscore" xml:space="preserve">
+		<value>Skóre</value>
+	</data>
+	<data name="Death.NewRecord" xml:space="preserve">
+		<value>Nový Rekord!</value>
+	</data>
+	<data name="Death.RIP" xml:space="preserve">
+		<value>RIP</value>
+	</data>
+	<data name="Death.Score" xml:space="preserve">
+		<value>Skóre:</value>
+	</data>
+	<data name="Death.Task" xml:space="preserve">
+		<value>Úkoly</value>
+	</data>
+	<data name="Death.Text" xml:space="preserve">
+		<value>OJOCH JE MRTVÝ,
+AŤ ŽIJE OJOCH!</value>
+	</data>
+	<data name="Menu.Back" xml:space="preserve">
+		<value>Zpět</value>
 	</data>
 	<data name="Menu.BackToMenu" xml:space="preserve">
 		<value>Zpět do Menu</value>
 	</data>
+	<data name="Menu.Bonus" xml:space="preserve">
+		<value>Bonusy</value>
+	</data>
+	<data name="Menu.ChangeName" xml:space="preserve">
+		<value>Sem napiš své jméno...</value>
+	</data>
 	<data name="Menu.Continue" xml:space="preserve">
 		<value>Pokračovat</value>
+	</data>
+	<data name="Menu.Credits" xml:space="preserve">
+		<value>Autoři</value>
 	</data>
 	<data name="Menu.Exit" xml:space="preserve">
 		<value>Konec</value>
 	</data>
 	<data name="Menu.Extra" xml:space="preserve">
-		<value>Extra</value>
+		<value>Ostatní</value>
 	</data>
 	<data name="Menu.Highscore" xml:space="preserve">
-		<value>Úkoly a skóre</value>
+		<value>Nejlepší Skóre</value>
 	</data>
-	<data name="Menu.NewHighscore" xml:space="preserve">
-		<value>Nové skóre</value>
+	<data name="Menu.Intro" xml:space="preserve">
+		<value>Intro</value>
+	</data>
+	<data name="Menu.Music" xml:space="preserve">
+		<value>Hlasitost Hudby</value>
 	</data>
 	<data name="Menu.Play" xml:space="preserve">
 		<value>Hrej!</value>
 	</data>
+	<data name="Menu.Playing" xml:space="preserve">
+		<value>Právě hraje</value>
+	</data>
+	<data name="Menu.Settings" xml:space="preserve">
+		<value>Nastavení</value>
+	</data>
+	<data name="Menu.Sounds" xml:space="preserve">
+		<value>Hlasitost Zvuků</value>
+	</data>
+	<data name="Menu.Stats" xml:space="preserve">
+		<value>Statistiky</value>
+	</data>
 	<data name="Menu.TaskCompleted" xml:space="preserve">
 		<value>Splnil jsi úkol</value>
+	</data>
+	<data name="Menu.Tasks" xml:space="preserve">
+		<value>Úkoly</value>
+	</data>
+	<data name="Menu.Tutorial" xml:space="preserve">
+		<value>Tutoriál</value>
+	</data>
+	<data name="Pause.BackToMenu" xml:space="preserve">
+		<value>Zpět do Menu</value>
+	</data>
+	<data name="Pause.Continue" xml:space="preserve">
+		<value>Pokračovat</value>
+	</data>
+	<data name="Pause.Pause" xml:space="preserve">
+		<value>Hra pozastavena</value>
 	</data>
 	<data name="PowerUp.Bubbles" xml:space="preserve">
 		<value>Bublinace</value>
@@ -152,13 +237,52 @@
 	<data name="PowerUp.Ghost" xml:space="preserve">
 		<value>Dušení</value>
 	</data>
+	<data name="PowerUp.Love" xml:space="preserve">
+		<value>Nápoj lásky</value>
+	</data>
 	<data name="PowerUp.Nitro" xml:space="preserve">
 		<value>Nitro</value>
 	</data>
 	<data name="PowerUp.Rambouch" xml:space="preserve">
 		<value>Rambouch</value>
 	</data>
-	<data name="PoweUp.Love" xml:space="preserve">
-		<value>Nápoj lásky</value>
+	<data name="Score.TheBest" xml:space="preserve">
+		<value>Tabulka nejlepších</value>
+	</data>
+	<data name="Stats.Enemies" xml:space="preserve">
+		<value>Zabito nepřátel</value>
+	</data>
+	<data name="Stats.Games" xml:space="preserve">
+		<value>Odehráno her</value>
+	</data>
+	<data name="Stats.LongestTime" xml:space="preserve">
+		<value>Nejdéle vydrženo naživu</value>
+	</data>
+	<data name="Stats.Mad" xml:space="preserve">
+		<value>Zešíleno</value>
+	</data>
+	<data name="Stats.Powers" xml:space="preserve">
+		<value>Sebráno PowerUpů/Downů</value>
+	</data>
+	<data name="Stats.Sanity" xml:space="preserve">
+		<value>Maximální příčetnost</value>
+	</data>
+	<data name="Stats.Times" xml:space="preserve">
+		<value>Celkový odehraný čas</value>
+	</data>
+	<data name="Stats.Title" xml:space="preserve">
+		<value>Statistiky</value>
+	</data>
+	<data name="Takss.Level" xml:space="preserve">
+		<value>Úroveň:</value>
+	</data>
+	<data name="Tasks.FightTitle" xml:space="preserve">
+		<value>Umění boje</value>
+	</data>
+	<data name="Tasks.New" xml:space="preserve">
+		<value>Nový úkol</value>
+	</data>
+	<data name="Tasks.Title" xml:space="preserve">
+		<value>Úkoly</value>
 	</data>
 </root>

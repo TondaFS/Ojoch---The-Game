@@ -38,7 +38,7 @@ public class OjochManager : MonoBehaviour {
 
     void Start () {
         //kvůli zranění - viz. HealthScript
-        sprite = GameObject.Find("sprite").GetComponent<ColorChanger>();
+        sprite = GetComponentInChildren<ColorChanger>();//GameObject.Find("sprite").GetComponent<ColorChanger>();
     }
 	
 }

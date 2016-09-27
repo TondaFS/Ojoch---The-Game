@@ -22,6 +22,8 @@ GameObject:
   - 212: {fileID: 212000010389444824}
   - 114: {fileID: 114000011498583190}
   - 58: {fileID: 58000010156857044}
+  - 114: {fileID: 114000013110766078}
+  - 95: {fileID: 95000013792816010}
   m_Layer: 11
   m_Name: silverCoin
   m_TagString: coin
@@ -56,6 +58,23 @@ CircleCollider2D:
   m_Offset: {x: 0, y: -0.1}
   serializedVersion: 2
   m_Radius: 1.0142303
+--- !u!95 &95000013792816010
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000010629320470}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 4955f5dc9030e6a4a8cc14ea488d1989, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!114 &114000011498583190
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -68,6 +87,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   value: 5
+  scale: 0
+--- !u!114 &114000013110766078
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000010629320470}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c8d5cb4d956322b4e9ec3670c56ff41c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: {x: 1, y: 1}
+  direction: {x: -1, y: 0}
 --- !u!212 &212000010389444824
 SpriteRenderer:
   m_ObjectHideFlags: 1

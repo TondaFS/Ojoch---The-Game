@@ -79,4 +79,19 @@ public class BestScores : MonoBehaviour {
             }
         }
     }     
+
+    /// <summary>
+    /// Vypíše tabulku nejlepších hráčů.
+    /// </summary>
+    public void DisplayBestScores(Text names, Text values)
+    {
+
+        names.text = "";
+        values.text = "";
+        for(int i = 0; i < scores.Count; i++)
+        {
+            names.text += (i + 1) + ". " + scores[i].name + "\n";
+            values.text += scores[i].score + "\n";
+        }
+    }
 }

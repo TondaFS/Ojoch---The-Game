@@ -13,10 +13,6 @@ public class OjochScript : MonoBehaviour {
     public SoundManager managerSound;
     public ScoreScript session;
 
-    //public Collider2D obstacle; 
-    //public CollectingScript collect;
-    //private GameObject socha;
-
     //Pro ultrakejch 
     public bool kejch = false;
     public Vector2 ultraKejch = new Vector2(0,0);
@@ -45,23 +41,43 @@ public class OjochScript : MonoBehaviour {
     public GameObject souflEffect;
     public float zakaleniTime = 0;
     private float zakaleniFade = 0;
-    
 
+    //Dalsi obekty
+    public ColorChanger sprite;
+    public SpinSocks sockPivot;
+     
+  
+    void Start()
+    {
+        if (GameManager.instance.GetComponent<BonusManager>().ojochHasHat)
+        {
+            GameObject.Find("sprite").SetActive(false);           
+        }
+        else
+        {
+            GameObject.Find("hatSprite").SetActive(false);
+        }
 
-    void Start() {
         session = GameObject.Find("Session Controller").GetComponent<ScoreScript>();
         ojoch = GetComponent<Rigidbody2D>();
         powerCombo = GetComponent<PowerUpScript>();
-        playerHealth = GetComponent<HealthScript>();        
-        animator = transform.Find("sprite").gameObject.GetComponent<Animator>();
-        weapons = GetComponentsInChildren<WeaponScript>();
-        //collect = GetComponent<CollectingScript>();
-        managerSound = GameManager.instance.GetComponent<SoundManager>();
-        //socha = GameObject.Find("statue");
+        playerHealth = GetComponent<HealthScript>();           
+        weapons = GetComponentsInChildren<WeaponScript>();        
+        managerSound = GameManager.instance.GetComponent<SoundManager>();        
         GetComponent<AudioSource>().volume = 0.3f * managerSound.soundsVolume;
         sanityBar = GameObject.Find("Brain");
-        sanityBar.SetActive(false);        
-}
+        sanityBar.SetActive(false);
+        animator = GetComponentInChildren<Animator>();        
+        sprite = GetComponentInChildren<ColorChanger>();
+        sockPivot = GameObject.Find("rotatingSocks").GetComponent<SpinSocks>();
+        sockPivot.enabled = false;
+
+
+        //animator = transform.Find("sprite").gameObject.GetComponent<Animator>();
+        //sprite = GameObject.Find("sprite").GetComponent<ColorChanger>();
+        //socha = GameObject.Find("statue");
+        //collect = GetComponent<CollectingScript>();
+    }
 
     void Update () {
         
@@ -119,8 +135,11 @@ public class OjochScript : MonoBehaviour {
             {
                 godMode = 0;
                 powerCombo.effects.smradostit.SetActive(false);
-                GameObject.Find("sprite").GetComponent<ColorChanger>().active = false;
-                GameObject.Find("sock pivot").GetComponent<SpinSocks>().enabled = false;
+                sprite.active = false;               
+                sockPivot.enabled = false;
+
+                //GameObject.Find("sprite").GetComponent<ColorChanger>().active = false;
+                //GameObject.Find("sock pivot").GetComponent<SpinSocks>().enabled = false;
             }
         }
 

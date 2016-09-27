@@ -189,6 +189,51 @@ public class TaskManager : MonoBehaviour {
         }
     }    
 
+    public void DisplayAllTasks(Text one, Text two, Text three)
+    {
+        DisplayTaskOne(one);
+        DisplayTaskTwo(two);
+        DisplayTaskThree(three);
+    }
+
+    public void DisplayTaskOne(Text one)
+    {
+        one.text = activeTasks[0].description + "\n" + "Splněno: " + activeTasks[0].progress + " / " + activeTasks[0].target;
+
+    }
+
+    public void DisplayTaskTwo(Text two)
+    {
+        two.text = activeTasks[1].description + "\n" + "Splněno: " + activeTasks[1].progress + " / " + activeTasks[1].target;
+    }
+
+    public void DisplayTaskThree(Text three)
+    {
+        three.text = activeTasks[2].description + "\n" + "Splněno: " + activeTasks[2].progress + " / " + activeTasks[2].target;
+    }
+
+    public void NewTask(int questRow, GameObject button, Text textField)
+    {
+        InitiateTask(activeTasks[questRow].id + 1, questRow);
+        button.SetActive(false);
+        switch (questRow)
+        {
+            case 0:
+                
+                GameManager.instance.GetComponent<TaskManager>().DisplayTaskOne(textField);
+                break;
+            case 1:
+                GameManager.instance.GetComponent<TaskManager>().DisplayTaskTwo(textField);
+                break;
+            case 2:
+                GameManager.instance.GetComponent<TaskManager>().DisplayTaskThree(textField);
+                break;
+        }
+
+        GameManager.instance.SaveData();
+    }
+
+    /*
     //Zobrazi ukoly
     public void displayTasks()
     {
@@ -229,4 +274,5 @@ public class TaskManager : MonoBehaviour {
             GameObject.Find("scoreManager").GetComponent<ScoreManager>().thirdComplete.SetActive(true);
         }
     }
+    */
 }

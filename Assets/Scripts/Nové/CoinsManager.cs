@@ -4,7 +4,7 @@ using System.Collections;
 [System.Serializable]
 public class CoinsManager : MonoBehaviour {
     public int coins;
-
+    
     /// <summary>
     /// Upraví peníze v Ojochově pěněžence o danou hodnotu.
     /// </summary>

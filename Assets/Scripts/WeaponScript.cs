@@ -79,7 +79,7 @@ public class WeaponScript : MonoBehaviour {
         }
     }
 
-    public void StatueAttack(bool isEnemy, Vector2 direction) {
+    public void StatueAttack(bool isEnemy, Vector2 direction, float angle) {
         var shotTransform = Instantiate(heartPrefab) as Transform;                             //vytvoreni nove strely
         shotTransform.position = transform.position + new Vector3(1.5f, 4, 0);                //prirazeni pozice strely
 
@@ -92,7 +92,8 @@ public class WeaponScript : MonoBehaviour {
         MovingScript move = shotTransform.gameObject.GetComponent<MovingScript>();             //Bereme MovingScript strely
         if (move != null)
         {
-            move.direction = direction;                                                        //Strela se vystreli smerem vpravo
+            move.direction = direction;                                                         //Strela se vystreli smerem vpravo
+            shotTransform.Rotate(new Vector3(0, 0, angle));            
         }
     }
 

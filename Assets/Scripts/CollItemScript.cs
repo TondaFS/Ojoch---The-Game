@@ -56,7 +56,9 @@ public class CollItemScript : MonoBehaviour {
         }
     }
     
-    //Posune obrazek na pozici prevniho predmetu
+    /// <summary>
+    /// Posune obrázek na pozici prvního předmětu
+    /// </summary>
     public void MoveToFirst()
     {
         fast += 2f;
@@ -68,8 +70,10 @@ public class CollItemScript : MonoBehaviour {
             RemoveImages();
         }
     }
-
-    //odstrani obrazky predmetu a na jejich pozici vytvori odpovidajici obrazek PowerUpu
+    
+    /// <summary>
+    /// Odstraní obrázky předmětů a na jejich pozici vytvoří odpovídající obrázek PowerUpu
+    /// </summary>
     public void RemoveImages()
     {
         Create(transform.position, combo); 
@@ -77,8 +81,12 @@ public class CollItemScript : MonoBehaviour {
         Destroy(gameObject);
     }
    
-
-    //Vytvori PowerUp
+    
+    /// <summary>
+    /// Vytvoří PowerUp
+    /// </summary>
+    /// <param name="position">Pozice vytvoření</param>
+    /// <param name="id">Id powerUpu</param>
     public void Create(Vector3 position, int id)
     {
         var poowerUp = Instantiate(powerUp) as Image;

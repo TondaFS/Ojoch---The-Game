@@ -13,10 +13,10 @@ public class StatueAttackScript : MonoBehaviour {
     // Update is called once per frame
     void Update () {
         if (heartAttack) {
-            weapon.StatueAttack(true, new Vector2(1, 0));      
-            weapon.StatueAttack(true, new Vector2(1, -1f));
-            weapon.StatueAttack(true, new Vector2(1, -0.5f));
-            weapon.StatueAttack(true, new Vector2(1, -1.5f));
+            weapon.StatueAttack(true, new Vector2(1, 0), 0);             
+            weapon.StatueAttack(true, new Vector2(1, -0.5f), -8);
+            weapon.StatueAttack(true, new Vector2(1, -1f), -18);
+            weapon.StatueAttack(true, new Vector2(1, -1.5f), -28);
             heartAttack = false;            
         }
 	}

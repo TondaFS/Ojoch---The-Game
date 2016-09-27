@@ -14,27 +14,61 @@ public class SessionController : MonoBehaviour
     public GameObject deathMenu;
     public GameObject newHighScoreText;
     public GameObject taskCompletedText;
-    public GameObject ojoch;
-      
-    
+
+    public GameObject deathScore;
+    public GameObject highscoreMenu;
+    public GameObject tasksMenu;
+
+    public GameObject scoreNames;
+    public GameObject scoreValues;
+
+    GameObject taskOne;
+    GameObject taskOneNew;
+    GameObject taskTwo;
+    GameObject taskTwoNew;
+    GameObject taskThree;
+    GameObject taskThreeNew;
+
+
+
+
     void Start() {
         pauseMenu = GameObject.Find("PAUSE");
         pauseMenu.SetActive(false);
         taskCompletedText = GameObject.Find("taskCompleted");
-        taskCompletedText.SetActive(false);
         newHighScoreText = GameObject.Find("NewHighscore");
-        newHighScoreText.SetActive(false);
         deathMenu = GameObject.Find("DEATH");
+        deathScore = GameObject.Find("rip");
+        tasksMenu = GameObject.Find("TASKS");
+        highscoreMenu = GameObject.Find("HIGHSCORE");
+        scoreNames = GameObject.Find("scoreNames");
+        scoreValues = GameObject.Find("scoreValues");
+        
+
+        taskOne = GameObject.Find("taskOne");
+        taskOneNew = GameObject.Find("newOne");
+        taskTwo = GameObject.Find("taskTwo");
+        taskTwoNew = GameObject.Find("newTwo");
+        taskThree = GameObject.Find("taskThree");
+        taskThreeNew = GameObject.Find("newThree");
+
+        
+
+        taskOneNew.SetActive(false);
+        taskTwoNew.SetActive(false);
+        taskThreeNew.SetActive(false);
+        tasksMenu.SetActive(false);
+        highscoreMenu.SetActive(false);
+
         deathMenu.SetActive(false);
                
         pause = false;
         ojochDead = false;        
         GameObject.Find("Music").GetComponent<AudioSource>().volume = GameManager.instance.GetComponent<SoundManager>().musicVolume;
-        GameManager.instance.GetComponent<SoundManager>().MuteEverything(false);
+        GameManager.instance.GetComponent<SoundManager>().MuteEverything(false);        
     }
 
 	void FixedUpdate () {
-        //Debug.Log("Game runtime: " + Time.time);
         gameSpeed += Time.deltaTime / speedUpTime;
 
         if (gameSpeed < 1)
@@ -104,5 +138,76 @@ public class SessionController : MonoBehaviour
         pauseMenu.SetActive(bolean);
         pause = bolean;
     }
+
+    /// <summary>
+    /// Přepne mezi death Menu a Highscore
+    /// </summary>
+    /// <param name="change"></param>
+    public void HighscoreMenu(bool change)
+    {
+        deathMenu.SetActive(!change);
+        highscoreMenu.SetActive(change);
+
+        if (change)
+        {
+            GameManager.instance.GetComponent<BestScores>().DisplayBestScores(scoreNames.GetComponent<Text>(), scoreValues.GetComponent<Text>());
+        }
+    }
         
+
+    public void TasksMenu(bool change)
+    {
+        deathMenu.SetActive(!change);
+
+        tasksMenu.SetActive(change);
+        GameManager.instance.GetComponent<TaskManager>().DisplayAllTasks(taskOne.GetComponent<Text>(), taskTwo.GetComponent<Text>(), taskThree.GetComponent<Text>());
+        CheckQuest();
+    }
+
+    /// <summary>
+    /// Zkontroluje, jestli není nějaký úkol splněn. Pokud je, zobrazí pod ním tlačítko pro vytvoření nového.
+    /// </summary>
+    public void CheckQuest()
+    {
+        if (GameManager.instance.GetComponent<TaskManager>().activeTasks[0].completed)
+        {
+            taskOneNew.SetActive(true);
+        }
+        if (GameManager.instance.GetComponent<TaskManager>().activeTasks[0].completed)
+        {
+            taskTwoNew.SetActive(true);
+        }
+        if (GameManager.instance.GetComponent<TaskManager>().activeTasks[0].completed)
+        {
+            taskThreeNew.SetActive(true);
+        }
+    }
+
+    /// <summary>
+    /// Vytvoří nový úkol v dané sadě.
+    /// </summary>
+    /// <param name="questRow">Sada, ve které vytvoří nový úkol.</param>
+    public void NewTask(int questRow)
+    {
+        GameManager.instance.GetComponent<TaskManager>().InitiateTask(GameManager.instance.GetComponent<TaskManager>().activeTasks[questRow].id + 1, questRow);
+        switch (questRow)
+        {
+            case 0:
+                GameManager.instance.GetComponent<TaskManager>().DisplayTaskOne(taskOne.GetComponent<Text>());
+                taskOneNew.SetActive(false);
+                break;
+            case 1:
+                GameManager.instance.GetComponent<TaskManager>().DisplayTaskTwo(taskTwo.GetComponent<Text>());
+                taskTwoNew.SetActive(false);
+                break;
+            case 2:
+                GameManager.instance.GetComponent<TaskManager>().DisplayTaskThree(taskThree.GetComponent<Text>());
+                taskThreeNew.SetActive(false);
+                break;
+        }
+
+        GameManager.instance.SaveData();
+    }
+
+
 }

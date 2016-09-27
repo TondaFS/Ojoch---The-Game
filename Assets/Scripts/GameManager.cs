@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour
     public float recordScore = 0;
     public LanguageManager languageManager;
     public string playerName;
+    public string activeLanguage;
 
     void Awake()
     {
@@ -28,9 +29,13 @@ public class GameManager : MonoBehaviour
         
         DontDestroyOnLoad(this.gameObject);
         highscores = GetComponent<BestScores>();
-        playerName = "Ojoch";  
+        playerName = "Ojoch";
+        
         LoadData();
-        languageManager = LanguageManager.Instance;        
+        languageManager = LanguageManager.Instance;
+        LanguageManager.SetDontDestroyOnLoad();
+        languageManager.ChangeLanguage(activeLanguage);
+          
     }
     
     //Ulozi data do Slozky (pokud neexistuje, vytvori jej)
@@ -49,6 +54,9 @@ public class GameManager : MonoBehaviour
         formatter.Serialize(saveFile, GetComponent<SoundManager>().soundsVolume);
         formatter.Serialize(saveFile, GetComponent<TaskManager>().activeTasks);     //ulozi prave aktvini ukoly 
         formatter.Serialize(saveFile, playerName);
+        formatter.Serialize(saveFile, activeLanguage);
+        formatter.Serialize(saveFile, GetComponent<BonusManager>().ojochHasHat);
+        formatter.Serialize(saveFile, GetComponent<BonusManager>().hatBought);
         
         
         saveFile.Close();
@@ -68,7 +76,9 @@ public class GameManager : MonoBehaviour
             GetComponent<SoundManager>().soundsVolume = (float)formatter.Deserialize(saveFile);
             GetComponent<TaskManager>().activeTasks = (Task[])formatter.Deserialize(saveFile);
             playerName = (String)formatter.Deserialize(saveFile);
-            
+            activeLanguage = (String)formatter.Deserialize(saveFile);
+            GetComponent<BonusManager>().ojochHasHat = (bool)formatter.Deserialize(saveFile);
+            GetComponent<BonusManager>().hatBought = (bool)formatter.Deserialize(saveFile);         
             
             saveFile.Close();            
         }
@@ -79,6 +89,9 @@ public class GameManager : MonoBehaviour
             GetComponent<TaskManager>().InitiateTask(0, 0);
             GetComponent<TaskManager>().InitiateTask(0, 1);
             GetComponent<TaskManager>().InitiateTask(0, 2);
+            activeLanguage = "cs-CZ";
+            GetComponent<BonusManager>().ojochHasHat = false;
+            GetComponent<BonusManager>().hatBought = false;
         }
     }   
 }

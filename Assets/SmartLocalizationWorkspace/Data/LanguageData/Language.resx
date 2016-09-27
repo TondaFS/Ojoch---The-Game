@@ -116,14 +116,66 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-	<data name="key" xml:space="preserve">
-		<value>New Value</value>
+	<data name="Bonus.Activate" xml:space="preserve">
+		<value>Activate</value>
+	</data>
+	<data name="Bonus.Buy" xml:space="preserve">
+		<value>Buy</value>
+	</data>
+	<data name="Bonus.Deactivate" xml:space="preserve">
+		<value>Deactivate</value>
+	</data>
+	<data name="Bonus.Error" xml:space="preserve">
+		<value>Error</value>
+	</data>
+	<data name="Bonus.HatDescription" xml:space="preserve">
+		<value>Hat Description</value>
+	</data>
+	<data name="Bonus.HatTitle" xml:space="preserve">
+		<value>Hat Title</value>
+	</data>
+	<data name="Bonus.Locked" xml:space="preserve">
+		<value>Locked</value>
+	</data>
+	<data name="Death.Again" xml:space="preserve">
+		<value>Again!</value>
+	</data>
+	<data name="Death.Back" xml:space="preserve">
+		<value>Back to Menu</value>
+	</data>
+	<data name="Death.NewHighscore" xml:space="preserve">
+		<value>Hoghscores</value>
+	</data>
+	<data name="Death.RIP" xml:space="preserve">
+		<value>RIP Ojoch</value>
+	</data>
+	<data name="Death.Score" xml:space="preserve">
+		<value>Score:</value>
+	</data>
+	<data name="Death.Task" xml:space="preserve">
+		<value>Tasks</value>
+	</data>
+	<data name="Death.Text" xml:space="preserve">
+		<value>OJOCH JE MRTEV, 
+AŤ ŽIJE OJOCH</value>
+	</data>
+	<data name="Menu.Back" xml:space="preserve">
+		<value>Back</value>
 	</data>
 	<data name="Menu.BackToMenu" xml:space="preserve">
 		<value>Back To Menu</value>
 	</data>
+	<data name="Menu.Bonus" xml:space="preserve">
+		<value>Bonus</value>
+	</data>
+	<data name="Menu.ChangeName" xml:space="preserve">
+		<value>ChangeName</value>
+	</data>
 	<data name="Menu.Continue" xml:space="preserve">
 		<value>Continue</value>
+	</data>
+	<data name="Menu.Credits" xml:space="preserve">
+		<value>Authors</value>
 	</data>
 	<data name="Menu.Exit" xml:space="preserve">
 		<value>Exit</value>
@@ -132,16 +184,46 @@
 		<value>Extra</value>
 	</data>
 	<data name="Menu.Highscore" xml:space="preserve">
-		<value>Tasks and Highscore</value>
+		<value>Highscore</value>
 	</data>
-	<data name="Menu.NewHighscore" xml:space="preserve">
-		<value>New Highscore</value>
+	<data name="Menu.Intro" xml:space="preserve">
+		<value>Intro</value>
+	</data>
+	<data name="Menu.Music" xml:space="preserve">
+		<value>Music Volume</value>
 	</data>
 	<data name="Menu.Play" xml:space="preserve">
 		<value>Play</value>
 	</data>
+	<data name="Menu.Playing" xml:space="preserve">
+		<value>Active Player text</value>
+	</data>
+	<data name="Menu.Settings" xml:space="preserve">
+		<value>Settings</value>
+	</data>
+	<data name="Menu.Sounds" xml:space="preserve">
+		<value>Sounds Volume</value>
+	</data>
+	<data name="Menu.Stats" xml:space="preserve">
+		<value>Stats</value>
+	</data>
 	<data name="Menu.TaskCompleted" xml:space="preserve">
 		<value>Task Completed</value>
+	</data>
+	<data name="Menu.Tasks" xml:space="preserve">
+		<value>Tasks</value>
+	</data>
+	<data name="Menu.Tutorial" xml:space="preserve">
+		<value>Tutorial</value>
+	</data>
+	<data name="Pause.BackToMenu" xml:space="preserve">
+		<value>BackToMenu</value>
+	</data>
+	<data name="Pause.Continue" xml:space="preserve">
+		<value>Continue</value>
+	</data>
+	<data name="Pause.Pause" xml:space="preserve">
+		<value>Hra pozastavena</value>
 	</data>
 	<data name="PowerUp.Bubbles" xml:space="preserve">
 		<value>Bubbles</value>
@@ -152,13 +234,55 @@
 	<data name="PowerUp.Ghost" xml:space="preserve">
 		<value>Ghost</value>
 	</data>
+	<data name="PowerUp.Love" xml:space="preserve">
+		<value>Love Potion</value>
+	</data>
 	<data name="PowerUp.Nitro" xml:space="preserve">
 		<value>Nitro</value>
 	</data>
 	<data name="PowerUp.Rambouch" xml:space="preserve">
 		<value>Ak47</value>
 	</data>
-	<data name="PoweUp.Love" xml:space="preserve">
-		<value>Love Potion</value>
+	<data name="Score.TheBest" xml:space="preserve">
+		<value>Best Scores</value>
+	</data>
+	<data name="Stats.Enemies" xml:space="preserve">
+		<value>Enemies Killed</value>
+	</data>
+	<data name="Stats.Games" xml:space="preserve">
+		<value>GamesPlayed</value>
+	</data>
+	<data name="Stats.LongestTime" xml:space="preserve">
+		<value>Longest Time played</value>
+	</data>
+	<data name="Stats.Mad" xml:space="preserve">
+		<value>Got Mad</value>
+	</data>
+	<data name="Stats.Powers" xml:space="preserve">
+		<value>Collected Power Ups</value>
+	</data>
+	<data name="Stats.Sanity" xml:space="preserve">
+		<value>Full Sanity</value>
+	</data>
+	<data name="Stats.Times" xml:space="preserve">
+		<value>Time played</value>
+	</data>
+	<data name="Stats.Title" xml:space="preserve">
+		<value>Statistics Title</value>
+	</data>
+	<data name="Takss.Level" xml:space="preserve">
+		<value>Úroveň</value>
+	</data>
+	<data name="Tasks.FightTitle" xml:space="preserve">
+		<value>Umění boje</value>
+	</data>
+	<data name="Tasks.New" xml:space="preserve">
+		<value>New</value>
+	</data>
+	<data name="Tasks.Title" xml:space="preserve">
+		<value>Tasks Title</value>
+	</data>
+	<data name="Death.NewRecord" xml:space="preserve">
+		<value>New Record</value>
 	</data>
 </root>
