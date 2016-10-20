@@ -5,9 +5,21 @@ using System.Collections;
 /// Skript řeší veškeré Ojochovy kolize s nepřáteli a objekty ve hře.
 /// </summary>
 public class OjochCollisions : MonoBehaviour {
-    private GameObject socha;               
+    /// <summary>
+    /// Reference na sochu
+    /// </summary>
+    private GameObject socha;  
+    /// <summary>
+    /// Reference na ScoreScript
+    /// </summary>                     
     public ScoreScript session;
-    public PowerUpScript powerCombo;            
+    /// <summary>
+    /// Reference na PowerUpScript
+    /// </summary>
+    public PowerUpScript powerCombo;     
+    /// <summary>
+    /// Jak dlouho se bude socha pohybovat dopředu oté co dostane Ojoch zranění.
+    /// </summary>               
     public float statueForward = 0.75f;
     
     void Start () {

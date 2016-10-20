@@ -49,7 +49,7 @@ public class HealthScript : MonoBehaviour {
         else
         {
             hp -= damageCount;
-            if (hp <= 0 && (gameObject.tag == "Enemy" || gameObject.tag == "Boss"))
+            if (hp <= 0) //&& (gameObject.tag == "Enemy" || gameObject.tag == "Boss"))
             {
                 if (!dead)
                 {
@@ -64,7 +64,12 @@ public class HealthScript : MonoBehaviour {
                         sescontr.GetComponent<EndGameScript>().enemyInSession += 1;
                     }
                 }  
-                Destroy(gameObject, .5f);  
+                Destroy(gameObject, .5f);
+            }
+            else
+            {
+                this.GetComponent<EnemyHit>().SetRedColor();
+                this.GetComponent<EnemyHit>().isHit = true;
             }
         }        
     }

@@ -15,6 +15,7 @@ GameObject:
   - 114: {fileID: 11457146}
   - 50: {fileID: 5047980}
   - 114: {fileID: 114000010095945926}
+  - 114: {fileID: 114000010633040322}
   m_Layer: 12
   m_Name: enemy_bird
   m_TagString: Enemy
@@ -29,7 +30,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 182158}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -1.4180355, y: -2.7185905, z: 0}
   m_LocalScale: {x: 0.2, y: 0.2, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
@@ -98,6 +99,7 @@ MonoBehaviour:
   sanity: 30
   isEnemy: 1
   enemyType: 0
+  sescontr: {fileID: 0}
   sanityOne: {fileID: 0}
   sanityTwo: {fileID: 0}
   sanityThree: {fileID: 0}
@@ -225,3 +227,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57926016a28524146b7f70febe09ff88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114000010633040322
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 182158}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ece9cab54ff5d546a45ce36aa83aeea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isHit: 0
+  speedOfChange: 20
+  timeOfHit: 0
