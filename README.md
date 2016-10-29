@@ -3,5 +3,4 @@
 Hra o kocourkovi Ojochovi.
 
 WEB:  http://ojoch.cz/
-
 FB:   https://www.facebook.com/kocourekojoch/
