@@ -2,7 +2,7 @@
 using System.Collections;
 
 /// <summary>
-/// Skript pro rychlý (veřejný) přístup k jednotlivýcm Ojochovým skriptům.
+/// Skript pro rychlý (veřejný) přístup k jednotlivým Ojochovým skriptům.
 /// <para>OjochScript, HealthScript, WeaponScript, CollectingScript, PowerUpScript, OjochCollisions</para>
 /// </summary>
 public class OjochManager : MonoBehaviour {

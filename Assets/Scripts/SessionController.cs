@@ -4,6 +4,8 @@ using UnityEngine.UI;
 
 public class SessionController : MonoBehaviour
 {
+    public static SessionController instance = null;
+
     public float gameSpeed = 1;
     public float speedUpTime = 50;
 
@@ -29,8 +31,17 @@ public class SessionController : MonoBehaviour
     GameObject taskThree;
     GameObject taskThreeNew;
 
-
-
+    void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else if (instance != this)
+        {
+            Destroy(this.gameObject);
+        }
+    }
 
     void Start() {
         pauseMenu = GameObject.Find("PAUSE");

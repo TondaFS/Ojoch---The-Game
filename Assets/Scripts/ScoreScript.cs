@@ -9,7 +9,7 @@ public class ScoreScript : MonoBehaviour {
     public float tmpscore;                          //hracovo skore
     public float scorePerSecond = 0;                //pro zvyseni skore za kazdou vterinu  
     public int killedEnemies;                       //pocet zabitych nepratel
-    public float fiveSecondsTimer = 0;               //Timer na vynulovani modifikatoru skore
+    public float fiveSecondsTimer = 0;              //Timer na vynulovani modifikatoru skore
 
     public bool end;
 

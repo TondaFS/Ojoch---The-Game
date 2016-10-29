@@ -20,11 +20,9 @@ public class EnemyHit : MonoBehaviour {
 
 	void Start () {
         isHit = false;
-	}
+	}	
 	
-	
-	void Update () { 
-            
+	void Update () {             
 	    if (isHit)
         {
             ChangeColor();

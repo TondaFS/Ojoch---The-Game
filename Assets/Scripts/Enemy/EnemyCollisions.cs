@@ -18,8 +18,7 @@ public class EnemyCollisions : MonoBehaviour {
             ProjectileEnemyCollision(col);                       
         }
     }
-
-    //Vypne nepriteli kolize, prehraje smrt a znici jej
+    
     /// <summary>
     /// Funkce zajistí všechny náležitosti, když nepřítel umře.
     /// <para>Vypnutí Collideru nepřítele, spuštění animace smrti, přehrání zvuku smrti a nakonec zničení nepřítele.</para>
@@ -42,7 +41,8 @@ public class EnemyCollisions : MonoBehaviour {
     {
         if (!col.gameObject.GetComponent<ShotScript>().isEnemyShot)
         {
-            GetComponent<HealthScript>().Damage(col.gameObject.GetComponent<ShotScript>().damage);
+            GetComponent<EnemyHealth>().EnemyDamage(col.gameObject.GetComponent<ShotScript>().damage);
+            col.gameObject.GetComponent<Animator>().SetTrigger("shot");
             Destroy(col.gameObject);
         }
     }

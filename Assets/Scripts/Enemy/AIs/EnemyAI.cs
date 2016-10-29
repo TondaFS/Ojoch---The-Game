@@ -3,17 +3,6 @@ using System.Collections;
 using System;
 using System.Collections.Generic;
 
-public enum AIStates
-{
-    flyOnScreen,
-    flyToPoints,
-    kamikaze,
-    chase,
-    stopAndShoot,
-    chargeAttack,
-    wait
-}
-
 
 
 public class EnemyAI : MonoBehaviour {
@@ -107,7 +96,7 @@ public class EnemyAI : MonoBehaviour {
 
     void Update()
     {
-        //Debug.Log("State: " + currentState);
+        Debug.Log("State: " + currentState);
         DestroyOffScreeners();
 
         switch (currentState)
@@ -246,7 +235,7 @@ public class EnemyAI : MonoBehaviour {
             if (explosionCountdown < 0 && !exploded)
             {
                 exploded = true;
-                GetComponent<HealthScript>().Damage(100);
+                GetComponent<EnemyHealth>().EnemyDamage(100);
             }
         }
     }

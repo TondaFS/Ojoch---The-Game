@@ -6,16 +6,18 @@ using System.Collections;
 /// Skript řešící životy, příčetnost a zranění
 /// </summary>
 public class HealthScript : MonoBehaviour {
-
-    //Promenne
+    /// <summary>
+    /// Počet Ojochových životů
+    /// </summary>
     public int hp = 1;              //pocet zivotu
-    public int sanity = 30;         //Pocet pricetnosti          
-    public bool isEnemy = true;     //jedna se o hrace/nepritele?
-    OjochScript ojoch;
-    public int enemyType;
-    private bool dead = false;
-    public GameObject sescontr;
-    
+    /// <summary>
+    /// Ojochova příčetnost
+    /// </summary>
+    public int sanity = 3;         //Pocet pricetnosti          
+    /// <summary>
+    /// Reference na OjochScript
+    /// </summary>
+    OjochScript ojoch;   
 
     //Ojochovy staty
     [Space(10, order = 0)]
@@ -35,91 +37,17 @@ public class HealthScript : MonoBehaviour {
 
     void Start() {
         ojoch = OjochManager.instance.ojochScript;               
-        sescontr = GameObject.Find("Session Controller");        
     }          
 
-    // Započítání zranení a kontrola, jestli nemá být objekt zničen
-    public void Damage(int damageCount)
+    /// <summary>
+    /// Dá Ojochovi zranění a upraví ukazatel životů. Pokud ještě nezemřel, nastaví na dvě vteřiny nesmrtelnost, aktivuje smradoštít. Jinak začne courotine DieOjoch.
+    /// Pokud dostane kladné zranění: Obnoví životy na 6 a upraví dle toho ukazatele.
+    /// </summary>
+    /// <param name="damage">Dané zranění</param>
+    public void Damage(int damage)
     {
-        if (gameObject.tag == "Player")
-        {
-            AdjustHealthBar(damageCount);
-        }
-
-        else
-        {
-            hp -= damageCount;
-            if (hp <= 0) //&& (gameObject.tag == "Enemy" || gameObject.tag == "Boss"))
-            {
-                if (!dead)
-                {
-                    EnemyDeathSound(gameObject.GetComponent<HealthScript>().enemyType);
-                    dead = true;
-                    gameObject.GetComponent<Collider2D>().enabled = false;
-                    gameObject.GetComponent<Animator>().SetTrigger("bDeath");
-                                        
-                    if (!gameObject.GetComponent<EnemyAI>().exploded)
-                    {
-                        ojoch.session.UpdateScoreStuff(50, 0, 1, true);
-                        sescontr.GetComponent<EndGameScript>().enemyInSession += 1;
-                    }
-                }  
-                Destroy(gameObject, .5f);
-            }
-            else
-            {
-                this.GetComponent<EnemyHit>().SetRedColor();
-                this.GetComponent<EnemyHit>().isHit = true;
-            }
-        }        
-    }
-
-    //Funkce, ktera ojochovi ubira pricetnost a nasledne upravuje pocet mozku ve hre
-    public void LooseSanity(int damage) {
-        if (sanity > 0)
-        {
-            sanity -= damage;
-            switch (sanity)
-            {
-                case 3:
-                    ojoch.sanityBar.SetActive(true);
-                    
-                    break;
-                case 2:
-                    sanityThree.SetActive(false);
-                    break;
-                case 1:
-                    sanityTwo.SetActive(false);
-                    break;
-
-                //Pokud ojoch ztrati veskerou pricetnost, informace o tom se ulozi a  spusti se efekt soufl
-                case 0:
-                    sanityOne.SetActive(false);                    
-                    sescontr.GetComponent<EndGameScript>().sanityLost = true;
-                    sescontr.GetComponent<ShowingEffects>().soufl.SetActive(true);
-                    ojoch.zakaleniTime = 1;
-                    break;
-            }
-            
-        }
-    }
-
-    //Funkce pri smrti Ojocha, kde se nejdrive pocka na prehrani animace a teprve pak se vypne hudba a spusti funkce na konci hry
-    private IEnumerator DieOjoch()
-    {
-        ojoch.animator.SetTrigger("dead");
-        yield return new WaitForSeconds(0.75f);
-        sescontr.GetComponent<EndGameScript>().EndGame();
-        Time.timeScale = 0.1f;
-        GameObject.Find("Music").GetComponent<AudioSource>().mute = true;
-        Destroy(gameObject);
-    }
-    
-    //Da zraneni ojochovi a podle toho upravi pocet zivotu, pokud dostava bublinaci, vyleci vse
-    public void AdjustHealthBar(int damage)
-    {        
         bool smth;
-        if(damage > 0)
+        if (damage > 0)
         {
             hp -= damage;
             smth = false;
@@ -162,29 +90,46 @@ public class HealthScript : MonoBehaviour {
             healthFour.SetActive(smth);
             healthFive.SetActive(smth);
             healthSix.SetActive(smth);
-        }       
+        }
     }
 
-    /// <summary>
-    /// Přehraje odpovídající zvuk smrti daného nepřítele
-    /// </summary>
-    /// <param name="enemy">ID nepřítele</param>
-    public void EnemyDeathSound(int enemy)
-    {
-        switch (enemy)
+    //Funkce, ktera ojochovi ubira pricetnost a nasledne upravuje pocet mozku ve hre
+    public void LooseSanity(int damage) {
+        if (sanity > 0)
         {
-            case 0:
-                GameManager.instance.GetComponent<SoundManager>().PlaySoundPitchShift(GameManager.instance.GetComponent<SoundManager>().birdDeath);
-                break;
-            case 1:
-                GameManager.instance.GetComponent<SoundManager>().PlaySound(GameManager.instance.GetComponent<SoundManager>().squirrelDeath);
-                break;
-            case 2:
-                GameManager.instance.GetComponent<SoundManager>().PlaySound(GameManager.instance.GetComponent<SoundManager>().pokoutnikDeath);
-                break;
-            case 3:
-                GameManager.instance.GetComponent<SoundManager>().PlaySoundPitchShift(GameManager.instance.GetComponent<SoundManager>().ratDeath);
-                break;
+            sanity -= damage;
+            switch (sanity)
+            {
+                case 3:
+                    ojoch.sanityBar.SetActive(true);                    
+                    break;
+                case 2:
+                    sanityThree.SetActive(false);
+                    break;
+                case 1:
+                    sanityTwo.SetActive(false);
+                    break;
+
+                //Pokud ojoch ztrati veskerou pricetnost, informace o tom se ulozi a spusti se efekt soufl
+                case 0:
+                    sanityOne.SetActive(false);                    
+                    SessionController.instance.GetComponent<EndGameScript>().sanityLost = true;
+                    SessionController.instance.GetComponent<ShowingEffects>().soufl.SetActive(true);
+                    ojoch.zakaleniTime = 1;
+                    break;
+            }
+            
         }
+    }
+
+    //Funkce pri smrti Ojocha, kde se nejdrive pocka na prehrani animace a teprve pak se vypne hudba a spusti funkce na konci hry
+    private IEnumerator DieOjoch()
+    {
+        ojoch.animator.SetTrigger("dead");
+        yield return new WaitForSeconds(0.75f);
+        SessionController.instance.GetComponent<EndGameScript>().EndGame();
+        Time.timeScale = 0.1f;
+        GameObject.Find("Music").GetComponent<AudioSource>().mute = true;
+        Destroy(gameObject);
     }
 }
