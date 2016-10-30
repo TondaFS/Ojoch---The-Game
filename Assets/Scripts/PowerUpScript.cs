@@ -183,7 +183,10 @@ public class PowerUpScript : MonoBehaviour {
     /// </summary>
     void Rambouch()
     {
-        ShowPowerUpText(GameManager.instance.languageManager.GetTextValue("PowerUp.Rambouch"), true);
+        panelText.text = GameManager.instance.languageManager.GetTextValue("PowerUp.Rambouch");
+        odpocet = 3;
+        powerUpImage.SetActive(true);
+
         int chance = Random.Range(0, 100);
 
         if (chance <= 33)
@@ -207,6 +210,8 @@ public class PowerUpScript : MonoBehaviour {
             ojoch.animator.SetBool("isAk47", true);
         }
 
+        ojoch.managerSound.PlaySound(ojoch.managerSound.clipGood);        
+        //ShowPowerUpText(GameManager.instance.languageManager.GetTextValue("PowerUp.Rambouch"), true);
         akTime = 10;
         effects.rambouch.SetActive(true);
     }

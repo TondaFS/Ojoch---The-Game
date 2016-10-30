@@ -177,7 +177,7 @@ public class OjochCollisions : MonoBehaviour {
         if (col.gameObject.GetComponent<ShotScript>().isEnemyShot && OjochManager.instance.ojochScript.godMode <= 0)
         {
             OjochManager.instance.ojochScript.PlayDamageSound();
-            OjochManager.instance.ojochScript.animator.SetTrigger("hit");
+            //OjochManager.instance.ojochScript.animator.SetTrigger("hit");
             OjochManager.instance.ojochHealth.Damage(1);
             session.UpdateScoreStuff(0, -1, 0, false);
 
@@ -195,6 +195,7 @@ public class OjochCollisions : MonoBehaviour {
     void CoinCollision(Collision2D col)
     {
         GameManager.instance.GetComponent<CoinsManager>().AjustCoins(col.gameObject.GetComponent<Coins>().value);
+        OjochManager.instance.ojochScript.animator.SetTrigger("good");
         Destroy(col.gameObject);
     }
 }

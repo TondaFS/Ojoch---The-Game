@@ -77,7 +77,8 @@ public class HealthScript : MonoBehaviour {
                 case 0:
                     healthOne.SetActive(smth);
                     GameManager.instance.GetComponent<SoundManager>().PlaySound(GameManager.instance.GetComponent<SoundManager>().clipOjochDeath);
-                    StartCoroutine(DieOjoch());
+                    ojoch.animator.SetTrigger("dead");
+                    //StartCoroutine(DieOjoch());
                     break;
             }
         }
@@ -124,12 +125,9 @@ public class HealthScript : MonoBehaviour {
 
     //Funkce pri smrti Ojocha, kde se nejdrive pocka na prehrani animace a teprve pak se vypne hudba a spusti funkce na konci hry
     private IEnumerator DieOjoch()
-    {
-        ojoch.animator.SetTrigger("dead");
-        yield return new WaitForSeconds(0.75f);
-        SessionController.instance.GetComponent<EndGameScript>().EndGame();
-        Time.timeScale = 0.1f;
-        GameObject.Find("Music").GetComponent<AudioSource>().mute = true;
-        Destroy(gameObject);
+    {        
+        yield return new WaitForSeconds(0.75f);        
     }
+
+    
 }
