@@ -10,7 +10,6 @@ public class OjochAnimationsSetter : MonoBehaviour {
         SessionController.instance.GetComponent<EndGameScript>().EndGame();
         Time.timeScale = 0.1f;
         GameObject.Find("Music").GetComponent<AudioSource>().mute = true;
-        Debug.Log("Ahoj");
         Destroy(gameObject.transform.parent.gameObject);
     }
 }

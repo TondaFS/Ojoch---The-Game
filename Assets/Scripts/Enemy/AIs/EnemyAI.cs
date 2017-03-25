@@ -158,19 +158,7 @@ public class EnemyAI : MonoBehaviour {
                 break;
         }
     }
-
-
-    //AI leti na stanovene misto na obrazovku, kdyz tam doleti, prepne so dalsiho stavu
-    private void FlyOnScreen()
-    {
-        transform.position = Vector3.MoveTowards(transform.position, flyOnScreenPos, movementSpeed * Time.deltaTime);
-
-        if (transform.position.x == flyOnScreenPosX)
-        {
-            SwitchToNextState();
-        }
-    }
-
+    
     private void FlyToPoint()
     {
         // pohybuj se smerem k dalsimu bodu
@@ -195,7 +183,6 @@ public class EnemyAI : MonoBehaviour {
 
         }
     }
-
     //AI leti za hracem, kdyz je blizko, zazehne a vybouchne
     private void Kamikaze()
     {
@@ -240,56 +227,6 @@ public class EnemyAI : MonoBehaviour {
             }
         }
     }
-
-    private void Chase()
-    {
-        if(player != null)
-            transform.position = Vector3.MoveTowards(transform.position, player.transform.position, movementSpeed * Time.deltaTime);
-    }
-
-    private void StopAndShoot()
-    {
-        if (currentMissileCooldown > 0)
-        {
-            currentMissileCooldown -= Time.deltaTime;
-        }
-        else
-        {
-            currentMissileCooldown = missileCooldown;
-            gameObject.GetComponent<Animator>().SetTrigger("sAttack");
-            ammo--;
-        }
-
-        if (ammo == 0)
-        {
-            SwitchToNextState();
-        }
-    }
-
-    private void Launch()
-    {
-        missileLauncherPos = this.transform.GetChild(0).transform.position;
-        //Debug.Log(missileLauncherPos);
-        Instantiate(missile, missileLauncherPos, Quaternion.identity);
-    }
-
-    //AI se nabije a leti rovne az mimo obrazovku
-    private void ChargeAttack()
-    {
-        chargeUpTime -= Time.deltaTime;
-
-        if (chargeUpTime > 0)
-        {
-            transform.position = transform.position + (Vector3)UnityEngine.Random.insideUnitCircle * 0.1f;
-        }
-
-        if (chargeUpTime <= 0)
-        {
-            Vector3 offScreenPos = new Vector3(Camera.main.ViewportToWorldPoint(new Vector3(-2, 0)).x, transform.position.y);
-            transform.position = Vector3.MoveTowards(transform.position, offScreenPos, movementSpeed * 5 * Time.deltaTime);
-        }
-    }
-
     private void Wait()
     {
         waitTime -= Time.deltaTime;
@@ -299,12 +236,23 @@ public class EnemyAI : MonoBehaviour {
             SwitchToNextState();
         }
     }
-
-    //AI se prepne do dalsiho stavu
-    private void SwitchToNextState()
+    private void DestroyThis()
     {
-        currentState = states[0];
-        states.RemoveAt(0);
+        Destroy(gameObject);
+    }
+    
+    //DONE
+    //Destroys any enemy way off the screen
+    private void DestroyOffScreeners()
+    {
+        //Debug.DrawLine(new Vector3(leftBoundary, -20), new Vector3(leftBoundary, 20));
+
+        if (transform.position.x < leftBoundary ||
+           transform.position.y < botBoundary ||
+           transform.position.y > topBoundary)
+        {
+            Destroy(this.gameObject);
+        }
     }
 
     //Sprite se otoci na stranu kde je hrac
@@ -334,25 +282,68 @@ public class EnemyAI : MonoBehaviour {
             }
         }
     }
-
-    private void DestroyThis()
+    //AI se prepne do dalsiho stavu
+    private void SwitchToNextState()
     {
-        Destroy(gameObject);
+        currentState = states[0];
+        states.RemoveAt(0);
     }
 
-    //DONE
-    //Destroys any enemy way off the screen
-    private void DestroyOffScreeners()
+    //AI se nabije a leti rovne az mimo obrazovku
+    private void ChargeAttack()
     {
-        //Debug.DrawLine(new Vector3(leftBoundary, -20), new Vector3(leftBoundary, 20));
+        chargeUpTime -= Time.deltaTime;
 
-        if (transform.position.x < leftBoundary ||
-           transform.position.y < botBoundary ||
-           transform.position.y > topBoundary)
+        if (chargeUpTime > 0)
         {
-            Destroy(this.gameObject);
+            transform.position = transform.position + (Vector3)UnityEngine.Random.insideUnitCircle * 0.1f;
+        }
+
+        if (chargeUpTime <= 0)
+        {
+            Vector3 offScreenPos = new Vector3(Camera.main.ViewportToWorldPoint(new Vector3(-2, 0)).x, transform.position.y);
+            transform.position = Vector3.MoveTowards(transform.position, offScreenPos, movementSpeed * 5 * Time.deltaTime);
         }
     }
+    private void Chase()
+    {
+        if (player != null)
+            transform.position = Vector3.MoveTowards(transform.position, player.transform.position, movementSpeed * Time.deltaTime);
+    }
 
-    
+    //AI leti na stanovene misto na obrazovku, kdyz tam doleti, prepne so dalsiho stavu
+    private void FlyOnScreen()
+    {
+        transform.position = Vector3.MoveTowards(transform.position, flyOnScreenPos, movementSpeed * Time.deltaTime);
+
+        if (transform.position.x == flyOnScreenPosX)
+        {
+            SwitchToNextState();
+        }
+    }
+    private void StopAndShoot()
+    {
+        if (currentMissileCooldown > 0)
+        {
+            currentMissileCooldown -= Time.deltaTime;
+        }
+        else
+        {
+            currentMissileCooldown = missileCooldown;
+            gameObject.GetComponent<Animator>().SetTrigger("sAttack");
+            ammo--;
+        }
+
+        if (ammo == 0)
+        {
+            SwitchToNextState();
+        }
+    }
+    private void Launch()
+    {
+        missileLauncherPos = this.transform.GetChild(0).transform.position;
+        //Debug.Log(missileLauncherPos);
+        Instantiate(missile, missileLauncherPos, Quaternion.identity);
+    }
+
 }

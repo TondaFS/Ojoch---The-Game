@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using System.Collections.Generic;
 
 public class SessionController : MonoBehaviour
 {
@@ -10,26 +11,45 @@ public class SessionController : MonoBehaviour
     public float speedUpTime = 50;
 
     public bool pause;
+    [HideInInspector]
     public GameObject pauseMenu;
     public bool ojochDead;
-
+    [HideInInspector]
     public GameObject deathMenu;
+    [HideInInspector]
     public GameObject newHighScoreText;
+    [HideInInspector]
     public GameObject taskCompletedText;
-
+    [HideInInspector]
     public GameObject deathScore;
+    [HideInInspector]
     public GameObject highscoreMenu;
+    [HideInInspector]
     public GameObject tasksMenu;
-
+    [HideInInspector]
     public GameObject scoreNames;
+    [HideInInspector]
     public GameObject scoreValues;
-
+    [HideInInspector]
     GameObject taskOne;
+    [HideInInspector]
     GameObject taskOneNew;
+    [HideInInspector]
     GameObject taskTwo;
+    [HideInInspector]
     GameObject taskTwoNew;
+    [HideInInspector]
     GameObject taskThree;
+    [HideInInspector]
     GameObject taskThreeNew;
+
+    public int numberOfEnemies;
+    public List<GameObject> birdsInScene;
+    public List<GameObject> ratsInScene;
+    public List<GameObject> sputniksInScene;
+    public List<GameObject> squirrelsInScene;
+    public List<GameObject> pigsInScene;
+    public GameObject bossInScene;
 
     void Awake()
     {

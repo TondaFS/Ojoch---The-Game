@@ -15,11 +15,13 @@ public class DelayWaveSpawning : MonoBehaviour {
 
     void Update()
     {
+        
         delay -= Time.deltaTime;
         if (delay < 0)
         {
             spawner.enabled = true;
             this.enabled = false;
         }
+        
     }
 }

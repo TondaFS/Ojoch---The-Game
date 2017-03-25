@@ -12,10 +12,29 @@ public enum AIStates
     chase,
     stopAndShoot,
     chargeAttack,
+    chaseAndShoot,
     wait
 }
+/// <summary>
+/// Typy všech nepřátel a bossů ve hře.
+/// </summary>
+public enum EnemyType
+{
+    bird,
+    rat,
+    squirrel,
+    sputnik,
+    pig,
+    none
+}
+
 
 public class CommonAI : MonoBehaviour {
+    /// <summary>
+    /// Typ nepřítele
+    /// </summary>
+    public EnemyType enemyType = EnemyType.none;
+    
     /// <summary>
     /// Rychlost pohybu
     /// </summary>
@@ -23,7 +42,11 @@ public class CommonAI : MonoBehaviour {
     /// <summary>
     /// Aktuální stav AI
     /// </summary>
-    private AIStates currentState;
+    public AIStates currentState;
+    /// <summary>
+    /// Stav do kterého se enemák přepne, jen co vletí na obrazovku
+    /// </summary>
+    public AIStates startingState;
 
     //facing player
     /// <summary>
@@ -64,12 +87,33 @@ public class CommonAI : MonoBehaviour {
         flyOnScreenPos = new Vector3(flyOnScreenPosX, transform.position.y);
 
         player = OjochManager.instance.gameObject;
+        SessionController.instance.numberOfEnemies += 1;
         
     }
-
     void Update()
     {
         DestroyOffScreeners();
+
+        switch(currentState){
+            case AIStates.flyOnScreen:
+                FlyOnScreen();
+            break;
+            case AIStates.chase:
+                Chase();
+            break;
+            case AIStates.chargeAttack:
+                ChargeAttack();
+                break;
+            
+            //Pouye pro strelce
+            case AIStates.stopAndShoot:
+                GetComponent<ShooterAI>().Shoot();
+                break;
+            case AIStates.chaseAndShoot:
+                GetComponent<ShooterAI>().Shoot();
+                GetComponent<CommonAI>().Chase();
+                break;
+        }        
     }
 
     /// <summary>
@@ -84,4 +128,105 @@ public class CommonAI : MonoBehaviour {
             Destroy(this.gameObject);
         }
     }
+
+    /// <summary>
+    /// AI leti na stanovene misto na obrazovku, kdyz tam doleti, prepne so dalsiho stavu
+    /// </summary>
+    public void FlyOnScreen()
+    {
+        transform.position = Vector3.MoveTowards(transform.position, flyOnScreenPos, movementSpeed * Time.deltaTime);
+
+        if (transform.position.x == flyOnScreenPosX)
+        {
+            SwitchToNextState(startingState);
+        }
+    }
+    /// <summary>
+    /// AI se prepme do dalsiho stavu
+    /// </summary>
+    /// <param name="state">Stav do ktereho se mam prepnout</param>
+    public void SwitchToNextState(AIStates state)
+    {
+        currentState = state;
+    }
+    /// <summary>
+    /// Pronásledování Ojocha
+    /// </summary>
+    public void Chase()
+    {
+        if (player != null)
+            transform.position = Vector3.MoveTowards(transform.position, player.transform.position, movementSpeed * Time.deltaTime);
+    }
+    /// <summary>
+    /// AI se nabije a leti rovne az mimo obrazovku
+    /// </summary>
+    public void ChargeAttack()
+    {
+        chargeUpTime -= Time.deltaTime;
+
+        if (chargeUpTime > 0)
+        {
+            transform.position = transform.position + (Vector3)UnityEngine.Random.insideUnitCircle * 0.1f;
+        }
+
+        if (chargeUpTime <= 0)
+        {
+            Vector3 offScreenPos = new Vector3(Camera.main.ViewportToWorldPoint(new Vector3(-2, 0)).x, transform.position.y);
+            transform.position = Vector3.MoveTowards(transform.position, offScreenPos, movementSpeed * 5 * Time.deltaTime);
+        }
+    }
+    /// <summary>
+    /// Sprite se otoci na stranu kde je hrac
+    /// </summary>
+    public void TurnAtPlayer()
+    {
+        if (player != null)
+        {
+            if (transform.position.x > player.transform.position.x)
+            {
+                if (!facingLeft)
+                {
+                    Vector3 scale = transform.localScale;
+                    scale.x *= -1;
+                    transform.localScale = scale;
+                    facingLeft = true;
+                }
+            }
+            else
+            {
+                if (facingLeft)
+                {
+                    Vector3 scale = transform.localScale;
+                    scale.x *= -1;
+                    transform.localScale = scale;
+                    facingLeft = false;
+                }
+            }
+        }
+    }
+
+    /// <summary>
+    /// Změní rychlost pohybu o danou hodnotu
+    /// </summary>
+    /// <param name="change">Velikost změny</param>
+    public void ChangeMovementSpeed(float change)
+    {
+        movementSpeed += change;
+    }
+
+    /// <summary>
+    /// Destroys this Game object and remove the enemy from list in session controller
+    /// </summary>
+    private void DestroyThis()
+    {
+        SessionController.instance.numberOfEnemies -= 1;
+        switch (enemyType)
+        {
+            case EnemyType.squirrel:
+                SessionController.instance.squirrelsInScene.Remove(this.gameObject);
+                break;
+        }
+        Destroy(gameObject);
+    }
+
 }

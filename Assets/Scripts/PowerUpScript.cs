@@ -214,6 +214,26 @@ public class PowerUpScript : MonoBehaviour {
         //ShowPowerUpText(GameManager.instance.languageManager.GetTextValue("PowerUp.Rambouch"), true);
         akTime = 10;
         effects.rambouch.SetActive(true);
+        SpeedUpEnemeyCooldown();
+    }
+
+    /// <summary>
+    /// Zvětší rychlost střelby nepřátel
+    /// </summary>
+    void SpeedUpEnemeyCooldown()
+    {
+        foreach(GameObject sputnik in SessionController.instance.sputniksInScene)
+        {
+            sputnik.GetComponent<ShooterAI>().ChangeMissileCooldown(-0.5f);
+        }
+        foreach (GameObject squirrel in SessionController.instance.squirrelsInScene)
+        {
+            squirrel.GetComponent<ShooterAI>().ChangeMissileCooldown(-0.5f);
+        }
+        foreach (GameObject pig in SessionController.instance.pigsInScene)
+        {
+            pig.GetComponent<ShooterAI>().ChangeMissileCooldown(-0.5f);
+        }
     }
 
     /// <summary>

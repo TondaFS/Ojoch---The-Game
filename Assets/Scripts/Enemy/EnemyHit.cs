@@ -47,11 +47,10 @@ public class EnemyHit : MonoBehaviour {
     }
 
     /// <summary>
-    /// Nastavtaví baru na červenou
+    /// Nastavtaví barvu na červenou
     /// </summary>
     public void SetRedColor()
     {
-        Debug.Log("Setting red");
         this.GetComponent<SpriteRenderer>().color = new Color(1, 0, 0);
     }
 }
