@@ -76,8 +76,10 @@ public class EnemyAI : MonoBehaviour {
     {
         SwitchToNextState();
 
+        //Kamikaze
         originalScale = transform.localScale;
         ignitionSpeed = movementSpeed + 1;
+        //End kamikaze
 
         leftBoundary = Camera.main.ViewportToWorldPoint(new Vector3(-0.5f, 0)).x;
         topBoundary = Camera.main.ViewportToWorldPoint(new Vector3(0, 1.5f)).y;
@@ -333,6 +335,12 @@ public class EnemyAI : MonoBehaviour {
         }
     }
 
+    private void DestroyThis()
+    {
+        Destroy(gameObject);
+    }
+
+    //DONE
     //Destroys any enemy way off the screen
     private void DestroyOffScreeners()
     {
@@ -346,8 +354,5 @@ public class EnemyAI : MonoBehaviour {
         }
     }
 
-    private void DestroyThis()
-    {
-        Destroy(gameObject);
-    }
+    
 }
