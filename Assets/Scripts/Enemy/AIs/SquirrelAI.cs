@@ -10,6 +10,7 @@ public class SquirrelAI : MonoBehaviour {
         commonAI = GetComponent<CommonAI>();
         commonAI.startingState = AIStates.stopAndShoot;
         SessionController.instance.squirrelsInScene.Add(this.gameObject);
+        MakeBirdsCharge();
 
         if (SessionController.instance.sputniksInScene.Count > 0)
         {
@@ -20,6 +21,17 @@ public class SquirrelAI : MonoBehaviour {
             (SessionController.instance.bossInScene.GetComponent<BossAI>().bossType == BossType.goldenstein))
         {
             commonAI.SwitchToNextState(AIStates.chaseAndShoot);
+        }
+    }
+
+    /// <summary>
+    /// Změní všem žlutým ptákům ve hře stav na Chare útoks
+    /// </summary>
+    void MakeBirdsCharge()
+    {
+        foreach(GameObject bird in SessionController.instance.birdsInScene)
+        {
+            bird.GetComponent<CommonAI>().SwitchToNextState(AIStates.chargeAttack);
         }
     }
 

@@ -215,24 +215,36 @@ public class PowerUpScript : MonoBehaviour {
         akTime = 10;
         effects.rambouch.SetActive(true);
         SpeedUpEnemeyCooldown();
+        SpeedUpEnemyMovement();
     }
 
     /// <summary>
-    /// Zvětší rychlost střelby nepřátel
+    /// Zvětší rychlost střelby nepřátel: veverkám, sputnikovi i prasatům
     /// </summary>
     void SpeedUpEnemeyCooldown()
     {
         foreach(GameObject sputnik in SessionController.instance.sputniksInScene)
         {
-            sputnik.GetComponent<ShooterAI>().ChangeMissileCooldown(-0.5f);
+            sputnik.GetComponent<ShooterAI>().ChangeMissileCooldown(-0.25f);
         }
         foreach (GameObject squirrel in SessionController.instance.squirrelsInScene)
         {
-            squirrel.GetComponent<ShooterAI>().ChangeMissileCooldown(-0.5f);
+            squirrel.GetComponent<ShooterAI>().ChangeMissileCooldown(-0.25f);
         }
         foreach (GameObject pig in SessionController.instance.pigsInScene)
         {
-            pig.GetComponent<ShooterAI>().ChangeMissileCooldown(-0.5f);
+            pig.GetComponent<ShooterAI>().ChangeMissileCooldown(-0.25f);
+        }
+    }
+
+    /// <summary>
+    /// Zvětší rychost pohybu nepřátel: krysám
+    /// </summary>
+    void SpeedUpEnemyMovement()
+    {
+        foreach(GameObject rat in SessionController.instance.ratsInScene)
+        {
+            rat.GetComponent<CommonAI>().ChangeMovementSpeed(1);
         }
     }
 

@@ -56,11 +56,11 @@ public class CommonAI : MonoBehaviour {
     /// <summary>
     /// reference na gameObject Ojocha
     /// </summary>
-    private GameObject player;
+    public GameObject player;
     /// <summary>
     /// Diva se nepritel vlevo?
     /// </summary>
-    private bool facingLeft = true;
+    public bool facingLeft = true;
 
     //destroy off screeners
     private float leftBoundary;
@@ -105,7 +105,7 @@ public class CommonAI : MonoBehaviour {
                 ChargeAttack();
                 break;
             
-            //Pouye pro strelce
+            //Pouze pro strelce
             case AIStates.stopAndShoot:
                 GetComponent<ShooterAI>().Shoot();
                 break;
@@ -224,6 +224,9 @@ public class CommonAI : MonoBehaviour {
         {
             case EnemyType.squirrel:
                 SessionController.instance.squirrelsInScene.Remove(this.gameObject);
+                break;
+            case EnemyType.rat:
+                SessionController.instance.ratsInScene.Remove(this.gameObject);
                 break;
         }
         Destroy(gameObject);

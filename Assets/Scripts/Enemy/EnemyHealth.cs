@@ -30,10 +30,11 @@ public class EnemyHealth : MonoBehaviour {
             GetComponent<Collider2D>().enabled = false;
             GetComponent<Animator>().SetTrigger("bDeath");
 
-            if(GetComponent<CommonAI>().enemyType == EnemyType.rat && GetComponent<RatAI>().exploded)
+            if((GetComponent<CommonAI>().enemyType == EnemyType.rat || GetComponent<CommonAI>().enemyType == EnemyType.sputnik)
+                && GetComponent<KamikazeScript>().exploded)
             {
                 SessionController.instance.GetComponent<ScoreScript>().UpdateScoreStuff(score, 0, 1, true);
-                SessionController.instance.GetComponent<EndGameScript>().enemyInSession += 1;
+                //SessionController.instance.GetComponent<EndGameScript>().enemyInSession -= 1;
             }
         }
         else
