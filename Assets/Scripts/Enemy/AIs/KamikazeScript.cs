@@ -55,7 +55,7 @@ public class KamikazeScript : MonoBehaviour {
             float playerDistance = Vector2.Distance(transform.position, GetComponent<CommonAI>().player.transform.position);
             //Debug.Log(playerDistance);
 
-            if (playerDistance < ignitionRadius)
+            if (playerDistance < ignitionRadius && !ignited)
             {
                 ignited = true;
                 GetComponent<CommonAI>().movementSpeed = ignitionSpeed;

@@ -14,7 +14,7 @@ public enum BossType
     zebirko,
     rudak,
     rakosnik,
-    alexander,
+    filipovic,
     kovar,
     fakir
 }

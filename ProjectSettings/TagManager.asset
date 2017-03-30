@@ -15,6 +15,7 @@ TagManager:
   - ImageTwo
   - Boss
   - coin
+  - Laser
   layers:
   - Default
   - TransparentFX

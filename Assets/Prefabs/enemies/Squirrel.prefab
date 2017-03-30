@@ -57,7 +57,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1473832658196514}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 12, y: 0, z: 0}
+  m_LocalPosition: {x: 10.69251, y: 0.3144862, z: 0}
   m_LocalScale: {x: 0.2849268, y: 0.2849268, z: 0.71231705}
   m_Children:
   - {fileID: 4809262072267998}
@@ -138,6 +138,8 @@ MonoBehaviour:
   currentState: 0
   startingState: 4
   turns: 1
+  player: {fileID: 0}
+  facingLeft: 1
   flyOnScreenPosX: 0.9
 --- !u!114 &114342566461558336
 MonoBehaviour:
@@ -161,6 +163,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a3507b0e4e6ee240bf72cb11ec7a828, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sputnikFOS: 0.65
 --- !u!114 &114680118861870020
 MonoBehaviour:
   m_ObjectHideFlags: 1

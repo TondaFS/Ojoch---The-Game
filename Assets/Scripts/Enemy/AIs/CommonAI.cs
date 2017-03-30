@@ -13,7 +13,8 @@ public enum AIStates
     stopAndShoot,
     chargeAttack,
     chaseAndShoot,
-    wait
+    wait,
+    shootLaser
 }
 /// <summary>
 /// Typy všech nepřátel a bossů ve hře.
@@ -125,7 +126,7 @@ public class CommonAI : MonoBehaviour {
            transform.position.y < botBoundary ||
            transform.position.y > topBoundary)
         {
-            Destroy(this.gameObject);
+            DestroyThis();
         }
     }
 
@@ -215,7 +216,7 @@ public class CommonAI : MonoBehaviour {
     }
 
     /// <summary>
-    /// Destroys this Game object and remove the enemy from list in session controller
+    /// Zničí nepřítele a odebere jej ze seznamu nepřátel stejného typu
     /// </summary>
     private void DestroyThis()
     {
@@ -227,6 +228,9 @@ public class CommonAI : MonoBehaviour {
                 break;
             case EnemyType.rat:
                 SessionController.instance.ratsInScene.Remove(this.gameObject);
+                break;
+            case EnemyType.sputnik:
+                SessionController.instance.sputniksInScene.Remove(this.gameObject);
                 break;
         }
         Destroy(gameObject);

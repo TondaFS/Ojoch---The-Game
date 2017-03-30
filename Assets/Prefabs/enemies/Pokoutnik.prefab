@@ -28,6 +28,7 @@ GameObject:
   - component: {fileID: 114413231253888802}
   - component: {fileID: 114021093470541008}
   - component: {fileID: 114562743919375198}
+  - component: {fileID: 114558159530385868}
   m_Layer: 12
   m_Name: Pokoutnik
   m_TagString: Boss
@@ -121,7 +122,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   missile: {fileID: 430316, guid: fd4324faf7d8cdf4fa388b01870578ae, type: 2}
   ammo: 15
-  missileCooldown: 1
+  missileCooldown: 1.1
   noMissileState: 5
 --- !u!114 &114091446256344302
 MonoBehaviour:
@@ -152,7 +153,24 @@ MonoBehaviour:
   currentState: 0
   startingState: 4
   turns: 1
+  player: {fileID: 0}
+  facingLeft: 1
   flyOnScreenPosX: 0.9
+--- !u!114 &114558159530385868
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1018137276358098}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1658416f772111f49882a04c470350c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  explosionCountdown: 2
+  ignitionRadius: 3
+  ignited: 0
+  exploded: 0
 --- !u!114 &114562743919375198
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -28,6 +28,7 @@ GameObject:
   - component: {fileID: 114982297230644196}
   - component: {fileID: 114244229890288088}
   - component: {fileID: 114884001781047454}
+  - component: {fileID: 114532058019257476}
   m_Layer: 12
   m_Name: krysa_kamikaze
   m_TagString: Enemy
@@ -134,9 +135,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9640731626c40bd41bca39163298078c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  explosionCountdown: 1
-  ignitionRadius: 3
-  exploded: 0
 --- !u!114 &114315051702672636
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -148,6 +146,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57926016a28524146b7f70febe09ff88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114532058019257476
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1775307619524978}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1658416f772111f49882a04c470350c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  explosionCountdown: 1
+  ignitionRadius: 3
+  ignited: 0
+  exploded: 0
 --- !u!114 &114884001781047454
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -176,7 +189,7 @@ MonoBehaviour:
   enemyType: 1
   movementSpeed: 2
   currentState: 0
-  startingState: 3
+  startingState: 2
   turns: 1
   player: {fileID: 0}
   facingLeft: 1

@@ -4,23 +4,38 @@ using UnityEngine;
 
 public class SquirrelAI : MonoBehaviour {
     CommonAI commonAI;
+    public float sputnikFOS = 0;
 
     void Start()
     {
         commonAI = GetComponent<CommonAI>();
         commonAI.startingState = AIStates.stopAndShoot;
         SessionController.instance.squirrelsInScene.Add(this.gameObject);
-        MakeBirdsCharge();
 
+        MakeBirdsCharge();
+        CheckSputnik();
+        CheckBoss();        
+    }
+
+    /// <summary>
+    /// Zkontroluje, zda nejsou ve scéně nějacé sputnici, pokud an, zavolá fci SputnikAppears()
+    /// </summary>
+    void CheckSputnik()
+    {
         if (SessionController.instance.sputniksInScene.Count > 0)
         {
             SputnikAppears();
         }
-
-        if(SessionController.instance.bossInScene != null &&
+    }
+    /// <summary>
+    /// Zkontroluje, zda již není ve hře Goldenstein, pokud ano, zavolá funkci GoldensteinAppears()
+    /// </summary>
+    void CheckBoss()
+    {
+        if (SessionController.instance.bossInScene != null &&
             (SessionController.instance.bossInScene.GetComponent<BossAI>().bossType == BossType.goldenstein))
         {
-            commonAI.SwitchToNextState(AIStates.chaseAndShoot);
+            GoldensteinAppears();
         }
     }
 
@@ -40,7 +55,7 @@ public class SquirrelAI : MonoBehaviour {
     /// </summary>
     public void SputnikAppears()
     {
-        commonAI.flyOnScreenPosX = 0.75f;
+        commonAI.flyOnScreenPosX = sputnikFOS;
         commonAI.SwitchToNextState(AIStates.flyOnScreen);
     }
 

@@ -233,7 +233,7 @@ public class PowerUpScript : MonoBehaviour {
         }
         foreach (GameObject pig in SessionController.instance.pigsInScene)
         {
-            pig.GetComponent<ShooterAI>().ChangeMissileCooldown(-0.25f);
+            pig.GetComponent<PigAI>().laserCooldown -= 0.25f;
         }
     }
 
@@ -244,7 +244,8 @@ public class PowerUpScript : MonoBehaviour {
     {
         foreach(GameObject rat in SessionController.instance.ratsInScene)
         {
-            rat.GetComponent<CommonAI>().ChangeMovementSpeed(1);
+            if(rat != null)
+                rat.GetComponent<CommonAI>().ChangeMovementSpeed(1);
         }
     }
 
