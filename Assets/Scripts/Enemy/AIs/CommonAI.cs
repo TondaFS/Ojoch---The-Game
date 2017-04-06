@@ -14,7 +14,9 @@ public enum AIStates
     chargeAttack,
     chaseAndShoot,
     wait,
-    shootLaser
+    shootLaser,
+    laserActive,
+    laserCharging
 }
 /// <summary>
 /// Typy všech nepřátel a bossů ve hře.

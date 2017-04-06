@@ -5,17 +5,17 @@ GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 477348}
-  - 114: {fileID: 11492790}
-  - 114: {fileID: 11448592}
-  - 114: {fileID: 11492982}
-  - 82: {fileID: 8292086}
-  - 114: {fileID: 11413070}
-  - 114: {fileID: 114000012461592660}
-  - 114: {fileID: 114000013775915190}
-  - 114: {fileID: 114000010246662468}
+  - component: {fileID: 477348}
+  - component: {fileID: 11492790}
+  - component: {fileID: 11448592}
+  - component: {fileID: 8292086}
+  - component: {fileID: 114501625069548846}
+  - component: {fileID: 11413070}
+  - component: {fileID: 114000012461592660}
+  - component: {fileID: 114000013775915190}
+  - component: {fileID: 114000010246662468}
   m_Layer: 0
   m_Name: _Game Manager
   m_TagString: Untagged
@@ -32,10 +32,10 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.31054398, y: -1.2592032, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!82 &8292086
 AudioSource:
   m_ObjectHideFlags: 1
@@ -52,6 +52,7 @@ AudioSource:
   Loop: 0
   Mute: 0
   Spatialize: 0
+  SpatializePostEffects: 0
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
@@ -64,12 +65,14 @@ AudioSource:
   rolloffCustomCurve:
     serializedVersion: 2
     m_Curve:
-    - time: 0
+    - serializedVersion: 2
+      time: 0
       value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
-    - time: 1
+    - serializedVersion: 2
+      time: 1
       value: 0
       inSlope: 0
       outSlope: 0
@@ -80,7 +83,8 @@ AudioSource:
   panLevelCustomCurve:
     serializedVersion: 2
     m_Curve:
-    - time: 0
+    - serializedVersion: 2
+      time: 0
       value: 0
       inSlope: 0
       outSlope: 0
@@ -91,7 +95,8 @@ AudioSource:
   spreadCustomCurve:
     serializedVersion: 2
     m_Curve:
-    - time: 0
+    - serializedVersion: 2
+      time: 0
       value: 0
       inSlope: 0
       outSlope: 0
@@ -102,7 +107,8 @@ AudioSource:
   reverbZoneMixCustomCurve:
     serializedVersion: 2
     m_Curve:
-    - time: 0
+    - serializedVersion: 2
+      time: 0
       value: 1
       inSlope: 0
       outSlope: 0
@@ -471,36 +477,6 @@ MonoBehaviour:
   languageManager: {fileID: 0}
   playerName: 
   activeLanguage: 
---- !u!114 &11492982
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 147462}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a042f61045237a445b8c905a1a35336b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  musicVolume: 1
-  soundsVolume: 1
-  clipShoot: {fileID: 8300000, guid: e81562ae9f9bb7d44b42f5282e147594, type: 3}
-  clipDamage1: {fileID: 8300000, guid: 98099ecb857272843a12db6d235dfa6c, type: 3}
-  clipDamage2: {fileID: 8300000, guid: abef98b16f6c5514e8d103e5e1808da3, type: 3}
-  clipGrab: {fileID: 8300000, guid: d9b428646196a9041826fda15e82aacf, type: 3}
-  clipAk47: {fileID: 8300000, guid: 0c0360de2bc9ecf428e441927215b7f8, type: 3}
-  clipGood: {fileID: 8300000, guid: 3b4c9585f408daf459e73447a8876bfb, type: 3}
-  clipBad: {fileID: 8300000, guid: f6eacaa1e112e764ca2c6ade0b3e3964, type: 3}
-  clipOjochDeath: {fileID: 8300000, guid: 2e362ac39b5dfe745a86d5869e6624d5, type: 3}
-  squirrelDeath: {fileID: 8300000, guid: a06bfa2d02a82f541a7d02e764d63158, type: 3}
-  pokoutnikDeath: {fileID: 8300000, guid: 155283152d7af534c915d0adb60a9f93, type: 3}
-  birdDeath: {fileID: 8300000, guid: b692f9ea88045114d8217f9b6be85d01, type: 3}
-  ratDeath: {fileID: 8300000, guid: a309230eb29e6cd438cf5a1064f960e4, type: 3}
-  ghost: {fileID: 8300000, guid: aea4d71f8ac9d0e459a842f49c492d08, type: 3}
-  vodka: {fileID: 8300000, guid: 69c6f3b0c79163a4397142eceb70d48a, type: 3}
-  clipEnemyHit: {fileID: 8300000, guid: 35f29ab6ca2c00e4f9b3c7308d864a31, type: 3}
-  clipBobblePoop: {fileID: 8300000, guid: defcd9b8c5bf91441ba2dc8313632c25, type: 3}
-  soundAudioSource: {fileID: 8292086}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
@@ -600,6 +576,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ojochHasHat: 0
+  hatBought: 0
 --- !u!114 &114000012461592660
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -631,3 +608,34 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   coins: 0
+--- !u!114 &114501625069548846
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 147462}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a042f61045237a445b8c905a1a35336b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  musicVolume: 1
+  soundsVolume: 1
+  clipShoot: {fileID: 8300000, guid: e81562ae9f9bb7d44b42f5282e147594, type: 3}
+  clipDamage1: {fileID: 8300000, guid: 98099ecb857272843a12db6d235dfa6c, type: 3}
+  clipDamage2: {fileID: 8300000, guid: abef98b16f6c5514e8d103e5e1808da3, type: 3}
+  clipGrab: {fileID: 8300000, guid: d9b428646196a9041826fda15e82aacf, type: 3}
+  clipAk47: {fileID: 8300000, guid: 0c0360de2bc9ecf428e441927215b7f8, type: 3}
+  clipGood: {fileID: 8300000, guid: 3b4c9585f408daf459e73447a8876bfb, type: 3}
+  clipBad: {fileID: 8300000, guid: f6eacaa1e112e764ca2c6ade0b3e3964, type: 3}
+  clipOjochDeath: {fileID: 8300000, guid: 2e362ac39b5dfe745a86d5869e6624d5, type: 3}
+  squirrelDeath: {fileID: 8300000, guid: a06bfa2d02a82f541a7d02e764d63158, type: 3}
+  pokoutnikDeath: {fileID: 8300000, guid: 155283152d7af534c915d0adb60a9f93, type: 3}
+  birdDeath: {fileID: 8300000, guid: b692f9ea88045114d8217f9b6be85d01, type: 3}
+  ratDeath: {fileID: 8300000, guid: a309230eb29e6cd438cf5a1064f960e4, type: 3}
+  pigDeath: {fileID: 8300000, guid: 92fce2748a3a9d64bbe62c42e5912adc, type: 3}
+  ghost: {fileID: 8300000, guid: aea4d71f8ac9d0e459a842f49c492d08, type: 3}
+  vodka: {fileID: 8300000, guid: 69c6f3b0c79163a4397142eceb70d48a, type: 3}
+  clipEnemyHit: {fileID: 8300000, guid: 35f29ab6ca2c00e4f9b3c7308d864a31, type: 3}
+  clipBobblePoop: {fileID: 8300000, guid: defcd9b8c5bf91441ba2dc8313632c25, type: 3}
+  soundAudioSource: {fileID: 0}

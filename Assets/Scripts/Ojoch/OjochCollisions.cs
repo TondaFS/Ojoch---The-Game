@@ -50,10 +50,11 @@ public class OjochCollisions : MonoBehaviour {
             PowerUpCollision(col);
         }    
         
-        if (col.gameObject.tag == "coin")
+       if (col.gameObject.tag == "coin")
         {
             CoinCollision(col);
-        }   
+        }
+        
     } 
 
     void OnTriggerEnter2D(Collider2D col)
@@ -61,6 +62,12 @@ public class OjochCollisions : MonoBehaviour {
         if (col.gameObject.tag == "Projectile")
         {
             ProjectileCollision(col);         
+        }
+
+        if (col.gameObject.tag == "Laser")
+        {
+            Debug.Log("smth");
+            LaserCollision(col);
         }
     }
     
@@ -177,7 +184,7 @@ public class OjochCollisions : MonoBehaviour {
         if (col.gameObject.GetComponent<ShotScript>().isEnemyShot && OjochManager.instance.ojochScript.godMode <= 0)
         {
             OjochManager.instance.ojochScript.PlayDamageSound();
-            //OjochManager.instance.ojochScript.animator.SetTrigger("hit");
+            OjochManager.instance.ojochScript.animator.SetTrigger("hit");
             OjochManager.instance.ojochHealth.Damage(1);
             session.UpdateScoreStuff(0, -1, 0, false);
 
@@ -198,4 +205,21 @@ public class OjochCollisions : MonoBehaviour {
         OjochManager.instance.ojochScript.animator.SetTrigger("good");
         Destroy(col.gameObject);
     }
+
+    /// <summary>
+    /// Ojochova kolize s laserem. 
+    /// Pokud není Ojoch nesmrtelný a jedná se o nepřátelskou střelu, přehraje zvuk zranění, spustí animaci, dá zranění, upraví skóre
+    /// </summary>
+    /// <param name="col"></param>
+    void LaserCollision(Collider2D col)
+    {
+        if(OjochManager.instance.ojochScript.godMode <= 0)
+        {
+            OjochManager.instance.ojochScript.PlayDamageSound();
+            OjochManager.instance.ojochScript.animator.SetTrigger("hit");
+            OjochManager.instance.ojochHealth.Damage(1);
+            session.UpdateScoreStuff(0, -1, 0, false);
+        }
+    }
+
 }

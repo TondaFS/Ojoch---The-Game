@@ -63,6 +63,9 @@ public class EnemyHealth : MonoBehaviour {
             case EnemyType.rat:
                 GameManager.instance.GetComponent<SoundManager>().PlaySoundPitchShift(GameManager.instance.GetComponent<SoundManager>().ratDeath);
                 break;
+            case EnemyType.pig:
+                GameManager.instance.GetComponent<SoundManager>().PlaySound(GameManager.instance.GetComponent<SoundManager>().pigDeath);
+                break;
         }
     }
 }

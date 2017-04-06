@@ -39,6 +39,7 @@ public class ShooterAI : MonoBehaviour {
         if (ammo == 0)
         {
             GetComponent<CommonAI>().SwitchToNextState(noMissileState);
+
         }
     }
     /// <summary>
