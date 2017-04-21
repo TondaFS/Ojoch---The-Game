@@ -105,7 +105,8 @@ public class EnemyAI : MonoBehaviour {
             case AIStates.flyOnScreen:
                 FlyOnScreen();
                 break;
-
+    
+                /*
             case AIStates.flyToPoints:
                 if (points.Count <= 0)
                 {
@@ -120,7 +121,7 @@ public class EnemyAI : MonoBehaviour {
                     FlyToPoint();
                 }
                 break;
-
+                */
             case AIStates.kamikaze:
                 if (turns)
                 {

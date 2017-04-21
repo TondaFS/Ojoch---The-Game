@@ -7,7 +7,7 @@ using System.Collections;
 public enum AIStates
 {
     flyOnScreen,
-    flyToPoints,
+    flyOnCurve,
     kamikaze,
     chase,
     stopAndShoot,
@@ -106,16 +106,7 @@ public class CommonAI : MonoBehaviour {
             break;
             case AIStates.chargeAttack:
                 ChargeAttack();
-                break;
-            
-            //Pouze pro strelce
-            case AIStates.stopAndShoot:
-                GetComponent<ShooterAI>().Shoot();
-                break;
-            case AIStates.chaseAndShoot:
-                GetComponent<ShooterAI>().Shoot();
-                GetComponent<CommonAI>().Chase();
-                break;
+                break;            
         }        
     }
 
@@ -233,6 +224,12 @@ public class CommonAI : MonoBehaviour {
                 break;
             case EnemyType.sputnik:
                 SessionController.instance.sputniksInScene.Remove(this.gameObject);
+                break;
+            case EnemyType.pig:
+                SessionController.instance.pigsInScene.Remove(this.gameObject);
+                break;
+            case EnemyType.bird:
+                SessionController.instance.birdsInScene.Remove(this.gameObject);
                 break;
         }
         Destroy(gameObject);

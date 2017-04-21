@@ -10,7 +10,28 @@ public class ShooterAI : MonoBehaviour {
     public float missileCooldown = 1;
     private float currentMissileCooldown;
 
+    private CommonAI commonAIScript;
+
     public AIStates noMissileState;    
+    void Start()
+    {
+        commonAIScript = GetComponent<CommonAI>();
+    }
+
+    void Update()
+    {
+        switch (commonAIScript.currentState)
+        {
+            case AIStates.stopAndShoot:
+                Shoot();
+                break;
+            case AIStates.chaseAndShoot:
+                Shoot();
+                commonAIScript.Chase();
+                break;
+        }
+        
+    }
 
     /// <summary>
     /// Změní rychlost střelby o danou hodnoty
@@ -48,7 +69,6 @@ public class ShooterAI : MonoBehaviour {
     public void Launch()
     {
         missileLauncherPos = this.transform.GetChild(0).transform.position;
-        //Debug.Log(missileLauncherPos);
         Instantiate(missile, missileLauncherPos, Quaternion.identity);
     }
         
