@@ -123,7 +123,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   commonAIScript: {fileID: 0}
   myMovement: 1
-  random: 0
+  sinSpeed: 0.15
 --- !u!114 &114192904584355316
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -136,13 +136,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyType: 0
-  movementSpeed: 2
+  movementSpeed: 1.5
   currentState: 0
   startingState: 1
   turns: 1
   player: {fileID: 0}
   facingLeft: 1
-  flyOnScreenPosX: 1.15
+  flyOnScreenPosX: 0.9
 --- !u!114 &114347341348690346
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -179,7 +179,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b85f867053a128d4893efabcfa89209c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hp: 3
+  hp: 2
   score: 50
 --- !u!212 &212093516809709450
 SpriteRenderer:

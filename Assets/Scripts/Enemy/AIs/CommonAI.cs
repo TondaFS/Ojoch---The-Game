@@ -16,7 +16,8 @@ public enum AIStates
     wait,
     shootLaser,
     laserActive,
-    laserCharging
+    laserCharging,
+    protectPig
 }
 /// <summary>
 /// Typy všech nepřátel a bossů ve hře.
@@ -229,6 +230,17 @@ public class CommonAI : MonoBehaviour {
                 SessionController.instance.pigsInScene.Remove(this.gameObject);
                 break;
             case EnemyType.bird:
+                if(GetComponent<BirdAI>().pigReference != null)
+                {
+                    GetComponent<BirdAI>().pigReference.GetComponent<PigAI>().isProtected = false;
+                    if(SessionController.instance.pigsInScene.Count > 0)
+                    {
+                        foreach (GameObject bird in SessionController.instance.birdsInScene)
+                        {
+                            bird.GetComponent<CommonAI>().SwitchToNextState(AIStates.protectPig);
+                        }
+                    }                    
+                }                
                 SessionController.instance.birdsInScene.Remove(this.gameObject);
                 break;
         }

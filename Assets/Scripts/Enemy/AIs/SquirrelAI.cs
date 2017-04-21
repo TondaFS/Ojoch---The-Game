@@ -44,10 +44,14 @@ public class SquirrelAI : MonoBehaviour {
     /// </summary>
     void MakeBirdsCharge()
     {
-        foreach(GameObject bird in SessionController.instance.birdsInScene)
+        if(SessionController.instance.pigsInScene.Count < 1)
         {
-            bird.GetComponent<CommonAI>().SwitchToNextState(AIStates.chargeAttack);
+            foreach (GameObject bird in SessionController.instance.birdsInScene)
+            {
+                bird.GetComponent<CommonAI>().SwitchToNextState(AIStates.chargeAttack);
+            }
         }
+        
     }
 
     /// <summary>

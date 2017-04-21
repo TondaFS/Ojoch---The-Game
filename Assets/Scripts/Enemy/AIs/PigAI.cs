@@ -37,12 +37,17 @@ public class PigAI : MonoBehaviour {
     /// Aktuální hodnota munice
     /// </summary>
     public float currentLaserAmmo;
+    /// <summary>
+    /// Chrání tohle prase nějaký pták?
+    /// </summary>
+    public bool isProtected = false;
 
 	void Start () {
         commonAI = GetComponent<CommonAI>();
         SessionController.instance.pigsInScene.Add(this.gameObject);
         CheckZebirko();
         MakeSpuntiksKamikaze();
+        MakeBirdsProtect();
 
         currentLaserAmmo = laserAmmo;
 	}
@@ -77,6 +82,14 @@ public class PigAI : MonoBehaviour {
         foreach(GameObject sputnik in SessionController.instance.sputniksInScene)
         {
             sputnik.GetComponent<SputnikAI>().PigAppears();
+        }
+    }
+
+    void MakeBirdsProtect()
+    {
+        foreach(GameObject bird in SessionController.instance.birdsInScene)
+        {
+            bird.GetComponent<BirdAI>().PigAppear();
         }
     }
     
