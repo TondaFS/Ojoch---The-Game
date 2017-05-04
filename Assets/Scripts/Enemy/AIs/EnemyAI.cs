@@ -104,24 +104,7 @@ public class EnemyAI : MonoBehaviour {
         {
             case AIStates.flyOnScreen:
                 FlyOnScreen();
-                break;
-    
-                /*
-            case AIStates.flyToPoints:
-                if (points.Count <= 0)
-                {
-                    SwitchToNextState();
-                }
-                else
-                {
-                    if (turns)
-                    {
-                        TurnAtPlayer();
-                    }
-                    FlyToPoint();
-                }
-                break;
-                */
+                break;    
             case AIStates.kamikaze:
                 if (turns)
                 {
@@ -129,7 +112,6 @@ public class EnemyAI : MonoBehaviour {
                 }
                 Kamikaze();
                 break;
-
             case AIStates.chase:
                 if (turns)
                 {
@@ -137,7 +119,6 @@ public class EnemyAI : MonoBehaviour {
                 }
                 Chase();
                 break;
-
             case AIStates.stopAndShoot:
                 if (turns)
                 {
@@ -145,11 +126,9 @@ public class EnemyAI : MonoBehaviour {
                 }
                 StopAndShoot();
                 break;
-
             case AIStates.chargeAttack:
                 ChargeAttack();
                 break;
-
             case AIStates.wait:
                 if (waitTime == -1)
                 {

@@ -3,9 +3,12 @@ using UnityEngine.UI;
 using System.Collections;
 
 public class OjochScript : MonoBehaviour {
-    public Vector2 speed = new Vector2(10,10);      // Rychlost Ojocha
+    /// <summary>
+    /// Ojochova rychlost
+    /// </summary>
+    public Vector2 speed = new Vector2(10,10);
     private Vector2 movement;                       // Ulozeni pohybu
-    public Rigidbody2D ojoch;    
+    private Rigidbody2D ojoch;    
     public PowerUpScript powerCombo;
     private WeaponScript[] weapons;
     public Animator animator;    
@@ -72,6 +75,7 @@ public class OjochScript : MonoBehaviour {
         sockPivot = GameObject.Find("rotatingSocks").GetComponent<SpinSocks>();
         sockPivot.enabled = false;
     }
+    
 
     void Update () {
         

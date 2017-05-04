@@ -43,12 +43,33 @@ public class SessionController : MonoBehaviour
     [HideInInspector]
     GameObject taskThreeNew;
 
+    /// <summary>
+    /// Počet nepřátel ve scéně
+    /// </summary>
     public int numberOfEnemies;
+    /// <summary>
+    /// Seznam ptáků ve hře
+    /// </summary>
     public List<GameObject> birdsInScene;
+    /// <summary>
+    /// Seznam krys ve hře
+    /// </summary>
     public List<GameObject> ratsInScene;
+    /// <summary>
+    /// Seznam sputniků ve hře
+    /// </summary>
     public List<GameObject> sputniksInScene;
+    /// <summary>
+    /// Seznam veverek ve hře
+    /// </summary>
     public List<GameObject> squirrelsInScene;
+    /// <summary>
+    /// Seznam prasat ve hře
+    /// </summary>
     public List<GameObject> pigsInScene;
+    /// <summary>
+    /// Refrence na bosse ve scéně
+    /// </summary>
     public GameObject bossInScene;
 
     void Awake()
@@ -82,7 +103,6 @@ public class SessionController : MonoBehaviour
         taskTwoNew = GameObject.Find("newTwo");
         taskThree = GameObject.Find("taskThree");
         taskThreeNew = GameObject.Find("newThree");
-
         
 
         taskOneNew.SetActive(false);
