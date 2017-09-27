@@ -24,20 +24,26 @@ public class KamikazeScript : MonoBehaviour {
     /// </summary>
     public bool exploded = false;
     private Vector3 originalScale;
+    /// <summary>
+    /// Reference na commonAI script
+    /// </summary>
+    CommonAI commonAIRef; 
 
     void Start()
     {
         originalScale = transform.localScale;
-        ignitionSpeed = GetComponent<CommonAI>().movementSpeed + 1;        
+        commonAIRef = GetComponent<CommonAI>();
+        ignitionSpeed = commonAIRef.movementSpeed + 1;       
+         
     }
 
     void Update()
     {
-        if (GetComponent<CommonAI>().currentState == AIStates.kamikaze)
+        if (commonAIRef.currentState == AIStates.kamikaze)
         {
-            if (GetComponent<CommonAI>().turns)
+            if (commonAIRef.turns)
             {
-                GetComponent<CommonAI>().TurnAtPlayer();
+                commonAIRef.TurnAtPlayer();
             }
             Kamikaze();
         }
@@ -47,18 +53,18 @@ public class KamikazeScript : MonoBehaviour {
     /// AI leti za hracem, kdyz je blizko, zazehne a vybouchne
     /// </summary>
     private void Kamikaze()
-    {
-        if (GetComponent<CommonAI>().player != null)
+    {    
+        if (commonAIRef.player != null)
         {
-            transform.position = Vector3.MoveTowards(transform.position, GetComponent<CommonAI>().player.transform.position, GetComponent<CommonAI>().movementSpeed * Time.deltaTime);
+            transform.position = Vector3.MoveTowards(transform.position, commonAIRef.player.transform.position, commonAIRef.movementSpeed * Time.deltaTime);
 
-            float playerDistance = Vector2.Distance(transform.position, GetComponent<CommonAI>().player.transform.position);
+            float playerDistance = Vector2.Distance(transform.position, commonAIRef.player.transform.position);
             //Debug.Log(playerDistance);
 
             if (playerDistance < ignitionRadius && !ignited)
             {
                 ignited = true;
-                GetComponent<CommonAI>().movementSpeed = ignitionSpeed;
+                commonAIRef.movementSpeed = ignitionSpeed;
             }
 
             if (ignited)
@@ -73,7 +79,7 @@ public class KamikazeScript : MonoBehaviour {
 
                 //pulse
                 float pulse = Mathf.Sin(Time.time * 30) * 0.05f;
-                if (GetComponent<CommonAI>().facingLeft)
+                if (commonAIRef.facingLeft)
                 {
                     transform.localScale = new Vector3(originalScale.x - pulse, originalScale.y + pulse);
                 }
@@ -86,7 +92,7 @@ public class KamikazeScript : MonoBehaviour {
             if (explosionCountdown < 0 && !exploded)
             {
                 exploded = true;
-                GetComponent<EnemyHealth>().EnemyDamage(100);
+                commonAIRef.EnemyDamage(100);
             }
         }
     }

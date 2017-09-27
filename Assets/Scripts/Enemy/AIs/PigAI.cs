@@ -2,9 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PigAI : MonoBehaviour {
-    CommonAI commonAI;
-
+public class PigAI : CommonAI {
     /// <summary>
     /// GameObject laseru prasete
     /// </summary>
@@ -42,8 +40,9 @@ public class PigAI : MonoBehaviour {
     /// </summary>
     public bool isProtected = false;
 
-	void Start () {
-        commonAI = GetComponent<CommonAI>();
+	public override void Start () {
+        base.Start();
+        
         SessionController.instance.pigsInScene.Add(this.gameObject);
         CheckZebirko();
         MakeSpuntiksKamikaze();
@@ -52,18 +51,31 @@ public class PigAI : MonoBehaviour {
         currentLaserAmmo = laserAmmo;
 	}
 
-    void Update()
+    public override void Update()
     {
-        if(GetComponent<CommonAI>().currentState == AIStates.shootLaser)
+        base.Update();
+
+        if(currentState == AIStates.shootLaser)
         {
             ShootLaser();
-        } else if(GetComponent<CommonAI>().currentState == AIStates.laserActive)
+        } else if(currentState == AIStates.laserActive)
         {
             Debug.Log("Laser s active!");
-        } else if(GetComponent<CommonAI>().currentState == AIStates.laserCharging)
+        } else if(currentState == AIStates.laserCharging)
         {
             Debug.Log("Charging!");
         }
+    }
+
+    public override void EnemyDeathSound()
+    {
+        GameManager.instance.GetComponent<SoundManager>().PlaySound(GameManager.instance.GetComponent<SoundManager>().pigDeath);
+    }
+
+    public override void DestroyThis()
+    {        
+        SessionController.instance.pigsInScene.Remove(this.gameObject);
+        base.DestroyThis();
     }
 
     /// <summary>
@@ -121,7 +133,7 @@ public class PigAI : MonoBehaviour {
     IEnumerator Charging()
     {
         yield return new WaitForSeconds(batteryCharging);
-        GetComponent<CommonAI>().SwitchToNextState(AIStates.shootLaser);
+        SwitchToNextState(AIStates.shootLaser);
         GetComponent<Animator>().SetBool("isCharging", false);
         GetComponent<Animator>().SetBool("sAttack", false);
         currentLaserAmmo = laserAmmo;
@@ -137,7 +149,7 @@ public class PigAI : MonoBehaviour {
         yield return new WaitForSeconds(laserDuration);
         if(currentLaserAmmo <= 0)
         {
-            GetComponent<CommonAI>().SwitchToNextState(AIStates.laserCharging);
+            SwitchToNextState(AIStates.laserCharging);
             GetComponent<Animator>().SetBool("isCharging", true);            
             laser.SetActive(false);
             Debug.Log("No ammo!");
@@ -146,7 +158,7 @@ public class PigAI : MonoBehaviour {
         }
         else
         {
-            GetComponent<CommonAI>().SwitchToNextState(AIStates.shootLaser);
+            SwitchToNextState(AIStates.shootLaser);
             GetComponent<Animator>().SetBool("sAttack", false);
             
             laser.SetActive(false);
@@ -169,7 +181,7 @@ public class PigAI : MonoBehaviour {
             GetComponent<Animator>().SetBool("sAttack", true);
             laser.SetActive(true);
             currentLaserAmmo--;
-            GetComponent<CommonAI>().SwitchToNextState(AIStates.laserActive);
+            SwitchToNextState(AIStates.laserActive);
             StartCoroutine(LaserShoot());
         }
     }

@@ -2,18 +2,41 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SputnikAI : MonoBehaviour {
-    CommonAI commonAI;
+public class SputnikAI : ShooterAI {
+    KamikazeScript kamikazeScript;
 
-    void Start()
+    public override void Start()
     {
-        commonAI = GetComponent<CommonAI>();
-        commonAI.startingState = AIStates.stopAndShoot;
+        startingState = AIStates.stopAndShoot;
         SessionController.instance.sputniksInScene.Add(this.gameObject);
+        kamikazeScript = GetComponent<KamikazeScript>();
         MakeRatsCharge();
         MakeSquirrelsMove();
         CheckRakosnik();
         CheckPigs();
+    }
+
+    public override void EnemyDeathSound()
+    {
+        GameManager.instance.GetComponent<SoundManager>().PlaySound(GameManager.instance.GetComponent<SoundManager>().pokoutnikDeath);
+    }
+
+    public override void DestroyThis()
+    {
+        SessionController.instance.sputniksInScene.Remove(this.gameObject);
+        base.DestroyThis();
+    }
+
+    public override void EnemyDamage(int damage)
+    {
+        if (GetComponent<KamikazeScript>().exploded)
+            score = 0;
+
+        base.EnemyDamage(damage); 
+        
+        //hodit do common? nebudou to mít všichni nepřátele?
+        if (hp <= damagedHP)
+            GetComponent<Animator>().SetTrigger("isDamaged");
     }
 
     /// <summary>
@@ -43,7 +66,7 @@ public class SputnikAI : MonoBehaviour {
     /// </summary>
     public void RakosnikAppears()
     {
-        GetComponent<ShooterAI>().ChangeMissileCooldown(-0.50f);
+        ChangeMissileCooldown(-0.50f);
     }
 
     /// <summary>
@@ -75,16 +98,16 @@ public class SputnikAI : MonoBehaviour {
     /// </summary>
     public void PigAppears()
     {
-        if(commonAI.currentState == AIStates.flyOnScreen)
+        if(currentState.Equals(AIStates.flyOnScreen))
         {
-            commonAI.startingState = AIStates.kamikaze;
+            startingState = AIStates.kamikaze;
         }
-        else if(commonAI.currentState != AIStates.kamikaze)
+        else if(currentState.Equals(AIStates.kamikaze))
         {
-            commonAI.currentState = AIStates.kamikaze;            
+            currentState = AIStates.kamikaze;            
         }
 
-        GetComponent<KamikazeScript>().ignited = true;
-        commonAI.movementSpeed += 1;
+        kamikazeScript.ignited = true;
+        movementSpeed += 1;
     }
 }

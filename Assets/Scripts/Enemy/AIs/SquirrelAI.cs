@@ -2,19 +2,30 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SquirrelAI : MonoBehaviour {
-    CommonAI commonAI;
+public class SquirrelAI : ShooterAI {
     public float sputnikFOS = 0;
 
-    void Start()
+    public override void Start()
     {
-        commonAI = GetComponent<CommonAI>();
-        commonAI.startingState = AIStates.stopAndShoot;
+        base.Start();
+
+        startingState = AIStates.stopAndShoot;
         SessionController.instance.squirrelsInScene.Add(this.gameObject);
 
         MakeBirdsCharge();
         CheckSputnik();
         CheckBoss();        
+    }
+
+    public override void EnemyDeathSound()
+    {
+        GameManager.instance.GetComponent<SoundManager>().PlaySound(GameManager.instance.GetComponent<SoundManager>().squirrelDeath);
+    }
+
+    public override void DestroyThis()
+    {
+        SessionController.instance.squirrelsInScene.Remove(this.gameObject);
+        base.DestroyThis();
     }
 
     /// <summary>
@@ -59,8 +70,8 @@ public class SquirrelAI : MonoBehaviour {
     /// </summary>
     public void SputnikAppears()
     {
-        commonAI.flyOnScreenPosX = sputnikFOS;
-        commonAI.SwitchToNextState(AIStates.flyOnScreen);
+        flyOnScreenPosX = sputnikFOS;
+        SwitchToNextState(AIStates.flyOnScreen);
     }
 
     /// <summary>
@@ -68,6 +79,6 @@ public class SquirrelAI : MonoBehaviour {
     /// </summary>
     public void GoldensteinAppears()
     {
-        commonAI.SwitchToNextState(AIStates.chaseAndShoot);
+        SwitchToNextState(AIStates.chaseAndShoot);
     }
 }

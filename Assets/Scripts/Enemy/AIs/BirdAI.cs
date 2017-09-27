@@ -11,8 +11,7 @@ public enum TypeOfMovement
     forwardBackAndForward
 }
 
-public class BirdAI : MonoBehaviour { 
-    public CommonAI commonAIScript;
+public class BirdAI : CommonAI { 
     /// <summary>
     /// Typ křivky, po které se bude pták pohybovat
     /// </summary>
@@ -43,9 +42,14 @@ public class BirdAI : MonoBehaviour {
     /// </summary>
     public GameObject pigReference;
         
-    void Start()
+    /// <summary>
+    /// Vzuyiti base Start z common AI doplneny o pohzbove informace a 
+    /// kontroly jinych nepratel
+    /// </summary>
+    public override void Start()
     {
-        commonAIScript = GetComponent<CommonAI>();
+        base.Start();
+        
         offScreenPoint.y = transform.position.y;        
         sinPosition = CalculatePositionForSinMovement();
 
@@ -53,18 +57,63 @@ public class BirdAI : MonoBehaviour {
 
         if(SessionController.instance.squirrelsInScene.Count > 0)
         {
-            commonAIScript.startingState = AIStates.chargeAttack;
+            startingState = AIStates.chargeAttack;
         } 
 
         if(SessionController.instance.pigsInScene.Count > 0)
         {
-            commonAIScript.startingState = AIStates.protectPig;
+            startingState = AIStates.protectPig;
         }
 
         if (SessionController.instance.bossInScene != null && SessionController.instance.bossInScene.GetComponent<BossAI>().bossType.Equals(BossType.rudak))
         {
-            commonAIScript.startingState = AIStates.chase;
+            startingState = AIStates.chase;
         }
+    }
+
+    public override void Update()
+    {
+        base.Update();
+
+        if (currentState.Equals(AIStates.flyOnCurve))
+            Movement();
+
+        if (currentState.Equals(AIStates.protectPig))
+        {
+            if (pigReference == null)
+            {
+                ChoosePig();
+            }
+            ProtectPig();
+        }
+
+    }
+
+    public override void EnemyDeathSound()
+    {
+        GameManager.instance.GetComponent<SoundManager>().PlaySoundPitchShift(GameManager.instance.GetComponent<SoundManager>().birdDeath);
+    }
+
+    /// <summary>
+    /// Zjisti, jestli dany ptak chranil nejake prase. Pokud ano, prenastavi danemu praseti info o ochraně na false a pro vsechny ptaky 
+    /// znovu vyřeší, jestli by dané prase neměli chránit...
+    /// </summary>
+    public override void DestroyThis()
+    {        
+        if (pigReference != null)
+        {
+            pigReference.GetComponent<PigAI>().isProtected = false;
+            if (SessionController.instance.pigsInScene.Count > 0)
+            {
+                foreach (GameObject bird in SessionController.instance.birdsInScene)
+                {
+                    bird.GetComponent<CommonAI>().SwitchToNextState(AIStates.protectPig);
+                }
+            }
+        }
+        SessionController.instance.birdsInScene.Remove(this.gameObject);
+
+        base.DestroyThis();
     }
 
     /// <summary>
@@ -89,47 +138,27 @@ public class BirdAI : MonoBehaviour {
                 
         return Mathf.Asin(sinPos / 4) / sinSpeed;
     }
-
-    void Update()
-    {
-
-        if (commonAIScript.currentState.Equals(AIStates.flyOnCurve))
-        {
-            Movement();
-        }
-
-        if (commonAIScript.currentState.Equals(AIStates.protectPig))
-        {
-            if(pigReference == null)
-            {
-                ChoosePig();
-            }  
-                                  
-            ProtectPig();
-        }
-        
-    }
-
+    
     /// <summary>
     /// Jak se objeví ve hře vevrka, provede Charge Attack
     /// </summary>
     public void SquirrelAppears()
     {
-        commonAIScript.SwitchToNextState(AIStates.chargeAttack);
+        SwitchToNextState(AIStates.chargeAttack);
     }
     /// <summary>
     /// Jak se objeví prase ve hře, začnu jedno prase chránit
     /// </summary>
     public void PigAppear()
     {
-        commonAIScript.SwitchToNextState(AIStates.protectPig);
+        SwitchToNextState(AIStates.protectPig);
     }
     /// <summary>
     /// Jak se ve hře objeví Rudý rudák anebo Ojoch sebere AK47 - začnu Ojocha pronásledovat
     /// </summary>
     public void AkOrRudakAppears()
     {
-        commonAIScript.SwitchToNextState(AIStates.chase);
+        SwitchToNextState(AIStates.chase);
     }
 
     /// <summary>
@@ -159,7 +188,7 @@ public class BirdAI : MonoBehaviour {
     /// </summary>
     private void StraightLineMovement()
     {
-        transform.position = Vector3.MoveTowards(transform.position, offScreenPoint, commonAIScript.movementSpeed * Time.deltaTime);
+        transform.position = Vector3.MoveTowards(transform.position, offScreenPoint, movementSpeed * Time.deltaTime);
     }
 
     /// <summary>
@@ -167,7 +196,7 @@ public class BirdAI : MonoBehaviour {
     /// </summary>
     private void UpAndDownMovement()
     {        
-        transform.position = new Vector3(transform.position.x - commonAIScript.movementSpeed * Time.deltaTime, Mathf.Sin(sinPosition*sinSpeed) * 4 + posunuti, 0);
+        transform.position = new Vector3(transform.position.x - movementSpeed * Time.deltaTime, Mathf.Sin(sinPosition*sinSpeed) * 4 + posunuti, 0);
         if(posunuti < 1)
         {
             posunuti += 0.02f;
@@ -182,7 +211,7 @@ public class BirdAI : MonoBehaviour {
     {
         if(SessionController.instance.pigsInScene.Count < 1)
         {
-            commonAIScript.SwitchToNextState(AIStates.chase);
+            SwitchToNextState(AIStates.chase);
         }
         else
         {
@@ -197,7 +226,7 @@ public class BirdAI : MonoBehaviour {
             }
             if(pigReference == null)
             {
-                commonAIScript.SwitchToNextState(AIStates.chase);
+                SwitchToNextState(AIStates.chase);
             }
         }
                
@@ -210,14 +239,9 @@ public class BirdAI : MonoBehaviour {
     {  
         if(pigReference != null)
         {
-            transform.position = Vector3.MoveTowards(transform.position, pigReference.transform.position + new Vector3(-1.5f, 0, 0), commonAIScript.movementSpeed * Time.deltaTime);
+            transform.position = Vector3.MoveTowards(transform.position, pigReference.transform.position + new Vector3(-1.5f, 0, 0), movementSpeed * Time.deltaTime);
         }
         
     }
-
-
-
-
-
-
+    
 }

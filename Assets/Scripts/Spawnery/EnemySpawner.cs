@@ -10,7 +10,7 @@ public class EnemySpawner : MonoBehaviour {
     private List<Transform> currentBosses = new List<Transform>();
     private List<Transform> currentPowerUps = new List<Transform>();
 
-    private float spawnDistance = 10;
+    //private float spawnDistance = 10;
     //private float destroyDistance;
 
     void Start()

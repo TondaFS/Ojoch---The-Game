@@ -5,16 +5,43 @@ using UnityEngine;
 /// <summary>
 /// Skript unikátního chévání krysy: kamikaze
 /// </summary>
-public class RatAI : MonoBehaviour {    
-    void Start()
+public class RatAI : CommonAI { 
+       
+    /// <summary>
+    /// Využití základní Start funkce z commonAi, změna počátečního stavu
+    /// na kamikazi a přidání kontroly Sputniků a bosse krysáka
+    /// </summary>
+    public override void Start()
     {
-        GetComponent<CommonAI>().startingState = AIStates.kamikaze;
+        base.Start();
+
+        startingState = AIStates.kamikaze;
         SessionController.instance.ratsInScene.Add(this.gameObject);
         
         CheckSputnik();
         CheckBoss();
-    }   
-    
+    }
+
+    public override void EnemyDeathSound()
+    {
+        GameManager.instance.GetComponent<SoundManager>().PlaySoundPitchShift(GameManager.instance.GetComponent<SoundManager>().ratDeath);
+    }
+
+    public override void DestroyThis()
+    {
+        SessionController.instance.ratsInScene.Remove(this.gameObject);
+        base.DestroyThis();
+    }
+
+    public override void EnemyDamage(int damage)
+    {
+        if (GetComponent<KamikazeScript>().exploded)
+            score = 0;
+
+        base.EnemyDamage(damage);
+
+    }
+
     /// <summary>
     /// Zkontroluje, zda již ve scéně nejsou nějací sputnici, pokud ano, donutí krysy udělat ChargeAttack
     /// </summary>
@@ -22,7 +49,7 @@ public class RatAI : MonoBehaviour {
     {
         if (SessionController.instance.sputniksInScene.Count > 0)
         {
-            GetComponent<CommonAI>().startingState = AIStates.chargeAttack;
+            startingState = AIStates.chargeAttack;
         }
     } 
     /// <summary>
@@ -41,6 +68,6 @@ public class RatAI : MonoBehaviour {
     /// </summary>
     public void FilipovicAppears()
     {
-        GetComponent<CommonAI>().ChangeMovementSpeed(1);
+        ChangeMovementSpeed(1);
     }
 }

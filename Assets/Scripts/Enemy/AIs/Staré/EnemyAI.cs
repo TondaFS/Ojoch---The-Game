@@ -224,7 +224,7 @@ public class EnemyAI : MonoBehaviour {
             if (explosionCountdown < 0 && !exploded)
             {
                 exploded = true;
-                GetComponent<EnemyHealth>().EnemyDamage(100);
+                GetComponent<CommonAI>().EnemyDamage(100);
             }
         }
     }

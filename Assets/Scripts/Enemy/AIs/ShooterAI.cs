@@ -2,35 +2,28 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ShooterAI : MonoBehaviour {
+public class ShooterAI : CommonAI {
     [Header("Stop And Shoot", order = 1)]
     public Transform missile;
     public int ammo;
     private Vector3 missileLauncherPos;
     public float missileCooldown = 1;
     private float currentMissileCooldown;
-
-    private CommonAI commonAIScript;
-
-    public AIStates noMissileState;    
-    void Start()
+    
+    public AIStates noMissileState; 
+      
+    public override void Update()
     {
-        commonAIScript = GetComponent<CommonAI>();
-    }
+        base.Update();
 
-    void Update()
-    {
-        switch (commonAIScript.currentState)
-        {
-            case AIStates.stopAndShoot:
-                Shoot();
-                break;
-            case AIStates.chaseAndShoot:
-                Shoot();
-                commonAIScript.Chase();
-                break;
-        }
+        if (currentState.Equals(AIStates.stopAndShoot))
+            Shoot();        
         
+        else if (currentState.Equals(AIStates.chaseAndShoot))
+        {
+            Shoot();
+            Chase();
+        }        
     }
 
     /// <summary>
@@ -59,7 +52,7 @@ public class ShooterAI : MonoBehaviour {
 
         if (ammo == 0)
         {
-            GetComponent<CommonAI>().SwitchToNextState(noMissileState);
+            SwitchToNextState(noMissileState);
 
         }
     }

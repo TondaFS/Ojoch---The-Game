@@ -20,7 +20,7 @@ public enum AIStates
     protectPig
 }
 /// <summary>
-/// Typy všech nepřátel a bossů ve hře.
+/// Typy všech nepřátel ve hře.
 /// </summary>
 public enum EnemyType
 {
@@ -32,30 +32,57 @@ public enum EnemyType
     none
 }
 
-
+/// <summary>
+/// Skript udržující téměř všechnu logiku týkající se nepřátelské AI
+/// Nepřítelovy životy, jejich ztráta a kontrola, zda by neměl umřít.
+/// Nepřítelovo chování a přepínání AI stavů.
+/// </summary>
 public class CommonAI : MonoBehaviour {
     /// <summary>
     /// Typ nepřítele
     /// </summary>
     public EnemyType enemyType = EnemyType.none;
-    
+
+    /// <summary>
+    /// Životy
+    /// </summary>
+    [Space(10)]
+    public int hp = 1;
+    public int damagedHP = 1;
+    /// <summary>
+    /// Kolik hráč dostane skóre za zabití
+    /// </summary>
+    public int score = 50;
+    /// <summary>
+    /// Dostal nepřítel zásah?
+    /// </summary>
+    /// 
+    public bool isHit;
+    /// <summary>
+    /// Jakou rychle se bude měnit barva na původní
+    /// </summary>
+    public float speedOfChange = 1f;
+
     /// <summary>
     /// Rychlost pohybu
     /// </summary>
+    [Space(10)]
     public float movementSpeed;
     /// <summary>
     /// Aktuální stav AI
     /// </summary>
     public AIStates currentState;
     /// <summary>
-    /// Stav do kterého se enemák přepne, jen co vletí na obrazovku
+    /// Stav do kterého se nepřítel přepne, poté, co vletí na obrazovku.
     /// </summary>
+    [Tooltip("Stav do kterého se nepřítel přepne, poté, co vletí na obrazovku.")]
     public AIStates startingState;
 
     //facing player
     /// <summary>
     /// Je nepritel otoceny k hraci?
     /// </summary>
+    [Space(10)]
     public bool turns = true;
     /// <summary>
     /// reference na gameObject Ojocha
@@ -73,13 +100,16 @@ public class CommonAI : MonoBehaviour {
 
     //flyOnScreen
     [Header("Fly on screen", order = 1)]
-    public float flyOnScreenPosX; //hodnota je v procentech 0 vlevo, 1 vlevo
+    public float flyOnScreenPosX; //hodnota je v procentech 0 vlevo, 1 vpravo
     private Vector3 flyOnScreenPos;
 
     //Charge Attack
     private float chargeUpTime = 2;
 
-    void Start()
+    /// <summary>
+    /// Základní nastavení nepřítele při inicializaci ve scéně
+    /// </summary>
+    public virtual void Start()
     {
         currentState = AIStates.flyOnScreen;
 
@@ -92,23 +122,88 @@ public class CommonAI : MonoBehaviour {
 
         player = OjochManager.instance.gameObject;
         SessionController.instance.numberOfEnemies += 1;
-        
+
+        isHit = false;
+        damagedHP = (int)(hp / 2);
     }
-    void Update()
+    public virtual void Update()
     {
         DestroyOffScreeners();
 
-        switch(currentState){
+        if (isHit)
+        {
+            ChangeColor();
+        }
+
+        switch (currentState) {
+
             case AIStates.flyOnScreen:
                 FlyOnScreen();
-            break;
+                break;
             case AIStates.chase:
                 Chase();
-            break;
+                break;
             case AIStates.chargeAttack:
                 ChargeAttack();
-                break;            
-        }        
+                break;
+        }
+    }
+
+    /// <summary>
+    /// Dá nepříteli zranění. Pokud následkem toho přijde o svůj zbývající život,
+    /// spustí animaci a zvuk smrti, přidá Ojochovi skóre a zajistí, aby nepřítel zemřel.
+    /// V opačném případě zajistí, aby nepřítel červeně blikl.
+    /// </summary>
+    /// <param name="damage">Jaké zranění něpřítel dostane</param>
+    public virtual void EnemyDamage(int damage)
+    {
+        hp -= damage;
+        if (hp <= 0)
+        {
+            EnemyDeathSound();
+            GetComponent<Collider2D>().enabled = false;
+            GetComponent<Animator>().SetTrigger("bDeath");
+            SessionController.instance.GetComponent<ScoreScript>().UpdateScoreStuff(score, 0, 1, true);
+        }
+        else
+        {
+            SetRedColor();
+            isHit = true;
+        }
+    }
+
+    /// <summary>
+    /// Přehraje odpovídající zvuk smrti daného nepřítele
+    /// </summary>
+    /// <param name="enemy">Typ nepřítele</param>
+    public virtual void EnemyDeathSound()
+    {
+        Debug.LogWarning("Nepritel nepouzil ve svem AI override teto metody pro prehrani vlastniho zvuku!");
+    }
+
+    /// <summary>
+    /// Mění postupně barvu z červené na původní
+    /// </summary>
+    public void ChangeColor()
+    {
+        float actualColor = this.GetComponent<SpriteRenderer>().color.g + (speedOfChange * Time.deltaTime);
+        if (actualColor >= 1)
+        {
+            gameObject.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1);
+            isHit = false;
+        }
+        else
+        {
+            this.GetComponent<SpriteRenderer>().color = new Color(1, actualColor, actualColor);
+        }
+    }
+
+    /// <summary>
+    /// Nastaví barvu na červenou
+    /// </summary>
+    public void SetRedColor()
+    {
+        this.GetComponent<SpriteRenderer>().color = new Color(1, 0, 0);
     }
 
     /// <summary>
@@ -116,10 +211,10 @@ public class CommonAI : MonoBehaviour {
     /// </summary>
     private void DestroyOffScreeners()
     {
-        if (transform.position.x < leftBoundary ||
-           transform.position.y < botBoundary ||
-           transform.position.y > topBoundary)
+        if (transform.position.x < leftBoundary || transform.position.y < botBoundary ||
+            transform.position.y > topBoundary)
         {
+            Debug.Log("Destroying out of screen");
             DestroyThis();
         }
     }
@@ -131,7 +226,7 @@ public class CommonAI : MonoBehaviour {
     {
         transform.position = Vector3.MoveTowards(transform.position, flyOnScreenPos, movementSpeed * Time.deltaTime);
 
-        if (transform.position.x == flyOnScreenPosX)
+        if (transform.position.x <= flyOnScreenPosX)
         {
             SwitchToNextState(startingState);
         }
@@ -210,40 +305,11 @@ public class CommonAI : MonoBehaviour {
     }
 
     /// <summary>
-    /// Zničí nepřítele a odebere jej ze seznamu nepřátel stejného typu
+    /// Sníží počet nepřátel ve hře a zničí daný objekt
     /// </summary>
-    private void DestroyThis()
+    public virtual void DestroyThis()
     {
         SessionController.instance.numberOfEnemies -= 1;
-        switch (enemyType)
-        {
-            case EnemyType.squirrel:
-                SessionController.instance.squirrelsInScene.Remove(this.gameObject);
-                break;
-            case EnemyType.rat:
-                SessionController.instance.ratsInScene.Remove(this.gameObject);
-                break;
-            case EnemyType.sputnik:
-                SessionController.instance.sputniksInScene.Remove(this.gameObject);
-                break;
-            case EnemyType.pig:
-                SessionController.instance.pigsInScene.Remove(this.gameObject);
-                break;
-            case EnemyType.bird:
-                if(GetComponent<BirdAI>().pigReference != null)
-                {
-                    GetComponent<BirdAI>().pigReference.GetComponent<PigAI>().isProtected = false;
-                    if(SessionController.instance.pigsInScene.Count > 0)
-                    {
-                        foreach (GameObject bird in SessionController.instance.birdsInScene)
-                        {
-                            bird.GetComponent<CommonAI>().SwitchToNextState(AIStates.protectPig);
-                        }
-                    }                    
-                }                
-                SessionController.instance.birdsInScene.Remove(this.gameObject);
-                break;
-        }
         Destroy(gameObject);
     }
 

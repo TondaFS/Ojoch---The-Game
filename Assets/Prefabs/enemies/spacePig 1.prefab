@@ -57,10 +57,7 @@ GameObject:
   - component: {fileID: 58527369497290338}
   - component: {fileID: 50696626449690844}
   - component: {fileID: 114904599708338758}
-  - component: {fileID: 114004416810289728}
-  - component: {fileID: 114304221766314990}
   - component: {fileID: 114669013006060726}
-  - component: {fileID: 114857760770613016}
   m_Layer: 12
   m_Name: spacePig 1
   m_TagString: Enemy
@@ -75,7 +72,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1749608783057784}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 11.399655, y: -1.7478473, z: 0}
+  m_LocalPosition: {x: 12.707241, y: -0.25134924, z: 0}
   m_LocalScale: {x: 0.4, y: 0.4, z: 1}
   m_Children:
   - {fileID: 4713249249709040}
@@ -140,6 +137,7 @@ CircleCollider2D:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_UsedByEffector: 0
+  m_UsedByComposite: 0
   m_Offset: {x: 0.3, y: -0.1}
   serializedVersion: 2
   m_Radius: 2.803896
@@ -154,9 +152,20 @@ BoxCollider2D:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_UsedByEffector: 0
+  m_UsedByComposite: 0
   m_Offset: {x: -0.0000015258789, y: -0.06266284}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
   serializedVersion: 2
   m_Size: {x: 6.709305, y: 0.094866276}
+  m_EdgeRadius: 0
 --- !u!95 &95307597613186262
 Animator:
   serializedVersion: 3
@@ -191,33 +200,6 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
---- !u!114 &114004416810289728
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1749608783057784}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1ece9cab54ff5d546a45ce36aa83aeea, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isHit: 0
-  speedOfChange: 7
-  timeOfHit: 0
---- !u!114 &114304221766314990
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1749608783057784}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b85f867053a128d4893efabcfa89209c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hp: 20
-  score: 150
 --- !u!114 &114669013006060726
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -229,6 +211,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c1af499bdc23a241914c6eb67bf66f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemyType: 4
+  hp: 20
+  score: 50
+  isHit: 0
+  speedOfChange: 1
+  movementSpeed: 4
+  currentState: 0
+  startingState: 8
+  turns: 1
+  player: {fileID: 0}
+  facingLeft: 1
+  flyOnScreenPosX: 0
   laser: {fileID: 1298743958412672}
   laserDuration: 1.5
   laserCooldown: 2.5
@@ -237,25 +231,7 @@ MonoBehaviour:
   currentBatteryCharging: 0
   laserAmmo: 3
   currentLaserAmmo: 3
---- !u!114 &114857760770613016
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1749608783057784}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ea775536ecf7db14c8313f8c713c8297, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enemyType: 4
-  movementSpeed: 4
-  currentState: 0
-  startingState: 8
-  turns: 1
-  player: {fileID: 0}
-  facingLeft: 1
-  flyOnScreenPosX: 0.9
+  isProtected: 0
 --- !u!114 &114904599708338758
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -297,11 +273,18 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1741792119
+  m_SortingLayer: 6
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 75cda9d2a0bf3354d895697501c1443c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 1, y: 1}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
 --- !u!212 &212630581394749464
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -332,8 +315,15 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1741792119
+  m_SortingLayer: 6
   m_SortingOrder: -1
   m_Sprite: {fileID: 21300000, guid: 7f9de0ecb35b1a344b25a78ff7a580e0, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 1, y: 1}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0

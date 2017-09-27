@@ -2,7 +2,16 @@
 using System.Collections;
 
 public class EnemyCollisions : MonoBehaviour {
-    
+    /// <summary>
+    /// reference na CommonAI script, abychom nemuseli používat GetComponent<>() pokaždé, když nepřítele zraníme
+    /// </summary>
+    CommonAI commonAIRef;
+
+    void Start()
+    {
+        commonAIRef = GetComponent<CommonAI>();
+    }
+
     void OnCollisionEnter2D(Collision2D col)
     {
         if (col.gameObject.tag == "Socha")
@@ -29,7 +38,6 @@ public class EnemyCollisions : MonoBehaviour {
         col.GetComponent<Collider2D>().enabled = false;
         col.GetComponent<Animator>().SetTrigger("bDeath");
         GameManager.instance.GetComponent<SoundManager>().PlaySound(GameManager.instance.GetComponent<SoundManager>().clipEnemyHit);
-        //Destroy(col, 0.5f);
     }
 
     /// <summary>
@@ -41,8 +49,7 @@ public class EnemyCollisions : MonoBehaviour {
     {
         if (!col.gameObject.GetComponent<ShotScript>().isEnemyShot)
         {
-            GetComponent<EnemyHealth>().EnemyDamage(col.gameObject.GetComponent<ShotScript>().damage);
-            //col.gameObject.GetComponent<Animator>().SetTrigger("shot");
+            commonAIRef.EnemyDamage(col.gameObject.GetComponent<ShotScript>().damage);
             Destroy(col.gameObject);
         }
     }
