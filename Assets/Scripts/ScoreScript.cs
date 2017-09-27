@@ -5,12 +5,27 @@ using UnityEngine.UI;
 public class ScoreScript : MonoBehaviour {
     public Text scoreText;
     public Text modi;
-    public float modifikatorScore = 1;              //Modfifikator
-    public float tmpscore;                          //hracovo skore
-    public float scorePerSecond = 0;                //pro zvyseni skore za kazdou vterinu  
-    public int killedEnemies;                       //pocet zabitych nepratel
+    /// <summary>
+    /// Modifikátor skóre
+    /// </summary>
+    public float modifikatorScore = 1;       
+    /// <summary>
+    /// Hráčovo aktuální skóre
+    /// </summary>
+    public float tmpscore;
+    /// <summary>
+    /// Hodnota, kterou hráč dostane každou vteřinou
+    /// </summary>
+    public float scorePerSecond = 0;
+    /// <summary>
+    /// Počet zabitých nepřátel pro referenci, zda zvýšit modifikátor
+    /// </summary>
+    public int killedEnemies;
+
+    //Brzy nebude třeba
     public float fiveSecondsTimer = 0;              //Timer na vynulovani modifikatoru skore
 
+    //Skončila hra? brzy nebude třeba
     public bool end;
 
     public Slider fiveSecondsSlider;
