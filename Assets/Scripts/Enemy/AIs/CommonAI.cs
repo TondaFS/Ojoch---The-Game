@@ -38,6 +38,7 @@ public enum EnemyType
 /// Nepřítelovo chování a přepínání AI stavů.
 /// </summary>
 public class CommonAI : MonoBehaviour {
+    #region Proměnné
     /// <summary>
     /// Typ nepřítele
     /// </summary>
@@ -78,6 +79,16 @@ public class CommonAI : MonoBehaviour {
     [Tooltip("Stav do kterého se nepřítel přepne, poté, co vletí na obrazovku.")]
     public AIStates startingState;
 
+    /// <summary>
+    /// zvuk smrti
+    /// </summary>
+    [Header("SoundClips")]    
+    public AudioClip deathSound;
+    /// <summary>
+    /// zvuk při kolizi s nepřítelem nebo sochou
+    /// </summary>
+    public AudioClip ojochCollisionClip;
+
     //facing player
     /// <summary>
     /// Je nepritel otoceny k hraci?
@@ -92,7 +103,6 @@ public class CommonAI : MonoBehaviour {
     /// Diva se nepritel vlevo?
     /// </summary>
     public bool facingLeft = true;
-
     //destroy off screeners
     private float leftBoundary;
     private float topBoundary;
@@ -106,6 +116,10 @@ public class CommonAI : MonoBehaviour {
     //Charge Attack
     private float chargeUpTime = 2;
 
+    
+
+    #endregion
+
     /// <summary>
     /// Základní nastavení nepřítele při inicializaci ve scéně
     /// </summary>
@@ -116,7 +130,7 @@ public class CommonAI : MonoBehaviour {
         leftBoundary = Camera.main.ViewportToWorldPoint(new Vector3(-0.5f, 0)).x;
         topBoundary = Camera.main.ViewportToWorldPoint(new Vector3(0, 1.5f)).y;
         botBoundary = Camera.main.ViewportToWorldPoint(new Vector3(0, -0.5f)).y;
-
+        
         flyOnScreenPosX = Camera.main.ViewportToWorldPoint(new Vector3(flyOnScreenPosX, 0)).x;
         flyOnScreenPos = new Vector3(flyOnScreenPosX, transform.position.y);
 
@@ -160,10 +174,12 @@ public class CommonAI : MonoBehaviour {
         hp -= damage;
         if (hp <= 0)
         {
+            Debug.Log("Enemy dies");
             EnemyDeathSound();
             GetComponent<Collider2D>().enabled = false;
             GetComponent<Animator>().SetTrigger("bDeath");
             SessionController.instance.GetComponent<ScoreScript>().UpdateScoreStuff(score, 0, 1, true);
+            Debug.Log("End enemy damage");
         }
         else
         {
@@ -176,9 +192,10 @@ public class CommonAI : MonoBehaviour {
     /// Přehraje odpovídající zvuk smrti daného nepřítele
     /// </summary>
     /// <param name="enemy">Typ nepřítele</param>
-    public virtual void EnemyDeathSound()
+    public void EnemyDeathSound()
     {
-        Debug.LogWarning("Nepritel nepouzil ve svem AI override teto metody pro prehrani vlastniho zvuku!");
+        GameManager.instance.GetComponent<SoundManager>().PlaySound(deathSound);
+        //Debug.LogWarning("Nepritel nepouzil ve svem AI override teto metody pro prehrani vlastniho zvuku!");
     }
 
     /// <summary>
@@ -313,4 +330,51 @@ public class CommonAI : MonoBehaviour {
         Destroy(gameObject);
     }
 
+    
+    #region Enemy Collisions
+    
+    void OnCollisionEnter2D(Collision2D col)
+    {
+        if (col.gameObject.tag == "Socha")
+        {
+            EnemyDamage(gameObject);
+        }
+    }
+    void OnTriggerEnter2D(Collider2D col)
+    {
+        if (col.gameObject.tag == "Projectile")
+        {
+            ProjectileEnemyCollision(col);
+        }
+    }
+
+    /// <summary>
+    /// Funkce zajistí všechny náležitosti, když nepřítel umře.
+    /// <para>Vypnutí Collideru nepřítele, spuštění animace smrti, přehrání zvuku smrti a nakonec zničení nepřítele.</para>
+    /// </summary>
+    /// <param name="col">Objekt, co způsobí nepříteli smrt.</param>
+    public void EnemyDamage(GameObject col)
+    {
+        Debug.Log("Enemy die");
+        col.GetComponent<Collider2D>().enabled = false;
+        col.GetComponent<Animator>().SetTrigger("bDeath");
+        GameManager.instance.GetComponent<SoundManager>().PlaySound(ojochCollisionClip);
+
+    }
+
+    /// <summary>
+    /// Nepřítelova kolize s Ojochovou (ne nepřátelskou) střelou.
+    /// <para>Dá nepříteli zranění a zničí střelu.</para>
+    /// </summary>
+    /// <param name="col">Střela</param>
+    public void ProjectileEnemyCollision(Collider2D col)
+    {
+        if (!col.gameObject.GetComponent<ShotScript>().isEnemyShot)
+        {
+            EnemyDamage(col.gameObject.GetComponent<ShotScript>().damage);
+            Destroy(col.gameObject);
+        }
+    }
+    #endregion
+    
 }

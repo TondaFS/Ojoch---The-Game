@@ -3,7 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class SquirrelAI : ShooterAI {
-    public float sputnikFOS = 0;
+    /// <summary>
+    /// Posunutí doleva, když se objeví sputnik
+    /// </summary>
+    //public float sputnikFOS = 0;
 
     public override void Start()
     {
@@ -17,11 +20,19 @@ public class SquirrelAI : ShooterAI {
         CheckBoss();        
     }
 
+    /*
+    /// <summary>
+    /// Přehraje zvuk smrti
+    /// </summary>
     public override void EnemyDeathSound()
     {
         GameManager.instance.GetComponent<SoundManager>().PlaySound(GameManager.instance.GetComponent<SoundManager>().squirrelDeath);
     }
+    */
 
+    /// <summary>
+    /// Zničí tuto veverku
+    /// </summary>
     public override void DestroyThis()
     {
         SessionController.instance.squirrelsInScene.Remove(this.gameObject);
@@ -70,7 +81,7 @@ public class SquirrelAI : ShooterAI {
     /// </summary>
     public void SputnikAppears()
     {
-        flyOnScreenPosX = sputnikFOS;
+        //flyOnScreenPosX = sputnikFOS;
         SwitchToNextState(AIStates.flyOnScreen);
     }
 

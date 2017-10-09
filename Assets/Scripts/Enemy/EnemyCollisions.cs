@@ -35,6 +35,7 @@ public class EnemyCollisions : MonoBehaviour {
     /// <param name="col">Objekt, co způsobí nepříteli smrt.</param>
     public void EnemyDamage(GameObject col)
     {
+        Debug.Log("Enemy die");
         col.GetComponent<Collider2D>().enabled = false;
         col.GetComponent<Animator>().SetTrigger("bDeath");
         GameManager.instance.GetComponent<SoundManager>().PlaySound(GameManager.instance.GetComponent<SoundManager>().clipEnemyHit);
@@ -45,7 +46,7 @@ public class EnemyCollisions : MonoBehaviour {
     /// <para>Dá nepříteli zranění a zničí střelu.</para>
     /// </summary>
     /// <param name="col">Střela</param>
-    void ProjectileEnemyCollision(Collider2D col)
+    public void ProjectileEnemyCollision(Collider2D col)
     {
         if (!col.gameObject.GetComponent<ShotScript>().isEnemyShot)
         {

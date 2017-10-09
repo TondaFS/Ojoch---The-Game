@@ -7,7 +7,8 @@ public class SputnikAI : ShooterAI {
 
     public override void Start()
     {
-        startingState = AIStates.stopAndShoot;
+        base.Start();
+
         SessionController.instance.sputniksInScene.Add(this.gameObject);
         kamikazeScript = GetComponent<KamikazeScript>();
         MakeRatsCharge();
@@ -16,10 +17,12 @@ public class SputnikAI : ShooterAI {
         CheckPigs();
     }
 
+    /*
     public override void EnemyDeathSound()
     {
         GameManager.instance.GetComponent<SoundManager>().PlaySound(GameManager.instance.GetComponent<SoundManager>().pokoutnikDeath);
     }
+    */
 
     public override void DestroyThis()
     {
@@ -27,8 +30,14 @@ public class SputnikAI : ShooterAI {
         base.DestroyThis();
     }
 
+    public void Test()
+    {
+        Debug.Log("Test");
+    }
+
     public override void EnemyDamage(int damage)
     {
+        Debug.Log("Damage");
         if (GetComponent<KamikazeScript>().exploded)
             score = 0;
 

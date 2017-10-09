@@ -22,10 +22,12 @@ public class RatAI : CommonAI {
         CheckBoss();
     }
 
+    /*
     public override void EnemyDeathSound()
     {
         GameManager.instance.GetComponent<SoundManager>().PlaySoundPitchShift(GameManager.instance.GetComponent<SoundManager>().ratDeath);
     }
+    */
 
     public override void DestroyThis()
     {

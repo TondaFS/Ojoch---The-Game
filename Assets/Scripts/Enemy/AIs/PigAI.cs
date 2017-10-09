@@ -67,10 +67,12 @@ public class PigAI : CommonAI {
         }
     }
 
+    /*
     public override void EnemyDeathSound()
     {
         GameManager.instance.GetComponent<SoundManager>().PlaySound(GameManager.instance.GetComponent<SoundManager>().pigDeath);
     }
+    */
 
     public override void DestroyThis()
     {        

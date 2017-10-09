@@ -21,13 +21,8 @@ GameObject:
   - component: {fileID: 4803244827699066}
   - component: {fileID: 212562428942696992}
   - component: {fileID: 95721236813065570}
-  - component: {fileID: 61625440160544798}
-  - component: {fileID: 114680118861870020}
-  - component: {fileID: 114342566461558336}
-  - component: {fileID: 114045226730695672}
-  - component: {fileID: 114152199709339894}
-  - component: {fileID: 114772839076135176}
   - component: {fileID: 114400737811387376}
+  - component: {fileID: 70257320934972842}
   m_Layer: 12
   m_Name: Squirrel
   m_TagString: Enemy
@@ -57,7 +52,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1473832658196514}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 10.69251, y: 0.3144862, z: 0}
+  m_LocalPosition: {x: 10.210241, y: 0.30444896, z: 0}
   m_LocalScale: {x: 0.2849268, y: 0.2849268, z: 0.71231705}
   m_Children:
   - {fileID: 4809262072267998}
@@ -77,8 +72,8 @@ Transform:
   m_Father: {fileID: 4803244827699066}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!61 &61625440160544798
-BoxCollider2D:
+--- !u!70 &70257320934972842
+CapsuleCollider2D:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
@@ -88,9 +83,10 @@ BoxCollider2D:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_UsedByEffector: 0
-  m_Offset: {x: -0.49197385, y: 0.4702065}
-  serializedVersion: 2
-  m_Size: {x: 3.678527, y: 5.8410463}
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.12245479, y: 1.0041281}
+  m_Size: {x: 4.7505484, y: 7.221743}
+  m_Direction: 0
 --- !u!95 &95721236813065570
 Animator:
   serializedVersion: 3
@@ -108,50 +104,6 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
---- !u!114 &114045226730695672
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1473832658196514}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1ece9cab54ff5d546a45ce36aa83aeea, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isHit: 0
-  speedOfChange: 8
-  timeOfHit: 0
---- !u!114 &114152199709339894
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1473832658196514}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ea775536ecf7db14c8313f8c713c8297, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enemyType: 2
-  movementSpeed: 4
-  currentState: 0
-  startingState: 4
-  turns: 1
-  player: {fileID: 0}
-  facingLeft: 1
-  flyOnScreenPosX: 0.9
---- !u!114 &114342566461558336
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1473832658196514}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 57926016a28524146b7f70febe09ff88, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &114400737811387376
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -163,31 +115,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a3507b0e4e6ee240bf72cb11ec7a828, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sputnikFOS: 0.65
---- !u!114 &114680118861870020
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1473832658196514}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b85f867053a128d4893efabcfa89209c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hp: 15
-  score: 50
---- !u!114 &114772839076135176
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1473832658196514}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 803d649c6ad8ecd449823c35ff097dde, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  enemyType: 2
+  hp: 10
+  damagedHP: 0
+  score: 25
+  isHit: 0
+  speedOfChange: 1
+  movementSpeed: 3
+  currentState: 0
+  startingState: 4
+  deathSound: {fileID: 8300000, guid: a06bfa2d02a82f541a7d02e764d63158, type: 3}
+  ojochCollisionClip: {fileID: 8300000, guid: 35f29ab6ca2c00e4f9b3c7308d864a31, type: 3}
+  turns: 0
+  player: {fileID: 0}
+  facingLeft: 1
+  flyOnScreenPosX: 0.9
   missile: {fileID: 458796, guid: 73d559162835d0147a142e5c645602c5, type: 2}
   ammo: 10
   missileCooldown: 1
@@ -222,8 +164,15 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1741792119
+  m_SortingLayer: 6
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 02a3e8ede86dba94ba38439e12e50008, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 1, y: 1}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0

@@ -43,7 +43,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &1749608783057784
 GameObject:
   m_ObjectHideFlags: 0
@@ -55,8 +55,6 @@ GameObject:
   - component: {fileID: 212117028428982878}
   - component: {fileID: 95307597613186262}
   - component: {fileID: 58527369497290338}
-  - component: {fileID: 50696626449690844}
-  - component: {fileID: 114904599708338758}
   - component: {fileID: 114669013006060726}
   m_Layer: 12
   m_Name: spacePig 1
@@ -72,7 +70,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1749608783057784}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 12.707241, y: -0.25134924, z: 0}
+  m_LocalPosition: {x: 5.74, y: 0.95, z: 0}
   m_LocalScale: {x: 0.4, y: 0.4, z: 1}
   m_Children:
   - {fileID: 4713249249709040}
@@ -86,7 +84,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1298743958412672}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -20, y: -1.55, z: 0}
+  m_LocalPosition: {x: -19.95, y: -1.6, z: 0}
   m_LocalScale: {x: 5, y: 5, z: 1}
   m_Children:
   - {fileID: 4846774004428020}
@@ -106,26 +104,6 @@ Transform:
   m_Father: {fileID: 4713249249709040}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!50 &50696626449690844
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1749608783057784}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 0
-  m_Material: {fileID: 0}
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0
 --- !u!58 &58527369497290338
 CircleCollider2D:
   m_ObjectHideFlags: 1
@@ -213,16 +191,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyType: 4
   hp: 20
-  score: 50
+  damagedHP: 1
+  score: 70
   isHit: 0
   speedOfChange: 1
   movementSpeed: 4
   currentState: 0
   startingState: 8
+  deathSound: {fileID: 8300000, guid: 92fce2748a3a9d64bbe62c42e5912adc, type: 3}
+  ojochCollisionClip: {fileID: 8300000, guid: 35f29ab6ca2c00e4f9b3c7308d864a31, type: 3}
   turns: 1
   player: {fileID: 0}
   facingLeft: 1
-  flyOnScreenPosX: 0
+  flyOnScreenPosX: 0.9
   laser: {fileID: 1298743958412672}
   laserDuration: 1.5
   laserCooldown: 2.5
@@ -232,17 +213,6 @@ MonoBehaviour:
   laserAmmo: 3
   currentLaserAmmo: 3
   isProtected: 0
---- !u!114 &114904599708338758
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1749608783057784}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 57926016a28524146b7f70febe09ff88, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!212 &212117028428982878
 SpriteRenderer:
   m_ObjectHideFlags: 1

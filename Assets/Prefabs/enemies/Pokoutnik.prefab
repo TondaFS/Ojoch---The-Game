@@ -21,10 +21,9 @@ GameObject:
   - component: {fileID: 4943586454186448}
   - component: {fileID: 212520604070414436}
   - component: {fileID: 95391315560614538}
-  - component: {fileID: 114629315349897912}
   - component: {fileID: 114562743919375198}
   - component: {fileID: 114558159530385868}
-  - component: {fileID: 65567031215509824}
+  - component: {fileID: 61970220936200678}
   m_Layer: 12
   m_Name: Pokoutnik
   m_TagString: Enemy
@@ -67,25 +66,38 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1018137276358098}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 16.04, y: 0.77, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalPosition: {x: 11.28, y: 4.29, z: 0}
+  m_LocalScale: {x: 2, y: 2, z: 1}
   m_Children:
   - {fileID: 4232272075442018}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &65567031215509824
-BoxCollider:
+--- !u!61 &61970220936200678
+BoxCollider2D:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1018137276358098}
+  m_Enabled: 1
+  m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.0024350882, y: 0.01948011}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 2.8, y: 1.58}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 2.58, y: 1.56, z: 0.2}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 2.7269495, y: 1.5313}
+  m_EdgeRadius: 0
 --- !u!95 &95391315560614538
 Animator:
   serializedVersion: 3
@@ -138,25 +150,16 @@ MonoBehaviour:
   movementSpeed: 2
   currentState: 0
   startingState: 4
+  deathSound: {fileID: 8300000, guid: 155283152d7af534c915d0adb60a9f93, type: 3}
+  ojochCollisionClip: {fileID: 8300000, guid: 35f29ab6ca2c00e4f9b3c7308d864a31, type: 3}
   turns: 0
   player: {fileID: 0}
   facingLeft: 1
-  flyOnScreenPosX: 7
+  flyOnScreenPosX: 0.9
   missile: {fileID: 430316, guid: fd4324faf7d8cdf4fa388b01870578ae, type: 2}
   ammo: 10
-  missileCooldown: 1.5
+  missileCooldown: 2
   noMissileState: 5
---- !u!114 &114629315349897912
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1018137276358098}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 57926016a28524146b7f70febe09ff88, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!212 &212520604070414436
 SpriteRenderer:
   m_ObjectHideFlags: 1

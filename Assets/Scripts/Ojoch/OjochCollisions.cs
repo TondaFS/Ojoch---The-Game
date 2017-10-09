@@ -104,7 +104,7 @@ public class OjochCollisions : MonoBehaviour {
     /// <param name="col">Nepřítel</param>
     void EnemyCollision(Collision2D col)
     {
-        col.gameObject.GetComponent<EnemyCollisions>().EnemyDamage(col.gameObject);
+        col.gameObject.GetComponent<CommonAI>().EnemyDamage(col.gameObject);
         if (OjochManager.instance.ojochScript.godMode <= 0)
         {
             OjochDamage(-1, false);

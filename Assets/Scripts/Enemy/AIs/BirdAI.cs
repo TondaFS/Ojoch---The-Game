@@ -89,10 +89,12 @@ public class BirdAI : CommonAI {
 
     }
 
+    /*
     public override void EnemyDeathSound()
     {
         GameManager.instance.GetComponent<SoundManager>().PlaySoundPitchShift(GameManager.instance.GetComponent<SoundManager>().birdDeath);
     }
+    */
 
     /// <summary>
     /// Zjisti, jestli dany ptak chranil nejake prase. Pokud ano, prenastavi danemu praseti info o ochraně na false a pro vsechny ptaky 
@@ -188,6 +190,7 @@ public class BirdAI : CommonAI {
     /// </summary>
     private void StraightLineMovement()
     {
+        Debug.Log("move");
         transform.position = Vector3.MoveTowards(transform.position, offScreenPoint, movementSpeed * Time.deltaTime);
     }
 
