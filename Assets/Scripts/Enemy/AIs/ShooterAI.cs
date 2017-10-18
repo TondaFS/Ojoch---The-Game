@@ -9,7 +9,11 @@ public class ShooterAI : CommonAI {
     private Vector3 missileLauncherPos;
     public float missileCooldown = 1;
     private float currentMissileCooldown;
-    
+    /// <summary>
+    /// O kolik se zrychli rychlost strelby
+    /// </summary>
+    public float cooldownChange = 0.25f;
+
     public AIStates noMissileState; 
       
     public override void Update()
@@ -32,7 +36,7 @@ public class ShooterAI : CommonAI {
     /// <param name="change">Velikost změny</param>
     public void ChangeMissileCooldown(float change)
     {
-        missileCooldown += change;
+        missileCooldown -= change;
     }
     /// <summary>
     /// Starts shooting missiles
@@ -53,7 +57,6 @@ public class ShooterAI : CommonAI {
         if (ammo == 0)
         {
             SwitchToNextState(noMissileState);
-
         }
     }
     /// <summary>

@@ -3,49 +3,58 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class SputnikAI : ShooterAI {
-    KamikazeScript kamikazeScript;
+    KamikazeScript kamikazeScript;   
 
     public override void Start()
     {
         base.Start();
 
+        enemyType = EnemyType.sputnik;
         SessionController.instance.sputniksInScene.Add(this.gameObject);
         kamikazeScript = GetComponent<KamikazeScript>();
-        MakeRatsCharge();
         MakeSquirrelsMove();
         CheckRakosnik();
         CheckPigs();
-    }
-
-    /*
-    public override void EnemyDeathSound()
-    {
-        GameManager.instance.GetComponent<SoundManager>().PlaySound(GameManager.instance.GetComponent<SoundManager>().pokoutnikDeath);
-    }
-    */
-
+    }    
     public override void DestroyThis()
     {
         SessionController.instance.sputniksInScene.Remove(this.gameObject);
         base.DestroyThis();
     }
-
-    public void Test()
-    {
-        Debug.Log("Test");
-    }
-
+    
+    /// <summary>
+    /// Kontroluje, jestli Sputnik nezemrel pres exploz, pokud ano, nedostane hrac zadne skore
+    /// </summary>
+    /// <param name="damage"></param>
     public override void EnemyDamage(int damage)
     {
-        Debug.Log("Damage");
         if (GetComponent<KamikazeScript>().exploded)
             score = 0;
 
         base.EnemyDamage(damage); 
-        
-        //hodit do common? nebudou to mít všichni nepřátele?
-        if (hp <= damagedHP)
+            
+    }
+
+    /// <summary>
+    /// Prepnuti na poskozeneho sputnika a zrychleni rychlosti strelby
+    /// </summary>
+    public override void HalfHealth()
+    {
+        if (!halfDamageEffectDone)
+        {
+            Debug.Log("Sputnik ma polovinu zivota a strili rychleji");
             GetComponent<Animator>().SetTrigger("isDamaged");
+            ChangeMissileCooldown(cooldownChange);
+            halfDamageEffectDone = true;
+        }        
+    }
+
+    /// <summary>
+    /// Zrychli sputnikovu rychlost strelby
+    /// </summary>
+    public override void AK47()
+    {
+        ChangeMissileCooldown(cooldownChange);
     }
 
     /// <summary>
@@ -75,20 +84,9 @@ public class SputnikAI : ShooterAI {
     /// </summary>
     public void RakosnikAppears()
     {
-        ChangeMissileCooldown(-0.50f);
+        ChangeMissileCooldown(2*cooldownChange);
     }
-
-    /// <summary>
-    /// Všem krysám ve hře změní stav na chargeAttack
-    /// </summary>
-    void MakeRatsCharge()
-    {
-        foreach(GameObject rat in SessionController.instance.ratsInScene)
-        {        
-            rat.GetComponent<CommonAI>().currentState = AIStates.chargeAttack;
-        }
-    }
-
+    
     /// <summary>
     /// Vynutí všechny veverky, aby se pohnuly vpřed a uvolnili Sputnikovi místo.
     /// </summary>
@@ -111,12 +109,12 @@ public class SputnikAI : ShooterAI {
         {
             startingState = AIStates.kamikaze;
         }
-        else if(currentState.Equals(AIStates.kamikaze))
+        else if(!currentState.Equals(AIStates.kamikaze))
         {
-            currentState = AIStates.kamikaze;            
-        }
+            SwitchToNextState(AIStates.kamikaze);
+        }       
 
         kamikazeScript.ignited = true;
-        movementSpeed += 1;
+        ChangeMovementSpeed(movementChange);
     }
 }

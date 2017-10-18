@@ -6,12 +6,13 @@ public class SquirrelAI : ShooterAI {
     /// <summary>
     /// Posunutí doleva, když se objeví sputnik
     /// </summary>
-    //public float sputnikFOS = 0;
+    public float sputnikFOS = 0;
 
     public override void Start()
     {
         base.Start();
 
+        enemyType = EnemyType.squirrel;
         startingState = AIStates.stopAndShoot;
         SessionController.instance.squirrelsInScene.Add(this.gameObject);
 
@@ -20,15 +21,23 @@ public class SquirrelAI : ShooterAI {
         CheckBoss();        
     }
 
-    /*
-    /// <summary>
-    /// Přehraje zvuk smrti
-    /// </summary>
-    public override void EnemyDeathSound()
+    public override void AK47()
     {
-        GameManager.instance.GetComponent<SoundManager>().PlaySound(GameManager.instance.GetComponent<SoundManager>().squirrelDeath);
+        ChangeMissileCooldown(cooldownChange);
     }
-    */
+
+    /// <summary>
+    /// Veverka zvysi svou rychlost strelby
+    /// </summary>
+    public override void HalfHealth()
+    {
+        if (!halfDamageEffectDone)
+        {
+            Debug.Log("Veverka ma polovinu zivota... strili rychleji");
+            ChangeMissileCooldown(cooldownChange);
+            halfDamageEffectDone = true;
+        }
+    }
 
     /// <summary>
     /// Zničí tuto veverku
@@ -81,7 +90,11 @@ public class SquirrelAI : ShooterAI {
     /// </summary>
     public void SputnikAppears()
     {
-        //flyOnScreenPosX = sputnikFOS;
+        Debug.Log("Sputnik is here");
+        Debug.Log(flyOnScreenPos);
+        flyOnScreenPos.x = sputnikFOS;
+        flyOnScreenPosX = sputnikFOS;
+        Debug.Log(flyOnScreenPos);
         SwitchToNextState(AIStates.flyOnScreen);
     }
 

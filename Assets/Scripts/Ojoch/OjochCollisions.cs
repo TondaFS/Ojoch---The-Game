@@ -66,7 +66,6 @@ public class OjochCollisions : MonoBehaviour {
 
         if (col.gameObject.tag == "Laser")
         {
-            Debug.Log("smth");
             LaserCollision(col);
         }
     }

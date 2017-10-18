@@ -6,7 +6,7 @@ using UnityEngine;
 /// Skript unikátního chévání krysy: kamikaze
 /// </summary>
 public class RatAI : CommonAI { 
-       
+    
     /// <summary>
     /// Využití základní Start funkce z commonAi, změna počátečního stavu
     /// na kamikazi a přidání kontroly Sputniků a bosse krysáka
@@ -15,6 +15,7 @@ public class RatAI : CommonAI {
     {
         base.Start();
 
+        enemyType = EnemyType.rat;
         startingState = AIStates.kamikaze;
         SessionController.instance.ratsInScene.Add(this.gameObject);
         
@@ -22,19 +23,39 @@ public class RatAI : CommonAI {
         CheckBoss();
     }
 
-    /*
-    public override void EnemyDeathSound()
+    /// <summary>
+    /// Zvysi pohyb krysy po dosazeni poloviny zivotu
+    /// </summary>
+    public override void HalfHealth()
     {
-        GameManager.instance.GetComponent<SoundManager>().PlaySoundPitchShift(GameManager.instance.GetComponent<SoundManager>().ratDeath);
+        if (!halfDamageEffectDone)
+        {
+            ChangeMovementSpeed(movementChange);
+            halfDamageEffectDone = true;
+        }
     }
-    */
 
+    /// <summary>
+    /// Zrychli pohyb krysy po sebrani AK47
+    /// </summary>
+    public override void AK47()
+    {
+        ChangeMovementSpeed(movementChange);
+    }
+
+    /// <summary>
+    /// Znici objekt a smaze zaznam o kryse v listu krys
+    /// </summary>
     public override void DestroyThis()
     {
         SessionController.instance.ratsInScene.Remove(this.gameObject);
         base.DestroyThis();
     }
 
+    /// <summary>
+    /// Kontroluje, zda krysa nezemrela pres vybuch, pokud ano, hrac nedostane zadne skore
+    /// </summary>
+    /// <param name="damage"></param>
     public override void EnemyDamage(int damage)
     {
         if (GetComponent<KamikazeScript>().exploded)

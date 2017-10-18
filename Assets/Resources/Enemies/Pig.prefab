@@ -43,7 +43,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1749608783057784
 GameObject:
   m_ObjectHideFlags: 0
@@ -57,7 +57,7 @@ GameObject:
   - component: {fileID: 58527369497290338}
   - component: {fileID: 114669013006060726}
   m_Layer: 12
-  m_Name: spacePig 1
+  m_Name: Pig
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -70,7 +70,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1749608783057784}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5.74, y: 0.95, z: 0}
+  m_LocalPosition: {x: 13.96, y: 0, z: 0}
   m_LocalScale: {x: 0.4, y: 0.4, z: 1}
   m_Children:
   - {fileID: 4713249249709040}
@@ -84,8 +84,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1298743958412672}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -19.95, y: -1.6, z: 0}
-  m_LocalScale: {x: 5, y: 5, z: 1}
+  m_LocalPosition: {x: -23.3, y: -1.57, z: 0}
+  m_LocalScale: {x: 6, y: 5, z: 1}
   m_Children:
   - {fileID: 4846774004428020}
   m_Father: {fileID: 4711840483204220}
@@ -131,7 +131,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.0000015258789, y: -0.06266284}
+  m_Offset: {x: -0.0000014305115, y: -0.007879496}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -142,7 +142,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 6.709305, y: 0.094866276}
+  m_Size: {x: 6.709305, y: 0.14678955}
   m_EdgeRadius: 0
 --- !u!95 &95307597613186262
 Animator:
@@ -193,20 +193,21 @@ MonoBehaviour:
   hp: 20
   damagedHP: 1
   score: 70
-  isHit: 0
-  speedOfChange: 1
+  speedOfChange: 8
   movementSpeed: 4
   currentState: 0
-  startingState: 8
-  deathSound: {fileID: 8300000, guid: 92fce2748a3a9d64bbe62c42e5912adc, type: 3}
-  ojochCollisionClip: {fileID: 8300000, guid: 35f29ab6ca2c00e4f9b3c7308d864a31, type: 3}
+  startingState: 9
+  movementChange: 0.25
   turns: 1
   player: {fileID: 0}
   facingLeft: 1
   flyOnScreenPosX: 0.9
+  deathSound: {fileID: 8300000, guid: 92fce2748a3a9d64bbe62c42e5912adc, type: 3}
+  ojochCollisionClip: {fileID: 8300000, guid: 35f29ab6ca2c00e4f9b3c7308d864a31, type: 3}
   laser: {fileID: 1298743958412672}
   laserDuration: 1.5
   laserCooldown: 2.5
+  laserCooldownChange: 1
   currentLaserCooldown: 0
   batteryCharging: 5
   currentBatteryCharging: 0

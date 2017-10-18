@@ -214,38 +214,33 @@ public class PowerUpScript : MonoBehaviour {
         //ShowPowerUpText(GameManager.instance.languageManager.GetTextValue("PowerUp.Rambouch"), true);
         akTime = 10;
         effects.rambouch.SetActive(true);
-        SpeedUpEnemeyCooldown();
-        SpeedUpEnemyMovement();
+        CallEnemeyAK47();
     }
-
+    
     /// <summary>
     /// Zvětší rychlost střelby nepřátel: veverkám, sputnikovi i prasatům
     /// </summary>
-    void SpeedUpEnemeyCooldown()
+    void CallEnemeyAK47()
     {
         foreach(GameObject sputnik in SessionController.instance.sputniksInScene)
         {
-            sputnik.GetComponent<ShooterAI>().ChangeMissileCooldown(-0.25f);
+            sputnik.GetComponent<CommonAI>().AK47();
         }
         foreach (GameObject squirrel in SessionController.instance.squirrelsInScene)
         {
-            squirrel.GetComponent<ShooterAI>().ChangeMissileCooldown(-0.25f);
+            squirrel.GetComponent<CommonAI>().AK47();
         }
         foreach (GameObject pig in SessionController.instance.pigsInScene)
         {
-            pig.GetComponent<PigAI>().laserCooldown -= 0.25f;
+            pig.GetComponent<CommonAI>().AK47();
         }
-    }
-
-    /// <summary>
-    /// Zvětší rychost pohybu nepřátel: krysám
-    /// </summary>
-    void SpeedUpEnemyMovement()
-    {
-        foreach(GameObject rat in SessionController.instance.ratsInScene)
+        foreach (GameObject bird in SessionController.instance.birdsInScene)
         {
-            if(rat != null)
-                rat.GetComponent<CommonAI>().ChangeMovementSpeed(1);
+            bird.GetComponent<CommonAI>().AK47();
+        }
+        foreach (GameObject rat in SessionController.instance.ratsInScene)
+        {
+            rat.GetComponent<CommonAI>().AK47();
         }
     }
 

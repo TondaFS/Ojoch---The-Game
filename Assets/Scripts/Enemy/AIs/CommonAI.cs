@@ -1,13 +1,15 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+#region Enumy nepřátel
 /// <summary>
 /// Stavy AI, ve kterých mohou nepřátelé být
 /// </summary>
 public enum AIStates
 {
     flyOnScreen,
-    flyOnCurve,
+    flyForward,
+    flyUpOrDown,
     kamikaze,
     chase,
     stopAndShoot,
@@ -31,6 +33,7 @@ public enum EnemyType
     pig,
     none
 }
+#endregion
 
 /// <summary>
 /// Skript udržující téměř všechnu logiku týkající se nepřátelské AI
@@ -42,14 +45,16 @@ public class CommonAI : MonoBehaviour {
     /// <summary>
     /// Typ nepřítele
     /// </summary>
+    [HideInInspector]
     public EnemyType enemyType = EnemyType.none;
 
     /// <summary>
     /// Životy
     /// </summary>
-    [Space(10)]
+    [Header("Životy")]
     public int hp = 1;
     public int damagedHP = 1;
+    protected bool halfDamageEffectDone;
     /// <summary>
     /// Kolik hráč dostane skóre za zabití
     /// </summary>
@@ -58,7 +63,7 @@ public class CommonAI : MonoBehaviour {
     /// Dostal nepřítel zásah?
     /// </summary>
     /// 
-    public bool isHit;
+    bool isHit;
     /// <summary>
     /// Jakou rychle se bude měnit barva na původní
     /// </summary>
@@ -67,7 +72,7 @@ public class CommonAI : MonoBehaviour {
     /// <summary>
     /// Rychlost pohybu
     /// </summary>
-    [Space(10)]
+    [Header("Pohyb stuff")]
     public float movementSpeed;
     /// <summary>
     /// Aktuální stav AI
@@ -78,26 +83,19 @@ public class CommonAI : MonoBehaviour {
     /// </summary>
     [Tooltip("Stav do kterého se nepřítel přepne, poté, co vletí na obrazovku.")]
     public AIStates startingState;
-
     /// <summary>
-    /// zvuk smrti
+    /// O kolik rychleji se bude ptak pohybovar pri zmene pohybu
     /// </summary>
-    [Header("SoundClips")]    
-    public AudioClip deathSound;
-    /// <summary>
-    /// zvuk při kolizi s nepřítelem nebo sochou
-    /// </summary>
-    public AudioClip ojochCollisionClip;
+    public float movementChange = 0.25f;
 
-    //facing player
     /// <summary>
     /// Je nepritel otoceny k hraci?
     /// </summary>
-    [Space(10)]
     public bool turns = true;
     /// <summary>
     /// reference na gameObject Ojocha
     /// </summary>
+    [HideInInspector]
     public GameObject player;
     /// <summary>
     /// Diva se nepritel vlevo?
@@ -111,13 +109,20 @@ public class CommonAI : MonoBehaviour {
     //flyOnScreen
     [Header("Fly on screen", order = 1)]
     public float flyOnScreenPosX; //hodnota je v procentech 0 vlevo, 1 vpravo
-    private Vector3 flyOnScreenPos;
+    protected Vector3 flyOnScreenPos;
 
     //Charge Attack
     private float chargeUpTime = 2;
-
-    
-
+        
+    /// <summary>
+    /// zvuk smrti
+    /// </summary>
+    [Header("SoundClips")]    
+    public AudioClip deathSound;
+    /// <summary>
+    /// zvuk při kolizi s nepřítelem nebo sochou
+    /// </summary>
+    public AudioClip ojochCollisionClip;
     #endregion
 
     /// <summary>
@@ -126,10 +131,10 @@ public class CommonAI : MonoBehaviour {
     public virtual void Start()
     {
         currentState = AIStates.flyOnScreen;
-
+        halfDamageEffectDone = false;
         leftBoundary = Camera.main.ViewportToWorldPoint(new Vector3(-0.5f, 0)).x;
-        topBoundary = Camera.main.ViewportToWorldPoint(new Vector3(0, 1.5f)).y;
-        botBoundary = Camera.main.ViewportToWorldPoint(new Vector3(0, -0.5f)).y;
+        topBoundary = Camera.main.ViewportToWorldPoint(new Vector3(0, 1)).y;
+        botBoundary = Camera.main.ViewportToWorldPoint(new Vector3(0, 0)).y;
         
         flyOnScreenPosX = Camera.main.ViewportToWorldPoint(new Vector3(flyOnScreenPosX, 0)).x;
         flyOnScreenPos = new Vector3(flyOnScreenPosX, transform.position.y);
@@ -183,9 +188,22 @@ public class CommonAI : MonoBehaviour {
         }
         else
         {
+            if (hp <= damagedHP)
+                HalfHealth();
+
             SetRedColor();
             isHit = true;
         }
+    }
+
+    public virtual void HalfHealth()
+    {
+        Debug.Log("Common AI Half Health...");     
+    }
+
+    public virtual void AK47()
+    {
+        Debug.Log("Ojoch sebral AK47 comon AI");
     }
 
     /// <summary>
@@ -195,7 +213,6 @@ public class CommonAI : MonoBehaviour {
     public void EnemyDeathSound()
     {
         GameManager.instance.GetComponent<SoundManager>().PlaySound(deathSound);
-        //Debug.LogWarning("Nepritel nepouzil ve svem AI override teto metody pro prehrani vlastniho zvuku!");
     }
 
     /// <summary>
@@ -242,7 +259,6 @@ public class CommonAI : MonoBehaviour {
     public void FlyOnScreen()
     {
         transform.position = Vector3.MoveTowards(transform.position, flyOnScreenPos, movementSpeed * Time.deltaTime);
-
         if (transform.position.x <= flyOnScreenPosX)
         {
             SwitchToNextState(startingState);
@@ -335,7 +351,7 @@ public class CommonAI : MonoBehaviour {
     
     void OnCollisionEnter2D(Collision2D col)
     {
-        if (col.gameObject.tag == "Socha")
+        if (col.gameObject.tag.Equals("Socha"))
         {
             EnemyDamage(gameObject);
         }
@@ -355,7 +371,6 @@ public class CommonAI : MonoBehaviour {
     /// <param name="col">Objekt, co způsobí nepříteli smrt.</param>
     public void EnemyDamage(GameObject col)
     {
-        Debug.Log("Enemy die");
         col.GetComponent<Collider2D>().enabled = false;
         col.GetComponent<Animator>().SetTrigger("bDeath");
         GameManager.instance.GetComponent<SoundManager>().PlaySound(ojochCollisionClip);

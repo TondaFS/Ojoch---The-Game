@@ -7,8 +7,7 @@ public class OjochScript : MonoBehaviour {
     /// Ojochova rychlost
     /// </summary>
     public Vector2 speed = new Vector2(10,10);
-    private Vector2 movement;                       // Ulozeni pohybu
-    private Rigidbody2D ojoch;    
+    private Vector2 movement;                       // Ulozeni pohybu  
     public PowerUpScript powerCombo;
     private WeaponScript[] weapons;
     public Animator animator;    
@@ -62,7 +61,6 @@ public class OjochScript : MonoBehaviour {
         }
 
         session = GameObject.Find("Session Controller").GetComponent<ScoreScript>();
-        ojoch = GetComponent<Rigidbody2D>();
         powerCombo = GetComponent<PowerUpScript>();
         playerHealth = GetComponent<HealthScript>();           
         weapons = GetComponentsInChildren<WeaponScript>();        

@@ -66,7 +66,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1018137276358098}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 11.28, y: 4.29, z: 0}
+  m_LocalPosition: {x: 12.47, y: 0, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 1}
   m_Children:
   - {fileID: 4232272075442018}
@@ -144,12 +144,14 @@ MonoBehaviour:
   enemyType: 3
   hp: 15
   damagedHP: 7
+  halfDamageEffectDone: 0
   score: 40
   isHit: 0
-  speedOfChange: 1
+  speedOfChange: 8
   movementSpeed: 2
   currentState: 0
-  startingState: 4
+  startingState: 5
+  movementChange: 1
   deathSound: {fileID: 8300000, guid: 155283152d7af534c915d0adb60a9f93, type: 3}
   ojochCollisionClip: {fileID: 8300000, guid: 35f29ab6ca2c00e4f9b3c7308d864a31, type: 3}
   turns: 0
@@ -159,7 +161,8 @@ MonoBehaviour:
   missile: {fileID: 430316, guid: fd4324faf7d8cdf4fa388b01870578ae, type: 2}
   ammo: 10
   missileCooldown: 2
-  noMissileState: 5
+  cooldownChange: 0.25
+  noMissileState: 6
 --- !u!212 &212520604070414436
 SpriteRenderer:
   m_ObjectHideFlags: 1

@@ -2,81 +2,98 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public enum TypeOfMovement
-{
-    straightLine,
-    upAndDown,
-    bottomToTop,
-    topToBottom,
-    forwardBackAndForward
-}
-
 public class BirdAI : CommonAI { 
     /// <summary>
-    /// Typ křivky, po které se bude pták pohybovat
+    /// x-ová souřadnice bodu, kam se bude pták pohybovat
     /// </summary>
-    public TypeOfMovement myMovement;
-    /// <summary>
-    /// Bod, ke kterému se bude pták pohybovat po přímé lince
-    /// Využití ale i u y-ové souřadnice pro další pohyby
-    /// </summary>
-    private Vector3 offScreenPoint = new Vector3(-10, 0, 0);
+    private int offScreenPoint = -20;
 
     /// <summary>
-    /// Rychlost pohybu po sinusoidě
+    /// Jak dlouho trva, nez se ptak pohne nahoru nebo dolu
     /// </summary>
-    [Tooltip("Rychlost po sinusoidě: dopručeno v intevralu <0.1,0.2>")]
-    public float sinSpeed = 1;
+    [Header("Up and Down movement")]
+    public float changeOfYTimer = 1.5f;
     /// <summary>
-    /// Pozice odkud se bude počítat sinus pohyb
+    /// Jak moc doleva se ptak musi posunotu v ramci pohybu nahoru nebo dolu
     /// </summary>
-    private float sinPosition;
+    public float changeOfXPosition = 1;
     /// <summary>
-    /// Posunutí, kt se bude postupně zvětšovat do 1, zaručuje, že se bude pták pohybovat k okrajím obrazovky a ne mimo ně. 
-    /// Zvětšuje se, aby při přepnutí do stavu Up and Down nedošlo ke skoku.
-    /// </summary>            
-    private float posunuti = 0;
+    /// Jak moc nahoru nebo dolu se ptak posune
+    /// </summary>
+    public float changeOfYPosition = 1f;
+    /// <summary>
+    /// Vektor pro ulozeni cilove destinace pri pohybu nahoru nebo dolu
+    /// </summary>
+    Vector3 yDestination;
+    /// <summary>
+    /// casovac pro spusteni pohybu nahoru nebo dolu
+    /// </summary>
+    Coroutine movementTimer;
+    /// <summary>
+    /// Kolikrat se ptak pohl v ramci jednoho smeru
+    /// </summary>
+    [SerializeField]
+    int movementInDirection;
+    /// <summary>
+    /// Smery, kterymi se muze ptak pohybovat
+    /// </summary>
+    enum Direction { up, down, none }
+    /// <summary>
+    /// Jakym smerem se ptak naposledy pohl
+    /// </summary>
+    Direction lastDirection;
 
     /// <summary>
     /// Reference na prase, které budu chránit;
     /// </summary>
-    public GameObject pigReference;
-        
+    [Header("Ochrana prasete")]    
+    private GameObject pigReference;
     /// <summary>
-    /// Vzuyiti base Start z common AI doplneny o pohzbove informace a 
+    /// Posuniti ptaka vzhledem k praseti
+    /// </summary>
+    public float pigXPosition = 1.7f;
+    /// <summary>
+    /// Posutuni ptaka v y ose vzhledem k praseti
+    /// </summary>
+    public float pigYPosition = 0.25f;
+    
+    /// <summary>
+    /// Vyuziti base Start z common AI doplneny o pohzbove informace a 
     /// kontroly jinych nepratel
     /// </summary>
     public override void Start()
     {
         base.Start();
-        
-        offScreenPoint.y = transform.position.y;        
-        sinPosition = CalculatePositionForSinMovement();
 
-        SessionController.instance.birdsInScene.Add(this.gameObject);
+        enemyType = EnemyType.bird;
+        movementTimer = null;
+        movementInDirection = 0;
+        lastDirection = Direction.none;
 
-        if(SessionController.instance.squirrelsInScene.Count > 0)
-        {
-            startingState = AIStates.chargeAttack;
-        } 
-
+        SessionController.instance.birdsInScene.Add(this.gameObject); 
         if(SessionController.instance.pigsInScene.Count > 0)
         {
             startingState = AIStates.protectPig;
         }
-
         if (SessionController.instance.bossInScene != null && SessionController.instance.bossInScene.GetComponent<BossAI>().bossType.Equals(BossType.rudak))
         {
             startingState = AIStates.chase;
         }
     }
-
     public override void Update()
     {
         base.Update();
 
-        if (currentState.Equals(AIStates.flyOnCurve))
-            Movement();
+        if (currentState.Equals(AIStates.flyForward))
+        {
+            if (movementTimer == null)
+                movementTimer = StartCoroutine(ChangeOfY(changeOfYTimer));
+            
+            MovementForward();
+        }
+
+        if (currentState.Equals(AIStates.flyUpOrDown))
+            MovementUpOrDown();
 
         if (currentState.Equals(AIStates.protectPig))
         {
@@ -86,18 +103,32 @@ public class BirdAI : CommonAI {
             }
             ProtectPig();
         }
-
     }
-
-    /*
-    public override void EnemyDeathSound()
-    {
-        GameManager.instance.GetComponent<SoundManager>().PlaySoundPitchShift(GameManager.instance.GetComponent<SoundManager>().birdDeath);
-    }
-    */
 
     /// <summary>
-    /// Zjisti, jestli dany ptak chranil nejake prase. Pokud ano, prenastavi danemu praseti info o ochraně na false a pro vsechny ptaky 
+    /// Zastavi movementTimer coroutine, prepne se do stavu pronasledovani Ojocha a zrzchli
+    /// </summary>
+    public override void AK47()
+    {
+        StopCoroutine(movementTimer);
+        SwitchToNextState(AIStates.chase);
+        ChangeMovementSpeed(movementChange);
+    }
+    /// <summary>
+    /// Ptakovi se zrychli pohyb
+    /// </summary>
+    public override void HalfHealth()
+    {
+        if (!halfDamageEffectDone)
+        {
+            movementSpeed += movementChange;
+            halfDamageEffectDone = true;
+            Debug.Log("Ptak ma polovinu sveho zivota... jeho pohyb je zrychlen.");
+        }
+        
+    }
+    /// <summary>
+    /// Zjistí, jestli dany ptak chranil nejake prase. Pokud ano, prenastavi danemu praseti info o ochraně na false a pro vsechny ptaky 
     /// znovu vyřeší, jestli by dané prase neměli chránit...
     /// </summary>
     public override void DestroyThis()
@@ -116,44 +147,14 @@ public class BirdAI : CommonAI {
         SessionController.instance.birdsInScene.Remove(this.gameObject);
 
         base.DestroyThis();
-    }
-
-    /// <summary>
-    ///  Vypočítá pozici, odkud bude počítat sinusový pohyb
-    /// </summary>
-    /// <returns></returns>
-    float CalculatePositionForSinMovement()
-    {
-        Debug.Log(offScreenPoint.y);
-        float sinPos = 0;
-        if(offScreenPoint.y > 4)
-        {
-            sinPos = 4;
-        } else if(offScreenPoint.y < -3)
-        {
-            sinPos = -3;
-        }
-        else
-        {
-            sinPos = offScreenPoint.y;
-        }
-                
-        return Mathf.Asin(sinPos / 4) / sinSpeed;
-    }
-    
-    /// <summary>
-    /// Jak se objeví ve hře vevrka, provede Charge Attack
-    /// </summary>
-    public void SquirrelAppears()
-    {
-        SwitchToNextState(AIStates.chargeAttack);
-    }
+    }        
     /// <summary>
     /// Jak se objeví prase ve hře, začnu jedno prase chránit
     /// </summary>
     public void PigAppear()
     {
         SwitchToNextState(AIStates.protectPig);
+        StopCoroutine(movementTimer);
     }
     /// <summary>
     /// Jak se ve hře objeví Rudý rudák anebo Ojoch sebere AK47 - začnu Ojocha pronásledovat
@@ -166,51 +167,27 @@ public class BirdAI : CommonAI {
     /// <summary>
     /// Nastaví správný pohyb 
     /// </summary>
-    private void Movement()
+    private void MovementForward()
     {
-        switch (myMovement)
-        {
-            case TypeOfMovement.straightLine:
-                StraightLineMovement();
-                break;
-            case TypeOfMovement.upAndDown:
-                UpAndDownMovement();
-                break;
-            case TypeOfMovement.bottomToTop:
-                break;
-            case TypeOfMovement.topToBottom:
-                break;
-            case TypeOfMovement.forwardBackAndForward:
-                break;
-        }
+        Vector3 towardVector = new Vector3(offScreenPoint, transform.position.y);
+        transform.position = Vector3.MoveTowards(transform.position, towardVector, movementSpeed * Time.deltaTime);
     }
 
     /// <summary>
-    /// Pohybuj se přímo doleva za obrazovku
+    /// Ptak se hybe nahoru nebo dolu
     /// </summary>
-    private void StraightLineMovement()
+    private void MovementUpOrDown()
     {
-        Debug.Log("move");
-        transform.position = Vector3.MoveTowards(transform.position, offScreenPoint, movementSpeed * Time.deltaTime);
-    }
+        transform.position = Vector3.MoveTowards(transform.position, yDestination, movementSpeed * Time.deltaTime);
 
-    /// <summary>
-    /// Pohybuj se nahoru a dolu
-    /// </summary>
-    private void UpAndDownMovement()
-    {        
-        transform.position = new Vector3(transform.position.x - movementSpeed * Time.deltaTime, Mathf.Sin(sinPosition*sinSpeed) * 4 + posunuti, 0);
-        if(posunuti < 1)
-        {
-            posunuti += 0.02f;
-        }        
-        sinPosition += 0.1f;
+        if (transform.position.Equals(yDestination))
+            SwitchToNextState(AIStates.flyForward);
     }
-
+        
     /// <summary>
     /// Náhodně vybere nějaké prase, které bude chránit
     /// </summary>
-    public void ChoosePig()
+    private void ChoosePig()
     {
         if(SessionController.instance.pigsInScene.Count < 1)
         {
@@ -234,17 +211,100 @@ public class BirdAI : CommonAI {
         }
                
     }
-
     /// <summary>
     /// Letím před prase
     /// </summary>
-    public void ProtectPig()
+    private void ProtectPig()
     {  
         if(pigReference != null)
         {
-            transform.position = Vector3.MoveTowards(transform.position, pigReference.transform.position + new Vector3(-1.5f, 0, 0), movementSpeed * Time.deltaTime);
-        }
-        
+            transform.position = Vector3.MoveTowards(transform.position, pigReference.transform.position + new Vector3(-pigXPosition, pigYPosition, 0), movementSpeed * Time.deltaTime);
+        }        
     }
     
+    /// <summary>
+    /// Timer, ktery po urcite dobe spocita smer, kterym se bude muset ptak pohnout
+    /// </summary>
+    /// <param name="time"></param>
+    /// <returns></returns>
+    IEnumerator ChangeOfY(float time)
+    {
+        lastDirection = CalculateDirection();
+        
+        //nastav smer nahoru
+        if (lastDirection.Equals(Direction.up))
+            yDestination = new Vector3(transform.position.x - changeOfXPosition, transform.position.y + changeOfYPosition);
+        
+        //nastav smer dolu
+        else
+            yDestination = new Vector3(transform.position.x - changeOfXPosition, transform.position.y - changeOfYPosition);
+            
+
+        SwitchToNextState(AIStates.flyUpOrDown);
+
+        yield return new WaitForSeconds(time);
+        movementTimer = StartCoroutine(ChangeOfY(changeOfYTimer));        
+    }
+    
+    /// <summary>
+    /// Metoda, ktera nam vybere spravny smer pohybu bud nahoru nebo dolu, kontroluje, jestli jsme neprekrocili pocet
+    /// posunu v jednom smeru o 2 a pak jestli se ptak nahodou uz neobjevuje u okraje obrazovky a ze by jej nasledujici pohyb neposunul mimo
+    /// </summary>
+    /// <returns>vraci spravny smer</returns>
+    private Direction CalculateDirection()
+    {
+        int propability = Random.Range(0, 100);
+        Direction newDirection;
+
+        //chceme se pohnout dolu
+        if (propability < 50)
+        {
+            // nepohybovali jsme se dolu uz nahodou 2x?
+            if (lastDirection.Equals(Direction.down) && movementInDirection == 2)
+            {
+                movementInDirection = 1;
+                newDirection = Direction.up;
+            }
+            else
+            {
+                //nejsme nahodou u okraje obrazovky?
+                if ((transform.position.y - changeOfYPosition) < -5)
+                {
+                    newDirection = Direction.up;
+                    movementInDirection = 1;
+                }
+                else
+                {
+                    newDirection = Direction.down;
+                    movementInDirection += 1;
+                }    
+            }
+        }
+        //chceme nahoru
+        else
+        {
+            //nehybali jsme se nahoru uz dvakrat?
+            if (lastDirection.Equals(Direction.up) && movementInDirection == 2)
+            {
+                movementInDirection = 1;
+                newDirection = Direction.down;
+            }
+            else
+            {
+                //nejsme nahodou u okraje obrazovky?
+                if ((transform.position.y + changeOfYPosition) > 5)
+                {
+                    newDirection = Direction.down;
+                    movementInDirection = 1;
+                }
+                else {   
+                    newDirection = Direction.up;
+                    movementInDirection += 1;
+                }
+            }
+        }
+        
+        return newDirection;
+    }
+
 }

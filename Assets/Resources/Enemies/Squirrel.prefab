@@ -52,7 +52,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1473832658196514}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 10.210241, y: 0.30444896, z: 0}
+  m_LocalPosition: {x: 10.996886, y: 0, z: 0}
   m_LocalScale: {x: 0.2849268, y: 0.2849268, z: 0.71231705}
   m_Children:
   - {fileID: 4809262072267998}
@@ -118,22 +118,26 @@ MonoBehaviour:
   enemyType: 2
   hp: 10
   damagedHP: 0
+  halfDamageEffectDone: 0
   score: 25
   isHit: 0
-  speedOfChange: 1
-  movementSpeed: 3
+  speedOfChange: 8
+  movementSpeed: 2.75
   currentState: 0
-  startingState: 4
+  startingState: 5
+  movementChange: 0.25
   deathSound: {fileID: 8300000, guid: a06bfa2d02a82f541a7d02e764d63158, type: 3}
   ojochCollisionClip: {fileID: 8300000, guid: 35f29ab6ca2c00e4f9b3c7308d864a31, type: 3}
   turns: 0
   player: {fileID: 0}
   facingLeft: 1
-  flyOnScreenPosX: 0.9
+  flyOnScreenPosX: 0.95
   missile: {fileID: 458796, guid: 73d559162835d0147a142e5c645602c5, type: 2}
   ammo: 10
   missileCooldown: 1
-  noMissileState: 3
+  cooldownChange: 0.25
+  noMissileState: 4
+  sputnikFOS: 3.75
 --- !u!212 &212562428942696992
 SpriteRenderer:
   m_ObjectHideFlags: 1

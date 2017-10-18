@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PigAI : CommonAI {
+    [Header("Laser stuff")]
     /// <summary>
     /// GameObject laseru prasete
     /// </summary>
@@ -15,6 +16,10 @@ public class PigAI : CommonAI {
     /// Jak rychle prase střílí
     /// </summary>
     public float laserCooldown;
+    /// <summary>
+    /// O kolik se zmeni rychlost dobijeni
+    /// </summary>
+    public float laserCooldownChange = 1f;
     /// <summary>
     /// Aktuální doba cooldownu pro střelbu
     /// </summary>
@@ -35,14 +40,17 @@ public class PigAI : CommonAI {
     /// Aktuální hodnota munice
     /// </summary>
     public float currentLaserAmmo;
+
+    [Header("Ostatni")]
     /// <summary>
     /// Chrání tohle prase nějaký pták?
     /// </summary>
     public bool isProtected = false;
-
+    
 	public override void Start () {
         base.Start();
-        
+
+        enemyType = EnemyType.pig;
         SessionController.instance.pigsInScene.Add(this.gameObject);
         CheckZebirko();
         MakeSpuntiksKamikaze();
@@ -50,7 +58,6 @@ public class PigAI : CommonAI {
 
         currentLaserAmmo = laserAmmo;
 	}
-
     public override void Update()
     {
         base.Update();
@@ -58,22 +65,8 @@ public class PigAI : CommonAI {
         if(currentState == AIStates.shootLaser)
         {
             ShootLaser();
-        } else if(currentState == AIStates.laserActive)
-        {
-            Debug.Log("Laser s active!");
-        } else if(currentState == AIStates.laserCharging)
-        {
-            Debug.Log("Charging!");
-        }
-    }
-
-    /*
-    public override void EnemyDeathSound()
-    {
-        GameManager.instance.GetComponent<SoundManager>().PlaySound(GameManager.instance.GetComponent<SoundManager>().pigDeath);
-    }
-    */
-
+        } 
+    }    
     public override void DestroyThis()
     {        
         SessionController.instance.pigsInScene.Remove(this.gameObject);
@@ -99,6 +92,9 @@ public class PigAI : CommonAI {
         }
     }
 
+    /// <summary>
+    /// Vynuti, aby vsem ptakum ve hre zkontrolovalo, jestli hlida nejake prase a pokud ne, tak aby zacal hlidat
+    /// </summary>
     void MakeBirdsProtect()
     {
         foreach(GameObject bird in SessionController.instance.birdsInScene)
@@ -166,6 +162,36 @@ public class PigAI : CommonAI {
             laser.SetActive(false);
         }
         
+    }
+
+    /// <summary>
+    /// Zavola snizeni doby nabijeni laseru
+    /// </summary>
+    public override void HalfHealth()
+    {
+        if (!halfDamageEffectDone)
+        {
+            Debug.Log("Prase ma polovinu zivotu, snizim cooldown nabijeni");
+            ChangeLaserCooldown(laserCooldownChange);
+            halfDamageEffectDone = true;
+        }
+    }
+
+    /// <summary>
+    /// zmensi dobu, kterou je treba pro nabijeni baterii
+    /// </summary>
+    public override void AK47()
+    {
+        ChangeLaserCooldown(laserCooldownChange);
+    }
+
+    /// <summary>
+    /// Zmensi dobu nabijeni laseru o danou hodnotu
+    /// </summary>
+    /// <param name="value"></param>
+    public void ChangeLaserCooldown(float value)
+    {
+        laserCooldown -= value;
     }
 
     /// <summary>
