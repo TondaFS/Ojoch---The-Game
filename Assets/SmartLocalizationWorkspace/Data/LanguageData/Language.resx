@@ -146,6 +146,9 @@
 	<data name="Death.NewHighscore" xml:space="preserve">
 		<value>Hoghscores</value>
 	</data>
+	<data name="Death.NewRecord" xml:space="preserve">
+		<value>New Record</value>
+	</data>
 	<data name="Death.RIP" xml:space="preserve">
 		<value>RIP Ojoch</value>
 	</data>
@@ -158,6 +161,12 @@
 	<data name="Death.Text" xml:space="preserve">
 		<value>OJOCH JE MRTEV, 
 AŤ ŽIJE OJOCH</value>
+	</data>
+	<data name="Editor.Load" xml:space="preserve">
+		<value>Load</value>
+	</data>
+	<data name="Editor.Save" xml:space="preserve">
+		<value>Save</value>
 	</data>
 	<data name="Menu.Back" xml:space="preserve">
 		<value>Back</value>
@@ -282,7 +291,7 @@ AŤ ŽIJE OJOCH</value>
 	<data name="Tasks.Title" xml:space="preserve">
 		<value>Tasks Title</value>
 	</data>
-	<data name="Death.NewRecord" xml:space="preserve">
-		<value>New Record</value>
+	<data name="Editor.New" xml:space="preserve">
+		<value>New</value>
 	</data>
 </root>

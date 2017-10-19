@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="windows-1250"?>
+<WaveXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <WaveName>WaveReferencePosition</WaveName>
+  <Difficulty>easy</Difficulty>
+  <Enemies>
+    <EditorObjectXML>
+      <PrefabName>Pig</PrefabName>
+      <Position>
+        <x>9.065321</x>
+        <y>-1.7299453</y>
+      </Position>
+    </EditorObjectXML>
+    <EditorObjectXML>
+      <PrefabName>Pokoutnik</PrefabName>
+      <Position>
+        <x>9.960358</x>
+        <y>0.8255529</y>
+      </Position>
+    </EditorObjectXML>
+    <EditorObjectXML>
+      <PrefabName>Squirrel</PrefabName>
+      <Position>
+        <x>11.6732674</x>
+        <y>1.51842785</y>
+      </Position>
+    </EditorObjectXML>
+  </Enemies>
+  <PowerUps />
+</WaveXML>

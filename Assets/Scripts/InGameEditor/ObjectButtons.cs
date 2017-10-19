@@ -3,15 +3,10 @@
 public class ObjectButtons : MonoBehaviour {
     public string PrefabName = "";
     public string PathToPrefab = "InGameEditor/";
-    public GameObject WavePointRef;
+    public bool isEnemy = true;
 
     private GameObject newObj;
     
-    void Start()
-    {
-        WavePointRef = GameObject.Find("WaveReferencePosition");
-    }
-
     void Update()
     {
         if (Input.GetMouseButtonDown(0))
@@ -24,14 +19,18 @@ public class ObjectButtons : MonoBehaviour {
 
             if (hit.transform.gameObject.Equals(this.gameObject))
             {
-                Debug.Log("Instantiate " + PrefabName);
                 string name = PathToPrefab + PrefabName;
                 newObj = Instantiate(Resources.Load(name)) as GameObject;
-                newObj.transform.position = new Vector3(0,0,0);
-                newObj.transform.SetParent(WavePointRef.transform);               
-                Debug.Log("Done");
-            }
-            
+                newObj.transform.position = this.transform.position;
+                newObj.transform.SetParent(EditorManager.Instance.WaveReferencePoint.transform);
+
+                if (isEnemy)
+                    EditorManager.Instance.WaveReferencePoint.Enemies.Add(newObj.GetComponent<EditorObject>());
+                else
+                    EditorManager.Instance.WaveReferencePoint.PowerUps.Add(newObj.GetComponent<EditorObject>());
+
+                newObj.GetComponent<EditorObject>().SetDrag(); 
+            }            
         }
     }
 }

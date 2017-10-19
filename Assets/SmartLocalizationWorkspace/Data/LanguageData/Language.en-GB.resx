@@ -162,6 +162,15 @@
 		<value>OJOCH IS DEAD,
 LONG LIVE OJOCH!</value>
 	</data>
+	<data name="Editor.Load" xml:space="preserve">
+		<value>Load</value>
+	</data>
+	<data name="Editor.New" xml:space="preserve">
+		<value>New wave</value>
+	</data>
+	<data name="Editor.Save" xml:space="preserve">
+		<value>Save</value>
+	</data>
 	<data name="Menu.Back" xml:space="preserve">
 		<value>Back</value>
 	</data>
