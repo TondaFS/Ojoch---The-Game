@@ -2,6 +2,7 @@
 using UnityEngine;
 using System.Xml.Serialization;
 using System.IO;
+using UnityEngine.UI;
 
 /// <summary>
 /// Třída má na starost všechny důležité věci spojené s editorem
@@ -9,6 +10,27 @@ using System.IO;
 /// </summary>
 public class EditorManager : MonoBehaviour {
     public static EditorManager Instance;
+    /// <summary>
+    /// Slozka, kde se budou ukladat vlny
+    /// </summary>
+    public string directory = "CustomWaves";
+    /// <summary>
+    /// Cesta k editor prefabum
+    /// </summary>
+    public string PathToPrefab = "InGameEditor/";
+    /// <summary>
+    /// String prefabu, co se bude nacitat pro kazdou vlnu
+    /// </summary>
+    public string XMLFilePrefab = "InGameEditor/Wave";
+
+    /// <summary>
+    /// Reference na go ve scene, kde se objevi seznam custom vln
+    /// </summary>
+    public GameObject LoadMenuRef;
+    /// <summary>
+    /// Grid kde se objevi vsechny ulozene vlny nepratel
+    /// </summary>
+    public GameObject LoadGrid;
 
     /// <summary>
     /// Reference na objekt aktuálně vytvářené vlny nepřátel
@@ -18,7 +40,9 @@ public class EditorManager : MonoBehaviour {
     /// Referenční bod, ve kterém se objeví vždy nově vytvořený referenční objekt nepřátleské vlny
     /// </summary>
     public Vector2 WaveRefPointPosition = new Vector2(-9f, 0);
-    
+
+    private List<GameObject> customListOfXMLS;
+
     void Awake()
     {
         if (Instance == null)
@@ -30,6 +54,7 @@ public class EditorManager : MonoBehaviour {
     {
         WaveReferencePoint = FindObjectOfType<WaveReference>();
         Debug.Log(WaveReferencePoint);
+        customListOfXMLS = new List<GameObject>();
     }
 
     /// <summary>
@@ -62,12 +87,41 @@ public class EditorManager : MonoBehaviour {
             newWave.PowerUps.Add(eo);
         }
 
+        //Kontrola jestli existuje složka, kde budeme vlny ukládat
+        if (!Directory.Exists(Application.persistentDataPath + "/" + directory))
+        {
+            //vytvoření složky
+            Directory.CreateDirectory(Application.persistentDataPath + "/" + directory);
+        }
+        
+        //příprava cesty, kde se bude ukládat
+        string saveDirectory = Application.persistentDataPath + "/" + directory + "/"+ WaveReferencePoint.name + ".xml";
+
         //vytvorime novy serializer a ulozime vlnu do souboru
         XmlSerializer serializer = new XmlSerializer(typeof(WaveXML));
-        StreamWriter writer = new StreamWriter(WaveReferencePoint.name + ".xml");
+        StreamWriter writer = new StreamWriter(saveDirectory);
         serializer.Serialize(writer.BaseStream, newWave);
         writer.Close();
-        Debug.Log("Saved");
+
+        Debug.Log("Waver saved!");
+    }
+
+    /// <summary>
+    /// Načte vlnu dle zadaného názvu a poté zavolá fci, která ve scéně vytvoří objekty a uschová o vlně informace.
+    /// </summary>
+    /// <param name="name"></param>
+    public void LoadWave (string name){
+        Debug.Log("Loading wave");
+
+        string loadDirectory = Application.persistentDataPath + "/" + directory + "/" + name + ".xml";
+
+        XmlSerializer serializer = new XmlSerializer(typeof(WaveXML));
+        StreamReader reader = new StreamReader(loadDirectory);
+        WaveXML deserialized = (WaveXML)serializer.Deserialize(reader.BaseStream);
+        reader.Close();
+
+        CreateNew(deserialized);
+        TriggerLoadMenu();
     }
 
     /// <summary>
@@ -77,12 +131,135 @@ public class EditorManager : MonoBehaviour {
     {
         Destroy(WaveReferencePoint.gameObject);
 
+        //novy objekt
         GameObject newWaveRef = new GameObject();
         newWaveRef.name = "WaveReferencePosition";
         newWaveRef.transform.SetParent(this.transform);
+
+        //pridam mu skript
         WaveReference wr = newWaveRef.AddComponent(typeof(WaveReference)) as WaveReference;
         WaveReferencePoint = wr;
+        wr.Enemies = new List<EditorObject>();
+        wr.PowerUps = new List<EditorObject>();
         newWaveRef.transform.position = WaveRefPointPosition;
+    }
+    /// <summary>
+    /// Znici puvodni vlnu nepratel a vytvori novou dle ulozeneho schematu
+    /// </summary>
+    /// <param name="wave"></param>
+    public void CreateNew(WaveXML wave)
+    {
+        Destroy(WaveReferencePoint.gameObject);
+
+        //vytvorim novy go
+        GameObject newWaveRef = new GameObject();
+        newWaveRef.name = wave.WaveName;
+        newWaveRef.transform.SetParent(this.transform);
+
+        //pridam mu WaveRef skript
+        newWaveRef.AddComponent(typeof(WaveReference));
+        WaveReference wr = newWaveRef.GetComponent<WaveReference>();
+        WaveReferencePoint = wr;
+        wr.Enemies = new List<EditorObject>();
+        wr.PowerUps = new List<EditorObject>();
+        newWaveRef.transform.position = WaveRefPointPosition;
+
+        //nastavim obtiznost
+        wr.difficulty = wave.Difficulty;
+        wr.nameOfWave = wave.WaveName;
+
+        //vytvorim a umistim vsechny enemaky
+        foreach (EditorObjectXML enemy in wave.Enemies)
+        {
+            GameObject e = NewEditorItem("Ed_" + enemy.PrefabName, enemy.Position, true);
+            EditorObject eo = e.GetComponent<EditorObject>();
+            eo.position = enemy.Position;
+            wr.Enemies.Add(eo);
+        }
+
+        //vytvorim a umistim vsechny powerUPy
+        foreach (EditorObjectXML powerUP in wave.PowerUps)
+        {
+            GameObject p = NewEditorItem("Ed_" + powerUP.PrefabName, powerUP.Position, true);
+            EditorObject eo = p.GetComponent<EditorObject>();
+            eo.position = powerUP.Position;
+            wr.PowerUps.Add(eo);
+        }
+
+        Debug.Log("Load complete");
+    }
+
+    /// <summary>
+    /// Vytvoří nový GO dle jména prefabu a nastaví jeho pozici. Dále objekt přidá pod referenční point vlny. 
+    /// </summary>
+    /// <param name="prefabName">Jméno prefabu, co vytvořit</param>
+    /// <param name="position">Pozice, kde nový objekt umístit</param>
+    /// <returns></returns>
+    public GameObject NewEditorItem(string prefabName, Vector3 position, bool isLoad)
+    {        
+        GameObject newObj;
+        string name = PathToPrefab + prefabName;
+
+        newObj = Instantiate(Resources.Load(name)) as GameObject;
+        newObj.transform.SetParent(WaveReferencePoint.transform);
+
+        if(isLoad)
+            newObj.transform.localPosition = position;
+        else
+            newObj.transform.position = position;
+        
+        return newObj;
+    }
+
+    /// <summary>
+    /// Vypina a zapina seznam s ulozenymi vlnami nepratel
+    /// </summary>
+    public void TriggerLoadMenu()
+    {
+        LoadMenuRef.SetActive(!LoadMenuRef.activeSelf);
+        if (LoadMenuRef.activeSelf)
+        {
+            LoadFilesFromDirectory();
+        }
+        else
+        {
+            foreach (GameObject o in customListOfXMLS) {
+                Destroy(o);
+            }
+            customListOfXMLS.Clear();
+        }
+    }
+
+    /// <summary>
+    /// Zjisti seznam vsech xml vln v adresari custom vln a pro kazdou vztvori polozku v menu
+    /// </summary>
+    void LoadFilesFromDirectory()
+    {
+        Debug.Log("Loading Files from Directory");
+        DirectoryInfo dir = new DirectoryInfo(Application.persistentDataPath + "/" + directory + "/");        
+        FileInfo[] fileInfo = dir.GetFiles("*.xml");
+        
+        foreach (FileInfo f in fileInfo)
+        {
+            CreateWaveMenuItem(f.Name);
+        }
+    }
+
+    /// <summary>
+    /// vytvori novou polozku v load menu s nazvem dostupne custom vlny
+    /// </summary>
+    /// <param name="nameOfFile">jmeno xml souboru</param>
+    void CreateWaveMenuItem(string nameOfFile)
+    {
+        GameObject o = Instantiate(Resources.Load(XMLFilePrefab)) as GameObject;
+        WaveButtonScript wbs = o.GetComponent<WaveButtonScript>();
+
+        //chceme pouze string bez .xml
+        nameOfFile = nameOfFile.Substring(0, nameOfFile.Length - 4);        
+        wbs.nameOfWave = nameOfFile;
+        wbs.GetComponentInChildren<Text>().text = nameOfFile;
+        o.transform.SetParent(LoadGrid.transform, false);
+        customListOfXMLS.Add(o);
     }
     
 }

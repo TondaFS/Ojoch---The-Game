@@ -1,11 +1,8 @@
 ﻿using UnityEngine;
 
 public class ObjectButtons : MonoBehaviour {
-    public string PrefabName = "";
-    public string PathToPrefab = "InGameEditor/";
+    public string PrefabName = "";    
     public bool isEnemy = true;
-
-    private GameObject newObj;
     
     void Update()
     {
@@ -19,11 +16,8 @@ public class ObjectButtons : MonoBehaviour {
 
             if (hit.transform.gameObject.Equals(this.gameObject))
             {
-                string name = PathToPrefab + PrefabName;
-                newObj = Instantiate(Resources.Load(name)) as GameObject;
-                newObj.transform.position = this.transform.position;
-                newObj.transform.SetParent(EditorManager.Instance.WaveReferencePoint.transform);
-
+                GameObject newObj = EditorManager.Instance.NewEditorItem(PrefabName, this.transform.position, false);
+                
                 if (isEnemy)
                     EditorManager.Instance.WaveReferencePoint.Enemies.Add(newObj.GetComponent<EditorObject>());
                 else

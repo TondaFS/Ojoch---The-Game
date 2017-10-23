@@ -36,7 +36,10 @@ public class WaveReference : MonoBehaviour{
 
     void Start()
     {
-        Enemies = new List<EditorObject>();
-        PowerUps = new List<EditorObject>();
+        if (Enemies == null)
+        {
+            Enemies = new List<EditorObject>();
+            PowerUps = new List<EditorObject>();
+        }        
     }
 }
