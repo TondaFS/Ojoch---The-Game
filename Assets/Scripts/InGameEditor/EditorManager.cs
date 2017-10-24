@@ -23,18 +23,29 @@ public class EditorManager : MonoBehaviour {
     /// </summary>
     public string XMLFilePrefab = "InGameEditor/Wave";
 
+
     /// <summary>
     /// Reference na go ve scene, kde se objevi seznam custom vln
     /// </summary>
+    [Header("Reference na GO")]
     public GameObject LoadMenuRef;
     /// <summary>
     /// Grid kde se objevi vsechny ulozene vlny nepratel
     /// </summary>
     public GameObject LoadGrid;
+    /// <summary>
+    /// Input na zadavani jmena vlny
+    /// </summary>
+    public InputField NameInput;
+    /// <summary>
+    /// Menu s hlaskou o chybe ulozeni
+    /// </summary>
+    public WarningScript WarningMenu;
 
     /// <summary>
     /// Reference na objekt aktuálně vytvářené vlny nepřátel
     /// </summary>
+    [Header("Ostatní")]    
     public WaveReference WaveReferencePoint;
     /// <summary>
     /// Referenční bod, ve kterém se objeví vždy nově vytvořený referenční objekt nepřátleské vlny
@@ -64,7 +75,13 @@ public class EditorManager : MonoBehaviour {
     {
         //vytvoreni nove serializovatelne vlny a ulozeni zakl informaci
         WaveXML newWave = new WaveXML();
-        newWave.WaveName = WaveReferencePoint.name;
+        newWave.WaveName = WaveReferencePoint.nameOfWave;
+        Debug.Log(newWave.WaveName);
+
+        if (newWave.WaveName.Equals(""))
+            newWave.WaveName = WaveReferencePoint.name;
+
+        Debug.Log(newWave.WaveName);
         newWave.Difficulty = WaveReferencePoint.difficulty;
         newWave.Enemies = new List<EditorObjectXML>();
         newWave.PowerUps = new List<EditorObjectXML>();
@@ -95,14 +112,37 @@ public class EditorManager : MonoBehaviour {
         }
         
         //příprava cesty, kde se bude ukládat
-        string saveDirectory = Application.persistentDataPath + "/" + directory + "/"+ WaveReferencePoint.name + ".xml";
+        string saveDirectory = Application.persistentDataPath + "/" + directory + "/"+ newWave.WaveName + ".xml";
 
-        //vytvorime novy serializer a ulozime vlnu do souboru
+        if (File.Exists(saveDirectory))
+            SetUpSaveWarning(directory, newWave);
+        else
+            Serialize(saveDirectory, newWave);        
+    }
+
+    /// <summary>
+    /// Zobrazi save error menu a ulozi reference na vlnu a cestu k ulozeni
+    /// </summary>
+    /// <param name="p">cesta k ulozeni</param>
+    /// <param name="xml">vlna, co hrac chce ulozit</param>
+    void SetUpSaveWarning(string p, WaveXML xml)
+    {
+        WarningMenu.gameObject.SetActive(true);
+        WarningMenu.path = p;
+        WarningMenu.xml = xml;        
+    }
+
+    /// <summary>
+    /// Vztvori novy serializer a ulozi vlnu do souboru
+    /// </summary>
+    /// <param name="path">Cesta kde ulozit vlnu</param>
+    /// <param name="newWave">Vlna k ulozeni</param>
+    public void Serialize(string path, WaveXML newWave)
+    {        
         XmlSerializer serializer = new XmlSerializer(typeof(WaveXML));
-        StreamWriter writer = new StreamWriter(saveDirectory);
+        StreamWriter writer = new StreamWriter(path);
         serializer.Serialize(writer.BaseStream, newWave);
         writer.Close();
-
         Debug.Log("Waver saved!");
     }
 

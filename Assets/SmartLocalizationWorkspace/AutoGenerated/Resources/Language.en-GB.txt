@@ -162,6 +162,12 @@
 		<value>OJOCH IS DEAD,
 LONG LIVE OJOCH!</value>
 	</data>
+	<data name="Editor.Cancel" xml:space="preserve">
+		<value>Cancel</value>
+	</data>
+	<data name="Editor.Insert" xml:space="preserve">
+		<value>Enter name of the wave</value>
+	</data>
 	<data name="Editor.Load" xml:space="preserve">
 		<value>Load</value>
 	</data>
@@ -170,6 +176,9 @@ LONG LIVE OJOCH!</value>
 	</data>
 	<data name="Editor.Save" xml:space="preserve">
 		<value>Save</value>
+	</data>
+	<data name="Editor.SaveMessage" xml:space="preserve">
+		<value>Wave with this name already exists. Do you want to replace it?</value>
 	</data>
 	<data name="Menu.Back" xml:space="preserve">
 		<value>Back</value>

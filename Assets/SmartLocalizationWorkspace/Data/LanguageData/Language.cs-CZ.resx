@@ -162,6 +162,12 @@
 		<value>OJOCH JE MRTVÝ,
 AŤ ŽIJE OJOCH!</value>
 	</data>
+	<data name="Editor.Cancel" xml:space="preserve">
+		<value>Zrušit</value>
+	</data>
+	<data name="Editor.Insert" xml:space="preserve">
+		<value>Vložte jméno vlny</value>
+	</data>
 	<data name="Editor.Load" xml:space="preserve">
 		<value>Načíst</value>
 	</data>
@@ -170,6 +176,9 @@ AŤ ŽIJE OJOCH!</value>
 	</data>
 	<data name="Editor.Save" xml:space="preserve">
 		<value>Uložit</value>
+	</data>
+	<data name="Editor.SaveMessage" xml:space="preserve">
+		<value>Vlna s takovýmto názvem už existuje. Cheš ji přepsat?</value>
 	</data>
 	<data name="Menu.Back" xml:space="preserve">
 		<value>Zpět</value>
