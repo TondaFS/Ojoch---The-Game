@@ -1,6 +1,7 @@
 ﻿using System;
 using UnityEngine;
 using System.Collections.Generic;
+using SmartLocalization;
 
 /// <summary>
 /// Jednotlive obtiznosti nepratelskych vln
@@ -32,7 +33,11 @@ public class WaveReference : MonoBehaviour{
     /// <summary>
     /// List of all powerUps
     /// </summary>
-    public List<EditorObject> PowerUps;    
+    public List<EditorObject> PowerUps;
+    /// <summary>
+    /// Byla vlna ulozena od posledni zmeny?
+    /// </summary>
+    public bool isSaved = false;  
 
     void Start()
     {
@@ -40,6 +45,7 @@ public class WaveReference : MonoBehaviour{
         {
             Enemies = new List<EditorObject>();
             PowerUps = new List<EditorObject>();
-        }        
+            nameOfWave = LanguageManager.Instance.GetTextValue("Editor.NewWaveName");
+        }
     }
 }

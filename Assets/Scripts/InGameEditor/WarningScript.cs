@@ -42,4 +42,22 @@ public class WarningScript : MonoBehaviour {
         xml = null;
         this.gameObject.SetActive(false);
     }
+
+    /// <summary>
+    /// Creates new wave and hides the warnign message
+    /// </summary>
+    public void YesCreateNew()
+    {
+        EditorManager.Instance.WaveReferencePoint.isSaved = true;
+        EditorManager.Instance.CallCreateNewWave();
+        EditorManager.Instance.NewWarningMenu.SetActive(false);
+    }
+
+    /// <summary>
+    /// hides warning message
+    /// </summary>
+    public void NoCreateNew()
+    {
+        EditorManager.Instance.NewWarningMenu.SetActive(false);
+    }
 }

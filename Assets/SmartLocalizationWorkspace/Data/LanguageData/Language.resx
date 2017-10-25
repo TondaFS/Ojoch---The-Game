@@ -162,14 +162,35 @@
 		<value>OJOCH JE MRTEV, 
 AŤ ŽIJE OJOCH</value>
 	</data>
+	<data name="Editor.Cancel" xml:space="preserve">
+		<value>Cancel</value>
+	</data>
+	<data name="Editor.Difficulty" xml:space="preserve">
+		<value>Choose difficulty</value>
+	</data>
+	<data name="Editor.Easy" xml:space="preserve">
+		<value>Easy</value>
+	</data>
+	<data name="Editor.Hard" xml:space="preserve">
+		<value>Hard</value>
+	</data>
 	<data name="Editor.Insert" xml:space="preserve">
 		<value>InsertName</value>
 	</data>
 	<data name="Editor.Load" xml:space="preserve">
 		<value>Load</value>
 	</data>
+	<data name="Editor.Medium" xml:space="preserve">
+		<value>Medium</value>
+	</data>
 	<data name="Editor.New" xml:space="preserve">
 		<value>New</value>
+	</data>
+	<data name="Editor.NewWarning" xml:space="preserve">
+		<value>new wave warning</value>
+	</data>
+	<data name="Editor.NewWaveName" xml:space="preserve">
+		<value>newWave</value>
 	</data>
 	<data name="Editor.Save" xml:space="preserve">
 		<value>Save</value>
@@ -300,7 +321,10 @@ AŤ ŽIJE OJOCH</value>
 	<data name="Tasks.Title" xml:space="preserve">
 		<value>Tasks Title</value>
 	</data>
-	<data name="Editor.Cancel" xml:space="preserve">
-		<value>Cancel</value>
+	<data name="Yes" xml:space="preserve">
+		<value>Yes</value>
+	</data>
+	<data name="No" xml:space="preserve">
+		<value>No</value>
 	</data>
 </root>

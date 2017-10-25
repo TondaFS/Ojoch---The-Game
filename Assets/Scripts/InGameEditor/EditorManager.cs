@@ -3,6 +3,7 @@ using UnityEngine;
 using System.Xml.Serialization;
 using System.IO;
 using UnityEngine.UI;
+using SmartLocalization;
 
 /// <summary>
 /// Třída má na starost všechny důležité věci spojené s editorem
@@ -41,6 +42,16 @@ public class EditorManager : MonoBehaviour {
     /// Menu s hlaskou o chybe ulozeni
     /// </summary>
     public WarningScript WarningMenu;
+    /// <summary>
+    /// Reference na warning pri vytvareni nove vlny
+    /// </summary>
+    public GameObject NewWarningMenu;
+
+    //Toggly pro jednotlive obtiznosti
+    [Header("Toggles")]
+    public Toggle EasyToggle;
+    public Toggle MediumToggle;
+    public Toggle HardToggle;
 
     /// <summary>
     /// Reference na objekt aktuálně vytvářené vlny nepřátel
@@ -73,15 +84,14 @@ public class EditorManager : MonoBehaviour {
     /// </summary>
     public void SaveWave()
     {
+        Debug.Log("New wave");
         //vytvoreni nove serializovatelne vlny a ulozeni zakl informaci
         WaveXML newWave = new WaveXML();
         newWave.WaveName = WaveReferencePoint.nameOfWave;
-        Debug.Log(newWave.WaveName);
 
         if (newWave.WaveName.Equals(""))
             newWave.WaveName = WaveReferencePoint.name;
-
-        Debug.Log(newWave.WaveName);
+        
         newWave.Difficulty = WaveReferencePoint.difficulty;
         newWave.Enemies = new List<EditorObjectXML>();
         newWave.PowerUps = new List<EditorObjectXML>();
@@ -113,9 +123,9 @@ public class EditorManager : MonoBehaviour {
         
         //příprava cesty, kde se bude ukládat
         string saveDirectory = Application.persistentDataPath + "/" + directory + "/"+ newWave.WaveName + ".xml";
-
+        
         if (File.Exists(saveDirectory))
-            SetUpSaveWarning(directory, newWave);
+            SetUpSaveWarning(saveDirectory, newWave);
         else
             Serialize(saveDirectory, newWave);        
     }
@@ -137,13 +147,16 @@ public class EditorManager : MonoBehaviour {
     /// </summary>
     /// <param name="path">Cesta kde ulozit vlnu</param>
     /// <param name="newWave">Vlna k ulozeni</param>
-    public void Serialize(string path, WaveXML newWave)
-    {        
+    public void Serialize(string path, WaveXML newWaveA)
+    {
         XmlSerializer serializer = new XmlSerializer(typeof(WaveXML));
         StreamWriter writer = new StreamWriter(path);
-        serializer.Serialize(writer.BaseStream, newWave);
+        serializer.Serialize(writer.BaseStream, newWaveA);
         writer.Close();
-        Debug.Log("Waver saved!");
+        Debug.Log("Wave saved!");
+
+        WaveReferencePoint.isSaved = true;
+        WarningMenu.xml = null;
     }
 
     /// <summary>
@@ -181,7 +194,13 @@ public class EditorManager : MonoBehaviour {
         WaveReferencePoint = wr;
         wr.Enemies = new List<EditorObject>();
         wr.PowerUps = new List<EditorObject>();
+        wr.nameOfWave = LanguageManager.Instance.GetTextValue("Editor.NewWaveName");
+        wr.difficulty = WaveDifficulty.easy;        
         newWaveRef.transform.position = WaveRefPointPosition;
+
+        NameInput.text = wr.nameOfWave;        
+        EasyToggle.isOn = true;
+        wr.isSaved = true;
     }
     /// <summary>
     /// Znici puvodni vlnu nepratel a vytvori novou dle ulozeneho schematu
@@ -207,6 +226,25 @@ public class EditorManager : MonoBehaviour {
         //nastavim obtiznost
         wr.difficulty = wave.Difficulty;
         wr.nameOfWave = wave.WaveName;
+        wr.isSaved = true;
+
+        //nastavim jmeno v inputu
+        NameInput.text = wr.nameOfWave;
+
+        Debug.Log(wr.difficulty);
+        //nastavim spravnou obtiznost
+        switch (wr.difficulty)
+        {
+            case WaveDifficulty.easy:
+                EasyToggle.isOn = true;
+                break;
+            case WaveDifficulty.medium:
+                MediumToggle.isOn = true;
+                break;
+            case WaveDifficulty.hard:
+                HardToggle.isOn = true;
+                break;
+        }
 
         //vytvorim a umistim vsechny enemaky
         foreach (EditorObjectXML enemy in wave.Enemies)
@@ -301,5 +339,35 @@ public class EditorManager : MonoBehaviour {
         o.transform.SetParent(LoadGrid.transform, false);
         customListOfXMLS.Add(o);
     }
+    
+    /// <summary>
+    /// Updatuje jmeno vlny
+    /// </summary>
+    public void UpdateWaveName()
+    {
+        WaveReferencePoint.nameOfWave = NameInput.text;
+        WaveReferencePoint.isSaved = false;
+    }
+
+    /// <summary>
+    /// Updavi obtiznost vlny, pokud je hodnota vybrana na checked
+    /// </summary>
+    public void UpdateDifficulty(WaveDifficulty w)
+    {
+        WaveReferencePoint.difficulty = w;
+        WaveReferencePoint.isSaved = false;
+    }
+
+    /// <summary>
+    /// Zkontroluje, jestli byla vlna ulozena. Pokud ano, vytvori novou vlnu jinak hodi menu s warningem
+    /// </summary>
+    public void CallCreateNewWave()
+    {
+        if (WaveReferencePoint.isSaved)
+            CreateNew();
+        else
+            NewWarningMenu.SetActive(true);
+    }
+
     
 }

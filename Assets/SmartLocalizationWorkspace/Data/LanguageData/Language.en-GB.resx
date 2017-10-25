@@ -165,14 +165,33 @@ LONG LIVE OJOCH!</value>
 	<data name="Editor.Cancel" xml:space="preserve">
 		<value>Cancel</value>
 	</data>
+	<data name="Editor.Difficulty" xml:space="preserve">
+		<value>Choose difficulty:</value>
+	</data>
+	<data name="Editor.Easy" xml:space="preserve">
+		<value>Easy</value>
+	</data>
+	<data name="Editor.Hard" xml:space="preserve">
+		<value>Hard</value>
+	</data>
 	<data name="Editor.Insert" xml:space="preserve">
 		<value>Enter name of the wave</value>
 	</data>
 	<data name="Editor.Load" xml:space="preserve">
 		<value>Load</value>
 	</data>
+	<data name="Editor.Medium" xml:space="preserve">
+		<value>Medium</value>
+	</data>
 	<data name="Editor.New" xml:space="preserve">
 		<value>New wave</value>
+	</data>
+	<data name="Editor.NewWarning" xml:space="preserve">
+		<value>Active wave was not saved.
+Are you sure you want to create new one without saving?</value>
+	</data>
+	<data name="Editor.NewWaveName" xml:space="preserve">
+		<value>NewWave</value>
 	</data>
 	<data name="Editor.Save" xml:space="preserve">
 		<value>Save</value>
@@ -236,6 +255,9 @@ LONG LIVE OJOCH!</value>
 	</data>
 	<data name="Menu.Tutorial" xml:space="preserve">
 		<value>Tutorial</value>
+	</data>
+	<data name="No" xml:space="preserve">
+		<value>No</value>
 	</data>
 	<data name="Pause.BackToMenu" xml:space="preserve">
 		<value>Back to Menu</value>
@@ -302,5 +324,8 @@ LONG LIVE OJOCH!</value>
 	</data>
 	<data name="Tasks.Title" xml:space="preserve">
 		<value>Tasks</value>
+	</data>
+	<data name="Yes" xml:space="preserve">
+		<value>Yes</value>
 	</data>
 </root>

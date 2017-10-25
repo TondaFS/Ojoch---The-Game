@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Xml.Serialization;
+using UnityEngine.EventSystems;
 
 public class EditorObject : MonoBehaviour{
     /// <summary>
@@ -25,6 +26,9 @@ public class EditorObject : MonoBehaviour{
             if (hit.transform == null)
                 return;
 
+            if (EventSystem.current.IsPointerOverGameObject())
+                return;
+
             if (hit.transform.gameObject.Equals(this.gameObject))
             {
                 SetDrag();
@@ -33,8 +37,11 @@ public class EditorObject : MonoBehaviour{
 
         if (Input.GetMouseButtonUp(0))
         {
-            isMouseDrag = false;
-            CheckPosition();
+            if (isMouseDrag)
+            {
+                isMouseDrag = false;
+                CheckPosition();
+            }            
         }
 
         if (isMouseDrag)
@@ -72,6 +79,7 @@ public class EditorObject : MonoBehaviour{
         isMouseDrag = true;
         screenPosition = Camera.main.WorldToScreenPoint(transform.position);
         offset = transform.position - Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, screenPosition.z));
+        Debug.Log("Drag started " + this.name);        
     }
     /// <summary>
     /// Zkontroluje, zda neni objekt mimo hranice sceny, pokud ano, objekt znicim
@@ -88,6 +96,8 @@ public class EditorObject : MonoBehaviour{
             DestroyThis();
 
         position = this.transform.localPosition;
+        EditorManager.Instance.WaveReferencePoint.isSaved = false;
+        Debug.Log("Checked position " + this.name);
     }
     /// <summary>
     /// Zničí tento game object, ale nedříve odstraníme z Wave reference odkaz na tento skript
@@ -99,6 +109,9 @@ public class EditorObject : MonoBehaviour{
         else
             EditorManager.Instance.WaveReferencePoint.PowerUps.Remove(this);
 
+        EditorManager.Instance.WaveReferencePoint.isSaved = false;
+        Debug.Log("des");
         Destroy(this.gameObject);
+
     }
 }
