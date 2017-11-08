@@ -3,6 +3,7 @@ using System.Collections;
 using UnityEngine.UI;
 
 public class ScoreScript : MonoBehaviour {
+    public static ScoreScript instance;
     public Text scoreText;
     public Text modi;
     /// <summary>
@@ -30,6 +31,14 @@ public class ScoreScript : MonoBehaviour {
 
     public Slider fiveSecondsSlider;
     public GameObject fiveSecondsObject;
+
+    void Awake()
+    {
+        if (instance == null)
+            instance = this;
+        else if (instance != this)
+            Destroy(this);
+    }
 
     void Start()
     {

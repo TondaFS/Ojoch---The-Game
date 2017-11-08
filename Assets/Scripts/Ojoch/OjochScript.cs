@@ -11,17 +11,12 @@ public class OjochScript : MonoBehaviour {
     public PowerUpScript powerCombo;
     private WeaponScript[] weapons;
     public Animator animator;    
-    public HealthScript playerHealth;
     public SoundManager managerSound;
-    public ScoreScript session;
 
     //Pro ultrakejch 
     public bool kejch = false;
     public Vector2 ultraKejch = new Vector2(0,0);
-
-    //promenne na zivoty a sanity Ojocha
-    public GameObject sanityBar;   
-
+ 
     //Kontra strelba
     public bool contraBubles = false;           //Rozptyl bublinek   
 
@@ -34,10 +29,6 @@ public class OjochScript : MonoBehaviour {
 
     //nesmrtelnost
     public float godMode = 0;                   //nesmrtelnost 
-
-    //Push od sochy
-    public float push = 0;
-
     
     //Zakaleni obrayovky, kdyz ojoch prijde o veskerou pricetnost
     public GameObject souflEffect;
@@ -59,22 +50,32 @@ public class OjochScript : MonoBehaviour {
         {
             GameObject.Find("hatSprite").SetActive(false);
         }
-
-        session = GameObject.Find("Session Controller").GetComponent<ScoreScript>();
-        powerCombo = GetComponent<PowerUpScript>();
-        playerHealth = GetComponent<HealthScript>();           
+        
+        powerCombo = GetComponent<PowerUpScript>();           
         weapons = GetComponentsInChildren<WeaponScript>();        
         managerSound = GameManager.instance.GetComponent<SoundManager>();        
         GetComponent<AudioSource>().volume = 0.3f * managerSound.soundsVolume;
-        sanityBar = GameObject.Find("Brain");
-        sanityBar.SetActive(false);
         animator = GetComponentInChildren<Animator>();        
         sprite = GetComponentInChildren<ColorChanger>();
         sockPivot = GameObject.Find("rotatingSocks").GetComponent<SpinSocks>();
         sockPivot.enabled = false;
     }
-    
 
+    /// <summary>
+    /// Po určitou dobu ude Ojocha pushovat kupředu
+    /// </summary>
+    /// <param name="length">Doba pushe</param>
+    /// <returns></returns>
+    public IEnumerator Push(float length)
+    {
+        float duration = Time.time + length;
+        while (Time.time < duration)
+        {
+            transform.Translate(0.25f, 0, 0);
+            yield return null;
+        }
+    }
+    
     void Update () {
         
         //Kontrola zakaleni obrazovkz
@@ -87,14 +88,7 @@ public class OjochScript : MonoBehaviour {
                 sr.color = Color.Lerp(Color.clear, Color.white, zakaleniFade);
             }
         }
-
-        //Odražení od Sochy
-        if (push > 0)
-        {
-            transform.Translate(0.25f, 0, 0);
-            push -= Time.deltaTime;
-        }        
-
+        
         //Ultrakejch = pri duseni se Ojoch trese
         if (kejch)
         {
@@ -148,13 +142,11 @@ public class OjochScript : MonoBehaviour {
         {
             if (weapons != null && weapons[0].CanAttack)
             {
-
                 if (!isAkacko)
                 {
                     weapons[0].Attack(false, new Vector2(1, 0));                       //atribut false -> jedna se o nepritele, kdo strili? 
                     animator.SetTrigger("fire");
                     managerSound.PlaySoundPitchShift(managerSound.clipShoot);                        //Zvuk vystrelu
-
                     //Pokud je aktivovany prdak: Contra strelba
                     if (contraBubles)
                     {
@@ -170,7 +162,6 @@ public class OjochScript : MonoBehaviour {
                     weapons[0].Ak47Attack(false, new Vector2(1, 0));
                     animator.SetTrigger("akFire");
                     managerSound.PlaySoundPitchShift(managerSound.clipAk47);
-
                     //Ak47 + contra
                     if (contraBubles)
                     {

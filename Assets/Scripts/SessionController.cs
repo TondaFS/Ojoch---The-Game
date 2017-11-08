@@ -10,6 +10,7 @@ public class SessionController : MonoBehaviour
     public float gameSpeed = 1;
     public float speedUpTime = 50;
 
+    #region GameObj references
     public bool pause;
     [HideInInspector]
     public GameObject pauseMenu;
@@ -42,6 +43,7 @@ public class SessionController : MonoBehaviour
     GameObject taskThree;
     [HideInInspector]
     GameObject taskThreeNew;
+    #endregion
 
     /// <summary>
     /// Počet nepřátel ve scéně
@@ -72,6 +74,8 @@ public class SessionController : MonoBehaviour
     /// </summary>
     public GameObject bossInScene;
 
+    public GameObject Canvas;
+    
     void Awake()
     {
         if (instance == null)
@@ -82,9 +86,11 @@ public class SessionController : MonoBehaviour
         {
             Destroy(this.gameObject);
         }
+        Canvas.SetActive(true);
     }
-
     void Start() {
+        
+
         pauseMenu = GameObject.Find("PAUSE");
         pauseMenu.SetActive(false);
         taskCompletedText = GameObject.Find("taskCompleted");
@@ -95,6 +101,7 @@ public class SessionController : MonoBehaviour
         highscoreMenu = GameObject.Find("HIGHSCORE");
         scoreNames = GameObject.Find("scoreNames");
         scoreValues = GameObject.Find("scoreValues");
+
         
 
         taskOne = GameObject.Find("taskOne");
@@ -137,7 +144,7 @@ public class SessionController : MonoBehaviour
             speedUpTime = 80;
         }
     }
-
+    
     void Update()
     {
         if (pause)

@@ -21,6 +21,10 @@ public class OjochCollisions : MonoBehaviour {
     /// Jak dlouho se bude socha pohybovat dopředu oté co dostane Ojoch zranění.
     /// </summary>               
     public float statueForward = 0.75f;
+    /// <summary>
+    /// Jak dlouho bude Ojoch pushnut kupředu
+    /// </summary>
+    public float pushLength = 0.25f;
     
     void Start () {
         socha = GameObject.Find("statue");
@@ -84,7 +88,8 @@ public class OjochCollisions : MonoBehaviour {
         if (statue)
         {
             OjochManager.instance.ojochScript.animator.SetTrigger("isBack");
-            OjochManager.instance.ojochScript.push = 0.25f;
+            StartCoroutine(OjochManager.instance.ojochScript.Push(pushLength));
+            //OjochManager.instance.ojochScript.push = 0.25f;
         }
         else
         {

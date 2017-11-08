@@ -6,7 +6,11 @@ public class PowerUpScript : MonoBehaviour {
     public int powerUps = 0;        //sebrano powerUpu
     public int powerUpCombo = 0;    //jake combo bude
 
-    private OjochScript ojoch;
+    /// <summary>
+    /// Jak dlouho se bude zobrazovat text aktivovaneho PowerUpu
+    /// </summary>
+    public float showTextLength = 3;
+    
     public GameObject socha;
     public GameObject sessionController;
     public ShowingEffects effects;
@@ -14,20 +18,21 @@ public class PowerUpScript : MonoBehaviour {
     public GameObject ghostPrefab;   
 
     //promenne na panelText
-    public float odpocet = 0;                       //jak dlouho tam bude text
     public Text panelText;                          //text    
 
     //Ultrakejch
     public float duseniTime;
 
-    //Akacko
-    public float akTime = 0;
-
-    //Contra Bubbles
-    public float contraTime = 0;
+   /// <summary>
+   /// Doba po kterou  bude rambouch aktivni
+   /// </summary>
+    public float rambouchTime = 10;
+    /// <summary>
+    /// Doba, po kterou bude aktivni kontra strelba
+    /// </summary>
+    public float contraTime = 10;
 
     void Start() {
-        ojoch = this.GetComponent<OjochScript>();
         socha = GameObject.Find("statue");
         sessionController = GameObject.Find("Session Controller");
         effects = sessionController.GetComponent<ShowingEffects>();
@@ -37,20 +42,53 @@ public class PowerUpScript : MonoBehaviour {
         duseniTime = 0;
     }
 
-    void Update() {
-
-        //Odpocet zobrazeni textu
-        if (odpocet != 0)
+    /// <summary>
+    /// Zobrazí text právě aktivovaného powerUpu
+    /// </summary>
+    /// <returns></returns>
+    public IEnumerator ShowPowerUpText()
+    {
+        float duration = Time.time + showTextLength;
+        while (Time.time < duration)
         {
-            odpocet -= Time.deltaTime;
-            if (odpocet <= 0)
-            {
-                panelText.text = "";
-                odpocet = 0;
-                powerUpImage.SetActive(false);
-            }
-        }        
+            yield return null;
+        }
+        panelText.text = "";
+        powerUpImage.SetActive(false);
+    }
 
+    /// <summary>
+    /// Po určitou dobu be aktivní powerUp Rambouch
+    /// </summary>
+    /// <returns></returns>
+    public IEnumerator RambouchCoroutine()
+    {
+        float duration = Time.time + rambouchTime;
+        while (Time.time < duration)
+        {
+            effects.rText.text = "" + (int)(duration - Time.time + 1);
+            yield return null;
+        }
+        OjochManager.instance.ojochScript.isAkacko = false;
+        OjochManager.instance.ojochScript.animator.SetBool("isAk47", false);
+        effects.rambouch.SetActive(false);
+    }
+
+    /// <summary>
+    /// Po určitou dobu je aktivní kontra střelba
+    /// </summary>
+    /// <returns></returns>
+    public IEnumerator ContraShoot()
+    {
+        float duration = Time.time + contraTime;
+        while (Time.time < duration)
+        {
+            yield return null;
+        }
+        OjochManager.instance.ojochScript.contraBubles = false;
+    }
+
+    void Update() {
         //Kontrola Dušení
         if (duseniTime > 0)
         {
@@ -58,37 +96,12 @@ public class PowerUpScript : MonoBehaviour {
             effects.dText.text = "" + (int)(duseniTime + 1);
             if(duseniTime <= 0)
             {
-                ojoch.kejch = false;
-                ojoch.ultraKejch = new Vector2(0, 0);
+                OjochManager.instance.ojochScript.kejch = false;
+                OjochManager.instance.ojochScript.ultraKejch = new Vector2(0, 0);
                 effects.duseni.SetActive(false);
-                ojoch.animator.SetBool("duseni", false);
+                OjochManager.instance.ojochScript.animator.SetBool("duseni", false);
             }
-        }
-
-        //Kontrola Rambouch
-        if (akTime > 0)
-        {
-            akTime -= Time.deltaTime;
-            effects.rText.text = "" + (int)(akTime + 1);
-            if (akTime <= 0)
-            {
-                ojoch.isAkacko = false;
-                ojoch.animator.SetBool("isAk47", false);
-                effects.rambouch.SetActive(false);
-            }
-        }
-
-        
-        //Kontrola contra strelby / prdak
-        if (contraTime > 0)
-        {
-            contraTime -= Time.deltaTime;
-            if (contraTime <= 0)
-            {
-                ojoch.contraBubles = false;
-            }
-        }
-        
+        }        
     }
 
     //provedení komba po sebrání 2 powerupů
@@ -138,16 +151,16 @@ public class PowerUpScript : MonoBehaviour {
     public void ShowPowerUpText(string powerUp, bool type) {
         if (type)
         {
-            ojoch.managerSound.PlaySound(ojoch.managerSound.clipGood);
-            ojoch.animator.SetTrigger("good");
+            OjochManager.instance.ojochScript.managerSound.PlaySound(OjochManager.instance.ojochScript.managerSound.clipGood);
+            OjochManager.instance.ojochScript.animator.SetTrigger("good");
         }
         else
         {
-            ojoch.managerSound.PlaySound(ojoch.managerSound.clipBad);
-            ojoch.animator.SetTrigger("bad");
+            OjochManager.instance.ojochScript.managerSound.PlaySound(OjochManager.instance.ojochScript.managerSound.clipBad);
+            OjochManager.instance.ojochScript.animator.SetTrigger("bad");
         }
         panelText.text = powerUp;
-        odpocet = 3;
+        StartCoroutine(ShowPowerUpText());
         powerUpImage.SetActive(true);
     }
 
@@ -157,12 +170,12 @@ public class PowerUpScript : MonoBehaviour {
     void Zmatek()
     {
         ShowPowerUpText(GameManager.instance.languageManager.GetTextValue("PowerUp.Confuse"), false);
-        ojoch.session.modifikatorScore = 1;
+        ScoreScript.instance.modifikatorScore = 1;
 
-        ojoch.invertTime = 5;
-        if (!ojoch.isInverted)
+        OjochManager.instance.ojochScript.invertTime = 5;
+        if (!OjochManager.instance.ojochScript.isInverted)
         {
-            ojoch.InversionControlling();
+            OjochManager.instance.ojochScript.InversionControlling();
             effects.zmatek.SetActive(true);
         }
         
@@ -175,7 +188,7 @@ public class PowerUpScript : MonoBehaviour {
     {
         string text = GameManager.instance.languageManager.GetTextValue("PowerUp.Bubbles");
         ShowPowerUpText(text, true);
-        ojoch.playerHealth.Damage(-1);
+        OjochManager.instance.ojochHealth.Damage(-1);
     }
 
     /// <summary>
@@ -183,38 +196,35 @@ public class PowerUpScript : MonoBehaviour {
     /// </summary>
     void Rambouch()
     {
-        panelText.text = GameManager.instance.languageManager.GetTextValue("PowerUp.Rambouch");
-        odpocet = 3;
+        panelText.text = GameManager.instance.languageManager.GetTextValue("PowerUp.Rambouch");;
         powerUpImage.SetActive(true);
 
         int chance = Random.Range(0, 100);
 
         if (chance <= 33)
         {
-            ojoch.contraBubles = true;
-            contraTime = 10;
+            OjochManager.instance.ojochScript.contraBubles = true;
+            StartCoroutine(ContraShoot());
         }
         else if (chance > 33 && chance <= 66)
         {
-            ojoch.isAkacko = true;
-            akTime = 10;
-            ojoch.animator.SetBool("isAk47", true);
+            OjochManager.instance.ojochScript.isAkacko = true;
+            OjochManager.instance.ojochScript.animator.SetBool("isAk47", true);
         }
         else
         {
-            ojoch.contraBubles = true;
-            contraTime = 10;
-
-            ojoch.isAkacko = true;
-            akTime = 10;
-            ojoch.animator.SetBool("isAk47", true);
+            OjochManager.instance.ojochScript.contraBubles = true;            
+            OjochManager.instance.ojochScript.isAkacko = true;
+            OjochManager.instance.ojochScript.animator.SetBool("isAk47", true);
+            StartCoroutine(ContraShoot());
         }
 
-        ojoch.managerSound.PlaySound(ojoch.managerSound.clipGood);        
-        //ShowPowerUpText(GameManager.instance.languageManager.GetTextValue("PowerUp.Rambouch"), true);
-        akTime = 10;
+        OjochManager.instance.ojochScript.managerSound.PlaySound(OjochManager.instance.ojochScript.managerSound.clipGood);        
+        ShowPowerUpText(GameManager.instance.languageManager.GetTextValue("PowerUp.Rambouch"), true);
+        StartCoroutine(RambouchCoroutine());
         effects.rambouch.SetActive(true);
         CallEnemeyAK47();
+        
     }
     
     /// <summary>
@@ -265,15 +275,15 @@ public class PowerUpScript : MonoBehaviour {
     void Duseni()
     {
         ShowPowerUpText(GameManager.instance.languageManager.GetTextValue("PowerUp.Ghost"), false);
-        ojoch.kejch = true;
+        OjochManager.instance.ojochScript.kejch = true;
         duseniTime = 5;
         effects.duseni.SetActive(true);
-        ojoch.playerHealth.LooseSanity(1);
+        OjochManager.instance.ojochHealth.LooseSanity(1);
 
         var fuckingGhost = Instantiate(ghostPrefab) as GameObject;
         fuckingGhost.GetComponent<Transform>().position = transform.position + new Vector3(0.2f, -.5f, 0);
         GameManager.instance.GetComponent<SoundManager>().PlaySound(GameManager.instance.GetComponent<SoundManager>().ghost);
-        ojoch.animator.SetBool("duseni", true);
+        OjochManager.instance.ojochScript.animator.SetBool("duseni", true);
     }
 
     /// <summary>
@@ -283,7 +293,7 @@ public class PowerUpScript : MonoBehaviour {
     {
         ShowPowerUpText(GameManager.instance.languageManager.GetTextValue("PowerUp.Nitro"), true);
 
-        ojoch.godMode = 5;
+        OjochManager.instance.ojochScript.godMode = 5;
         effects.smradostit.SetActive(true);
         OjochManager.instance.ojochScript.sprite.active = true;
         OjochManager.instance.ojochScript.sockPivot.enabled = true;
