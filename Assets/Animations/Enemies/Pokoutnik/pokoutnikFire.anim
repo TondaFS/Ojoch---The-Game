@@ -19,6 +19,7 @@ AnimationClip:
   - curve:
     - time: 0
 <<<<<<< HEAD
+<<<<<<< HEAD
       value: {fileID: 21300000, guid: 72e7c3a867df088408a861f65aa98541, type: 3}
     - time: 0.083333336
       value: {fileID: 21300002, guid: 72e7c3a867df088408a861f65aa98541, type: 3}
@@ -31,6 +32,8 @@ AnimationClip:
     - time: 0.4166667
       value: {fileID: 21300010, guid: 72e7c3a867df088408a861f65aa98541, type: 3}
 =======
+=======
+>>>>>>> parent of 7093262... Animace a Vesmírné prase
       value: {fileID: 21300000, guid: c636832590ce77f46a967eb47b121018, type: 3}
     - time: .0833333358
       value: {fileID: 21300002, guid: c636832590ce77f46a967eb47b121018, type: 3}
@@ -72,7 +75,11 @@ AnimationClip:
     serializedVersion: 2
     m_StartTime: 0
 <<<<<<< HEAD
+<<<<<<< HEAD
     m_StopTime: 0.5
+=======
+    m_StopTime: .583333313
+>>>>>>> parent of 7093262... Animace a Vesmírné prase
 =======
     m_StopTime: .583333313
 >>>>>>> parent of 7093262... Animace a Vesmírné prase
@@ -96,7 +103,11 @@ AnimationClip:
   m_GenerateMotionCurves: 0
   m_Events:
 <<<<<<< HEAD
+<<<<<<< HEAD
   - time: 0.25
+=======
+  - time: .166666672
+>>>>>>> parent of 7093262... Animace a Vesmírné prase
 =======
   - time: .166666672
 >>>>>>> parent of 7093262... Animace a Vesmírné prase

@@ -1765,6 +1765,117 @@ RectTransform:
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1001 &530788828
 Prefab:
+<<<<<<< HEAD
+=======
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 11457146, guid: e705cd5189f90064e992bdf532975baa, type: 2}
+      propertyPath: points.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 420048, guid: e705cd5189f90064e992bdf532975baa, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: -1.16
+      objectReference: {fileID: 0}
+    - target: {fileID: 420048, guid: e705cd5189f90064e992bdf532975baa, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: -2.99
+      objectReference: {fileID: 0}
+    - target: {fileID: 420048, guid: e705cd5189f90064e992bdf532975baa, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 420048, guid: e705cd5189f90064e992bdf532975baa, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 420048, guid: e705cd5189f90064e992bdf532975baa, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 420048, guid: e705cd5189f90064e992bdf532975baa, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 420048, guid: e705cd5189f90064e992bdf532975baa, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 420048, guid: e705cd5189f90064e992bdf532975baa, type: 2}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11457146, guid: e705cd5189f90064e992bdf532975baa, type: 2}
+      propertyPath: waitTime
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11457146, guid: e705cd5189f90064e992bdf532975baa, type: 2}
+      propertyPath: points.Array.data[0].x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11457146, guid: e705cd5189f90064e992bdf532975baa, type: 2}
+      propertyPath: points.Array.data[0].y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 11457146, guid: e705cd5189f90064e992bdf532975baa, type: 2}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11457146, guid: e705cd5189f90064e992bdf532975baa, type: 2}
+      propertyPath: states.Array.data[0]
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 420048, guid: e705cd5189f90064e992bdf532975baa, type: 2}
+      propertyPath: m_LocalScale.x
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 420048, guid: e705cd5189f90064e992bdf532975baa, type: 2}
+      propertyPath: m_LocalScale.y
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 9543138, guid: e705cd5189f90064e992bdf532975baa, type: 2}
+      propertyPath: m_ApplyRootMotion
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000010633040322, guid: e705cd5189f90064e992bdf532975baa,
+        type: 2}
+      propertyPath: timeOfHit
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000010633040322, guid: e705cd5189f90064e992bdf532975baa,
+        type: 2}
+      propertyPath: speedOfChange
+      value: 7
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 11436966, guid: e705cd5189f90064e992bdf532975baa, type: 2}
+  m_ParentPrefab: {fileID: 100100000, guid: e705cd5189f90064e992bdf532975baa, type: 2}
+  m_IsPrefabParent: 0
+--- !u!1 &547590628
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 1000013440556774, guid: 6d291ce896d8a314584c2cf8f99c2435,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 224: {fileID: 547590629}
+  - 222: {fileID: 547590632}
+  - 114: {fileID: 547590631}
+  - 114: {fileID: 547590630}
+  m_Layer: 5
+  m_Name: Backtexts
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &547590629
+RectTransform:
+>>>>>>> parent of 7093262... Animace a Vesmírné prase
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
@@ -3509,6 +3620,9 @@ GameObject:
   - 212: {fileID: 861021259}
   - 95: {fileID: 861021258}
   - 114: {fileID: 861021257}
+<<<<<<< HEAD
+>>>>>>> parent of 7093262... Animace a Vesmírné prase
+=======
 >>>>>>> parent of 7093262... Animace a Vesmírné prase
   m_Layer: 8
   m_Name: sprite
@@ -3600,6 +3714,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
 <<<<<<< HEAD
+<<<<<<< HEAD
   m_DrawMode: 0
   m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
@@ -3617,6 +3732,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ba561ec93b7ece438206fa405475660, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+=======
+>>>>>>> parent of 7093262... Animace a Vesmírné prase
 =======
 >>>>>>> parent of 7093262... Animace a Vesmírné prase
 --- !u!1 &890697669
@@ -3933,8 +4050,12 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
 <<<<<<< HEAD
+<<<<<<< HEAD
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+=======
+  m_RootOrder: 7
+>>>>>>> parent of 7093262... Animace a Vesmírné prase
 =======
   m_RootOrder: 7
 >>>>>>> parent of 7093262... Animace a Vesmírné prase
@@ -4868,6 +4989,7 @@ Prefab:
       value: 
       objectReference: {fileID: 2087838246}
 <<<<<<< HEAD
+<<<<<<< HEAD
     - target: {fileID: 11484954, guid: 96bc249eae6b24a4b97c9d856553c3db, type: 2}
       propertyPath: zmatek
       value: 
@@ -4920,6 +5042,8 @@ Prefab:
       propertyPath: Canvas
       value: 
       objectReference: {fileID: 1786180662}
+=======
+>>>>>>> parent of 7093262... Animace a Vesmírné prase
 =======
 >>>>>>> parent of 7093262... Animace a Vesmírné prase
     m_RemovedComponents: []
@@ -5773,6 +5897,9 @@ GameObject:
   - 212: {fileID: 1472619263}
   - 95: {fileID: 1472619262}
   - 114: {fileID: 1472619261}
+<<<<<<< HEAD
+>>>>>>> parent of 7093262... Animace a Vesmírné prase
+=======
 >>>>>>> parent of 7093262... Animace a Vesmírné prase
   m_Layer: 8
   m_Name: hatSprite
@@ -5864,6 +5991,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
 <<<<<<< HEAD
+<<<<<<< HEAD
   m_DrawMode: 0
   m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
@@ -5881,6 +6009,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ba561ec93b7ece438206fa405475660, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+=======
+>>>>>>> parent of 7093262... Animace a Vesmírné prase
 =======
 >>>>>>> parent of 7093262... Animace a Vesmírné prase
 --- !u!1 &1520467676
@@ -6063,8 +6193,12 @@ RectTransform:
   - {fileID: 1225255689}
   m_Father: {fileID: 0}
 <<<<<<< HEAD
+<<<<<<< HEAD
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+=======
+  m_RootOrder: 6
+>>>>>>> parent of 7093262... Animace a Vesmírné prase
 =======
   m_RootOrder: 6
 >>>>>>> parent of 7093262... Animace a Vesmírné prase
