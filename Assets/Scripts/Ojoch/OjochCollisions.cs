@@ -206,7 +206,6 @@ public class OjochCollisions : MonoBehaviour {
     void CoinCollision(Collision2D col)
     {
         GameManager.instance.GetComponent<CoinsManager>().AjustCoins(col.gameObject.GetComponent<Coins>().value);
-        OjochManager.instance.ojochScript.animator.SetTrigger("good");
         Destroy(col.gameObject);
     }
 

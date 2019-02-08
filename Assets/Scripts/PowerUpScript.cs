@@ -196,9 +196,13 @@ public class PowerUpScript : MonoBehaviour {
     /// </summary>
     void Rambouch()
     {
+<<<<<<< HEAD
         panelText.text = GameManager.instance.languageManager.GetTextValue("PowerUp.Rambouch");;
         powerUpImage.SetActive(true);
 
+=======
+        ShowPowerUpText(GameManager.instance.languageManager.GetTextValue("PowerUp.Rambouch"), true);
+>>>>>>> parent of 7093262... Animace a Vesmírné prase
         int chance = Random.Range(0, 100);
 
         if (chance <= 33)
@@ -219,9 +223,13 @@ public class PowerUpScript : MonoBehaviour {
             StartCoroutine(ContraShoot());
         }
 
+<<<<<<< HEAD
         OjochManager.instance.ojochScript.managerSound.PlaySound(OjochManager.instance.ojochScript.managerSound.clipGood);        
         ShowPowerUpText(GameManager.instance.languageManager.GetTextValue("PowerUp.Rambouch"), true);
         StartCoroutine(RambouchCoroutine());
+=======
+        akTime = 10;
+>>>>>>> parent of 7093262... Animace a Vesmírné prase
         effects.rambouch.SetActive(true);
         CallEnemeyAK47();
         

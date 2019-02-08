@@ -162,8 +162,34 @@ public class HealthScript : MonoBehaviour {
             RemoveHeart();
             if (hp <= 0)
             {
+<<<<<<< HEAD:Assets/Scripts/Ojoch/HealthScript.cs
                 GameManager.instance.GetComponent<SoundManager>().PlaySound(GameManager.instance.GetComponent<SoundManager>().clipOjochDeath);
                 ojoch.animator.SetTrigger("dead");
+=======
+                case 6:
+                    damage = 0;
+                    break;
+                case 5:
+                    healthSix.SetActive(smth);
+                    break;
+                case 4:
+                    healthFive.SetActive(smth);
+                    break;
+                case 3:
+                    healthFour.SetActive(smth);
+                    break;
+                case 2:
+                    healthThree.SetActive(smth);
+                    break;
+                case 1:
+                    healthTwo.SetActive(smth);
+                    break;
+                case 0:
+                    healthOne.SetActive(smth);
+                    GameManager.instance.GetComponent<SoundManager>().PlaySound(GameManager.instance.GetComponent<SoundManager>().clipOjochDeath);
+                    StartCoroutine(DieOjoch());
+                    break;
+>>>>>>> parent of 7093262... Animace a Vesmírné prase:Assets/Scripts/HealthScript.cs
             }
         }
         //léčíme Ojocha
@@ -190,5 +216,20 @@ public class HealthScript : MonoBehaviour {
                 ojoch.zakaleniTime = 1;
             }
         }
+<<<<<<< HEAD:Assets/Scripts/Ojoch/HealthScript.cs
     }    
+=======
+    }
+
+    //Funkce pri smrti Ojocha, kde se nejdrive pocka na prehrani animace a teprve pak se vypne hudba a spusti funkce na konci hry
+    private IEnumerator DieOjoch()
+    {
+        ojoch.animator.SetTrigger("dead");
+        yield return new WaitForSeconds(0.75f);
+        SessionController.instance.GetComponent<EndGameScript>().EndGame();
+        Time.timeScale = 0.1f;
+        GameObject.Find("Music").GetComponent<AudioSource>().mute = true;
+        Destroy(gameObject);
+    }
+>>>>>>> parent of 7093262... Animace a Vesmírné prase:Assets/Scripts/HealthScript.cs
 }

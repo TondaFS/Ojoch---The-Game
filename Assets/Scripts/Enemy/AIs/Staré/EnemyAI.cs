@@ -97,7 +97,8 @@ public class EnemyAI : MonoBehaviour {
     }
 
     void Update()
-    {        
+    {
+        Debug.Log("State: " + currentState);
         DestroyOffScreeners();
 
         switch (currentState)

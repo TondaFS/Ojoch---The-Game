@@ -140,6 +140,7 @@ public class ScoreScript : MonoBehaviour {
         {
             FiveSecondsTimer();
         }
+
     }
     
     /// <summary>

@@ -59,6 +59,12 @@ public class OjochScript : MonoBehaviour {
         sprite = GetComponentInChildren<ColorChanger>();
         sockPivot = GameObject.Find("rotatingSocks").GetComponent<SpinSocks>();
         sockPivot.enabled = false;
+
+
+        //animator = transform.Find("sprite").gameObject.GetComponent<Animator>();
+        //sprite = GameObject.Find("sprite").GetComponent<ColorChanger>();
+        //socha = GameObject.Find("statue");
+        //collect = GetComponent<CollectingScript>();
     }
 
     /// <summary>
