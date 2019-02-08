@@ -516,7 +516,11 @@ AnimatorState:
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
   - {fileID: 1101604894587337208}
+=======
+  - {fileID: 1101000010356118012}
+>>>>>>> parent of 7093262... Animace a Vesmírné prase
 =======
   - {fileID: 1101000010356118012}
 >>>>>>> parent of 7093262... Animace a Vesmírné prase
@@ -680,11 +684,14 @@ AnimatorStateMachine:
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     m_Position: {x: 96, y: 120, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 110283838}
     m_Position: {x: -360, y: 288, z: 0}
 =======
+=======
+>>>>>>> parent of 7093262... Animace a Vesmírné prase
 =======
 >>>>>>> parent of 7093262... Animace a Vesmírné prase
 =======
@@ -695,6 +702,9 @@ AnimatorStateMachine:
     m_Position: {x: -252, y: -84, z: 0}
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> parent of 7093262... Animace a Vesmírné prase
+=======
 >>>>>>> parent of 7093262... Animace a Vesmírné prase
 =======
 >>>>>>> parent of 7093262... Animace a Vesmírné prase
@@ -705,6 +715,7 @@ AnimatorStateMachine:
     m_Position: {x: 12, y: 360, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 110280450}
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -730,6 +741,8 @@ AnimatorStateMachine:
 =======
 >>>>>>> parent of 7093262... Animace a Vesmírné prase
 =======
+=======
+>>>>>>> parent of 7093262... Animace a Vesmírné prase
     m_Position: {x: 0, y: -84, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 110268462}
@@ -737,6 +750,9 @@ AnimatorStateMachine:
   - serializedVersion: 1
     m_State: {fileID: 110251176}
     m_Position: {x: 72, y: 240, z: 0}
+<<<<<<< HEAD
+>>>>>>> parent of 7093262... Animace a Vesmírné prase
+=======
 >>>>>>> parent of 7093262... Animace a Vesmírné prase
   - serializedVersion: 1
     m_State: {fileID: 110233884}
@@ -746,7 +762,11 @@ AnimatorStateMachine:
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     m_Position: {x: 72, y: 276, z: 0}
+=======
+    m_Position: {x: 72, y: 132, z: 0}
+>>>>>>> parent of 7093262... Animace a Vesmírné prase
 =======
     m_Position: {x: 72, y: 132, z: 0}
 >>>>>>> parent of 7093262... Animace a Vesmírné prase
@@ -772,6 +792,7 @@ AnimatorStateMachine:
   m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}
   m_DefaultState: {fileID: 110274118}
 --- !u!1101 &1101000010356118012
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 AnimatorStateTransition:
@@ -802,6 +823,8 @@ AnimatorStateTransition:
 >>>>>>> parent of 7093262... Animace a Vesmírné prase
 =======
 >>>>>>> parent of 7093262... Animace a Vesmírné prase
+=======
+>>>>>>> parent of 7093262... Animace a Vesmírné prase
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -821,6 +844,9 @@ AnimatorStateTransition:
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 110225770}
 <<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> parent of 7093262... Animace a Vesmírné prase
+=======
 >>>>>>> parent of 7093262... Animace a Vesmírné prase
 =======
 >>>>>>> parent of 7093262... Animace a Vesmírné prase
@@ -831,8 +857,13 @@ AnimatorStateTransition:
   m_TransitionDuration: 0
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
   m_TransitionOffset: 1
   m_ExitTime: 0.25
+=======
+  m_TransitionOffset: 0
+  m_ExitTime: 0.7
+>>>>>>> parent of 7093262... Animace a Vesmírné prase
 =======
   m_TransitionOffset: 0
   m_ExitTime: 0.7
@@ -846,6 +877,7 @@ AnimatorStateTransition:
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 --- !u!1101 &1101000012538198106
@@ -875,6 +907,8 @@ AnimatorStateTransition:
 <<<<<<< HEAD
 --- !u!1101 &1101000014162506972
 =======
+=======
+>>>>>>> parent of 7093262... Animace a Vesmírné prase
 =======
 >>>>>>> parent of 7093262... Animace a Vesmírné prase
 --- !u!1101 &1101000011399504628
@@ -926,6 +960,7 @@ AnimatorStateTransition:
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 --- !u!1101 &1101064653736344878
@@ -1000,6 +1035,8 @@ AnimatorStateTransition:
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
+=======
+>>>>>>> parent of 7093262... Animace a Vesmírné prase
 =======
 >>>>>>> parent of 7093262... Animace a Vesmírné prase
 =======
