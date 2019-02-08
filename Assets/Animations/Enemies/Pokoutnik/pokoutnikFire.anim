@@ -20,6 +20,7 @@ AnimationClip:
     - time: 0
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
       value: {fileID: 21300000, guid: 72e7c3a867df088408a861f65aa98541, type: 3}
     - time: 0.083333336
       value: {fileID: 21300002, guid: 72e7c3a867df088408a861f65aa98541, type: 3}
@@ -32,6 +33,8 @@ AnimationClip:
     - time: 0.4166667
       value: {fileID: 21300010, guid: 72e7c3a867df088408a861f65aa98541, type: 3}
 =======
+=======
+>>>>>>> parent of 7093262... Animace a Vesmírné prase
 =======
 >>>>>>> parent of 7093262... Animace a Vesmírné prase
       value: {fileID: 21300000, guid: c636832590ce77f46a967eb47b121018, type: 3}
@@ -76,7 +79,11 @@ AnimationClip:
     m_StartTime: 0
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     m_StopTime: 0.5
+=======
+    m_StopTime: .583333313
+>>>>>>> parent of 7093262... Animace a Vesmírné prase
 =======
     m_StopTime: .583333313
 >>>>>>> parent of 7093262... Animace a Vesmírné prase
@@ -104,7 +111,11 @@ AnimationClip:
   m_Events:
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
   - time: 0.25
+=======
+  - time: .166666672
+>>>>>>> parent of 7093262... Animace a Vesmírné prase
 =======
   - time: .166666672
 >>>>>>> parent of 7093262... Animace a Vesmírné prase

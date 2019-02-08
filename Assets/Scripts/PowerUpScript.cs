@@ -198,9 +198,13 @@ public class PowerUpScript : MonoBehaviour {
     {
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
         panelText.text = GameManager.instance.languageManager.GetTextValue("PowerUp.Rambouch");;
         powerUpImage.SetActive(true);
 
+=======
+        ShowPowerUpText(GameManager.instance.languageManager.GetTextValue("PowerUp.Rambouch"), true);
+>>>>>>> parent of 7093262... Animace a Vesmírné prase
 =======
         ShowPowerUpText(GameManager.instance.languageManager.GetTextValue("PowerUp.Rambouch"), true);
 >>>>>>> parent of 7093262... Animace a Vesmírné prase
@@ -229,10 +233,13 @@ public class PowerUpScript : MonoBehaviour {
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
         OjochManager.instance.ojochScript.managerSound.PlaySound(OjochManager.instance.ojochScript.managerSound.clipGood);        
         ShowPowerUpText(GameManager.instance.languageManager.GetTextValue("PowerUp.Rambouch"), true);
         StartCoroutine(RambouchCoroutine());
 =======
+=======
+>>>>>>> parent of 7093262... Animace a Vesmírné prase
 =======
 >>>>>>> parent of 7093262... Animace a Vesmírné prase
         akTime = 10;

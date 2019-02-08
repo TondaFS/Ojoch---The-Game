@@ -1766,7 +1766,99 @@ RectTransform:
 --- !u!1001 &530788828
 Prefab:
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 11457146, guid: e705cd5189f90064e992bdf532975baa, type: 2}
+      propertyPath: points.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 420048, guid: e705cd5189f90064e992bdf532975baa, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: -1.16
+      objectReference: {fileID: 0}
+    - target: {fileID: 420048, guid: e705cd5189f90064e992bdf532975baa, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: -2.99
+      objectReference: {fileID: 0}
+    - target: {fileID: 420048, guid: e705cd5189f90064e992bdf532975baa, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 420048, guid: e705cd5189f90064e992bdf532975baa, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 420048, guid: e705cd5189f90064e992bdf532975baa, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 420048, guid: e705cd5189f90064e992bdf532975baa, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 420048, guid: e705cd5189f90064e992bdf532975baa, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 420048, guid: e705cd5189f90064e992bdf532975baa, type: 2}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11457146, guid: e705cd5189f90064e992bdf532975baa, type: 2}
+      propertyPath: waitTime
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11457146, guid: e705cd5189f90064e992bdf532975baa, type: 2}
+      propertyPath: points.Array.data[0].x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11457146, guid: e705cd5189f90064e992bdf532975baa, type: 2}
+      propertyPath: points.Array.data[0].y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 11457146, guid: e705cd5189f90064e992bdf532975baa, type: 2}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11457146, guid: e705cd5189f90064e992bdf532975baa, type: 2}
+      propertyPath: states.Array.data[0]
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 420048, guid: e705cd5189f90064e992bdf532975baa, type: 2}
+      propertyPath: m_LocalScale.x
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 420048, guid: e705cd5189f90064e992bdf532975baa, type: 2}
+      propertyPath: m_LocalScale.y
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 9543138, guid: e705cd5189f90064e992bdf532975baa, type: 2}
+      propertyPath: m_ApplyRootMotion
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000010633040322, guid: e705cd5189f90064e992bdf532975baa,
+        type: 2}
+      propertyPath: timeOfHit
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000010633040322, guid: e705cd5189f90064e992bdf532975baa,
+        type: 2}
+      propertyPath: speedOfChange
+      value: 7
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 11436966, guid: e705cd5189f90064e992bdf532975baa, type: 2}
+  m_ParentPrefab: {fileID: 100100000, guid: e705cd5189f90064e992bdf532975baa, type: 2}
+  m_IsPrefabParent: 0
+--- !u!1 &547590628
+GameObject:
+>>>>>>> parent of 7093262... Animace a Vesmírné prase
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
@@ -3621,6 +3713,9 @@ GameObject:
   - 95: {fileID: 861021258}
   - 114: {fileID: 861021257}
 <<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> parent of 7093262... Animace a Vesmírné prase
+=======
 >>>>>>> parent of 7093262... Animace a Vesmírné prase
 =======
 >>>>>>> parent of 7093262... Animace a Vesmírné prase
@@ -3715,6 +3810,7 @@ SpriteRenderer:
   m_FlipY: 0
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
   m_DrawMode: 0
   m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
@@ -3732,6 +3828,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ba561ec93b7ece438206fa405475660, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+=======
+>>>>>>> parent of 7093262... Animace a Vesmírné prase
 =======
 >>>>>>> parent of 7093262... Animace a Vesmírné prase
 =======
@@ -4051,8 +4149,12 @@ Transform:
   m_Father: {fileID: 0}
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+=======
+  m_RootOrder: 7
+>>>>>>> parent of 7093262... Animace a Vesmírné prase
 =======
   m_RootOrder: 7
 >>>>>>> parent of 7093262... Animace a Vesmírné prase
@@ -4990,6 +5092,7 @@ Prefab:
       objectReference: {fileID: 2087838246}
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     - target: {fileID: 11484954, guid: 96bc249eae6b24a4b97c9d856553c3db, type: 2}
       propertyPath: zmatek
       value: 
@@ -5042,6 +5145,8 @@ Prefab:
       propertyPath: Canvas
       value: 
       objectReference: {fileID: 1786180662}
+=======
+>>>>>>> parent of 7093262... Animace a Vesmírné prase
 =======
 >>>>>>> parent of 7093262... Animace a Vesmírné prase
 =======
@@ -5898,6 +6003,9 @@ GameObject:
   - 95: {fileID: 1472619262}
   - 114: {fileID: 1472619261}
 <<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> parent of 7093262... Animace a Vesmírné prase
+=======
 >>>>>>> parent of 7093262... Animace a Vesmírné prase
 =======
 >>>>>>> parent of 7093262... Animace a Vesmírné prase
@@ -5992,6 +6100,7 @@ SpriteRenderer:
   m_FlipY: 0
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
   m_DrawMode: 0
   m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
@@ -6009,6 +6118,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ba561ec93b7ece438206fa405475660, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+=======
+>>>>>>> parent of 7093262... Animace a Vesmírné prase
 =======
 >>>>>>> parent of 7093262... Animace a Vesmírné prase
 =======
@@ -6194,8 +6305,12 @@ RectTransform:
   m_Father: {fileID: 0}
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+=======
+  m_RootOrder: 6
+>>>>>>> parent of 7093262... Animace a Vesmírné prase
 =======
   m_RootOrder: 6
 >>>>>>> parent of 7093262... Animace a Vesmírné prase
