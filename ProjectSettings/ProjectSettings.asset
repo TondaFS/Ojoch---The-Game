@@ -68,7 +68,11 @@ PlayerSettings:
   runInBackground: 0
   captureSingleScreen: 0
 <<<<<<< HEAD
+<<<<<<< HEAD
   muteOtherAudioSources: 0
+=======
+  Override IPod Music: 0
+>>>>>>> parent of 084e62c... Upfrade to Unity 5.5
 =======
   Override IPod Music: 0
 >>>>>>> parent of 084e62c... Upfrade to Unity 5.5
@@ -105,9 +109,12 @@ PlayerSettings:
   xboxOneResolution: 0
   xboxOneMonoLoggingLevel: 0
 <<<<<<< HEAD
+<<<<<<< HEAD
   xboxOneLoggingLevel: 1
   xboxOneDisableEsram: 0
 =======
+=======
+>>>>>>> parent of 084e62c... Upfrade to Unity 5.5
   ps3SplashScreen: {fileID: 0}
 >>>>>>> parent of 084e62c... Upfrade to Unity 5.5
   videoMemoryForVertexBuffers: 0
@@ -176,8 +183,12 @@ PlayerSettings:
   iOSTargetOSVersionString: 6.0
   tvOSSdkVersion: 0
 <<<<<<< HEAD
+<<<<<<< HEAD
   tvOSRequireExtendedGameController: 0
   tvOSTargetOSVersionString: 9.0
+=======
+  tvOSTargetOSVersion: 900
+>>>>>>> parent of 084e62c... Upfrade to Unity 5.5
 =======
   tvOSTargetOSVersion: 900
 >>>>>>> parent of 084e62c... Upfrade to Unity 5.5
@@ -221,6 +232,7 @@ PlayerSettings:
   iOSDeviceRequirements: []
   iOSURLSchemes: []
 <<<<<<< HEAD
+<<<<<<< HEAD
   iOSBackgroundModes: 0
   iOSMetalForceHardShadows: 0
   metalEditorSupport: 1
@@ -230,6 +242,8 @@ PlayerSettings:
   iOSManualSigningProvisioningProfileID: 
   tvOSManualSigningProvisioningProfileID: 
   appleEnableAutomaticSigning: 0
+=======
+>>>>>>> parent of 084e62c... Upfrade to Unity 5.5
 =======
 >>>>>>> parent of 084e62c... Upfrade to Unity 5.5
   AndroidTargetDevice: 0
@@ -344,6 +358,7 @@ PlayerSettings:
   enableCrashReportAPI: 0
   locationUsageDescription: 
 <<<<<<< HEAD
+<<<<<<< HEAD
   microphoneUsageDescription: 
   switchNetLibKey: 
   switchSocketMemoryPoolSize: 6144
@@ -453,6 +468,8 @@ PlayerSettings:
   switchUdpReceiveBufferSize: 42
   switchSocketBufferEfficiency: 4
 =======
+=======
+>>>>>>> parent of 084e62c... Upfrade to Unity 5.5
   XboxTitleId: 
   XboxImageXexPath: 
   XboxSpaPath: 
@@ -494,9 +511,13 @@ PlayerSettings:
   ps4ParamSfxPath: 
   ps4VideoOutPixelFormat: 0
 <<<<<<< HEAD
+<<<<<<< HEAD
   ps4VideoOutInitialWidth: 1920
   ps4VideoOutBaseModeInitialWidth: 1920
   ps4VideoOutReprojectionRate: 120
+=======
+  ps4VideoOutResolution: 4
+>>>>>>> parent of 084e62c... Upfrade to Unity 5.5
 =======
   ps4VideoOutResolution: 4
 >>>>>>> parent of 084e62c... Upfrade to Unity 5.5
@@ -529,8 +550,11 @@ PlayerSettings:
   ps4pnGameCustomData: 1
   playerPrefsSupport: 0
 <<<<<<< HEAD
+<<<<<<< HEAD
   restrictedAudioUsageRights: 0
   ps4UseResolutionFallback: 0
+=======
+>>>>>>> parent of 084e62c... Upfrade to Unity 5.5
 =======
 >>>>>>> parent of 084e62c... Upfrade to Unity 5.5
   ps4ReprojectionSupport: 0
@@ -663,9 +687,12 @@ PlayerSettings:
   tizenGPSPermissions: 0
   tizenMicrophonePermissions: 0
 <<<<<<< HEAD
+<<<<<<< HEAD
   tizenDeploymentTarget: 
   tizenDeploymentTargetType: -1
   tizenMinOSVersion: 1
+=======
+>>>>>>> parent of 084e62c... Upfrade to Unity 5.5
 =======
 >>>>>>> parent of 084e62c... Upfrade to Unity 5.5
   n3dsUseExtSaveData: 0

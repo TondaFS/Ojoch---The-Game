@@ -1,5 +1,10 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 m_EditorVersion: 2017.1.0f3
+=======
+m_EditorVersion: 5.4.0f3
+m_StandardAssetsVersion: 0
+>>>>>>> parent of 084e62c... Upfrade to Unity 5.5
 =======
 m_EditorVersion: 5.4.0f3
 m_StandardAssetsVersion: 0
