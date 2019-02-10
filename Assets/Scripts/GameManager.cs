@@ -16,9 +16,6 @@ public class GameManager : MonoBehaviour
     public string playerName;
     public string activeLanguage;
 
-    public GameObject healthObj;
-    public GameObject sanityObj;
-
     void Awake()
     {
         if (instance == null)
